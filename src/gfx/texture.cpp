@@ -3,15 +3,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Texture::Texture() {}
-
-Texture::~Texture() {
-    glDeleteTextures(1, &handle);
-}
-
-Texture::Texture(std::string path, std::string fs_name, GLint tex_format, GLint src_format):
-fs_name(fs_name)
+void Texture::init(std::string path, std::string fs_name, GLint tex_format, GLint src_format)
 {
+    this->fs_name = fs_name;
+
     glGenTextures(1, &handle);
     bind();
 
@@ -34,5 +29,10 @@ fs_name(fs_name)
     stbi_image_free(data);
 }
 
+void Texture::destroy() {
+    glDeleteTextures(1, &handle);
+}
+
 void Texture::bind() {
+    glBindTexture(GL_TEXTURE_2D, handle);
 }

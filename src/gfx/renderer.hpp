@@ -7,9 +7,9 @@ public:
     Renderer();
     ~Renderer();
 
-    void init();
-    void render();
+    void init(World *world);
     void destroy();
+    void render();
 private:
     World *world;
 };

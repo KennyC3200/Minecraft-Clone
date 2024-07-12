@@ -11,8 +11,9 @@ class VBO {
 public:
     VBO();
     ~VBO();
-    VBO(GLuint type, enum VBODrawType draw_type);
 
+    void init(GLuint type, enum VBODrawType draw_type);
+    void destroy();
     void bind();
     void buffer(size_t size, void *data);
 

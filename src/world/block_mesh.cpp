@@ -12,5 +12,5 @@ uv_max(uv_max)
 {}
 
 void BlockMesh::init() {
-    shader = Shader("res/shaders/block.vs", "res/shaders/block.fs");
+    shader.init("res/shaders/block.vs", "res/shaders/block.fs");
 }

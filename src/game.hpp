@@ -9,10 +9,9 @@ public:
     ~Game();
 
     void init();
+    void loop();
     void destroy();
 private:
-    void loop();
-
     Window window;
     Renderer renderer;
     World world;

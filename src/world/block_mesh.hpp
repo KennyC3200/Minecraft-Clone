@@ -9,8 +9,11 @@ public:
     ~BlockMesh();
     BlockMesh(glm::vec2 uv_min, glm::vec2 uv_max);
 
-    static void init();
     static Shader shader;
 
     glm::vec2 uv_min, uv_max;
+private:
+    friend class Block;
+
+    static void init();
 };

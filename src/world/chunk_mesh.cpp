@@ -6,8 +6,8 @@ ChunkMesh::~ChunkMesh() {}
 
 void ChunkMesh::init() {
     vao.init();
-    vbo = VBO(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
-    ibo = VBO(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
+    vbo.init(GL_ARRAY_BUFFER, STATIC_DRAW);
+    ibo.init(GL_ELEMENT_ARRAY_BUFFER, STATIC_DRAW);
 }
 
 void ChunkMesh::destroy() {

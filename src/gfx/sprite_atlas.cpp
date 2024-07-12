@@ -7,7 +7,7 @@ SpriteAtlas::~SpriteAtlas() {}
 SpriteAtlas::SpriteAtlas(std::string path, std::string fs_name, glm::vec2 sprite_size):
 sprite_size(sprite_size)
 {
-    texture = Texture(path, fs_name, GL_RGB, GL_RGB);
+    texture.init(path, fs_name, GL_RGBA, GL_RGBA);
     size = texture.size;
     sprite_unit = sprite_size / size;
     pixel_unit = 1.0f / size;

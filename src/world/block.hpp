@@ -5,7 +5,9 @@
 
 enum BlockType {
     BLOCK_GRASS = 0,
+    BLOCK_DIRT,
     BLOCK_STONE,
+    BLOCK_SAND,
     BLOCK_LAST
 };
 
@@ -15,10 +17,13 @@ public:
     ~Block();
     Block(BlockType type, BlockMesh mesh);
 
-    static void init();
     static SpriteAtlas atlas;
     static Block blocks[BLOCK_LAST];
 
     BlockType type;
     BlockMesh mesh;
+private:
+    friend class World;
+
+    static void init();
 };

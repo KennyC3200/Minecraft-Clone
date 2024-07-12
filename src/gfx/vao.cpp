@@ -26,5 +26,4 @@ void VAO::attr(
 
     glVertexAttribPointer(location, size, type, GL_FALSE, stride, (void*) offset);
     glEnableVertexAttribArray(location);
-
 }

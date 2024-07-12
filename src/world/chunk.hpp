@@ -13,6 +13,8 @@ public:
     Chunk(glm::vec<2, int> position);
     ~Chunk();
 
+    void render();
+
     // chunk data stored in a 3d array
     // each u64 has the following bit fields:
     // - 28 bits metadata/extra

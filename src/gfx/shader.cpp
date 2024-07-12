@@ -1,12 +1,6 @@
 #include "shader.hpp"
 
-Shader::Shader() {}
-
-Shader::~Shader() {
-    glDeleteProgram(handle);
-}
-
-Shader::Shader(std::string vs_path, std::string fs_path) {
+void Shader::init(std::string vs_path, std::string fs_path) {
     handle = glCreateProgram();
     GLuint vs_handle = compile(vs_path, GL_VERTEX_SHADER);
     GLuint fs_handle = compile(fs_path, GL_FRAGMENT_SHADER);
@@ -28,6 +22,10 @@ Shader::Shader(std::string vs_path, std::string fs_path) {
 
     glDeleteShader(vs_handle);
     glDeleteShader(fs_handle);
+}
+
+void Shader::destroy() {
+    glDeleteProgram(handle);
 }
 
 void Shader::bind() {

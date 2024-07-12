@@ -8,10 +8,8 @@
 
 class Shader {
 public:
-    Shader();
-    ~Shader();
-    Shader(std::string vs_path, std::string fs_path);
-
+    void init(std::string vs_path, std::string fs_path);
+    void destroy();
     void bind();
     void uniform_texture_2d(Texture tex, unsigned int unit);
     void uniform_mat4(std::string name, glm::mat4 mat4);
