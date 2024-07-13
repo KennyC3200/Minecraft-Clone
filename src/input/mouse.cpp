@@ -1,8 +1,8 @@
 #include "mouse.hpp"
 
-void Mouse::init(Window *window, bool toggled) {
+void Mouse::init(Window *window) {
     this->window = window;
-    this->toggled = toggled;
+    toggled = false;
     first_move = true;
 }
 

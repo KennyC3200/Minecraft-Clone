@@ -1,28 +1,23 @@
 #include "game.hpp"
 
-Game::Game() {}
-
-Game::~Game() {}
-
 void Game::init() {
-    // Gfx
+    // gfx 
     window.init();
     world.init(&player);
     renderer.init(&world, &player);
 
-    // Inputs
+    // inputs
     keyboard.init(&window);
-    mouse.init(&window, true);
+    mouse.init(&window);
 
-    // Player
+    // player
     player.init(&window, &keyboard, &mouse);
 }
 
 void Game::destroy() {
-    // Gfx
+    // gfx
     window.destroy();
     world.destroy();
-    renderer.destroy();
 }
 
 void Game::loop() {
@@ -40,12 +35,20 @@ void Game::loop() {
 }
 
 void Game::update() {
-    // Input
+    // gfx
+    window.update();
+
+    // input
     keyboard.update();
     mouse.update();
 
-    // Player
+    // player
     player.update();
+
+    // handle input
+    if (keyboard.keys[GLFW_KEY_T].pressed) {
+        renderer.flags.wireframe = !renderer.flags.wireframe;
+    }
 }
 
 void Game::render() {

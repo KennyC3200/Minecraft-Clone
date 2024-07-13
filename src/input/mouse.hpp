@@ -4,7 +4,7 @@
 
 class Mouse {
 public:
-    void init(Window *window, bool toggled);
+    void init(Window *window);
     void update();
 
     glm::vec2 position, position_delta;

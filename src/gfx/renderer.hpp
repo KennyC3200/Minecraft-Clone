@@ -5,12 +5,12 @@
 
 class Renderer {
 public:
-    Renderer();
-    ~Renderer();
-
     void init(World *world, Player *player);
-    void destroy();
     void render();
+
+    struct {
+        bool wireframe;
+    } flags;
 private:
     World *world;
     Player *player;
