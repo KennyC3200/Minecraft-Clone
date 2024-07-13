@@ -1,7 +1,8 @@
 #include "mouse.hpp"
 
-void Mouse::init(Window *window) {
+void Mouse::init(Window *window, bool toggled) {
     this->window = window;
+    this->toggled = toggled;
     first_move = true;
 }
 
@@ -31,4 +32,9 @@ void Mouse::update() {
         keys[i].pressed = keys[i].down && !keys[i].last;
         keys[i].last = keys[i].down;
     }
+
+    glfwSetInputMode(
+        window->handle, 
+        GLFW_CURSOR, 
+        toggled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
 }
