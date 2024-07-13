@@ -2,6 +2,7 @@
 
 #include "chunk_mesh.hpp"
 #include "block.hpp"
+#include "../player/player.hpp"
 
 #define CHUNK_SIZE_X 16
 #define CHUNK_SIZE_Y 16
@@ -13,6 +14,7 @@ public:
     Chunk(glm::vec<2, int> position);
     ~Chunk();
 
+    static void init(Player *player);
     void render();
 
     // chunk data stored in a 3d array
@@ -28,4 +30,7 @@ public:
 
     glm::vec<2, int> position;
     ChunkMesh mesh;
+private:
+    // static player pointer
+    static Player *player;
 };

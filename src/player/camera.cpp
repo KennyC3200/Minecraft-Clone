@@ -27,12 +27,6 @@ void Camera::init(Window *window, Mouse *mouse) {
 }
 
 void Camera::update() {
-    view = glm::lookAt(position, position + front, up);
-    projection = glm::perspective(
-        glm::radians(fov), 
-        (float) window->size.x / window->size.y,
-        z_near, z_far);
-
     yaw += sensitivity * mouse->position_delta.x;
     pitch += sensitivity * mouse->position_delta.y;
     direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -40,4 +34,10 @@ void Camera::update() {
     direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
     front = glm::normalize(direction);
     pitch = CLAMP(pitch, -89.0f, 89.0f);
+
+    view = glm::lookAt(position, position + front, up);
+    projection = glm::perspective(
+        glm::radians(fov), 
+        (float) window->size.x / window->size.y,
+        z_near, z_far);
 }

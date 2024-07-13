@@ -7,8 +7,8 @@ Game::~Game() {}
 void Game::init() {
     // Gfx
     window.init();
-    world.init();
-    renderer.init(&world);
+    world.init(&player);
+    renderer.init(&world, &player);
 
     // Inputs
     keyboard.init(&window);

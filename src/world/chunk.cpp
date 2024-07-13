@@ -1,5 +1,7 @@
 #include "chunk.hpp"
 
+Player* Chunk::player;
+
 Chunk::Chunk(glm::vec<2, int> position):
 position(position)
 {
@@ -14,10 +16,19 @@ Chunk::~Chunk() {
     delete[] data;
 }
 
+void Chunk::init(Player *player) {
+    Chunk::player = player;
+}
+
 void Chunk::render() {
     // render one face
     BlockMesh::shader.bind();
     BlockMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
+
+    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+    BlockMesh::shader.uniform_mat4("model", model);
+    BlockMesh::shader.uniform_mat4("view", player->camera.view);
+    BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
     glm::vec2 uv_max = Block::blocks[BLOCK_GRASS].mesh.uv_max;
     glm::vec2 uv_min = Block::blocks[BLOCK_GRASS].mesh.uv_min;

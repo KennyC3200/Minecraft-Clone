@@ -15,19 +15,15 @@ void Player::update() {
     }
     if (keyboard->keys[GLFW_KEY_W].down) {
         camera.position += 10.0f * (float) window->time_delta * camera.front;
-        std::cout << 'W' << std::flush;
     }
     if (keyboard->keys[GLFW_KEY_S].down) {
         camera.position -= 10.0f * (float) window->time_delta * camera.front;
-        std::cout << 'S' << std::flush;
     }
     if (keyboard->keys[GLFW_KEY_A].down) {
         camera.position -= 10.0f * (float) window->time_delta * glm::normalize(glm::cross(camera.front, camera.up));
-        std::cout << 'A' << std::flush;
     }
     if (keyboard->keys[GLFW_KEY_D].down) {
         camera.position += 10.0f * (float) window->time_delta * glm::normalize(glm::cross(camera.front, camera.up));
-        std::cout << 'D' << std::flush;
     }
 
     camera.update();
