@@ -22,8 +22,8 @@ void Chunk::render() {
     BlockMesh::shader.bind();
     BlockMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
 
-    glm::vec2 uv_max = Block::blocks[BLOCK_DIRT].mesh.uv_max;
-    glm::vec2 uv_min = Block::blocks[BLOCK_DIRT].mesh.uv_min;
+    glm::vec2 uv_max = Block::blocks[BLOCK_GRASS].mesh.uv_max;
+    glm::vec2 uv_min = Block::blocks[BLOCK_GRASS].mesh.uv_min;
 
     float vertices[] = {
          0.5f,  0.5f, 0.0f,  uv_max.x, 1.0f - uv_min.y,  // top right

@@ -1,7 +1,7 @@
 UNAME_S = $(shell uname -s)
 
 CXX = clang++
-CXXFLAGS = -std=c++14 -g -Wall -Wextra
+CXXFLAGS = -std=c++20 -g -Wall -Wextra -Wfloat-conversion
 CXXFLAGS += -I lib/glad/include -I lib/glfw/include -I lib/stb -I lib/cglm/include -I lib/imgui -I lib/imgui/backends
 LDFLAGS = lib/glad/src/glad.o lib/glfw/src/libglfw3.a lib/glm/build/glm/libglm.a -lm
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../util/math.hpp"
+#include "../util/util.hpp"
 #include "../gfx/shader.hpp"
 
 class BlockMesh {
