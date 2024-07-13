@@ -12,7 +12,10 @@ void Game::init() {
 
     // Inputs
     keyboard.init(&window);
-    mouse.init(&window, false);
+    mouse.init(&window, true);
+
+    // Player
+    player.init(&window, &keyboard, &mouse);
 }
 
 void Game::destroy() {
@@ -37,12 +40,12 @@ void Game::loop() {
 }
 
 void Game::update() {
+    // Input
     keyboard.update();
     mouse.update();
 
-    if (keyboard.keys[GLFW_KEY_TAB].pressed) {
-        mouse.toggled = !mouse.toggled;
-    }
+    // Player
+    player.update();
 }
 
 void Game::render() {

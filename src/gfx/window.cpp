@@ -37,9 +37,21 @@ void Window::init() {
         std::cout << "Error initializing GLAD\n";
         exit(1);
     }
+
+    // initialize time variables
+    time_current = glfwGetTime();
+    time_previous = time_current;
+    time_delta = 0.0;
 }
 
 void Window::destroy() {
     glfwDestroyWindow(handle);
     glfwTerminate();
+}
+
+void Window::update() {
+    time_current = glfwGetTime();
+    time_delta = time_current - time_previous;
+    time_previous = time_current;
+    fps = 1.0 / time_delta;
 }

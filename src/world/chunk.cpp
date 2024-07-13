@@ -7,14 +7,11 @@ position(position)
     std::fill(data, data + CHUNK_VOLUME, BLOCK_GRASS);
 
     mesh.init();
-    std::cout << "chunk created\n";
 }
 
 Chunk::~Chunk() {
     mesh.destroy();
     delete[] data;
-
-    std::cout << "chunk deleted\n";
 }
 
 void Chunk::render() {

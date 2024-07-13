@@ -4,6 +4,7 @@
 #include "gfx/renderer.hpp"
 #include "input/keyboard.hpp"
 #include "input/mouse.hpp"
+#include "player/player.hpp"
 
 class Game {
 public:
@@ -23,4 +24,6 @@ private:
 
     Keyboard keyboard;
     Mouse mouse;
+
+    Player player;
 };
