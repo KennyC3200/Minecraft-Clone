@@ -5,6 +5,8 @@ void Renderer::init(World *world, Player *player) {
     this->player = player;
 
     flags.wireframe = false;
+
+    glEnable(GL_DEPTH);
 }
 
 void Renderer::render() {

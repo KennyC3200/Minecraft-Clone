@@ -44,8 +44,8 @@ void Chunk::render() {
         1, 2, 3   // second triangle
     };
 
-    mesh.vbo.buffer(sizeof(vertices), vertices);
     mesh.ibo.buffer(sizeof(indices), indices);
+    mesh.vbo.buffer(sizeof(vertices), vertices);
     mesh.vao.attr(mesh.vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0);
     mesh.vao.attr(mesh.vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
     mesh.vao.bind();
