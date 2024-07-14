@@ -1,7 +1,7 @@
 #pragma once
 
-#include "block_mesh.hpp"
 #include "../gfx/sprite_atlas.hpp"
+#include "block_mesh.hpp"
 
 enum BlockType {
     BLOCK_GRASS = 0,
