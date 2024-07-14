@@ -1,16 +1,23 @@
 #pragma once
 
+#include "../util/util.hpp"
 #include "../gfx/vao.hpp"
 #include "../gfx/vbo.hpp"
+#include "../player/player.hpp"
 
 class ChunkMesh {
 public:
-    ChunkMesh();
     ~ChunkMesh();
+    ChunkMesh(uint64_t *data, glm::vec<2, int> *position);
 
-    void init();
-    void destroy();
+    static void init(Player *player);
+    void render();
 
     VAO vao;
     VBO vbo, ibo;
+private:
+    static Player *player;
+
+    uint64_t *data;
+    glm::vec<2, int> *position;
 };

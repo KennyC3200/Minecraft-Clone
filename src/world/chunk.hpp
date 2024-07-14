@@ -29,8 +29,8 @@ public:
     uint64_t *data;
 
     glm::vec<2, int> position;
-    ChunkMesh mesh;
 private:
-    // static player pointer
     static Player *player;
+
+    ChunkMesh *mesh;
 };
