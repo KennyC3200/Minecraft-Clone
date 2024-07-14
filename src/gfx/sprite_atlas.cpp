@@ -19,3 +19,10 @@ sprite_size(sprite_size)
         << "pixel_unit: " << pixel_unit.x << ' ' << pixel_unit.y << '\n';
 #endif
 }
+
+glm::vec2 SpriteAtlas::sprite_uv(glm::vec2 sprite_coordinates) {
+    return glm::vec2(
+        sprite_coordinates.x * sprite_unit.x,
+        sprite_coordinates.y * sprite_unit.y
+    );
+}

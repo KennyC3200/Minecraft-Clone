@@ -30,8 +30,8 @@ void Chunk::render() {
     BlockMesh::shader.uniform_mat4("view", player->camera.view);
     BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
-    glm::vec2 uv_max = Block::blocks[BLOCK_GRASS].mesh.uv_max;
-    glm::vec2 uv_min = Block::blocks[BLOCK_GRASS].mesh.uv_min;
+    glm::vec2 uv_max = Block::blocks[BLOCK_GRASS].mesh.faces[FACE_TOP].uv_max;
+    glm::vec2 uv_min = Block::blocks[BLOCK_GRASS].mesh.faces[FACE_TOP].uv_min;
 
     float vertices[] = {
          0.5f,  0.5f, 0.0f,  uv_max.x, 1.0f - uv_min.y,  // top right

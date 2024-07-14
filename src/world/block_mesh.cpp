@@ -6,10 +6,11 @@ BlockMesh::BlockMesh() {}
 
 BlockMesh::~BlockMesh() {}
 
-BlockMesh::BlockMesh(glm::vec2 uv_min, glm::vec2 uv_max):
-uv_min(uv_min),
-uv_max(uv_max) 
-{}
+BlockMesh::BlockMesh(Face faces[6]) {
+    for (int i = 0; i < 6; i++) {
+        this->faces[i] = faces[i];
+    }
+}
 
 void BlockMesh::init() {
     shader.init("res/shaders/block.vs", "res/shaders/block.fs");
