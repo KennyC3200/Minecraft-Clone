@@ -16,7 +16,7 @@ public:
     static Shader shader;
 
     Face faces[6];
-    static constexpr float VERTICES[6] = {
+    static constexpr float VERTICES[] = {
     };
 private:
     friend class Block;
