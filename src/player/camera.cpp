@@ -24,16 +24,20 @@ void Camera::init(Window *window, Mouse *mouse) {
     z_near = 0.1f;
     z_far = 200.0f;
     sensitivity = 0.1f;
+
+    toggled = true;
 }
 
 void Camera::update() {
-    yaw += sensitivity * mouse->position_delta.x;
-    pitch += sensitivity * mouse->position_delta.y;
-    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    direction.y = sin(glm::radians(pitch));
-    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front = glm::normalize(direction);
-    pitch = CLAMP(pitch, -89.0f, 89.0f);
+    if (toggled) {
+        yaw += sensitivity * mouse->position_delta.x;
+        pitch += sensitivity * mouse->position_delta.y;
+        direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+        direction.y = sin(glm::radians(pitch));
+        direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+        front = glm::normalize(direction);
+        pitch = CLAMP(pitch, -89.0f, 89.0f);
+    }
 
     view = glm::lookAt(position, position + front, up);
     projection = glm::perspective(

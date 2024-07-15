@@ -5,6 +5,7 @@
 #include "input/keyboard.hpp"
 #include "input/mouse.hpp"
 #include "player/player.hpp"
+#include "ui/ui.hpp"
 
 class Game {
 public:
@@ -17,6 +18,7 @@ private:
 
     Window window;
     Renderer renderer;
+    UI ui;
     World world;
 
     Keyboard keyboard;

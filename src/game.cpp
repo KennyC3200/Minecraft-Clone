@@ -5,6 +5,7 @@ void Game::init() {
     window.init();
     world.init(&player);
     renderer.init(&world, &player);
+    ui.init(&window, &renderer, &world, &player);
 
     // inputs
     keyboard.init(&window);
@@ -16,6 +17,7 @@ void Game::init() {
 
 void Game::destroy() {
     // gfx
+    ui.destroy();
     window.destroy();
     world.destroy();
 }
@@ -45,12 +47,17 @@ void Game::update() {
     // player
     player.update();
 
-    // handle input
     if (keyboard.keys[GLFW_KEY_T].pressed) {
         renderer.flags.wireframe = !renderer.flags.wireframe;
+    }
+    if (keyboard.keys[GLFW_KEY_ESCAPE].pressed) {
+        ui.command_tools.toggled = !ui.command_tools.toggled;
+        mouse.toggled = ui.command_tools.toggled;
+        player.camera.toggled = !ui.command_tools.toggled;
     }
 }
 
 void Game::render() {
     renderer.render();
+    ui.render();
 }

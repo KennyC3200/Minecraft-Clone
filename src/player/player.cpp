@@ -10,9 +10,6 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse) {
 
 void Player::update() {
     // handle movement
-    if (keyboard->keys[GLFW_KEY_TAB].pressed) {
-        mouse->toggled = !mouse->toggled;
-    }
     if (keyboard->keys[GLFW_KEY_W].down) {
         camera.position += 10.0f * (float) window->time_delta * camera.front;
     }

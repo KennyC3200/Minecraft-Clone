@@ -19,6 +19,8 @@ public:
     float fov;
     float z_near, z_far;
     float sensitivity;
+
+    bool toggled;
 private:
     Window *window;
     Mouse *mouse;
