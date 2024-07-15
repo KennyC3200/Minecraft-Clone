@@ -15,19 +15,25 @@ public:
 
     static Shader shader;
     static constexpr float CUBE_VERTICES[] = {
-        // NORTH face (-z)
+        // NORTH (-z) face vertices
         0, 0, 0,
         1, 0, 0,
-        0, 1, 0,
         1, 1, 0,
+        0, 1, 0,
 
-        // SOUTH face (+z)
+        // SOUTH (+z) face vertices
         0, 0, 1,
         1, 0, 1,
-        0, 1, 1,
         1, 1, 1,
+        0, 1, 1,
     };
-    static constexpr float CUBE_UVS[] = {
+    static constexpr float CUBE_INDICES[] = {
+        1, 0, 3, 1, 3, 2, // NORTH (-z)
+        5, 4, 7, 5, 7, 6, // SOUTH (+z)
+        6, 5, 1, 6, 2, 1, // EAST  (+x)
+        4, 7, 3, 4, 0, 3, // WEST  (-x)
+        6, 7, 3, 6, 2, 3, // UP    (+y)
+        5, 4, 0, 5, 3, 0, // DOWN  (-z)
     };
 
     Face faces[6];

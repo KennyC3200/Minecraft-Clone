@@ -6,7 +6,7 @@ void Renderer::init(World *world, Player *player) {
 
     flags.wireframe = false;
 
-    glEnable(GL_DEPTH);
+    glEnable(GL_DEPTH_TEST);
 }
 
 void Renderer::render() {

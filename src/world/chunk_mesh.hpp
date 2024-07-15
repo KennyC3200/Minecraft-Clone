@@ -12,12 +12,12 @@ public:
 
     static void init(Player *player);
     void render();
-
-    VAO vao;
-    VBO vbo, ibo;
 private:
     static Player *player;
 
     uint64_t *data;
     glm::vec<2, int> *position;
+
+    VAO vao;
+    VBO vbo, ibo;
 };
