@@ -54,7 +54,7 @@ void ChunkMesh::render() {
         6, 5, 1, 6, 2, 1, // EAST  (+x)
         4, 7, 3, 4, 0, 3, // WEST  (-x)
         6, 7, 3, 6, 2, 3, // UP    (+y)
-        5, 4, 0, 5, 3, 0, // DOWN  (-z)
+        5, 4, 0, 5, 1, 0, // DOWN  (-z)
     };
 
     ibo.buffer(sizeof(indices), indices);
