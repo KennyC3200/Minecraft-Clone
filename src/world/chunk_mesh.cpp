@@ -26,11 +26,8 @@ void ChunkMesh::init(Player *player) {
 }
 
 void ChunkMesh::render() {
-    /// bind necessary shader variables
-    BlockMesh::shader.bind();
+    // TODO: call this only once--when the block atlas is initialized
     BlockMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
-    BlockMesh::shader.uniform_mat4("view", player->camera.view);
-    BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
@@ -90,11 +87,14 @@ void ChunkMesh::render() {
 
                 ibo.buffer(count * 6 * sizeof(unsigned int), indices);
                 vertex_buffer.buffer(6 * FACE_VERTEX_SIZE * sizeof(float), (void*) BlockMesh::CUBE_VERTICES);
-                vao.attr(vertex_buffer, 0, 3, GL_FLOAT, 0, 0);
                 uv_buffer.buffer(6 * FACE_UV_COORDINATES_SIZE * sizeof(float), block.mesh.uv_coordinates);
+
+                vao.attr(vertex_buffer, 0, 3, GL_FLOAT, 0, 0);
                 vao.attr(uv_buffer, 1, 2, GL_FLOAT, 0, 0);
+
                 vao.bind();
                 ibo.bind();
+
                 glDrawElements(GL_TRIANGLES, count * 6, GL_UNSIGNED_INT, 0);
             }
         }

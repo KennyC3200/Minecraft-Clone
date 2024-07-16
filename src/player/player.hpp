@@ -5,6 +5,7 @@
 #include "../input/keyboard.hpp"
 #include "../input/mouse.hpp"
 #include "camera.hpp"
+#include "../world/block_mesh.hpp"
 
 class Player {
 public:
