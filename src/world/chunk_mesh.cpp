@@ -85,18 +85,6 @@ void ChunkMesh::render() {
             }
         }
     }
-    // for (int i = 0; i < 6; i++) {
-    //     vertices.reserve(vertices.size() + (BLOCKMESH_FACE_VERTEX_SIZE + BLOCKMESH_FACE_UV_COORDINATES_SIZE) * sizeof(float));
-    //     vertices.insert(
-    //         vertices.end(),
-    //         &(BlockMesh::CUBE_VERTICES[i * (BLOCKMESH_FACE_VERTEX_SIZE)]), 
-    //         &(BlockMesh::CUBE_VERTICES[(i + 1) * (BLOCKMESH_FACE_VERTEX_SIZE) - 1]));
-    //     vertices.insert(
-    //         vertices.end(),
-    //         mesh.faces[i].uv_coordinates,
-    //         mesh.faces[i].uv_coordinates + BLOCKMESH_FACE_UV_COORDINATES_SIZE
-    //     );
-    // }
 #endif
 
     // append indices for each face
