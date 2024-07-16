@@ -5,6 +5,7 @@
 
 typedef struct {
     glm::vec2 uv_min, uv_max;
+    float uv_coordinates[6];
 } Face;
 
 class BlockMesh {
@@ -15,25 +16,49 @@ public:
 
     static Shader shader;
     static constexpr float CUBE_VERTICES[] = {
-        // NORTH (-z) face vertices
+        // NORTH (-z)
         0, 0, 0,
         1, 0, 0,
-        1, 1, 0,
         0, 1, 0,
+        1, 1, 0,
 
-        // SOUTH (+z) face vertices
+        // SOUTH (+z)
         0, 0, 1,
         1, 0, 1,
-        1, 1, 1,
         0, 1, 1,
+        1, 1, 1,
+
+        // EAST (+x)
+        1, 0, 1,
+        1, 0, 0,
+        1, 1, 1,
+        1, 1, 0,
+
+        // WEST (-x)
+        0, 0, 1,
+        0, 0, 0,
+        0, 1, 1,
+        0, 1, 0,
+
+        // UP (+y)
+        0, 1, 1,
+        1, 1, 1,
+        0, 1, 0,
+        1, 1, 0,
+
+        // DOWN (-y)
+        0, 0, 1,
+        1, 0, 1,
+        0, 0, 0,
+        1, 0, 0,
     };
     static constexpr float CUBE_INDICES[] = {
-        1, 0, 3, 1, 3, 2, // NORTH (-z)
-        5, 4, 7, 5, 7, 6, // SOUTH (+z)
-        6, 5, 1, 6, 2, 1, // EAST  (+x)
-        4, 7, 3, 4, 0, 3, // WEST  (-x)
-        6, 7, 3, 6, 2, 3, // UP    (+y)
-        5, 4, 0, 5, 1, 0, // DOWN  (-z)
+         2,  0,  1,  2,  3,  1, // NORTH (-z)
+         6,  4,  5,  6,  7,  5, // SOUTH (+z)
+        10,  8,  9, 10, 11,  9, // EAST  (+x)
+        14, 12, 13, 14, 15, 13, // WEST  (-x)
+        18, 16, 17, 18, 19, 17, // UP    (+y)
+        22, 20, 21, 22, 23, 21, // DOWN  (-y)
     };
 
     Face faces[6];

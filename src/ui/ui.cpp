@@ -11,6 +11,7 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
     toggled = true;
     overview.toggled = true;
     command_tools.toggled = false;
+    command_tools.demo_window = false;
 
     reset_button_id = 0;
 }
@@ -93,7 +94,7 @@ void UI::render_command_tools() {
     UI_RESET_BUTTON(3, player->camera.sensitivity = 0.1f;);
 
     ImGui::SeparatorText("Settings");
-    ImGui::Text("Window Size: %i %i", window->size.x, window->size.y);
+    ImGui::Text("Window Size: %ipx %ipx", window->size.x, window->size.y);
     ImGui::Checkbox("Overview", &overview.toggled);
     ImGui::Checkbox("Wireframe (t)", &renderer->flags.wireframe);
     if (command_tools.demo_window) {

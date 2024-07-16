@@ -18,7 +18,7 @@ void Block::init() {
     Face faces[6];
 
     faces[UP]    = {atlas.sprite_uv({0, 0}), atlas.sprite_uv({1, 1})};
-    faces[DOWN]  = {atlas.sprite_uv({0, 0}), atlas.sprite_uv({1, 1})};
+    faces[DOWN]  = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
     faces[NORTH] = {atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1})};
     faces[SOUTH] = {atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1})};
     faces[WEST]  = {atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1})};
