@@ -25,5 +25,4 @@ private:
 
     VAO vao;
     VBO vbo, ibo;
-    VBO texture_buffer;
 };

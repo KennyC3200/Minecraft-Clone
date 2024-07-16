@@ -51,7 +51,7 @@ public:
         0, 0, 0,
         1, 0, 0,
     };
-    static constexpr float CUBE_INDICES[] = {
+    static constexpr unsigned int CUBE_INDICES[] = {
          2,  0,  1,  2,  3,  1, // NORTH (-z)
          6,  4,  5,  6,  7,  5, // SOUTH (+z)
         10,  8,  9, 10, 11,  9, // EAST  (+x)

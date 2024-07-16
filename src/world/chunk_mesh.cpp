@@ -34,7 +34,9 @@ void ChunkMesh::render() {
 
     BlockMesh mesh = Block::blocks[BLOCK_GRASS].mesh;
 
-    float vertices[] = {
+    // append vertices for each face
+    #if 0
+    std::vector<float> vertices = {
         // NORTH (-z)
         0, 0, 0, mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_max.y,
         1, 0, 0, mesh.faces[NORTH].uv_max.x, 1 - mesh.faces[NORTH].uv_max.y,
@@ -71,19 +73,92 @@ void ChunkMesh::render() {
         0, 0, 0, mesh.faces[DOWN].uv_min.x, 1 - mesh.faces[DOWN].uv_min.y,
         1, 0, 0, mesh.faces[DOWN].uv_max.x, 1 - mesh.faces[DOWN].uv_min.y,
     };
-    unsigned int indices[] = {
-         2,  0,  1,  2,  3,  1, // NORTH (-z)
-         6,  4,  5,  6,  7,  5, // SOUTH (+z)
-        10,  8,  9, 10, 11,  9, // EAST  (+x)
-        14, 12, 13, 14, 15, 13, // WEST  (-x)
-        18, 16, 17, 18, 19, 17, // UP    (+y)
-        22, 20, 21, 22, 23, 21, // DOWN  (-y)
+    #else
+    std::vector<float> vertices = {
+        // Vertex coordinates
+        // NORTH (-z)
+        0, 0, 0,
+        1, 0, 0,
+        0, 1, 0,
+        1, 1, 0,
+
+        // SOUTH (+z)
+        0, 0, 1,
+        1, 0, 1,
+        0, 1, 1,
+        1, 1, 1,
+
+        // EAST (+x)
+        1, 0, 1,
+        1, 0, 0,
+        1, 1, 1,
+        1, 1, 0,
+
+        // WEST (-x)
+        0, 0, 1,
+        0, 0, 0,
+        0, 1, 1,
+        0, 1, 0,
+
+        // UP (+y)
+        0, 1, 1,
+        1, 1, 1,
+        0, 1, 0,
+        1, 1, 0,
+
+        // DOWN (-y)
+        0, 0, 1,
+        1, 0, 1,
+        0, 0, 0,
+        1, 0, 0,
+
+        // UV coordinates
+        // NORTH (-z)
+        mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_max.y,
+        mesh.faces[NORTH].uv_max.x, 1 - mesh.faces[NORTH].uv_max.y,
+        mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_min.y,
+        mesh.faces[NORTH].uv_max.x, 1 - mesh.faces[NORTH].uv_min.y,
+
+        // SOUTH (+z)
+        mesh.faces[SOUTH].uv_min.x, 1 - mesh.faces[SOUTH].uv_max.y,
+        mesh.faces[SOUTH].uv_max.x, 1 - mesh.faces[SOUTH].uv_max.y,
+        mesh.faces[SOUTH].uv_min.x, 1 - mesh.faces[SOUTH].uv_min.y,
+        mesh.faces[SOUTH].uv_max.x, 1 - mesh.faces[SOUTH].uv_min.y,
+
+        // EAST (+x)
+        mesh.faces[EAST].uv_min.x, 1 - mesh.faces[EAST].uv_max.y,
+        mesh.faces[EAST].uv_max.x, 1 - mesh.faces[EAST].uv_max.y,
+        mesh.faces[EAST].uv_min.x, 1 - mesh.faces[EAST].uv_min.y,
+        mesh.faces[EAST].uv_max.x, 1 - mesh.faces[EAST].uv_min.y,
+
+        // WEST (-x)
+        mesh.faces[WEST].uv_min.x, 1 - mesh.faces[WEST].uv_max.y,
+        mesh.faces[WEST].uv_max.x, 1 - mesh.faces[WEST].uv_max.y,
+        mesh.faces[WEST].uv_min.x, 1 - mesh.faces[WEST].uv_min.y,
+        mesh.faces[WEST].uv_max.x, 1 - mesh.faces[WEST].uv_min.y,
+
+        // UP (+y)
+        mesh.faces[UP].uv_min.x, 1 - mesh.faces[UP].uv_max.y,
+        mesh.faces[UP].uv_max.x, 1 - mesh.faces[UP].uv_max.y,
+        mesh.faces[UP].uv_min.x, 1 - mesh.faces[UP].uv_min.y,
+        mesh.faces[UP].uv_max.x, 1 - mesh.faces[UP].uv_min.y,
+
+        // DOWN (-y)
+        mesh.faces[DOWN].uv_min.x, 1 - mesh.faces[DOWN].uv_max.y,
+        mesh.faces[DOWN].uv_max.x, 1 - mesh.faces[DOWN].uv_max.y,
+        mesh.faces[DOWN].uv_min.x, 1 - mesh.faces[DOWN].uv_min.y,
+        mesh.faces[DOWN].uv_max.x, 1 - mesh.faces[DOWN].uv_min.y,
+    };
+    #endif
+
+    // append indices for each face
+    std::vector<unsigned int> indices = {
     };
 
-    ibo.buffer(sizeof(indices), indices);
-    vbo.buffer(sizeof(vertices), vertices);
-    vao.attr(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0);
-    vao.attr(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
+    ibo.buffer(sizeof(BlockMesh::CUBE_INDICES), (void*) BlockMesh::CUBE_INDICES);
+    vbo.buffer(vertices.size() * sizeof(float), &vertices[0]);
+    vao.attr(vbo, 0, 3, GL_FLOAT, 0, 0);
+    vao.attr(vbo, 1, 2, GL_FLOAT, 0, (4 * 3 * 6) * sizeof(float));
     vao.bind();
 
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
