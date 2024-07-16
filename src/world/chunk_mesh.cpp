@@ -77,8 +77,9 @@ void ChunkMesh::render() {
                     }
                     count++;
                 }
+
                 if (count == 0) {
-                    return;
+                    continue;
                 }
 
                 ibo.buffer(count * 6 * sizeof(unsigned int), indices);
