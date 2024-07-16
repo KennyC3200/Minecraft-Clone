@@ -32,45 +32,44 @@ void ChunkMesh::render() {
     BlockMesh::shader.uniform_mat4("view", player->camera.view);
     BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
-    glm::vec2 uv_max = Block::blocks[BLOCK_GRASS].mesh.faces[NORTH].uv_max;
-    glm::vec2 uv_min = Block::blocks[BLOCK_GRASS].mesh.faces[NORTH].uv_min;
+    BlockMesh mesh = Block::blocks[BLOCK_GRASS].mesh;
 
     float vertices[] = {
         // NORTH (-z)
-        0, 0, 0, uv_min.x, 1 - uv_max.y,
-        1, 0, 0, uv_max.x, 1 - uv_max.y,
-        0, 1, 0, uv_min.x, 1 - uv_min.y,
-        1, 1, 0, uv_max.x, 1 - uv_min.y,
+        0, 0, 0, mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_max.y,
+        1, 0, 0, mesh.faces[NORTH].uv_max.x, 1 - mesh.faces[NORTH].uv_max.y,
+        0, 1, 0, mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_min.y,
+        1, 1, 0, mesh.faces[NORTH].uv_max.x, 1 - mesh.faces[NORTH].uv_min.y,
 
         // SOUTH (+z)
-        0, 0, 1, uv_min.x, 1 - uv_max.y,
-        1, 0, 1, uv_max.x, 1 - uv_max.y,
-        0, 1, 1, uv_min.x, 1 - uv_min.y,
-        1, 1, 1, uv_max.x, 1 - uv_min.y,
+        0, 0, 1, mesh.faces[SOUTH].uv_min.x, 1 - mesh.faces[SOUTH].uv_max.y,
+        1, 0, 1, mesh.faces[SOUTH].uv_max.x, 1 - mesh.faces[SOUTH].uv_max.y,
+        0, 1, 1, mesh.faces[SOUTH].uv_min.x, 1 - mesh.faces[SOUTH].uv_min.y,
+        1, 1, 1, mesh.faces[SOUTH].uv_max.x, 1 - mesh.faces[SOUTH].uv_min.y,
 
         // EAST (+x)
-        1, 0, 1, uv_min.x, 1 - uv_max.y,
-        1, 0, 0, uv_max.x, 1 - uv_max.y,
-        1, 1, 1, uv_min.x, 1 - uv_min.y,
-        1, 1, 0, uv_max.x, 1 - uv_min.y,
+        1, 0, 1, mesh.faces[EAST].uv_min.x, 1 - mesh.faces[EAST].uv_max.y,
+        1, 0, 0, mesh.faces[EAST].uv_max.x, 1 - mesh.faces[EAST].uv_max.y,
+        1, 1, 1, mesh.faces[EAST].uv_min.x, 1 - mesh.faces[EAST].uv_min.y,
+        1, 1, 0, mesh.faces[EAST].uv_max.x, 1 - mesh.faces[EAST].uv_min.y,
 
         // WEST (-x)
-        0, 0, 1, uv_min.x, 1 - uv_max.y,
-        0, 0, 0, uv_max.x, 1 - uv_max.y,
-        0, 1, 1, uv_min.x, 1 - uv_min.y,
-        0, 1, 0, uv_max.x, 1 - uv_min.y,
+        0, 0, 1, mesh.faces[WEST].uv_min.x, 1 - mesh.faces[WEST].uv_max.y,
+        0, 0, 0, mesh.faces[WEST].uv_max.x, 1 - mesh.faces[WEST].uv_max.y,
+        0, 1, 1, mesh.faces[WEST].uv_min.x, 1 - mesh.faces[WEST].uv_min.y,
+        0, 1, 0, mesh.faces[WEST].uv_max.x, 1 - mesh.faces[WEST].uv_min.y,
 
         // UP (+y)
-        0, 1, 1, uv_min.x, 1 - uv_max.y,
-        1, 1, 1, uv_max.x, 1 - uv_max.y,
-        0, 1, 0, uv_min.x, 1 - uv_min.y,
-        1, 1, 0, uv_max.x, 1 - uv_min.y,
+        0, 1, 1, mesh.faces[UP].uv_min.x, 1 - mesh.faces[UP].uv_max.y,
+        1, 1, 1, mesh.faces[UP].uv_max.x, 1 - mesh.faces[UP].uv_max.y,
+        0, 1, 0, mesh.faces[UP].uv_min.x, 1 - mesh.faces[UP].uv_min.y,
+        1, 1, 0, mesh.faces[UP].uv_max.x, 1 - mesh.faces[UP].uv_min.y,
 
         // DOWN (-y)
-        0, 0, 1, uv_min.x, 1 - uv_max.y,
-        1, 0, 1, uv_max.x, 1 - uv_max.y,
-        0, 0, 0, uv_min.x, 1 - uv_min.y,
-        1, 0, 0, uv_max.x, 1 - uv_min.y,
+        0, 0, 1, mesh.faces[DOWN].uv_min.x, 1 - mesh.faces[DOWN].uv_max.y,
+        1, 0, 1, mesh.faces[DOWN].uv_max.x, 1 - mesh.faces[DOWN].uv_max.y,
+        0, 0, 0, mesh.faces[DOWN].uv_min.x, 1 - mesh.faces[DOWN].uv_min.y,
+        1, 0, 0, mesh.faces[DOWN].uv_max.x, 1 - mesh.faces[DOWN].uv_min.y,
     };
     unsigned int indices[] = {
          2,  0,  1,  2,  3,  1, // NORTH (-z)
