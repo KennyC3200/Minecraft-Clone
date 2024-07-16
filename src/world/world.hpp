@@ -12,7 +12,7 @@ public:
     void render();
 
     Chunk **chunks;
-    size_t chunks_count;
+    size_t chunks_size;
 private:
     Player *player;
 };

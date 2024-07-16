@@ -32,15 +32,6 @@ void ChunkMesh::render() {
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
-                glm::mat4 model = glm::translate(
-                    glm::mat4(1.0f), 
-                    glm::vec3(CHUNK_SIZE_X * position->x + x, 
-                              CHUNK_SIZE_Y * position->y + y, 
-                              CHUNK_SIZE_Z * position->z + z));
-                BlockMesh::shader.uniform_mat4("model", model);
-                BlockMesh::shader.uniform_mat4("view", player->camera.view);
-                BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
-
                 Block &block = Block::blocks[data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y]];
                 unsigned int indices[6 * 6] = {0};
                 int count = 0;
@@ -86,13 +77,23 @@ void ChunkMesh::render() {
                     continue;
                 }
 
+                glm::mat4 model = glm::translate(
+                    glm::mat4(1.0f), 
+                    glm::vec3(CHUNK_SIZE_X * position->x + x, 
+                              CHUNK_SIZE_Y * position->y + y, 
+                              CHUNK_SIZE_Z * position->z + z));
+                BlockMesh::shader.uniform_mat4("model", model);
+                BlockMesh::shader.uniform_mat4("view", player->camera.view);
+                BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
+
+
                 ibo.buffer(count * 6 * sizeof(unsigned int), indices);
                 vertex_buffer.buffer(6 * FACE_VERTEX_SIZE * sizeof(float), (void*) BlockMesh::CUBE_VERTICES);
-                uv_buffer.buffer(6 * FACE_UV_COORDINATES_SIZE * sizeof(float), block.mesh.uv_coordinates);
                 vao.attr(vertex_buffer, 0, 3, GL_FLOAT, 0, 0);
+                uv_buffer.buffer(6 * FACE_UV_COORDINATES_SIZE * sizeof(float), block.mesh.uv_coordinates);
                 vao.attr(uv_buffer, 1, 2, GL_FLOAT, 0, 0);
                 vao.bind();
-
+                ibo.bind();
                 glDrawElements(GL_TRIANGLES, count * 6, GL_UNSIGNED_INT, 0);
             }
         }
