@@ -37,13 +37,12 @@ void ChunkMesh::render() {
                 BlockMesh::shader.uniform_mat4("view", player->camera.view);
                 BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
-                BlockMesh mesh = Block::blocks[BLOCK_GRASS].mesh;
-                std::vector<unsigned int> indices = {
-                };
+                Block &block = Block::blocks[*data];
+                std::vector<unsigned int> indices;
 
                 ibo.buffer(sizeof(BlockMesh::CUBE_INDICES), (void*) BlockMesh::CUBE_INDICES);
                 vertex_buffer.buffer(6 * FACE_VERTEX_SIZE * sizeof(float), (void*) BlockMesh::CUBE_VERTICES);
-                uv_buffer.buffer(6 * FACE_UV_COORDINATES_SIZE * sizeof(float), mesh.uv_coordinates);
+                uv_buffer.buffer(6 * FACE_UV_COORDINATES_SIZE * sizeof(float), block.mesh.uv_coordinates);
                 vao.attr(vertex_buffer, 0, 3, GL_FLOAT, 0, 0);
                 vao.attr(uv_buffer, 1, 2, GL_FLOAT, 0, 0);
                 vao.bind();
