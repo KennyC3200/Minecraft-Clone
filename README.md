@@ -12,6 +12,8 @@
       renderable objects by state change: first render all the objects with shader one, then all objects with shader two, and so on; this can of course be extended 
       to blend state changes, texture binds, framebuffer switches etc.
 
+    - Don't render chunk border faces
     - Batch render the chunks
     - Minimize state changes
+    - Cannot have `BLOCK_AIR`? Solution: need to have `TRANSPARENT` or `OPAQUE` value in the metadata
 - Fix camera snapping
