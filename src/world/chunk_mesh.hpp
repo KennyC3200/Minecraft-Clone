@@ -24,5 +24,6 @@ private:
     glm::vec<2, int> *position;
 
     VAO vao;
-    VBO vbo, ibo;
+    VBO vertex_buffer, uv_buffer;
+    VBO ibo;
 };

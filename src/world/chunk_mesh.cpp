@@ -5,7 +5,8 @@
 Player *ChunkMesh::player;
 
 ChunkMesh::~ChunkMesh() {
-    vbo.destroy();
+    vertex_buffer.destroy();
+    uv_buffer.destroy();
     ibo.destroy();
     vao.destroy();
 }
@@ -15,7 +16,8 @@ ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<2, int> *position) {
     this->position = position;
 
     vao.init();
-    vbo.init(GL_ARRAY_BUFFER, STATIC_DRAW);
+    vertex_buffer.init(GL_ARRAY_BUFFER, STATIC_DRAW);
+    uv_buffer.init(GL_ARRAY_BUFFER, STATIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, STATIC_DRAW);
 }
 
@@ -36,68 +38,14 @@ void ChunkMesh::render() {
                 BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
                 BlockMesh mesh = Block::blocks[BLOCK_GRASS].mesh;
-
-                // append vertices for each face
-#if 0
-                std::vector<float> vertices = {
-                    // NORTH (-z)
-                    0, 0, 0, mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_max.y,
-                    1, 0, 0, mesh.faces[NORTH].uv_max.x, 1 - mesh.faces[NORTH].uv_max.y,
-                    0, 1, 0, mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_min.y,
-                    1, 1, 0, mesh.faces[NORTH].uv_max.x, 1 - mesh.faces[NORTH].uv_min.y,
-
-                    // SOUTH (+z)
-                    0, 0, 1, mesh.faces[SOUTH].uv_min.x, 1 - mesh.faces[SOUTH].uv_max.y,
-                    1, 0, 1, mesh.faces[SOUTH].uv_max.x, 1 - mesh.faces[SOUTH].uv_max.y,
-                    0, 1, 1, mesh.faces[SOUTH].uv_min.x, 1 - mesh.faces[SOUTH].uv_min.y,
-                    1, 1, 1, mesh.faces[SOUTH].uv_max.x, 1 - mesh.faces[SOUTH].uv_min.y,
-
-                    // EAST (+x)
-                    1, 0, 1, mesh.faces[EAST].uv_min.x, 1 - mesh.faces[EAST].uv_max.y,
-                    1, 0, 0, mesh.faces[EAST].uv_max.x, 1 - mesh.faces[EAST].uv_max.y,
-                    1, 1, 1, mesh.faces[EAST].uv_min.x, 1 - mesh.faces[EAST].uv_min.y,
-                    1, 1, 0, mesh.faces[EAST].uv_max.x, 1 - mesh.faces[EAST].uv_min.y,
-
-                    // WEST (-x)
-                    0, 0, 1, mesh.faces[WEST].uv_min.x, 1 - mesh.faces[WEST].uv_max.y,
-                    0, 0, 0, mesh.faces[WEST].uv_max.x, 1 - mesh.faces[WEST].uv_max.y,
-                    0, 1, 1, mesh.faces[WEST].uv_min.x, 1 - mesh.faces[WEST].uv_min.y,
-                    0, 1, 0, mesh.faces[WEST].uv_max.x, 1 - mesh.faces[WEST].uv_min.y,
-
-                    // UP (+y)
-                    0, 1, 1, mesh.faces[UP].uv_min.x, 1 - mesh.faces[UP].uv_max.y,
-                    1, 1, 1, mesh.faces[UP].uv_max.x, 1 - mesh.faces[UP].uv_max.y,
-                    0, 1, 0, mesh.faces[UP].uv_min.x, 1 - mesh.faces[UP].uv_min.y,
-                    1, 1, 0, mesh.faces[UP].uv_max.x, 1 - mesh.faces[UP].uv_min.y,
-
-                    // DOWN (-y)
-                    0, 0, 1, mesh.faces[DOWN].uv_min.x, 1 - mesh.faces[DOWN].uv_max.y,
-                    1, 0, 1, mesh.faces[DOWN].uv_max.x, 1 - mesh.faces[DOWN].uv_max.y,
-                    0, 0, 0, mesh.faces[DOWN].uv_min.x, 1 - mesh.faces[DOWN].uv_min.y,
-                    1, 0, 0, mesh.faces[DOWN].uv_max.x, 1 - mesh.faces[DOWN].uv_min.y,
-                };
-#else
-                std::vector<float> vertices;
-                for (int i = 0; i < 6; i++) {
-                    for (int j = 0; j < 4; j++) {
-                        for (int k = 0; k < 3; k++) {
-                            vertices.push_back(BlockMesh::CUBE_VERTICES[i * FACE_VERTEX_SIZE + j * 3 + k]);
-                        }
-                        for (int k = 0; k < 2; k++) {
-                            vertices.push_back(mesh.faces[i].uv_coordinates[j * 2 + k]);
-                        }
-                    }
-                }
-#endif
-
-                // append indices for each face
                 std::vector<unsigned int> indices = {
                 };
 
                 ibo.buffer(sizeof(BlockMesh::CUBE_INDICES), (void*) BlockMesh::CUBE_INDICES);
-                vbo.buffer(vertices.size() * sizeof(float), &vertices[0]);
-                vao.attr(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0);
-                vao.attr(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
+                vertex_buffer.buffer(6 * FACE_VERTEX_SIZE * sizeof(float), (void*) BlockMesh::CUBE_VERTICES);
+                uv_buffer.buffer(6 * FACE_UV_COORDINATES_SIZE * sizeof(float), mesh.uv_coordinates);
+                vao.attr(vertex_buffer, 0, 3, GL_FLOAT, 0, 0);
+                vao.attr(uv_buffer, 1, 2, GL_FLOAT, 0, 0);
                 vao.bind();
 
                 glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);

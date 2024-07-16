@@ -8,13 +8,13 @@
 
 typedef struct {
     glm::vec2 uv_min, uv_max;
+    // TODO: maybe delete to same memory?
     float uv_coordinates[FACE_UV_COORDINATES_SIZE];
 } Face;
 
 class BlockMesh {
 public:
     void add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
-    void add_face_vertices(std::vector<float> &vertices, std::vector<float> &indices);
 
     static Shader shader;
     static constexpr float CUBE_VERTICES[] = {
@@ -63,6 +63,7 @@ public:
         22, 20, 21, 22, 23, 21, // DOWN  (-y)
     };
 
+    float uv_coordinates[6 * FACE_UV_COORDINATES_SIZE];
     Face faces[6];
 private:
     friend class Block;
