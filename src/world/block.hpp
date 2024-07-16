@@ -17,9 +17,6 @@ public:
     ~Block();
     Block(BlockType type, BlockMesh mesh);
 
-    // each block is going to have an array of sprites for each face
-    void render_face();
-
     static SpriteAtlas atlas;
     static Block blocks[BLOCK_LAST];
 

@@ -15,29 +15,29 @@ mesh(mesh)
 void Block::init() {
     BlockMesh::init();
     atlas = SpriteAtlas("res/images/blocks.png", "blocks", glm::vec2(16, 16));
-    Face faces[6];
 
-    faces[UP]    = {atlas.sprite_uv({0, 0}), atlas.sprite_uv({1, 1})};
-    faces[DOWN]  = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
-    faces[NORTH] = {atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1})};
-    faces[SOUTH] = {atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1})};
-    faces[WEST]  = {atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1})};
-    faces[EAST]  = {atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1})};
-    blocks[BLOCK_GRASS] = Block(BLOCK_GRASS, faces);
+    BlockMesh mesh;
+    mesh.add_face(NORTH, atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
+    mesh.add_face(SOUTH, atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
+    mesh.add_face(EAST,  atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
+    mesh.add_face(WEST,  atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
+    mesh.add_face(UP,    atlas.sprite_uv({0, 0}), atlas.sprite_uv({1, 1}));
+    mesh.add_face(DOWN,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    blocks[BLOCK_GRASS] = Block(BLOCK_GRASS, mesh);
 
-    faces[UP]    = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
-    faces[DOWN]  = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
-    faces[NORTH] = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
-    faces[SOUTH] = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
-    faces[EAST]  = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
-    faces[WEST]  = {atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1})};
-    blocks[BLOCK_DIRT] = Block(BLOCK_DIRT, faces);
+    mesh.add_face(NORTH, atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    mesh.add_face(SOUTH, atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    mesh.add_face(EAST,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    mesh.add_face(WEST,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    mesh.add_face(UP,    atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    mesh.add_face(DOWN,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    blocks[BLOCK_DIRT] = Block(BLOCK_DIRT, mesh);
 
-    faces[UP]    = {atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1})};
-    faces[DOWN]  = {atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1})};
-    faces[NORTH] = {atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1})};
-    faces[SOUTH] = {atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1})};
-    faces[EAST]  = {atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1})};
-    faces[WEST]  = {atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1})};
-    blocks[BLOCK_STONE] = Block(BLOCK_STONE, faces);
+    mesh.add_face(NORTH, atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
+    mesh.add_face(SOUTH, atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
+    mesh.add_face(EAST,  atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
+    mesh.add_face(WEST,  atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
+    mesh.add_face(UP,    atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
+    mesh.add_face(DOWN,  atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
+    blocks[BLOCK_STONE] = Block(BLOCK_STONE, mesh);
 }

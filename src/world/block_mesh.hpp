@@ -3,15 +3,17 @@
 #include "../util/util.hpp"
 #include "../gfx/shader.hpp"
 
+#define FACE_VERTEX_SIZE (4 * 3)
+#define FACE_UV_COORDINATES_SIZE (4 * 2)
+
 typedef struct {
     glm::vec2 uv_min, uv_max;
+    float uv_coordinates[FACE_UV_COORDINATES_SIZE];
 } Face;
 
 class BlockMesh {
 public:
-    BlockMesh();
-    ~BlockMesh();
-    BlockMesh(Face faces[6]);
+    void add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
 
     static Shader shader;
     static constexpr float CUBE_VERTICES[] = {
