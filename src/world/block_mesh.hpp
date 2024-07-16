@@ -14,6 +14,7 @@ typedef struct {
 class BlockMesh {
 public:
     void add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
+    void add_face_vertices(std::vector<float> &vertices, std::vector<float> &indices);
 
     static Shader shader;
     static constexpr float CUBE_VERTICES[] = {

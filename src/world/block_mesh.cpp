@@ -20,3 +20,6 @@ void BlockMesh::add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max
         faces[direction].uv_coordinates[i] = uv_coordinates[i];
     }
 }
+
+void BlockMesh::add_face_vertices(std::vector<float> &vertices, std::vector<float> &indices) {
+}

@@ -38,7 +38,7 @@ void ChunkMesh::render() {
                 BlockMesh mesh = Block::blocks[BLOCK_GRASS].mesh;
 
                 // append vertices for each face
-#if 1
+#if 0
                 std::vector<float> vertices = {
                     // NORTH (-z)
                     0, 0, 0, mesh.faces[NORTH].uv_min.x, 1 - mesh.faces[NORTH].uv_max.y,
