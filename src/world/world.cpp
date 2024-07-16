@@ -6,8 +6,12 @@ void World::init(Player *player) {
     Block::init();
     Chunk::init(player);
 
-    Chunk *chunk = new Chunk(glm::vec<2, int>(0, 0));
-    chunks.push_back(chunk);
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+        }
+    }
+            Chunk *chunk = new Chunk(glm::vec<2, int>(0, 0));
+            chunks.push_back(chunk);
 }
 
 void World::destroy() {
