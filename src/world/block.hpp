@@ -4,7 +4,8 @@
 #include "block_mesh.hpp"
 
 enum BlockType {
-    BLOCK_GRASS = 0,
+    BLOCK_AIR = 0,
+    BLOCK_GRASS,
     BLOCK_DIRT,
     BLOCK_STONE,
     BLOCK_SAND,

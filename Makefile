@@ -11,10 +11,13 @@ ifeq ($(UNAME_S), Darwin)
 endif
 
 SRC = $(shell find src -name "*.cpp")
-SRC += lib/imgui/imgui.cpp lib/imgui/imgui_demo.cpp lib/imgui/imgui_draw.cpp lib/imgui/imgui_tables.cpp lib/imgui/imgui_widgets.cpp
-SRC += lib/imgui/backends/imgui_impl_glfw.cpp lib/imgui/backends/imgui_impl_opengl3.cpp
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
 BIN = bin
+
+IMGUI_SRC = lib/imgui/imgui.cpp lib/imgui/imgui_demo.cpp lib/imgui/imgui_draw.cpp lib/imgui/imgui_tables.cpp lib/imgui/imgui_widgets.cpp
+IMGUI_SRC += lib/imgui/backends/imgui_impl_glfw.cpp lib/imgui/backends/imgui_impl_opengl3.cpp
+IMGUI_OBJ = $(patsubst %.cpp, %.o, $(IMGUI_SRC))
+SRC += $(IMGUI_SRC)
 
 .PHONY: all clean
 
@@ -47,4 +50,4 @@ game: $(OBJ)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf $(BIN) $(OBJ)
+	rm -rf $(BIN) $(filter-out $(IMGUI_OBJ), $(OBJ))
