@@ -26,9 +26,6 @@ void ChunkMesh::init(Player *player) {
 }
 
 void ChunkMesh::render() {
-    // TODO: call this only once--when the block atlas is initialized
-    BlockMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
-
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
@@ -83,7 +80,6 @@ void ChunkMesh::render() {
                               CHUNK_SIZE_Y * position->y + y, 
                               CHUNK_SIZE_Z * position->z + z));
                 BlockMesh::shader.uniform_mat4("model", model);
-
 
                 ibo.buffer(count * 6 * sizeof(unsigned int), indices);
                 vertex_buffer.buffer(6 * FACE_VERTEX_SIZE * sizeof(float), (void*) BlockMesh::CUBE_VERTICES);

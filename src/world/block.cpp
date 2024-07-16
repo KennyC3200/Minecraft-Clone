@@ -15,6 +15,7 @@ mesh(mesh)
 void Block::init() {
     BlockMesh::init();
     atlas = SpriteAtlas("res/images/blocks.png", "blocks", glm::vec2(16, 16));
+    BlockMesh::shader.uniform_texture_2d(atlas.texture, 0);
 
     BlockMesh mesh;
     mesh.add_face(NORTH, atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
