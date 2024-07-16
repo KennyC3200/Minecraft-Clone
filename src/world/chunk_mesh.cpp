@@ -26,8 +26,11 @@ void ChunkMesh::init(Player *player) {
 }
 
 void ChunkMesh::render() {
+    /// bind necessary shader variables
     BlockMesh::shader.bind();
     BlockMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
+    BlockMesh::shader.uniform_mat4("view", player->camera.view);
+    BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
@@ -83,8 +86,6 @@ void ChunkMesh::render() {
                               CHUNK_SIZE_Y * position->y + y, 
                               CHUNK_SIZE_Z * position->z + z));
                 BlockMesh::shader.uniform_mat4("model", model);
-                BlockMesh::shader.uniform_mat4("view", player->camera.view);
-                BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
 
 
                 ibo.buffer(count * 6 * sizeof(unsigned int), indices);
