@@ -5,7 +5,6 @@
 
 typedef struct {
     glm::vec2 uv_min, uv_max;
-    float uv_coordinates[6];
 } Face;
 
 class BlockMesh {
