@@ -13,7 +13,27 @@
       to blend state changes, texture binds, framebuffer switches etc.
 
     - Don't render chunk border faces
+        - Pass in pointers to surrounding chunk data (uint64_t* or nullptr for chunks that aren't loaded)
     - Batch render the chunks
+        - Have different buffers to batch render: `DATA`, `INDICES`, defined as TEMPLATES
+            ```cpp
+            template<T>
+            struct ChunkMeshBuffer {
+                T *data;
+                
+                // data for this buffer, nullptr if not allocated
+                size_t capacity;
+
+                // current index (in bytes) into data
+                size_t index;
+
+                // final count (in bytes) in data
+                size_t count;
+
+                // current count (in elements) of data
+                size_t elements;
+            };
+            ```
     - Minimize state changes
     - Cannot have `BLOCK_AIR`? Solution: need to have `TRANSPARENT` or `OPAQUE` value in the metadata
 - Fix camera snapping
