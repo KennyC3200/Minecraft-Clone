@@ -16,5 +16,15 @@ void BlockMesh::add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max
         uv_min.x, 1 - uv_min.y,
         uv_max.x, 1 - uv_min.y,
     };
-    std::copy(faces[direction].uv_coordinates, faces[direction].uv_coordinates + 8, uv_coordinates);
+    for (int i = 0; i < FACE_UV_COORDINATES_SIZE; i++) {
+        faces[direction].uv_coordinates[i] = uv_coordinates[i];
+    }
+    std::cout << "--------------------------------" << '\n';
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 2; j++) {
+            std::cout << faces[direction].uv_coordinates[i * 2 + j] << ' ';
+        }
+        std::cout << '\n';
+    }
+    std::cout << "--------------------------------" << '\n';
 }
