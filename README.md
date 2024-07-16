@@ -17,7 +17,7 @@
     - Batch render the chunks
         - Have different buffers to batch render: `DATA`, `INDICES`, defined as TEMPLATES
             ```cpp
-            template<T>
+            template<typename T>
             struct ChunkMeshBuffer {
                 T *data;
                 

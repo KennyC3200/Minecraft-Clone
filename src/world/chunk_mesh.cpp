@@ -19,6 +19,9 @@ ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position) {
     vertex_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     uv_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
+
+    data_buffer.data    = new float[(CHUNK_VOLUME / 2) * 6 * 6 * 8];
+    indices_buffer.data = new unsigned int[(CHUNK_VOLUME / 2) * 6 * 6];
 }
 
 void ChunkMesh::init(Player *player) {
@@ -95,4 +98,7 @@ void ChunkMesh::render() {
             }
         }
     }
+}
+
+void ChunkMesh::mesh() {
 }
