@@ -13,7 +13,7 @@
 class ChunkMesh {
 public:
     ~ChunkMesh();
-    ChunkMesh(uint64_t *data, glm::vec<2, int> *position);
+    ChunkMesh(uint64_t *data, glm::vec<3, int> *position);
 
     static void init(Player *player);
     void render();
@@ -21,7 +21,7 @@ private:
     static Player *player;
 
     uint64_t *data;
-    glm::vec<2, int> *position;
+    glm::vec<3, int> *position;
 
     VAO vao;
     VBO vertex_buffer, uv_buffer;

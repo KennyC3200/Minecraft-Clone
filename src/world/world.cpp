@@ -6,22 +6,20 @@ void World::init(Player *player) {
     Block::init();
     Chunk::init(player);
 
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 2; j++) {
-        }
-    }
-            Chunk *chunk = new Chunk(glm::vec<2, int>(0, 0));
-            chunks.push_back(chunk);
+    chunks_count = 1;
+    chunks = new Chunk*[chunks_count];
+    chunks[0] = new Chunk(glm::vec<3, int>(0, 0, 0));
 }
 
 void World::destroy() {
-    for (size_t i = 0; i < chunks.size(); i++) {
+    for (size_t i = 0; i < chunks_count; i++) {
         delete chunks[i];
     }
+    delete[] chunks;
 }
 
 void World::render() {
-    for (auto &chunk : chunks) {
-        chunk->render();
+    for (size_t i = 0; i < chunks_count; i++) {
+        chunks[i]->render();
     }
 }

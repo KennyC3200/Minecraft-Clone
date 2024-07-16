@@ -11,7 +11,8 @@ public:
     void destroy();
     void render();
 
-    std::vector<Chunk*> chunks;
+    Chunk **chunks;
+    size_t chunks_count;
 private:
     Player *player;
 };

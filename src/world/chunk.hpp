@@ -6,7 +6,7 @@
 
 class Chunk {
 public:
-    Chunk(glm::vec<2, int> position);
+    Chunk(glm::vec<3, int> position);
     ~Chunk();
 
     static void init(Player *player);
@@ -23,7 +23,7 @@ public:
     // - 16 bits block id
     uint64_t *data;
 
-    glm::vec<2, int> position;
+    glm::vec<3, int> position;
 private:
     static Player *player;
 

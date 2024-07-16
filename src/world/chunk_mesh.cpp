@@ -11,14 +11,14 @@ ChunkMesh::~ChunkMesh() {
     vao.destroy();
 }
 
-ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<2, int> *position) {
+ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position) {
     this->data = data;
     this->position = position;
 
     vao.init();
-    vertex_buffer.init(GL_ARRAY_BUFFER, STATIC_DRAW);
-    uv_buffer.init(GL_ARRAY_BUFFER, STATIC_DRAW);
-    ibo.init(GL_ELEMENT_ARRAY_BUFFER, STATIC_DRAW);
+    vertex_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
+    uv_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
+    ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
 }
 
 void ChunkMesh::init(Player *player) {
@@ -32,7 +32,11 @@ void ChunkMesh::render() {
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
-                glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z));
+                glm::mat4 model = glm::translate(
+                    glm::mat4(1.0f), 
+                    glm::vec3(CHUNK_SIZE_X * position->x + x, 
+                              CHUNK_SIZE_Y * position->y + y, 
+                              CHUNK_SIZE_Z * position->z + z));
                 BlockMesh::shader.uniform_mat4("model", model);
                 BlockMesh::shader.uniform_mat4("view", player->camera.view);
                 BlockMesh::shader.uniform_mat4("projection", player->camera.projection);
