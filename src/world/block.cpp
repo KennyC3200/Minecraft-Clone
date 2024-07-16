@@ -25,14 +25,6 @@ void Block::init() {
     mesh.add_face(DOWN,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
     blocks[BLOCK_GRASS] = Block(BLOCK_GRASS, mesh);
 
-    std::cout << "GRASS\n";
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 2; j++) {
-            std::cout << blocks[BLOCK_GRASS].mesh.faces[DOWN].uv_coordinates[i * 2 + j];
-        }
-        std::cout << '\n';
-    }
-
     mesh.add_face(NORTH, atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
     mesh.add_face(SOUTH, atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
     mesh.add_face(EAST,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));

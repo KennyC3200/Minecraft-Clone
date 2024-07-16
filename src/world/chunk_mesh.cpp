@@ -81,7 +81,7 @@ void ChunkMesh::render() {
                 vertices.push_back(BlockMesh::CUBE_VERTICES[i * FACE_VERTEX_SIZE + j * 3 + k]);
             }
             for (int k = 0; k < 2; k++) {
-                vertices.push_back(mesh.faces[i].uv_coordinates[i * FACE_UV_COORDINATES_SIZE + j * 2 + k]);
+                vertices.push_back(mesh.faces[i].uv_coordinates[j * 2 + k]);
             }
         }
     }
