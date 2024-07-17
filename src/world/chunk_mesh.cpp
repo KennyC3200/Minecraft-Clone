@@ -104,11 +104,14 @@ void ChunkMesh::render() {
 }
 
 void ChunkMesh::buffers_init() {
-    indices_buffer.data = new unsigned int[(CHUNK_VOLUME / 2) * 6 * 6];
+    indices_buffer.capacity = (CHUNK_VOLUME / 2) * 6 * 6;
+    indices_buffer.data = new unsigned int[indices_buffer.capacity];
 }
 
 void ChunkMesh::buffers_destroy() {
+    delete[] indices_buffer.data;
 }
 
 void ChunkMesh::buffers_prepare() {
+    indices_buffer.elements = 0;
 }
