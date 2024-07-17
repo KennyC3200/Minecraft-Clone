@@ -16,7 +16,9 @@
         - Pass in pointers to surrounding chunk data (uint64_t* or nullptr for chunks that aren't loaded)
     - Refactor code
     - Batch render the chunks
-        - How do I pass in the model matrix?
+        - Only update the chunk mesh if the chunk has been updated
+        - Pass in the block positions via the `vector_buffer`
+        - Since we are already recalculating the `vector_buffer` for each mesh might as well stitch the `vector_buffer` together with the `uv_buffer`
         - Have different buffers to batch render: `DATA`, `INDICES`, defined as TEMPLATES
             ```cpp
             template<typename T>
@@ -36,6 +38,5 @@
                 size_t elements;
             };
             ```
-    - Minimize state changes
     - Cannot have `BLOCK_AIR`? Solution: need to have `TRANSPARENT` or `OPAQUE` value in the metadata
 - Fix camera snapping
