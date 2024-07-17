@@ -33,11 +33,12 @@ public:
     ChunkMesh(uint64_t *data, glm::vec<3, int> *position);
 
     static void init(Player *player);
+
+    void prepare();
+    void mesh();
     void render();
 private:
     static Player *player;
-
-    void mesh();
 
     ChunkMeshBuffer<float> data_buffer;
     ChunkMeshBuffer<unsigned int> indices_buffer;

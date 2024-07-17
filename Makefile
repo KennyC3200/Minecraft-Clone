@@ -51,3 +51,6 @@ game: $(OBJ)
 
 clean:
 	rm -rf $(BIN) $(filter-out $(IMGUI_OBJ), $(OBJ))
+
+deepclean:
+	rm -rf $(BIN) $(OBJ)

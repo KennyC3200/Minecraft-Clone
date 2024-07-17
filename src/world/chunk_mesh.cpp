@@ -28,6 +28,12 @@ void ChunkMesh::init(Player *player) {
     ChunkMesh::player = player;
 }
 
+void ChunkMesh::prepare() {
+}
+
+void ChunkMesh::mesh() {
+}
+
 void ChunkMesh::render() {
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
@@ -98,7 +104,4 @@ void ChunkMesh::render() {
             }
         }
     }
-}
-
-void ChunkMesh::mesh() {
 }

@@ -14,6 +14,7 @@
 
     - Don't render chunk border faces
         - Pass in pointers to surrounding chunk data (uint64_t* or nullptr for chunks that aren't loaded)
+    - Refactor code
     - Batch render the chunks
         - Have different buffers to batch render: `DATA`, `INDICES`, defined as TEMPLATES
             ```cpp

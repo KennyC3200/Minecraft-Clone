@@ -27,6 +27,5 @@ void Chunk::init(Player *player) {
 }
 
 void Chunk::render() {
-    BlockMesh::shader.bind();
     mesh->render();
 }

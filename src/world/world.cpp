@@ -22,6 +22,9 @@ void World::destroy() {
 }
 
 void World::render() {
+    BlockMesh::shader.bind();
+    BlockMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
+
     for (size_t i = 0; i < chunks_size; i++) {
         chunks[i]->render();
     }
