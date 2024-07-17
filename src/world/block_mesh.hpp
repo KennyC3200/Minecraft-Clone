@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../util/util.hpp"
-#include "../gfx/shader.hpp"
 
 #define FACE_VERTEX_SIZE (4 * 3)
 #define FACE_UV_COORDINATES_SIZE (4 * 2)
@@ -16,7 +15,6 @@ class BlockMesh {
 public:
     void add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
 
-    static Shader shader;
     static constexpr float CUBE_VERTICES[] = {
         // NORTH (-z)
         0, 0, 0,
@@ -65,8 +63,4 @@ public:
 
     float uv_coordinates[6 * FACE_UV_COORDINATES_SIZE];
     Face faces[6];
-private:
-    friend class Block;
-
-    static void init();
 };

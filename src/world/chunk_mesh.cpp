@@ -2,7 +2,7 @@
 #include "block.hpp"
 #include "block_mesh.hpp"
 
-Player *ChunkMesh::player;
+Shader ChunkMesh::shader;
 
 ChunkMesh::~ChunkMesh() {
     vertex_buffer.destroy();
@@ -19,13 +19,10 @@ ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position) {
     vertex_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     uv_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
-
-    data_buffer.data    = new float[(CHUNK_VOLUME / 2) * 6 * 6 * 8];
-    indices_buffer.data = new unsigned int[(CHUNK_VOLUME / 2) * 6 * 6];
 }
 
-void ChunkMesh::init(Player *player) {
-    ChunkMesh::player = player;
+void ChunkMesh::init() {
+    shader.init("res/shaders/chunk.vs", "res/shaders/chunk.fs");
 }
 
 void ChunkMesh::prepare() {
@@ -88,7 +85,7 @@ void ChunkMesh::render() {
                     glm::vec3(CHUNK_SIZE_X * position->x + x, 
                               CHUNK_SIZE_Y * position->y + y, 
                               CHUNK_SIZE_Z * position->z + z));
-                BlockMesh::shader.uniform_mat4("model", model);
+                shader.uniform_mat4("model", model);
 
                 ibo.buffer(count * 6 * sizeof(unsigned int), indices);
                 vertex_buffer.buffer(6 * FACE_VERTEX_SIZE * sizeof(float), (void*) BlockMesh::CUBE_VERTICES);
@@ -104,4 +101,14 @@ void ChunkMesh::render() {
             }
         }
     }
+}
+
+void ChunkMesh::buffers_init() {
+    indices_buffer.data = new unsigned int[(CHUNK_VOLUME / 2) * 6 * 6];
+}
+
+void ChunkMesh::buffers_destroy() {
+}
+
+void ChunkMesh::buffers_prepare() {
 }

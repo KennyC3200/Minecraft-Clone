@@ -13,7 +13,6 @@ mesh(mesh)
 {}
 
 void Block::init() {
-    BlockMesh::init();
     atlas = SpriteAtlas("res/images/blocks.png", "blocks", glm::vec2(16, 16));
 
     BlockMesh mesh;

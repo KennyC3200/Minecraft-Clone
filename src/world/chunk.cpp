@@ -1,7 +1,5 @@
 #include "chunk.hpp"
 
-Player* Chunk::player;
-
 Chunk::Chunk(glm::vec<3, int> position):
 position(position)
 {
@@ -21,9 +19,8 @@ Chunk::~Chunk() {
     delete[] data;
 }
 
-void Chunk::init(Player *player) {
-    Chunk::player = player;
-    ChunkMesh::init(player);
+void Chunk::init() {
+    ChunkMesh::init();
 }
 
 void Chunk::render() {

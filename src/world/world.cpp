@@ -4,7 +4,7 @@ void World::init(Player *player) {
     this->player = player;
 
     Block::init();
-    Chunk::init(player);
+    Chunk::init();
 
     chunks_size = 4;
     chunks = new Chunk*[chunks_size];
@@ -22,8 +22,8 @@ void World::destroy() {
 }
 
 void World::render() {
-    BlockMesh::shader.bind();
-    BlockMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
+    ChunkMesh::shader.bind();
+    ChunkMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
 
     for (size_t i = 0; i < chunks_size; i++) {
         chunks[i]->render();

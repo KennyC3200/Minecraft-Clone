@@ -1,11 +1,5 @@
 #include "block_mesh.hpp"
 
-Shader BlockMesh::shader;
-
-void BlockMesh::init() {
-    shader.init("res/shaders/block.vs", "res/shaders/block.fs");
-}
-
 void BlockMesh::add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max) {
     faces[direction].uv_min = uv_min;
     faces[direction].uv_max = uv_max;

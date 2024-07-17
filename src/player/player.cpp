@@ -28,6 +28,6 @@ void Player::update() {
 
 void Player::render() {
     // TODO: implement third-person
-    BlockMesh::shader.uniform_mat4("view", camera.view);
-    BlockMesh::shader.uniform_mat4("projection", camera.projection);
+    ChunkMesh::shader.uniform_mat4("view", camera.view);
+    ChunkMesh::shader.uniform_mat4("projection", camera.projection);
 }
