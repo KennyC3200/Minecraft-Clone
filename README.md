@@ -16,6 +16,7 @@
         - Pass in pointers to surrounding chunk data (uint64_t* or nullptr for chunks that aren't loaded)
     - Refactor code
     - Batch render the chunks
+        - How do I pass in the model matrix?
         - Have different buffers to batch render: `DATA`, `INDICES`, defined as TEMPLATES
             ```cpp
             template<typename T>
