@@ -112,7 +112,6 @@ void ChunkMesh::mesh() {
 }
 
 void ChunkMesh::render() {
-
     glm::mat4 model = glm::translate(
         glm::mat4(1.0f), 
         glm::vec3(

@@ -7,7 +7,6 @@
 
 typedef struct {
     glm::vec2 uv_min, uv_max;
-    // TODO: maybe delete to same memory?
     float uv_coordinates[FACE_UV_COORDINATES_SIZE];
 } Face;
 

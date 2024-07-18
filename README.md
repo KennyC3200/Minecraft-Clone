@@ -17,3 +17,4 @@
         - Pass in pointers to surrounding chunk data (uint64_t* or nullptr for chunks that aren't loaded)
     - Cannot have `BLOCK_AIR`? Solution: need to have `TRANSPARENT` or `OPAQUE` value in the metadata
 - Fix camera snapping
+- Render crosshair

@@ -22,7 +22,7 @@ void Camera::init(Window *window, Mouse *mouse) {
 
     fov = 45.0f;
     z_near = 0.1f;
-    z_far = 200.0f;
+    z_far = 300.0f;
     sensitivity = 0.1f;
 
     toggled = true;

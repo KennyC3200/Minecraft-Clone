@@ -88,8 +88,8 @@ void UI::render_command_tools() {
     ImGui::SeparatorText("Camera");
     ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
     UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);
-    ImGui::SliderFloat("Z-far", &player->camera.z_far, 1.0f, 300.0f);
-    UI_RESET_BUTTON(2, player->camera.z_far = 200.0f;);
+    ImGui::SliderFloat("Z-far", &player->camera.z_far, 1.0f, 500.0f);
+    UI_RESET_BUTTON(2, player->camera.z_far = 300.0f;);
     ImGui::SliderFloat("Sensitivity", &player->camera.sensitivity, 0.0f, 1.0f);
     UI_RESET_BUTTON(3, player->camera.sensitivity = 0.1f;);
 
