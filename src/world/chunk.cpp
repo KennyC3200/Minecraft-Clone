@@ -12,6 +12,8 @@ position(position)
     }
 
     mesh = new ChunkMesh(data, &this->position);
+    mesh->prepare();
+    mesh->mesh();
 }
 
 Chunk::~Chunk() {

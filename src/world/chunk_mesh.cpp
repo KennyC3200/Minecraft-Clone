@@ -5,19 +5,17 @@
 Shader ChunkMesh::shader;
 
 ChunkMesh::~ChunkMesh() {
-    vertex_buffer.destroy();
-    uv_buffer.destroy();
+    vbo.destroy();
     ibo.destroy();
     vao.destroy();
 }
 
 ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position) {
-    this->data = data;
     this->position = position;
+    this->data = data;
 
     vao.init();
-    vertex_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
-    uv_buffer.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
+    vbo.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
 }
 
@@ -26,92 +24,76 @@ void ChunkMesh::init() {
 }
 
 void ChunkMesh::prepare() {
+    vertices.clear();
+    indices.clear();
 }
 
 void ChunkMesh::mesh() {
-}
-
-void ChunkMesh::render() {
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
                 Block &block = Block::blocks[data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y]];
-                unsigned int indices[6 * 6] = {0};
-                int count = 0;
 
                 if (z + 1 >= CHUNK_SIZE_Z || data[x * CHUNK_SIZE_X + (z + 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices[count * 6 + i] = BlockMesh::CUBE_INDICES[6 * SOUTH + i];
-                    }
-                    count++;
+                    // for (int i = 0; i < 6; i++) {
+                    //     indices.push_back(BlockMesh::CUBE_INDICES[6 * SOUTH + i]);
+                    // }
                 }
                 if (z - 1 < 0 || data[x * CHUNK_SIZE_X + (z - 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices[count * 6 + i] = BlockMesh::CUBE_INDICES[6 * NORTH + i];
+                    for (int i = 0; i < 4; i++) {
+                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * NORTH + i * 3 + 0] + x);
+                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * NORTH + i * 3 + 1] + y);
+                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * NORTH + i * 3 + 2] + z);
+                        vertices.push_back(block.mesh.faces[NORTH].uv_coordinates[i * 2]);
+                        vertices.push_back(block.mesh.faces[NORTH].uv_coordinates[i * 2 + 1]);
                     }
-                    count++;
+                    for (int i = 0; i < 6; i++) {
+                        indices.push_back(BlockMesh::CUBE_INDICES[6 * NORTH + i]);
+                    }
                 }
                 if (x + 1 >= CHUNK_SIZE_X || data[(x + 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices[count * 6 + i] = BlockMesh::CUBE_INDICES[6 * EAST + i];
-                    }
-                    count++;
+                    // for (int i = 0; i < 6; i++) {
+                    //     indices.push_back(BlockMesh::CUBE_INDICES[6 * EAST + i]);
+                    // }
                 }
                 if (x - 1 < 0 || data[(x - 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices[count * 6 + i] = BlockMesh::CUBE_INDICES[6 * WEST + i];
-                    }
-                    count++;
+                    // for (int i = 0; i < 6; i++) {
+                    //     indices.push_back(BlockMesh::CUBE_INDICES[6 * WEST + i]);
+                    // }
                 }
                 if (y + 1 >= CHUNK_SIZE_Y || data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y + 1)] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices[count * 6 + i] = BlockMesh::CUBE_INDICES[6 * UP + i];
-                    }
-                    count++;
+                    // for (int i = 0; i < 6; i++) {
+                    //     indices.push_back(BlockMesh::CUBE_INDICES[6 * UP + i]);
+                    // }
                 }
                 if (y - 1 < 0 || data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y - 1)] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices[count * 6 + i] = BlockMesh::CUBE_INDICES[6 * DOWN + i];
-                    }
-                    count++;
+                    // for (int i = 0; i < 6; i++) {
+                    //     indices.push_back(BlockMesh::CUBE_INDICES[6 * DOWN + i]);
+                    // }
                 }
-
-                if (count == 0) {
-                    continue;
-                }
-
-                glm::mat4 model = glm::translate(
-                    glm::mat4(1.0f), 
-                    glm::vec3(CHUNK_SIZE_X * position->x + x, 
-                              CHUNK_SIZE_Y * position->y + y, 
-                              CHUNK_SIZE_Z * position->z + z));
-                shader.uniform_mat4("model", model);
-
-                ibo.buffer(count * 6 * sizeof(unsigned int), indices);
-                vertex_buffer.buffer(6 * FACE_VERTEX_SIZE * sizeof(float), (void*) BlockMesh::CUBE_VERTICES);
-                uv_buffer.buffer(6 * FACE_UV_COORDINATES_SIZE * sizeof(float), block.mesh.uv_coordinates);
-
-                vao.attr(vertex_buffer, 0, 3, GL_FLOAT, 0, 0);
-                vao.attr(uv_buffer, 1, 2, GL_FLOAT, 0, 0);
-
-                vao.bind();
-                ibo.bind();
-
-                glDrawElements(GL_TRIANGLES, count * 6, GL_UNSIGNED_INT, 0);
             }
         }
     }
 }
 
-void ChunkMesh::buffers_init() {
-    indices_buffer.capacity = (CHUNK_VOLUME / 2) * 6 * 6;
-    indices_buffer.data = new unsigned int[indices_buffer.capacity];
-}
+void ChunkMesh::render() {
 
-void ChunkMesh::buffers_destroy() {
-    delete[] indices_buffer.data;
-}
+    glm::mat4 model = glm::translate(
+        glm::mat4(1.0f), 
+        glm::vec3(
+            CHUNK_SIZE_X * position->x,
+            CHUNK_SIZE_Y * position->y,
+            CHUNK_SIZE_Z * position->z));
+    shader.uniform_mat4("model", model);
 
-void ChunkMesh::buffers_prepare() {
-    indices_buffer.elements = 0;
+    ibo.buffer(indices.size() * sizeof(unsigned int), &indices[0]);
+    vbo.buffer(vertices.size() * sizeof(float), &vertices[0]);
+
+    vao.attr(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0);
+    vao.attr(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
+
+    vao.bind();
+    ibo.bind();
+
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../util/util.hpp"
+#include <array>
 
 template<typename T>
 class MeshBuffer {
@@ -16,4 +17,5 @@ public:
     void init(size_t capacity);
     void destroy();
     void prepare();
+    void append(T value);
 };

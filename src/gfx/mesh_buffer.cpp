@@ -15,3 +15,8 @@ template<typename T>
 void MeshBuffer<T>::prepare() {
     elements = 0;
 }
+
+template<typename T>
+void MeshBuffer<T>::append(T value) {
+    data[elements++] = value;
+}
