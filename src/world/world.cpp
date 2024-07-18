@@ -16,10 +16,10 @@ void World::init(Player *player) {
     for (int x = 0; x < 10; x++) {
         for (int z = 0; z < 10; z++) {
             Chunk *neighbors[6];
-            neighbors[NORTH] = z - 1 < 10 ? chunks[z + 1] : nullptr;
-            neighbors[SOUTH] = z + 1 < 10 ? chunks[z + 1] : nullptr;
-            neighbors[EAST]  = x + 1 < 10 ? chunks[x + 1] : nullptr;
-            neighbors[WEST]  = x - 1 > 0  ? chunks[x - 1] : nullptr;
+            neighbors[NORTH] = z - 1 >= 0  ? chunks[x * 10 + z - 1]   : nullptr;
+            neighbors[SOUTH] = z + 1 <  10 ? chunks[x * 10 + z + 1]   : nullptr;
+            neighbors[EAST]  = x + 1 <  10 ? chunks[(x + 1) * 10 + z] : nullptr;
+            neighbors[WEST]  = x - 1 >= 0  ? chunks[(x - 1) * 10 + z] : nullptr;
             neighbors[UP]    = nullptr;
             neighbors[DOWN]  = nullptr;
             chunks[x * 10 + z]->neighbors_set(neighbors);
