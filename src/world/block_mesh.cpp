@@ -13,7 +13,4 @@ void BlockMesh::add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max
     for (int i = 0; i < FACE_UV_COORDINATES_SIZE; i++) {
         faces[direction].uv_coordinates[i] = _uv_coordinates[i];
     }
-    for (int i = 0; i < FACE_UV_COORDINATES_SIZE; i++) {
-        uv_coordinates[direction * FACE_UV_COORDINATES_SIZE + i] = _uv_coordinates[i];
-    }
 }

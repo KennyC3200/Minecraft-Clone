@@ -54,6 +54,5 @@ public:
     };
     static constexpr unsigned int CUBE_INDICES[] = {2,  0,  1,  2,  3,  1};
 
-    float uv_coordinates[6 * FACE_UV_COORDINATES_SIZE];
     Face faces[6];
 };
