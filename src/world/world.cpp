@@ -6,12 +6,13 @@ void World::init(Player *player) {
     Block::init();
     Chunk::init();
 
-    chunks_size = 4;
+    chunks_size = 100;
     chunks = new Chunk*[chunks_size];
-    chunks[0] = new Chunk({0, 0, 0});
-    chunks[1] = new Chunk({1, 0, 0});
-    chunks[2] = new Chunk({0, 0, 1});
-    chunks[3] = new Chunk({1, 0, 1});
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            chunks[i * 10 + j] = new Chunk({i, 0, j});
+        }
+    }
 }
 
 void World::destroy() {

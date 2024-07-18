@@ -12,31 +12,8 @@
       renderable objects by state change: first render all the objects with shader one, then all objects with shader two, and so on; this can of course be extended 
       to blend state changes, texture binds, framebuffer switches etc.
 
+    - Refactor code
     - Don't render chunk border faces
         - Pass in pointers to surrounding chunk data (uint64_t* or nullptr for chunks that aren't loaded)
-    - Refactor code
-    - Batch render the chunks
-        - Only update the chunk mesh if the chunk has been updated
-        - Pass in the block positions via the `vector_buffer`
-        - Since we are already recalculating the `vector_buffer` for each mesh might as well stitch the `vector_buffer` together with the `uv_buffer`
-        - Have different buffers to batch render: `DATA`, `INDICES`, defined as TEMPLATES
-            ```cpp
-            template<typename T>
-            struct ChunkMeshBuffer {
-                T *data;
-                
-                // data for this buffer, nullptr if not allocated
-                size_t capacity;
-
-                // current index (in bytes) into data
-                size_t index;
-
-                // final count (in bytes) in data
-                size_t count;
-
-                // current count (in elements) of data
-                size_t elements;
-            };
-            ```
     - Cannot have `BLOCK_AIR`? Solution: need to have `TRANSPARENT` or `OPAQUE` value in the metadata
 - Fix camera snapping
