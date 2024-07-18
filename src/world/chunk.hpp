@@ -10,6 +10,9 @@ public:
     ~Chunk();
 
     static void init();
+
+    void neighbors_set(Chunk *chunks[6]);
+
     void render();
 
     glm::vec<3, int> position;
@@ -26,4 +29,5 @@ private:
     uint64_t *data;
 
     ChunkMesh *mesh;
+    bool meshed;
 };

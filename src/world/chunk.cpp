@@ -12,8 +12,7 @@ position(position)
     }
 
     mesh = new ChunkMesh(data, &this->position);
-    mesh->prepare();
-    mesh->mesh();
+    meshed = false;
 }
 
 Chunk::~Chunk() {
@@ -25,6 +24,22 @@ void Chunk::init() {
     ChunkMesh::init();
 }
 
+void Chunk::neighbors_set(Chunk *chunks[6]) {
+    ChunkMesh *neighbors[6];
+    neighbors[NORTH] = chunks[NORTH] ? chunks[NORTH]->mesh : nullptr;
+    neighbors[SOUTH] = chunks[SOUTH] ? chunks[SOUTH]->mesh : nullptr;
+    neighbors[EAST]  = chunks[EAST]  ? chunks[EAST]->mesh  : nullptr;
+    neighbors[WEST]  = chunks[WEST]  ? chunks[WEST]->mesh  : nullptr;
+    neighbors[UP]    = chunks[UP]    ? chunks[UP]->mesh    : nullptr;
+    neighbors[DOWN]  = chunks[DOWN]  ? chunks[DOWN]->mesh  : nullptr;
+    mesh->neighbors_set(neighbors);
+}
+
 void Chunk::render() {
+    if (!meshed) {
+        mesh->prepare();
+        mesh->mesh();
+        meshed = true;
+    }
     mesh->render();
 }

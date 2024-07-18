@@ -19,6 +19,8 @@ public:
 
     static Shader shader;
 
+    void neighbors_set(ChunkMesh *neighbors[6]);
+
     void prepare();
     void mesh();
     void render();
@@ -28,6 +30,7 @@ private:
 
     uint64_t *data;
     glm::vec<3, int> *position;
+    ChunkMesh *neighbors[6];
 
     VAO vao;
     VBO vbo, ibo;

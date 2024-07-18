@@ -10,9 +10,13 @@ ChunkMesh::~ChunkMesh() {
     vao.destroy();
 }
 
-ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position) {
-    this->position = position;
-    this->data = data;
+ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position):
+data(data),
+position(position)
+{
+    for (int i = 0; i < 6; i++) {
+        this->neighbors[i] = neighbors[i];
+    }
 
     vao.init();
     vbo.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
@@ -21,6 +25,15 @@ ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position) {
 
 void ChunkMesh::init() {
     shader.init("res/shaders/chunk.vs", "res/shaders/chunk.fs");
+}
+
+void ChunkMesh::neighbors_set(ChunkMesh *neighbors[6]) {
+    this->neighbors[NORTH] = neighbors[NORTH];
+    this->neighbors[SOUTH] = neighbors[SOUTH];
+    this->neighbors[EAST]  = neighbors[EAST];
+    this->neighbors[WEST]  = neighbors[WEST];
+    this->neighbors[UP]    = neighbors[UP];
+    this->neighbors[DOWN]  = neighbors[DOWN];
 }
 
 void ChunkMesh::prepare() {
@@ -34,22 +47,40 @@ void ChunkMesh::mesh() {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
                 Block &block = Block::blocks[data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y]];
 
-                if (z + 1 >= CHUNK_SIZE_Z || data[x * CHUNK_SIZE_X + (z + 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
+                if (
+                    z + 1 >= CHUNK_SIZE_Z || 
+                    data[x * CHUNK_SIZE_X + (z + 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR
+                ) {
                     block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
                 }
-                if (z - 1 < 0 || data[x * CHUNK_SIZE_X + (z - 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
+                if (
+                    z - 1 < 0 || 
+                    data[x * CHUNK_SIZE_X + (z - 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR
+                ) {
                     block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
                 }
-                if (x + 1 >= CHUNK_SIZE_X || data[(x + 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
+                if (
+                    x + 1 >= CHUNK_SIZE_X || 
+                    data[(x + 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR
+                ) {
                     block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
                 }
-                if (x - 1 < 0 || data[(x - 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
+                if (
+                    x - 1 < 0 || 
+                    data[(x - 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR
+                ) {
                     block.mesh.mesh_face(WEST, {x, y, z}, vertices, indices);
                 }
-                if (y + 1 >= CHUNK_SIZE_Y || data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y + 1)] == BLOCK_AIR) {
+                if (
+                    y + 1 >= CHUNK_SIZE_Y || 
+                    data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y + 1)] == BLOCK_AIR
+                ) {
                     block.mesh.mesh_face(UP, {x, y, z}, vertices, indices);
                 }
-                if (y - 1 < 0 || data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y - 1)] == BLOCK_AIR) {
+                if (
+                    y - 1 < 0 || 
+                    data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y - 1)] == BLOCK_AIR
+                ) {
                     block.mesh.mesh_face(DOWN, {x, y, z}, vertices, indices);
                 }
             }
