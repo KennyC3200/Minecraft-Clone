@@ -4,7 +4,6 @@
 #include "../gfx/shader.hpp"
 #include "../gfx/vao.hpp"
 #include "../gfx/vbo.hpp"
-#include "../gfx/mesh_buffer.hpp"
 
 #define CHUNK_SIZE_X 16
 #define CHUNK_SIZE_Y 16
