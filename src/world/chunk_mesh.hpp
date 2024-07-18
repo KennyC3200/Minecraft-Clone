@@ -26,7 +26,6 @@ private:
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
 
-    // TODO: remove this (refactor)
     uint64_t *data;
     glm::vec<3, int> *position;
 

@@ -2,7 +2,6 @@
 
 #include "../util/util.hpp"
 
-#define FACE_VERTEX_SIZE (4 * 3)
 #define FACE_UV_COORDINATES_SIZE (4 * 2)
 
 typedef struct {
@@ -13,8 +12,13 @@ typedef struct {
 class BlockMesh {
 public:
     void add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
+    void mesh_face(
+        enum Direction direction,
+        glm::vec<3, int> position, 
+        std::vector<float> &vertices, 
+        std::vector<unsigned int> &indices);
 
-    static constexpr float CUBE_VERTICES[] = {
+    static constexpr float VERTICES[] = {
         // NORTH (-z)
         0, 0, 0,
         1, 0, 0,
@@ -51,7 +55,7 @@ public:
         0, 0, 0,
         1, 0, 0,
     };
-    static constexpr unsigned int CUBE_INDICES[] = {2,  0,  1,  2,  3,  1};
+    static constexpr unsigned int INDICES[] = {2,  0,  1,  2,  3,  1};
 
     Face faces[6];
 };

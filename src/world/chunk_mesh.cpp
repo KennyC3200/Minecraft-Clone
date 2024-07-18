@@ -35,76 +35,22 @@ void ChunkMesh::mesh() {
                 Block &block = Block::blocks[data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y]];
 
                 if (z + 1 >= CHUNK_SIZE_Z || data[x * CHUNK_SIZE_X + (z + 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices.push_back(vertices.size() / 5 + BlockMesh::CUBE_INDICES[i]);
-                    }
-                    for (int i = 0; i < 4; i++) {
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * SOUTH + i * 3 + 0] + x);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * SOUTH + i * 3 + 1] + y);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * SOUTH + i * 3 + 2] + z);
-                        vertices.push_back(block.mesh.faces[SOUTH].uv_coordinates[i * 2]);
-                        vertices.push_back(block.mesh.faces[SOUTH].uv_coordinates[i * 2 + 1]);
-                    }
+                    block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
                 }
                 if (z - 1 < 0 || data[x * CHUNK_SIZE_X + (z - 1) * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices.push_back(vertices.size() / 5 + BlockMesh::CUBE_INDICES[i]);
-                    }
-                    for (int i = 0; i < 4; i++) {
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * NORTH + i * 3 + 0] + x);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * NORTH + i * 3 + 1] + y);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * NORTH + i * 3 + 2] + z);
-                        vertices.push_back(block.mesh.faces[NORTH].uv_coordinates[i * 2]);
-                        vertices.push_back(block.mesh.faces[NORTH].uv_coordinates[i * 2 + 1]);
-                    }
+                    block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
                 }
                 if (x + 1 >= CHUNK_SIZE_X || data[(x + 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices.push_back(vertices.size() / 5 + BlockMesh::CUBE_INDICES[i]);
-                    }
-                    for (int i = 0; i < 4; i++) {
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * EAST + i * 3 + 0] + x);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * EAST + i * 3 + 1] + y);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * EAST + i * 3 + 2] + z);
-                        vertices.push_back(block.mesh.faces[EAST].uv_coordinates[i * 2]);
-                        vertices.push_back(block.mesh.faces[EAST].uv_coordinates[i * 2 + 1]);
-                    }
+                    block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
                 }
                 if (x - 1 < 0 || data[(x - 1) * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + y] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices.push_back(vertices.size() / 5 + BlockMesh::CUBE_INDICES[i]);
-                    }
-                    for (int i = 0; i < 4; i++) {
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * WEST + i * 3 + 0] + x);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * WEST + i * 3 + 1] + y);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * WEST + i * 3 + 2] + z);
-                        vertices.push_back(block.mesh.faces[WEST].uv_coordinates[i * 2]);
-                        vertices.push_back(block.mesh.faces[WEST].uv_coordinates[i * 2 + 1]);
-                    }
+                    block.mesh.mesh_face(WEST, {x, y, z}, vertices, indices);
                 }
                 if (y + 1 >= CHUNK_SIZE_Y || data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y + 1)] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices.push_back(vertices.size() / 5 + BlockMesh::CUBE_INDICES[i]);
-                    }
-                    for (int i = 0; i < 4; i++) {
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * UP + i * 3 + 0] + x);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * UP + i * 3 + 1] + y);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * UP + i * 3 + 2] + z);
-                        vertices.push_back(block.mesh.faces[UP].uv_coordinates[i * 2]);
-                        vertices.push_back(block.mesh.faces[UP].uv_coordinates[i * 2 + 1]);
-                    }
+                    block.mesh.mesh_face(UP, {x, y, z}, vertices, indices);
                 }
                 if (y - 1 < 0 || data[x * CHUNK_SIZE_X + z * CHUNK_SIZE_Z + (y - 1)] == BLOCK_AIR) {
-                    for (int i = 0; i < 6; i++) {
-                        indices.push_back(vertices.size() / 5 + BlockMesh::CUBE_INDICES[i]);
-                    }
-                    for (int i = 0; i < 4; i++) {
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * DOWN + i * 3 + 0] + x);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * DOWN + i * 3 + 1] + y);
-                        vertices.push_back(BlockMesh::CUBE_VERTICES[3 * 4 * DOWN + i * 3 + 2] + z);
-                        vertices.push_back(block.mesh.faces[DOWN].uv_coordinates[i * 2]);
-                        vertices.push_back(block.mesh.faces[DOWN].uv_coordinates[i * 2 + 1]);
-                    }
+                    block.mesh.mesh_face(DOWN, {x, y, z}, vertices, indices);
                 }
             }
         }

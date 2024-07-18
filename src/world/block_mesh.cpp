@@ -14,3 +14,21 @@ void BlockMesh::add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max
         faces[direction].uv_coordinates[i] = uv_coordinates[i];
     }
 }
+
+void BlockMesh::mesh_face(
+    Direction direction,
+    glm::vec<3, int> position,
+    std::vector<float> &vertices,
+    std::vector<unsigned int> &indices) 
+{
+    for (int i = 0; i < 6; i++) {
+        indices.push_back(vertices.size() / 5 + BlockMesh::INDICES[i]);
+    }
+    for (int i = 0; i < 4; i++) {
+        vertices.push_back(VERTICES[3 * 4 * direction + i * 3 + 0] + position.x);
+        vertices.push_back(VERTICES[3 * 4 * direction + i * 3 + 1] + position.y);
+        vertices.push_back(VERTICES[3 * 4 * direction + i * 3 + 2] + position.z);
+        vertices.push_back(faces[direction].uv_coordinates[i * 2]);
+        vertices.push_back(faces[direction].uv_coordinates[i * 2 + 1]);
+    }
+}
