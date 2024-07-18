@@ -10,6 +10,8 @@
 #define CHUNK_SIZE_Z 16
 #define CHUNK_VOLUME (CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z)
 
+#define CHUNK_POS_TO_IDX(x, y, z) ((x) * CHUNK_SIZE_X * CHUNK_SIZE_Z + (z) * CHUNK_SIZE_Z + (y))
+
 class ChunkMesh {
 public:
     ~ChunkMesh();

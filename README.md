@@ -12,9 +12,7 @@
       renderable objects by state change: first render all the objects with shader one, then all objects with shader two, and so on; this can of course be extended 
       to blend state changes, texture binds, framebuffer switches etc.
 
-    - Refactor code
-    - Don't render chunk border faces
-        - Pass in pointers to surrounding chunk data (uint64_t* or nullptr for chunks that aren't loaded)
+    - Don't render chunk border faces on the y-axis
     - Cannot have `BLOCK_AIR`? Solution: need to have `TRANSPARENT` or `OPAQUE` value in the metadata
 - Fix camera snapping
 - Render crosshair
