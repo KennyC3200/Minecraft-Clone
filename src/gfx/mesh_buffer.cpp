@@ -2,12 +2,17 @@
 
 template<typename T>
 void MeshBuffer<T>::init(size_t capacity) {
+    destroy();
+
     this->capacity = capacity;
     data = new T[capacity];
 }
 
 template<typename T>
 void MeshBuffer<T>::destroy() {
+    if (data == nullptr) {
+        return;
+    }
     delete[] data;
 }
 
