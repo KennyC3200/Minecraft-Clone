@@ -1,14 +1,9 @@
 #pragma once
 
-#include "../gfx/gfx.hpp"
-#include "../gfx/texture.hpp"
+#include "ui_component.hpp"
 
-class Hotbar {
+class Hotbar : public UIComponent {
 public:
-    void init();
-    void render();
-
-    bool toggled;
-private:
-    Texture texture;
+    void init() override;
+    void render() override;
 };

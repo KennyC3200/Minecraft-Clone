@@ -1,18 +1,9 @@
 #pragma once
 
-#include "../gfx/gfx.hpp"
-#include "../gfx/window.hpp"
-#include "../gfx/texture.hpp"
-#include "../gfx/shader.hpp"
+#include "ui_component.hpp"
 
-class Crosshair {
+class Crosshair : public UIComponent {
 public:
-    void init(Window *window);
-    void render();
-
-    bool toggled;
-private:
-    Window *window;
-    Shader shader;
-    Texture texture;
+    void init() override;
+    void render() override;
 };

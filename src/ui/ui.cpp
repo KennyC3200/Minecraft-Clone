@@ -6,8 +6,10 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
     this->world = world;
     this->player = player;
 
-    crosshair.init(this->window);
+    UIComponent::init(this->window);
+    crosshair.init();
     hotbar.init();
+
     init_imgui(window->handle);
 
     toggled = true;
@@ -19,6 +21,8 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
 }
 
 void UI::destroy() {
+    UIComponent::destroy();
+
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

@@ -4,6 +4,8 @@
 
 class Texture {
 public:
+    static Texture create(std::string path, std::string fs_name, GLint tex_format, GLint src_format);
+
     void init(std::string path, std::string fs_name, GLint tex_format, GLint src_format);
     void destroy();
     void bind();
