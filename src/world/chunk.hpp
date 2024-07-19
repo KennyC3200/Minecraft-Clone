@@ -16,7 +16,7 @@ public:
     void render();
 
     glm::vec<3, int> position;
-private:
+
     // chunk data stored in a 3d array
     // each u64 has the following bit fields:
     // - 28 bits metadata/extra
@@ -27,7 +27,7 @@ private:
     // - 4 bits light intensity
     // - 16 bits block id
     uint64_t *data;
-
+private:
     ChunkMesh *mesh;
     bool meshed;
 };
