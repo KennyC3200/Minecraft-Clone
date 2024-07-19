@@ -4,8 +4,14 @@ Chunk::Chunk(glm::vec<3, int> position):
 position(position)
 {
     data = new uint64_t[CHUNK_VOLUME];
-    std::fill(data, data + CHUNK_VOLUME / 2, BLOCK_STONE);
-    std::fill(data + CHUNK_VOLUME / 2, data + CHUNK_VOLUME, BLOCK_DIRT);
+    std::fill(data, data + CHUNK_VOLUME, BLOCK_DIRT);
+    for (int x = 0; x < CHUNK_SIZE_X; x++) {
+        for (int y = 0; y < CHUNK_SIZE_Y / 2; y++) {
+            for (int z = 0; z < CHUNK_SIZE_Z; z++) {
+                data[x * CHUNK_SIZE_X * CHUNK_SIZE_Z + z * CHUNK_SIZE_Z + y] = BLOCK_STONE;
+            }
+        }
+    }
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             data[x * CHUNK_SIZE_X * CHUNK_SIZE_Z + z * CHUNK_SIZE_Z + CHUNK_SIZE_Y - 1] = BLOCK_GRASS;
