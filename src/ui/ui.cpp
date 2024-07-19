@@ -6,6 +6,8 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
     this->world = world;
     this->player = player;
 
+    crosshair.init(this->window);
+    hotbar.init();
     init_imgui(window->handle);
 
     toggled = true;
@@ -23,6 +25,9 @@ void UI::destroy() {
 }
 
 void UI::render() {
+    crosshair.render();
+    hotbar.render();
+
     if (!toggled) {
         return;
     }

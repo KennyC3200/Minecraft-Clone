@@ -6,6 +6,8 @@
 #include <imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
 
+#include "crosshair.hpp"
+#include "hotbar.hpp"
 #include "../util/util.hpp"
 #include "../gfx/window.hpp"
 #include "../gfx/renderer.hpp"
@@ -22,6 +24,9 @@ public:
     void init(Window *window, Renderer *renderer, World *world, Player *player);
     void destroy();
     void render();
+
+    Crosshair crosshair;
+    Hotbar hotbar;
 
     bool toggled;
     struct {
