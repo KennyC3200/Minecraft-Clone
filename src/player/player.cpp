@@ -24,7 +24,13 @@ void Player::update() {
         camera.position += 60.0f * (float) window->time_delta * glm::normalize(glm::cross(camera.front, camera.up));
     }
     if (keyboard->keys[GLFW_KEY_0].pressed) {
-        world->chunks[world->chunks_idx(5, 1, 5)]->data[CHUNK_POS_TO_IDX(8, 15, 8)] = BLOCK_AIR;
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 12; y++) {
+                for (int z = 0; z < 10; z++) {
+                    world->chunks[world->chunks_idx(5, 1, 5)]->data[CHUNK_POS_TO_IDX(x + 2, 15 - y, z + 2)] = BLOCK_AIR;
+                }
+            }
+        }
         world->chunks[world->chunks_idx(5, 1, 5)]->meshed = false;
     }
     camera.update();
