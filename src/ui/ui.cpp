@@ -97,6 +97,8 @@ void UI::render_overview() {
     ImGui::Begin("Overview");
     ImGui::Text("FPS: %i", (int) window->fps);
     ImGui::Text("Position: %i %i %i", (int) player->position.x, (int) player->position.y, (int) player->position.z);
+    ImGui::Text("Chunk Position: %.2f %.2f %.2f", player->chunk_position.x, player->chunk_position.y, player->chunk_position.z);
+    ImGui::Text("Chunk Offset: %.2f %.2f %.2f", player->chunk_offset.x, player->chunk_offset.y, player->chunk_offset.z);
     ImGui::End();
 }
 

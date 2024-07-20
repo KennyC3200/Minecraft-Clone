@@ -2,9 +2,10 @@
 
 # TODO
 - Fix camera snapping
+- Create a player mesh
+- Implement third person mode
 
 # Future implementations?
-
 ## Optimize memory usage (assuming a memory bandwidth bottleneck)
 Each vertex is a 32 bit number.
     - 12 bits for position

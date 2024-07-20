@@ -14,9 +14,15 @@ public:
     void update();
     void render();
 
-    glm::vec3 position;
     Camera camera;
     Ray ray;
+
+    // game block and chunk position
+    glm::vec3 position;
+    glm::vec3 chunk_position;
+
+    // world chunk offset
+    glm::vec3 chunk_offset;
 private:
     Window *window;
     Keyboard *keyboard;
