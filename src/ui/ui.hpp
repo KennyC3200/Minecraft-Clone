@@ -38,6 +38,7 @@ public:
     } command_tools;
 private:
     void init_imgui(GLFWwindow *window);
+    void render_components();
     void render_overview();
     void render_command_tools();
 

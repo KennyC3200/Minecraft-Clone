@@ -6,6 +6,11 @@ void Renderer::init(World *world, Player *player) {
 
     flags.wireframe = false;
 
+    // blend for alpha channel
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    // 3d depth
     glEnable(GL_DEPTH_TEST);
 }
 

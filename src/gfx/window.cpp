@@ -5,8 +5,7 @@ Window::Window() {}
 Window::~Window() {}
 
 void Window::init() {
-    size.x = 1280;
-    size.y = 720;
+    size = {1440, 900};
 
     if (!glfwInit()) {
         std::cout << "Error initializing GLFW\n";
@@ -54,4 +53,6 @@ void Window::update() {
     time_delta = time_current - time_previous;
     time_previous = time_current;
     fps = 1.0 / time_delta;
+
+    glfwGetWindowSize(handle, &size.x, &size.y);
 }

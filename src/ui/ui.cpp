@@ -22,6 +22,8 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
 
 void UI::destroy() {
     UIComponent::destroy();
+    crosshair.destroy();
+    hotbar.destroy();
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
@@ -29,9 +31,7 @@ void UI::destroy() {
 }
 
 void UI::render() {
-    UIComponent::shader.bind();
-    crosshair.render();
-    hotbar.render();
+    render_components();
 
     if (!toggled) {
         return;
@@ -84,6 +84,13 @@ void UI::init_imgui(GLFWwindow *window) {
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     ImGui::StyleColorsDark();
+}
+
+void UI::render_components() {
+    UIComponent::shader.bind();
+
+    crosshair.render();
+    hotbar.render();
 }
 
 void UI::render_overview() {
