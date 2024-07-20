@@ -12,7 +12,7 @@ void UIComponent::init(Window *window) {
 
     textures[UI_TEXTURE_CROSSHAIR] = Texture::create("res/images/crosshair.png", "tex", GL_RGBA, GL_RGBA);
 
-    shader.init("res/shaders/texture_2d.vs", "res/shaders/texture_2d.fs");
+    shader.init("res/shaders/ui_2d.vs", "res/shaders/ui_2d.fs");
     vao.init();
     vbo.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);

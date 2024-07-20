@@ -29,6 +29,7 @@ void UI::destroy() {
 }
 
 void UI::render() {
+    UIComponent::shader.bind();
     crosshair.render();
     hotbar.render();
 
