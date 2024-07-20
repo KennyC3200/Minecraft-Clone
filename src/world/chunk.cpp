@@ -8,13 +8,13 @@ position(position)
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int y = 0; y < CHUNK_SIZE_Y / 2; y++) {
             for (int z = 0; z < CHUNK_SIZE_Z; z++) {
-                data[x * CHUNK_SIZE_X * CHUNK_SIZE_Z + z * CHUNK_SIZE_Z + y] = BLOCK_STONE;
+                data[CHUNK_POS_TO_IDX(x, y, z)] = BLOCK_STONE;
             }
         }
     }
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
-            data[x * CHUNK_SIZE_X * CHUNK_SIZE_Z + z * CHUNK_SIZE_Z + CHUNK_SIZE_Y - 1] = BLOCK_GRASS;
+            data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)] = BLOCK_GRASS;
         }
     }
 
