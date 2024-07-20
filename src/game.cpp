@@ -3,7 +3,7 @@
 void Game::init() {
     // gfx 
     window.init();
-    world.init(&player);
+    world.init();
     renderer.init(&world, &player);
     ui.init(&window, &renderer, &world, &player);
 
@@ -12,7 +12,7 @@ void Game::init() {
     mouse.init(&window);
 
     // player
-    player.init(&window, &keyboard, &mouse);
+    player.init(&window, &keyboard, &mouse, &world);
 }
 
 void Game::destroy() {

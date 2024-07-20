@@ -1,9 +1,10 @@
 #include "player.hpp"
 
-void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse) {
+void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world) {
     this->window = window;
     this->keyboard = keyboard;
     this->mouse = mouse;
+    this->world = world;
 
     camera.init(window, mouse);
 }
@@ -22,8 +23,11 @@ void Player::update() {
     if (keyboard->keys[GLFW_KEY_D].down) {
         camera.position += 60.0f * (float) window->time_delta * glm::normalize(glm::cross(camera.front, camera.up));
     }
-
     camera.update();
+
+    position = camera.position;
+
+    // handle ray casting
 }
 
 void Player::render() {

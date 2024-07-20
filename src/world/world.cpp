@@ -1,8 +1,6 @@
 #include "world.hpp"
 
-void World::init(Player *player) {
-    this->player = player;
-
+void World::init() {
     Block::init();
     Chunk::init();
 
@@ -13,7 +11,7 @@ void World::init(Player *player) {
             for (size_t z = 0; z < chunks_size.z; z++) {
                 chunks[chunks_idx(x, y, z)] = new Chunk({
                     x - chunks_size.x / 2,
-                    y - 2,
+                    y - 1,
                     z - chunks_size.z / 2
                 });
             }

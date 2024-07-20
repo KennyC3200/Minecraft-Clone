@@ -3,11 +3,10 @@
 #include <vector>
 
 #include "chunk.hpp"
-#include "../player/player.hpp"
 
 class World {
 public:
-    void init(Player *player);
+    void init();
     void destroy();
     void render();
 
@@ -16,6 +15,4 @@ public:
 private:
     size_t chunks_idx(size_t x, size_t y, size_t z);
     size_t chunks_size_magnitude();
-
-    Player *player;
 };

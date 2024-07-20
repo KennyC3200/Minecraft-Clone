@@ -2,7 +2,6 @@
 
 #include "chunk_mesh.hpp"
 #include "block.hpp"
-#include "../player/player.hpp"
 
 class Chunk {
 public:

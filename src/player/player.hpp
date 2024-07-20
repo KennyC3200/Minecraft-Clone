@@ -4,19 +4,22 @@
 #include "../gfx/window.hpp"
 #include "../input/keyboard.hpp"
 #include "../input/mouse.hpp"
+#include "../world/world.hpp"
 #include "camera.hpp"
-#include "../world/chunk_mesh.hpp"
+#include "ray.hpp"
 
 class Player {
 public:
-    void init(Window *window, Keyboard *keyboard, Mouse *mouse);
+    void init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world);
     void update();
     void render();
 
-    glm::vec2 position;
+    glm::vec3 position;
     Camera camera;
+    Ray ray;
 private:
     Window *window;
     Keyboard *keyboard;
     Mouse *mouse;
+    World *world;
 };

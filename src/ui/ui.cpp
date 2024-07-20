@@ -96,6 +96,7 @@ void UI::render_components() {
 void UI::render_overview() {
     ImGui::Begin("Overview");
     ImGui::Text("FPS: %i", (int) window->fps);
+    ImGui::Text("Position: %i %i %i", (int) player->position.x, (int) player->position.y, (int) player->position.z);
     ImGui::End();
 }
 
