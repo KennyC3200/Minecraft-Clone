@@ -34,13 +34,17 @@ public:
     } overview;
     struct {
         bool toggled;
+    } camera;
+    struct {
+        bool toggled;
         bool demo_window;
-    } command_tools;
+    } settings;
 private:
     void init_imgui(GLFWwindow *window);
     void render_components();
     void render_overview();
-    void render_command_tools();
+    void render_camera();
+    void render_settings();
 
     ImGuiIO *io;
     int reset_button_id;

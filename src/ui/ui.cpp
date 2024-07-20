@@ -14,8 +14,9 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
 
     toggled = true;
     overview.toggled = true;
-    command_tools.toggled = false;
-    command_tools.demo_window = false;
+    camera.toggled = true;
+    settings.toggled = false;
+    settings.demo_window = false;
 
     reset_button_id = 0;
 }
@@ -44,8 +45,11 @@ void UI::render() {
     if (overview.toggled) {
         render_overview();
     }
-    if (command_tools.toggled) {
-        render_command_tools();
+    if (camera.toggled) {
+        render_camera();
+    }
+    if (settings.toggled) {
+        render_settings();
     }
 
     ImGui::Render();
@@ -102,25 +106,27 @@ void UI::render_overview() {
     ImGui::End();
 }
 
-void UI::render_command_tools() {
-    ImGui::Begin("Command Tools");
-
-    ImGui::SeparatorText("Camera");
+void UI::render_camera() {
+    ImGui::Begin("Camera");
+    ImGui::Text("Pitch: %.2f", player->camera.pitch);
+    ImGui::Text("Yaw: %.2f", player->camera.yaw);
     ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
     UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);
     ImGui::SliderFloat("Z-far", &player->camera.z_far, 1.0f, 500.0f);
     UI_RESET_BUTTON(2, player->camera.z_far = 1000.0f;);
     ImGui::SliderFloat("Sensitivity", &player->camera.sensitivity, 0.0f, 1.0f);
     UI_RESET_BUTTON(3, player->camera.sensitivity = 0.1f;);
+    ImGui::End();
+}
 
-    ImGui::SeparatorText("Settings");
+void UI::render_settings() {
+    ImGui::Begin("Settings");
     ImGui::Text("Window Size: %ipx %ipx", window->size.x, window->size.y);
     ImGui::Checkbox("Overview", &overview.toggled);
     ImGui::Checkbox("Wireframe (t)", &renderer->flags.wireframe);
-    if (command_tools.demo_window) {
-        ImGui::ShowDemoWindow(&command_tools.demo_window);
+    if (settings.demo_window) {
+        ImGui::ShowDemoWindow(&settings.demo_window);
     }
-    ImGui::Checkbox("Demo Window", &command_tools.demo_window);
-
+    ImGui::Checkbox("Demo Window", &settings.demo_window);
     ImGui::End();
 }

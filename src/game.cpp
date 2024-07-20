@@ -51,9 +51,9 @@ void Game::update() {
         renderer.flags.wireframe = !renderer.flags.wireframe;
     }
     if (keyboard.keys[GLFW_KEY_ESCAPE].pressed) {
-        ui.command_tools.toggled = !ui.command_tools.toggled;
-        mouse.toggled = ui.command_tools.toggled;
-        player.camera.toggled = !ui.command_tools.toggled;
+        ui.settings.toggled = !ui.settings.toggled;
+        mouse.toggled = ui.settings.toggled;
+        player.camera.toggled = !ui.settings.toggled;
     }
 }
 
