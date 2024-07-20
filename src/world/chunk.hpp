@@ -26,7 +26,8 @@ public:
     // - 4 bits light intensity
     // - 16 bits block id
     uint64_t *data;
+
+    bool meshed;
 private:
     ChunkMesh *mesh;
-    bool meshed;
 };

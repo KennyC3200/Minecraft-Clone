@@ -23,6 +23,10 @@ void Player::update() {
     if (keyboard->keys[GLFW_KEY_D].down) {
         camera.position += 60.0f * (float) window->time_delta * glm::normalize(glm::cross(camera.front, camera.up));
     }
+    if (keyboard->keys[GLFW_KEY_0].pressed) {
+        world->chunks[world->chunks_idx(5, 1, 5)]->data[CHUNK_POS_TO_IDX(8, 15, 8)] = BLOCK_AIR;
+        world->chunks[world->chunks_idx(5, 1, 5)]->meshed = false;
+    }
     camera.update();
 
     position = camera.position;
