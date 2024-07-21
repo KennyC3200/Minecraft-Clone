@@ -12,7 +12,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     chunk_offset = world->chunks_center;
     world
-        ->chunks[world->chunks_idx((int)5, (int)0, (int)5)]
+        ->chunks[world->chunks_idx((int) chunk_offset.x, (int) chunk_offset.y, (int) chunk_offset.z)]
         ->data[CHUNK_POS_TO_IDX(8, 15, 8)] = BLOCK_AIR;
 }
 
