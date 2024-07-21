@@ -19,12 +19,15 @@ public:
 
     float speed;
 
-    // game block and chunk position
-    glm::vec3 position;
-    glm::vec3 chunk_position;
+    struct {
+        glm::vec3 position;
+        glm::vec3 chunk_position;
+    } game_data;
 
-    // world chunk offset
-    glm::vec3 chunk_offset;
+    struct {
+        glm::vec3 position;
+        glm::vec3 chunk_position;
+    } world_data;
 private:
     Window *window;
     Keyboard *keyboard;

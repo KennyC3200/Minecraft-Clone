@@ -100,9 +100,12 @@ void UI::render_components() {
 void UI::render_overview() {
     ImGui::Begin("Overview");
     ImGui::Text("FPS: %i", (int) window->fps);
-    ImGui::Text("Position: %i %i %i", (int) player->position.x, (int) player->position.y, (int) player->position.z);
-    ImGui::Text("Chunk Position: %.2f %.2f %.2f", player->chunk_position.x, player->chunk_position.y, player->chunk_position.z);
-    ImGui::Text("Chunk Offset: %.2f %.2f %.2f", player->chunk_offset.x, player->chunk_offset.y, player->chunk_offset.z);
+    ImGui::SeparatorText("Game");
+    ImGui::Text("Position: %i %i %i", (int) player->game_data.position.x, (int) player->game_data.position.y, (int) player->game_data.position.z);
+    ImGui::Text("Chunk Position: %.2f %.2f %.2f", player->game_data.chunk_position.x, player->game_data.chunk_position.y, player->game_data.chunk_position.z);
+    ImGui::SeparatorText("World");
+    ImGui::Text("Position: %i %i %i", (int) player->world_data.position.x, (int) player->world_data.position.y, (int) player->world_data.position.z);
+    ImGui::Text("Chunk Position: %.2f %.2f %.2f", player->world_data.chunk_position.x, player->world_data.chunk_position.y, player->world_data.chunk_position.z);
     ImGui::End();
 }
 
@@ -110,12 +113,12 @@ void UI::render_camera() {
     ImGui::Begin("Camera");
     ImGui::Text("Pitch: %.2f", player->camera.pitch);
     ImGui::Text("Yaw: %.2f", player->camera.yaw);
-    ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
-    UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);
-    ImGui::SliderFloat("Z-far", &player->camera.z_far, 1.0f, 500.0f);
-    UI_RESET_BUTTON(2, player->camera.z_far = 1000.0f;);
-    ImGui::SliderFloat("Sensitivity", &player->camera.sensitivity, 0.0f, 1.0f);
-    UI_RESET_BUTTON(3, player->camera.sensitivity = 0.1f;);
+    // ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
+    // UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);
+    // ImGui::SliderFloat("Z-far", &player->camera.z_far, 1.0f, 500.0f);
+    // UI_RESET_BUTTON(2, player->camera.z_far = 1000.0f;);
+    // ImGui::SliderFloat("Sensitivity", &player->camera.sensitivity, 0.0f, 1.0f);
+    // UI_RESET_BUTTON(3, player->camera.sensitivity = 0.1f;);
     ImGui::End();
 }
 
