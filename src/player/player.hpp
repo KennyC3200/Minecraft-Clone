@@ -17,6 +17,8 @@ public:
     Camera camera;
     Ray ray;
 
+    float speed;
+
     // game block and chunk position
     glm::vec3 position;
     glm::vec3 chunk_position;

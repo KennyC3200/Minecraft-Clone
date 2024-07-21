@@ -19,5 +19,6 @@ public:
     glm::vec3 chunks_center;
 
     size_t chunks_idx(size_t x, size_t y, size_t z);
+    size_t chunks_idx(glm::vec<3, size_t> position);
     size_t chunks_size_magnitude();
 };

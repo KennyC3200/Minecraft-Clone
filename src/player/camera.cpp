@@ -37,6 +37,11 @@ void Camera::update() {
         direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
         front = glm::normalize(direction);
         pitch = CLAMP(pitch, -89.0f, 89.0f);
+        right = glm::normalize(glm::cross(front, up));
+
+        // this is the cross product of the up vector and right vector
+        // gives the direction that the player will move in the x and z components
+        direction = glm::normalize(glm::cross(up, right));
     }
 
     view = glm::lookAt(position, position + front, up);

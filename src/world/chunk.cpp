@@ -14,7 +14,11 @@ position(position)
     }
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
-            data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)] = BLOCK_GRASS;
+            if (x == 0 || x == CHUNK_SIZE_X - 1 || z == 0 || z == CHUNK_SIZE_Z - 1) {
+                data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)] = BLOCK_AIR;
+            } else {
+                data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)] = BLOCK_GRASS;
+            }
         }
     }
 

@@ -58,3 +58,6 @@ size_t World::chunks_idx(size_t x, size_t y, size_t z) {
     return x * chunks_size.y * chunks_size.z + z * chunks_size.y + y;
 }
 
+size_t World::chunks_idx(glm::vec<3, size_t> position) {
+    return position.x * chunks_size.y * chunks_size.z + position.z * chunks_size.y + position.y;
+}
