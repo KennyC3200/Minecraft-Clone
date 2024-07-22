@@ -17,3 +17,6 @@
     __typeof__ (x_min) _x_min = (x_min); \
     __typeof__ (x_max) _x_max = (x_max); \
     MAX(_x_min, MIN(_x_max, _x)); })
+
+#define SIGN(_x) ({ __typeof__(_x) _xx = (_x);\
+    ((__typeof__(_x)) ( (((__typeof__(_x)) 0) < _xx) - (_xx < ((__typeof__(_x)) 0))));})
