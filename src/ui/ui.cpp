@@ -106,13 +106,18 @@ void UI::render_overview() {
     ImGui::SeparatorText("World");
     ImGui::Text("Position: %i %i %i", (int) player->world_data.position.x, (int) player->world_data.position.y, (int) player->world_data.position.z);
     ImGui::Text("Chunk Position: %.2f %.2f %.2f", player->world_data.chunk_position.x, player->world_data.chunk_position.y, player->world_data.chunk_position.z);
+    ImGui::SeparatorText("Chunk");
+    ImGui::Text("Position: %i %i %i", (int) player->chunk_data.position.x, (int) player->chunk_data.position.y, (int) player->chunk_data.position.z);
     ImGui::End();
 }
 
 void UI::render_camera() {
     ImGui::Begin("Camera");
+    ImGui::SeparatorText("Overview");
     ImGui::Text("Pitch: %.2f", player->camera.pitch);
     ImGui::Text("Yaw: %.2f", player->camera.yaw);
+    ImGui::SeparatorText("Ray");
+    ImGui::Text("Hit: %lu %lu %lu", player->ray.tmp.position.x, player->ray.tmp.position.y, player->ray.tmp.position.z);
     // ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
     // UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);
     // ImGui::SliderFloat("Z-far", &player->camera.z_far, 1.0f, 500.0f);

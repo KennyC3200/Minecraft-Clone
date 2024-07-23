@@ -28,6 +28,10 @@ public:
         glm::vec3 position;
         glm::vec3 chunk_position;
     } world_data;
+
+    struct {
+        glm::vec3 position;
+    } chunk_data;
 private:
     Window *window;
     Keyboard *keyboard;

@@ -9,13 +9,16 @@ struct RayCastData {
 
 class Ray {
 public:
-    void init(uint64_t **data, float max_distance);
-    void update(glm::vec3 position, glm::vec3 direction);
+    void init(float max_distance, glm::vec<3, size_t> data_size);
+    void update(uint64_t *data, glm::vec3 position, glm::vec3 direction);
     RayCastData cast();
 
     glm::vec3 position;
     glm::vec3 direction;
     float max_distance;
+
+    RayCastData tmp;
 private:
-    uint64_t **data;
+    uint64_t *data;
+    glm::vec<3, size_t> data_size;
 };
