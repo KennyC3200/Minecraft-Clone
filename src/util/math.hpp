@@ -20,3 +20,5 @@
 
 #define SIGN(_x) ({ __typeof__(_x) _xx = (_x);\
     ((__typeof__(_x)) ( (((__typeof__(_x)) 0) < _xx) - (_xx < ((__typeof__(_x)) 0))));})
+
+glm::vec3 intbound(glm::vec3 s, glm::vec3 ds);
