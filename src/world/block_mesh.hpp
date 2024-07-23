@@ -14,7 +14,7 @@ public:
     void add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
     void mesh_face(
         enum Direction direction,
-        glm::vec<3, int> position, 
+        glm::ivec3 position, 
         std::vector<float> &vertices, 
         std::vector<unsigned int> &indices);
 

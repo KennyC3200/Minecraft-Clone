@@ -30,7 +30,8 @@ public:
     } world_data;
 
     struct {
-        glm::vec3 position;
+        glm::ivec3 game_position;
+        glm::ivec3 world_position;
     } chunk_data;
 private:
     Window *window;

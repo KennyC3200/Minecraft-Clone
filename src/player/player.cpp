@@ -46,8 +46,8 @@ void Player::update() {
 
     camera.update();
     // TODO: need to refactor between camera.front and camera.direction
-    ray.update(world->chunks[idx]->data, camera.position, camera.front);
-    ray.cast();
+    ray.update(world->chunks[idx]->data, chunk_data.game_position, camera.front);
+    // ray.cast();
 
     game_data.position = {camera.position.x, camera.position.y, camera.position.z};
     game_data.chunk_position = world->chunks_center + game_data.position / 16.0f;
@@ -55,7 +55,8 @@ void Player::update() {
     world_data.position = {game_data.position.x, game_data.position.y, -game_data.position.z};
     world_data.chunk_position = world_data.position / 16.0f;
 
-    chunk_data.position = glm::vec<3, int>(world_data.position) - 16 * glm::vec<3, int>(world_data.chunk_position);
+    chunk_data.game_position = 16.0f * (game_data.chunk_position - glm::vec3(glm::ivec3(game_data.chunk_position)));
+    chunk_data.world_position = 16.0f * (world_data.chunk_position - glm::vec3(glm::ivec3(world_data.chunk_position)));
 }
 
 void Player::render() {

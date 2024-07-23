@@ -10,7 +10,7 @@ ChunkMesh::~ChunkMesh() {
     vao.destroy();
 }
 
-ChunkMesh::ChunkMesh(uint64_t *data, glm::vec<3, int> *position):
+ChunkMesh::ChunkMesh(uint64_t *data, glm::ivec3 *position):
 data(data),
 position(position)
 {

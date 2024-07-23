@@ -14,6 +14,8 @@
 #include "../world/world.hpp"
 #include "../player/player.hpp"
 
+#define UI_SPREAD_COORDINATES(c) ((c).x, (c).y, (c).z)\
+
 #define UI_RESET_BUTTON(id, assignment)\
 ImGui::SameLine();\
 if (ImGui::Button("Reset##"#id))\

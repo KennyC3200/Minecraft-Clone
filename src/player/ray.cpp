@@ -14,9 +14,9 @@ void Ray::update(uint64_t *data, glm::vec3 position, glm::vec3 direction) {
 RayCastData Ray::cast() {
     glm::vec3 step;
     glm::vec3 d_length, d_delta;
-    glm::vec<3, int> _position;
+    glm::ivec3 _position;
 
-    _position = {(int) position.x, (int) position.y, (int) position.z};
+    _position = glm::ivec3(position);
     step = {SIGN(direction.x), SIGN(direction.y), SIGN(direction.z)};
 
     d_length = intbound(position, direction);

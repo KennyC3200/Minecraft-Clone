@@ -5,7 +5,7 @@
 
 class Chunk {
 public:
-    Chunk(glm::vec<3, int> position);
+    Chunk(glm::ivec3 position);
     ~Chunk();
 
     static void init();
@@ -14,7 +14,7 @@ public:
 
     void render();
 
-    glm::vec<3, int> position;
+    glm::ivec3 position;
 
     // chunk data stored in a 3d array
     // each u64 has the following bit fields:

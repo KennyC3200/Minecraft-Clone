@@ -1,6 +1,6 @@
 #include "chunk.hpp"
 
-Chunk::Chunk(glm::vec<3, int> position):
+Chunk::Chunk(glm::ivec3 position):
 position(position)
 {
     data = new uint64_t[CHUNK_VOLUME];
