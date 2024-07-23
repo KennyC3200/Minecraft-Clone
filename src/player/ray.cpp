@@ -22,6 +22,10 @@ RayCastData Ray::cast() {
     d_length = intbound(position, direction);
     d_delta = step / direction;
 
+    // Add boundary variables
+    glm::ivec3 min_bounds = glm::ivec3(0, 0, 0);
+    glm::ivec3 max_bounds = glm::ivec3(data_size.x - 1, data_size.y - 1, data_size.z - 1);
+
     while (true) {
         if (d_length.x < d_length.y) {
             if (d_length.x < d_length.z) {
@@ -39,6 +43,14 @@ RayCastData Ray::cast() {
                 _position.z += step.z;
                 d_length.z += d_delta.z;
             }
+        }
+
+        // Boundary check to avoid segmentation fault
+        if (_position.x < min_bounds.x || _position.x > max_bounds.x ||
+            _position.y < min_bounds.y || _position.y > max_bounds.y ||
+            _position.z < min_bounds.z || _position.z > max_bounds.z) {
+            // Handle out-of-bounds scenario (e.g., return an error or a special value)
+            break;
         }
 
         // TODO: its gonna seg fault if the player is looking at somewhere not in the chunk

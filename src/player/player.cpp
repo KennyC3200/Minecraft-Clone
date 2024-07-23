@@ -47,7 +47,7 @@ void Player::update() {
     camera.update();
     // TODO: need to refactor between camera.front and camera.direction
     ray.update(world->chunks[idx]->data, chunk_data.game_position, camera.front);
-    // ray.cast();
+    ray.cast();
 
     game_data.position = {camera.position.x, camera.position.y, camera.position.z};
     game_data.chunk_position = world->chunks_center + game_data.position / 16.0f;
