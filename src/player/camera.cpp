@@ -20,7 +20,7 @@ void Camera::init(Window *window, Mouse *mouse) {
     pitch = 0.0f;
     roll = 0.0f;
 
-    fov = 45.0f;
+    fov = 60.0f;
     z_near = 0.1f;
     z_far = 1000.0f;
     sensitivity = 0.1f;

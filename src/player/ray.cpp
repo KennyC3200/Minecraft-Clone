@@ -17,7 +17,7 @@ RayCastData Ray::cast() {
     glm::ivec3 _position;
     float radius;
 
-    _position = glm::ivec3(position);
+    _position = glm::ivec3(floor(position.x), floor(position.y), floor(position.z));
     step = {SIGN(direction.x), SIGN(direction.y), SIGN(direction.z)};
 
     d_length = intbound(position, direction);
@@ -76,13 +76,9 @@ RayCastData Ray::cast() {
         // TODO: what if the player wants to delete blocks in other chunks? Currently would only work if the player is deleting the block in the chunk the player is standing in
         // TODO: this only works with having z has the second parameter: (x, z, y) instead of (x, y, z)
         if (data[_position.x * data_size.y * data_size.z + _position.z * data_size.y + _position.y]) {
-            RayCastData data;
-            data.hit = true;
-            data.position = _position;
-
-            tmp = data;
-
-            return data;
+            tmp.hit = true;
+            tmp.position = _position;
+            return tmp;
         }
     }
     tmp.hit = false;
