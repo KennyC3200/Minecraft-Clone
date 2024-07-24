@@ -9,7 +9,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     speed = 30.0f;
 
     camera.init(window, mouse);
-    ray.init(5.0f, {CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z});
+    ray.init(8.0f, {CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z});
 
     world_data.chunk_position = world->chunks_center;
 }
@@ -36,12 +36,10 @@ void Player::update() {
 
     size_t idx = world->chunks_idx((int) game_data.chunk_position.x, (int) game_data.chunk_position.y, (int) game_data.chunk_position.z);
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
-        if (world->chunks[idx]->data[CHUNK_POS_TO_IDX(8, 15, 8)] == BLOCK_AIR) {
-            world->chunks[idx]->data[CHUNK_POS_TO_IDX(8, 15, 8)] = BLOCK_GRASS;
-        } else {
-            world->chunks[idx]->data[CHUNK_POS_TO_IDX(8, 15, 8)] = BLOCK_AIR;
+        if (ray.tmp.hit) {
+            world->chunks[idx]->data[CHUNK_POS_TO_IDX(ray.tmp.position.x, ray.tmp.position.y, ray.tmp.position.z)] = BLOCK_AIR;
+            world->chunks[idx]->meshed = false;
         }
-        world->chunks[idx]->meshed = false;
     }
 
     camera.update();

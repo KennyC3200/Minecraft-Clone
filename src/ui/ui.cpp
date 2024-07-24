@@ -121,7 +121,11 @@ void UI::render_camera() {
     ImGui::SeparatorText("Ray");
     ImGui::Text("Position: %.2f %.2f %.2f", player->ray.position.x, player->ray.position.y, player->ray.position.z);
     ImGui::Text("Direction: %.2f %.2f %.2f", player->ray.direction.x, player->ray.direction.y, player->ray.direction.z);
-    ImGui::Text("Hit: %lu %lu %lu", player->ray.tmp.position.x, player->ray.tmp.position.y, player->ray.tmp.position.z);
+    if (player->ray.tmp.hit) {
+        ImGui::Text("Hit: %lu %lu %lu", player->ray.tmp.position.x, player->ray.tmp.position.y, player->ray.tmp.position.z);
+    } else {
+        ImGui::Text("Hit: false");
+    }
 
     // ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
     // UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);

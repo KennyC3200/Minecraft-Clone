@@ -76,15 +76,15 @@ RayCastData Ray::cast() {
         // TODO: what if the player wants to delete blocks in other chunks? Currently would only work if the player is deleting the block in the chunk the player is standing in
         // TODO: this only works with having z has the second parameter: (x, z, y) instead of (x, y, z)
         if (data[_position.x * data_size.y * data_size.z + _position.z * data_size.y + _position.y]) {
-            break;
+            RayCastData data;
+            data.hit = true;
+            data.position = _position;
+
+            tmp = data;
+
+            return data;
         }
     }
-
-    RayCastData data;
-    data.hit = true;
-    data.position = _position;
-
-    tmp = data;
-
-    return data;
+    tmp.hit = false;
+    return tmp;
 }
