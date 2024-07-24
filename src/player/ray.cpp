@@ -15,6 +15,7 @@ RayCastData Ray::cast() {
     glm::vec3 step;
     glm::vec3 d_length, d_delta;
     glm::ivec3 _position;
+    float radius;
 
     _position = glm::ivec3(position);
     step = {SIGN(direction.x), SIGN(direction.y), SIGN(direction.z)};
@@ -26,20 +27,38 @@ RayCastData Ray::cast() {
     glm::ivec3 min_bounds = glm::ivec3(0, 0, 0);
     glm::ivec3 max_bounds = glm::ivec3(data_size.x - 1, data_size.y - 1, data_size.z - 1);
 
+    radius = max_distance / glm::length(direction);
+
     while (true) {
         if (d_length.x < d_length.y) {
             if (d_length.x < d_length.z) {
+                if (d_length.x > radius) {
+                    break;
+                }
+
                 _position.x += step.x;
                 d_length.x += d_delta.x;
             } else {
+                if (d_length.z > radius) {
+                    break;
+                }
+
                 _position.z += step.z;
                 d_length.z += d_delta.z;
             }
         } else {
             if (d_length.y < d_length.z) {
+                if (d_length.y > radius) {
+                    break;
+                }
+
                 _position.y += step.y;
                 d_length.y += d_delta.y;
             } else {
+                if (d_length.z > radius) {
+                    break;
+                }
+
                 _position.z += step.z;
                 d_length.z += d_delta.z;
             }
@@ -50,7 +69,7 @@ RayCastData Ray::cast() {
             _position.y < min_bounds.y || _position.y > max_bounds.y ||
             _position.z < min_bounds.z || _position.z > max_bounds.z) {
             // Handle out-of-bounds scenario (e.g., return an error or a special value)
-            break;
+            continue;
         }
 
         // TODO: its gonna seg fault if the player is looking at somewhere not in the chunk

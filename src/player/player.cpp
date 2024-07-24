@@ -55,8 +55,8 @@ void Player::update() {
     world_data.position = {game_data.position.x, game_data.position.y, -game_data.position.z};
     world_data.chunk_position = world_data.position / 16.0f;
 
-    chunk_data.game_position = 16.0f * (game_data.chunk_position - glm::vec3(glm::ivec3(game_data.chunk_position)));
-    chunk_data.world_position = 16.0f * (world_data.chunk_position - glm::vec3(glm::ivec3(world_data.chunk_position)));
+    chunk_data.game_position = 16.0f * (game_data.chunk_position - glm::vec3(glm::ivec3(game_data.chunk_position))) + glm::vec3(0.0f, CHUNK_SIZE_Y - 1, 0.0f);
+    chunk_data.world_position = 16.0f * (world_data.chunk_position - glm::vec3(glm::ivec3(world_data.chunk_position))) + glm::vec3(0.0f, CHUNK_SIZE_Y - 1, 0.0f);
 }
 
 void Player::render() {

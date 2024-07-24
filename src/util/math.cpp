@@ -2,8 +2,8 @@
 
 glm::vec3 intbound(glm::vec3 s, glm::vec3 ds) {
     glm::vec3 v;
-    for (size_t i = 0; i < 3; i++) {
-        v[i] = (ds[i] > 0 ? (ceilf(s[i]) - s[i]) : (s[i] - floorf(s[i]))) / fabsf(ds[i]);
-    }
+    v.x = (ds.x > 0 ? (ceilf(s.x) - s.x) : (s.x - floorf(s.x))) / fabsf(ds.x);
+    v.y = (ds.y > 0 ? (ceilf(s.y) - s.y) : (s.y - floorf(s.y))) / fabsf(ds.y);
+    v.z = (ds.z > 0 ? (ceilf(s.z) - s.z) : (s.z - floorf(s.z))) / fabsf(ds.z);
     return v;
 }
