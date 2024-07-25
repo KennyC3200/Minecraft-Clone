@@ -19,6 +19,9 @@ ImGui::SameLine();\
 if (ImGui::Button("Reset##"#id))\
     assignment
 
+#define UI_VEC3(label, vec)\
+ImGui::Text(#label": %.2f %.2f %.2f", (vec).x, (vec).y, (vec).z);
+
 class UI {
 public:
     void init(Window *window, Renderer *renderer, World *world, Player *player);

@@ -6,7 +6,6 @@ void World::init() {
 
     chunks_size = {10, 1, 10};
     chunks = new Chunk*[chunks_size_magnitude()];
-    chunks_center = {chunks_size.x / 2.0f, 0, chunks_size.z / 2.0f};
     for (size_t x = 0; x < chunks_size.x; x++) {
         for (size_t y = 0; y < chunks_size.y; y++) {
             for (size_t z = 0; z < chunks_size.z; z++) {

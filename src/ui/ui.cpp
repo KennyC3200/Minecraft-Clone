@@ -100,15 +100,7 @@ void UI::render_components() {
 void UI::render_overview() {
     ImGui::Begin("Overview");
     ImGui::Text("FPS: %i", (int) window->fps);
-    ImGui::SeparatorText("Game");
-    ImGui::Text("Position: %i %i %i", (int) player->game_data.position.x, (int) player->game_data.position.y, (int) player->game_data.position.z);
-    ImGui::Text("Chunk Position: %.2f %.2f %.2f", player->game_data.chunk_position.x, player->game_data.chunk_position.y, player->game_data.chunk_position.z);
-    ImGui::SeparatorText("World");
-    ImGui::Text("Position: %i %i %i", (int) player->world_data.position.x, (int) player->world_data.position.y, (int) player->world_data.position.z);
-    ImGui::Text("Chunk Position: %.2f %.2f %.2f", player->world_data.chunk_position.x, player->world_data.chunk_position.y, player->world_data.chunk_position.z);
-    ImGui::SeparatorText("Chunk");
-    ImGui::Text("Game Position: %.2f %.2f %.2f", player->chunk_data.game_position.x, player->chunk_data.game_position.y, player->chunk_data.game_position.z);
-    ImGui::Text("World Position: %.2f %.2f %.2f", player->chunk_data.world_position.x, player->chunk_data.world_position.y, player->chunk_data.world_position.z);
+    UI_VEC3(Position, player->position);
     ImGui::End();
 }
 

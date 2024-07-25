@@ -20,21 +20,7 @@ public:
     float speed;
 
     glm::ivec3 offset;
-
-    struct {
-        glm::vec3 position;
-        glm::vec3 chunk_position;
-    } game_data;
-
-    struct {
-        glm::vec3 position;
-        glm::vec3 chunk_position;
-    } world_data;
-
-    struct {
-        glm::vec3 game_position;
-        glm::vec3 world_position;
-    } chunk_data;
+    glm::vec3 position;
 private:
     Window *window;
     Keyboard *keyboard;
