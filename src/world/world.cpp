@@ -12,7 +12,7 @@ void World::init() {
             for (size_t z = 0; z < chunks_size.z; z++) {
                 chunks[chunks_idx(x, y, z)] = new Chunk({
                     x - chunks_size.x / 2,
-                    y - 1,
+                    y,
                     z - chunks_size.z / 2
                 });
             }
