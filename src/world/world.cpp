@@ -10,11 +10,7 @@ void World::init() {
     for (size_t x = 0; x < chunks_size.x; x++) {
         for (size_t y = 0; y < chunks_size.y; y++) {
             for (size_t z = 0; z < chunks_size.z; z++) {
-                chunks[chunks_idx(x, y, z)] = new Chunk({
-                    x - chunks_size.x / 2,
-                    y,
-                    z - chunks_size.z / 2
-                });
+                chunks[chunks_idx(x, y, z)] = new Chunk({x, y, z});
             }
         }
     }

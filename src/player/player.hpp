@@ -19,6 +19,8 @@ public:
 
     float speed;
 
+    glm::ivec3 offset;
+
     struct {
         glm::vec3 position;
         glm::vec3 chunk_position;

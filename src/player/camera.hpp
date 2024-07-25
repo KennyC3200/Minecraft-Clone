@@ -6,7 +6,7 @@
 
 class Camera {
 public:
-    void init(Window *window, Mouse *mouse);
+    void init(Window *window, Mouse *mouse, glm::ivec3 position);
     void update();
 
     glm::vec3 position;

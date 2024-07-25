@@ -1,10 +1,10 @@
 #include "camera.hpp"
 
-void Camera::init(Window *window, Mouse *mouse) {
+void Camera::init(Window *window, Mouse *mouse, glm::ivec3 position) {
     this->window = window;
     this->mouse = mouse;
+    this->position = position;
 
-    position = glm::vec3(0.0f, 0.0f, 0.0f);
     front = glm::vec3(0.0f, 0.0f, -1.0f);
     up = glm::vec3(0.0f, 1.0f, 0.0f);
 
