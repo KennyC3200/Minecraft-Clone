@@ -9,6 +9,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     speed = 30.0f;
 
     offset = {CHUNK_SIZE_X * world->chunks_size.x / 2, CHUNK_SIZE_Y, CHUNK_SIZE_Z * world->chunks_size.z / 2};
+    position = {0, 0, 0};
 
     camera.init(window, mouse, offset);
     ray.init(8.0f, {CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z});

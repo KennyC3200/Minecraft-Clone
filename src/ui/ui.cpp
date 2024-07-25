@@ -99,20 +99,19 @@ void UI::render_components() {
 
 void UI::render_overview() {
     ImGui::Begin("Overview");
-    ImGui::Text("FPS: %i", (int) window->fps);
+    UI_INT(FPS, (int) window->fps);
     UI_VEC3(Position, player->position);
+    UI_VEC3(Position + Offset, player->position + player->offset);
     ImGui::End();
 }
 
 void UI::render_camera() {
     ImGui::Begin("Camera");
     ImGui::SeparatorText("Overview");
-    ImGui::Text("Pitch: %.2f", player->camera.pitch);
-    ImGui::Text("Yaw: %.2f", player->camera.yaw);
-    ImGui::Text("Front: %.2f %.2f %.2f", player->camera.front.x, player->camera.front.y, player->camera.front.z);
+    UI_VEC3(Front, player->camera.front);
     ImGui::SeparatorText("Ray");
-    ImGui::Text("Position: %.2f %.2f %.2f", player->ray.position.x, player->ray.position.y, player->ray.position.z);
-    ImGui::Text("Direction: %.2f %.2f %.2f", player->ray.direction.x, player->ray.direction.y, player->ray.direction.z);
+    UI_VEC3(Position, player->ray.position);
+    UI_VEC3(Direction, player->ray.direction);
     if (player->ray.tmp.hit) {
         ImGui::Text("Hit: %lu %lu %lu", player->ray.tmp.position.x, player->ray.tmp.position.y, player->ray.tmp.position.z);
     } else {

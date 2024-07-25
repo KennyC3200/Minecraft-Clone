@@ -19,8 +19,11 @@ ImGui::SameLine();\
 if (ImGui::Button("Reset##"#id))\
     assignment
 
-#define UI_VEC3(label, vec)\
-ImGui::Text(#label": %.2f %.2f %.2f", (vec).x, (vec).y, (vec).z);
+#define UI_INT(label, value) ImGui::Text(#label": %i", value);
+#define UI_FLOAT(label, value) ImGui::Text(#label": %.2f", value);
+
+#define UI_VEC3(label, vec) ImGui::Text(#label": %.2f %.2f %.2f", (vec).x, (vec).y, (vec).z);
+#define UI_IVEC3(label, vec) ImGUi::Text(#label": %i %i %i", (vec).x, (vec).y, (vec).z);
 
 class UI {
 public:

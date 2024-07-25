@@ -9,10 +9,12 @@ struct RayCastData {
 
 class Ray {
 public:
+    // refactor init so that it takes in the world, since these rays are only being used on the world thus far
     void init(float max_distance, glm::vec<3, size_t> data_size);
     void update(uint64_t *data, glm::vec3 position, glm::vec3 direction);
     RayCastData cast();
 
+    // refactor this so that cast takes in these arguments
     glm::vec3 position;
     glm::vec3 direction;
     float max_distance;

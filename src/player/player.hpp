@@ -19,8 +19,7 @@ public:
 
     float speed;
 
-    glm::ivec3 offset;
-    glm::vec3 position;
+    glm::vec3 offset, position;
 private:
     Window *window;
     Keyboard *keyboard;
