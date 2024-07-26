@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 void Game::init() {
-    // gfx 
+    // gfx
     window.init();
     world.init();
     renderer.init(&world, &player);
@@ -28,7 +28,7 @@ void Game::loop() {
 
         glClearColor(0.580f, 0.800f, 0.976f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
+
         update();
         render();
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "block.hpp"
 #include "../util/util.hpp"
 #include "../gfx/shader.hpp"
 #include "../gfx/vao.hpp"
@@ -15,11 +16,12 @@
 class ChunkMesh {
 public:
     ~ChunkMesh();
-    ChunkMesh(uint64_t *data, glm::ivec3 *position);
+    ChunkMesh(BlockData *data, glm::ivec3 *position);
 
     static void init();
 
     static Shader shader;
+    static constexpr glm::ivec3 chunk_size = {CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z};
 
     void neighbors_set(ChunkMesh *neighbors[6]);
 
@@ -30,7 +32,7 @@ private:
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
 
-    uint64_t *data;
+    BlockData *data;
     glm::ivec3 *position;
     ChunkMesh *neighbors[6];
 

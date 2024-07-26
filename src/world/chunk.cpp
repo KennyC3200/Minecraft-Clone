@@ -3,7 +3,7 @@
 Chunk::Chunk(glm::ivec3 position):
 position(position)
 {
-    data = new uint64_t[CHUNK_VOLUME];
+    data = new BlockData[CHUNK_VOLUME];
     std::fill(data, data + CHUNK_VOLUME, BLOCK_DIRT);
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int y = 0; y < CHUNK_SIZE_Y / 2; y++) {
@@ -35,15 +35,18 @@ void Chunk::init() {
     ChunkMesh::init();
 }
 
-void Chunk::neighbors_set(Chunk *chunks[6]) {
-    ChunkMesh *neighbors[6];
-    neighbors[NORTH] = chunks[NORTH] ? chunks[NORTH]->mesh : nullptr;
-    neighbors[SOUTH] = chunks[SOUTH] ? chunks[SOUTH]->mesh : nullptr;
-    neighbors[EAST]  = chunks[EAST]  ? chunks[EAST]->mesh  : nullptr;
-    neighbors[WEST]  = chunks[WEST]  ? chunks[WEST]->mesh  : nullptr;
-    neighbors[UP]    = chunks[UP]    ? chunks[UP]->mesh    : nullptr;
-    neighbors[DOWN]  = chunks[DOWN]  ? chunks[DOWN]->mesh  : nullptr;
-    mesh->neighbors_set(neighbors);
+void Chunk::neighbors_set(Chunk *neighbors[6]) {
+    ChunkMesh *mesh_neighbors[6];
+    for (int i = 0; i < 6; i++) {
+        if (neighbors[i]) {
+            this->neighbors[i] = neighbors[i];
+            mesh_neighbors[i]  = neighbors[i]->mesh;
+        } else {
+            this->neighbors[i] = nullptr;
+            mesh_neighbors[i]  = nullptr;
+        }
+    }
+    mesh->neighbors_set(mesh_neighbors);
 }
 
 void Chunk::render() {

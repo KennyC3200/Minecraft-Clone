@@ -1,8 +1,9 @@
 # Minecraft
 
 # TODO
-- Don't change the chunk's position: change the player's position instead. Then, record the offset from the generating position of the chunk in the player in the game data struct
-- Fix camera snapping
+- Fix camera snapping: clamp and then don't allow camera movements in that particular direction
+- More blocks
+- World generation
 - Create a player mesh
 - Implement third person mode
 

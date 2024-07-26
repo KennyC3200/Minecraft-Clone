@@ -5,10 +5,11 @@ void World::init() {
     Chunk::init();
 
     chunks_size = {10, 1, 10};
-    chunks = new Chunk*[chunks_size_magnitude()];
-    for (size_t x = 0; x < chunks_size.x; x++) {
-        for (size_t y = 0; y < chunks_size.y; y++) {
-            for (size_t z = 0; z < chunks_size.z; z++) {
+    _chunks_size = chunks_size.x * chunks_size.y * chunks_size.z;
+    chunks = new Chunk*[_chunks_size];
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            for (int z = 0; z < chunks_size.z; z++) {
                 chunks[chunks_idx(x, y, z)] = new Chunk({x, y, z});
             }
         }
@@ -30,7 +31,7 @@ void World::init() {
 }
 
 void World::destroy() {
-    for (size_t i = 0; i < chunks_size_magnitude(); i++) {
+    for (size_t i = 0; i < _chunks_size; i++) {
         delete chunks[i];
     }
     delete[] chunks;
@@ -40,19 +41,33 @@ void World::render() {
     ChunkMesh::shader.bind();
     ChunkMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
 
-    for (size_t i = 0; i < chunks_size_magnitude(); i++) {
+    for (size_t i = 0; i < _chunks_size; i++) {
         chunks[i]->render();
     }
 }
 
-size_t World::chunks_size_magnitude() {
-    return chunks_size.x * chunks_size.y * chunks_size.z;
+Chunk *World::chunk_get(glm::ivec3 position) {
+    return chunks[chunks_idx(position)];
 }
 
-size_t World::chunks_idx(size_t x, size_t y, size_t z) {
+int World::chunks_idx(int x, int y, int z) {
     return x * chunks_size.y * chunks_size.z + z * chunks_size.y + y;
 }
 
-size_t World::chunks_idx(glm::vec<3, size_t> position) {
+int World::chunks_idx(glm::ivec3 position) {
     return position.x * chunks_size.y * chunks_size.z + position.z * chunks_size.y + position.y;
+}
+
+BlockData *World::block_get(glm::ivec3 position) {
+    if (
+        position.x < 0 || position.x >= CHUNK_SIZE_X * chunks_size.x ||
+        position.y < 0 || position.y >= CHUNK_SIZE_Y * chunks_size.y ||
+        position.z < 0 || position.z >= CHUNK_SIZE_Z * chunks_size.z
+    ) {
+        return nullptr;
+    }
+
+    glm::ivec3 chunk_idx = position / ChunkMesh::chunk_size;
+    glm::ivec3 block_idx = position - chunk_idx * ChunkMesh::chunk_size;
+    return &chunks[chunks_idx(chunk_idx)]->data[CHUNK_POS_TO_IDX(block_idx.x, block_idx.y, block_idx.z)];
 }

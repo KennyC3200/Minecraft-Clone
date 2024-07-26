@@ -3,6 +3,8 @@
 #include "../gfx/sprite_atlas.hpp"
 #include "block_mesh.hpp"
 
+typedef uint64_t BlockData;
+
 enum BlockType {
     BLOCK_AIR = 0,
     BLOCK_GRASS,

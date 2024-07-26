@@ -1,7 +1,6 @@
 #pragma once
 
-#include <vector>
-
+#include "../util/util.hpp"
 #include "chunk.hpp"
 
 class World {
@@ -13,9 +12,12 @@ public:
     Chunk **chunks;
 
     // the number of chunks
-    glm::vec<3, size_t> chunks_size;
+    glm::ivec3 chunks_size;
+    size_t _chunks_size;
 
-    size_t chunks_idx(size_t x, size_t y, size_t z);
-    size_t chunks_idx(glm::vec<3, size_t> position);
-    size_t chunks_size_magnitude();
+    Chunk *chunk_get(glm::ivec3 position);
+    int chunks_idx(int x, int y, int z);
+    int chunks_idx(glm::ivec3 position);
+
+    BlockData *block_get(glm::ivec3 position);
 };

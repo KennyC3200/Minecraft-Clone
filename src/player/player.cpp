@@ -12,7 +12,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     position = {0, 0, 0};
 
     camera.init(window, mouse, offset);
-    ray.init(8.0f, {CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z});
+    ray.init(this->world, 8.0f);
 }
 
 void Player::update() {
@@ -49,12 +49,14 @@ void Player::update() {
         position.y -= _displacement;
     }
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
+        RayCastData raycast = ray.cast(position + offset, camera.front);
+        if (raycast.hit) {
+        }
     }
 
     camera.update();
     // TODO: need to refactor between camera.front and camera.direction
     // ray.update(world->chunks[idx]->data, chunk_data.game_position, camera.front);
-    // ray.cast();
 }
 
 void Player::render() {

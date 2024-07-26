@@ -109,14 +109,14 @@ void UI::render_camera() {
     ImGui::Begin("Camera");
     ImGui::SeparatorText("Overview");
     UI_VEC3(Front, player->camera.front);
-    ImGui::SeparatorText("Ray");
-    UI_VEC3(Position, player->ray.position);
-    UI_VEC3(Direction, player->ray.direction);
-    if (player->ray.tmp.hit) {
-        ImGui::Text("Hit: %lu %lu %lu", player->ray.tmp.position.x, player->ray.tmp.position.y, player->ray.tmp.position.z);
-    } else {
-        ImGui::Text("Hit: false");
-    }
+    // ImGui::SeparatorText("Ray");
+    // UI_VEC3(Position, player->ray.position);
+    // UI_VEC3(Direction, player->ray.direction);
+    // if (player->ray.tmp.hit) {
+    //     ImGui::Text("Hit: %lu %lu %lu", player->ray.tmp.position.x, player->ray.tmp.position.y, player->ray.tmp.position.z);
+    // } else {
+    //     ImGui::Text("Hit: false");
+    // }
 
     // ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
     // UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);

@@ -10,7 +10,7 @@ ChunkMesh::~ChunkMesh() {
     vao.destroy();
 }
 
-ChunkMesh::ChunkMesh(uint64_t *data, glm::ivec3 *position):
+ChunkMesh::ChunkMesh(BlockData *data, glm::ivec3 *position):
 data(data),
 position(position)
 {
@@ -28,12 +28,9 @@ void ChunkMesh::init() {
 }
 
 void ChunkMesh::neighbors_set(ChunkMesh *neighbors[6]) {
-    this->neighbors[NORTH] = neighbors[NORTH];
-    this->neighbors[SOUTH] = neighbors[SOUTH];
-    this->neighbors[EAST]  = neighbors[EAST];
-    this->neighbors[WEST]  = neighbors[WEST];
-    this->neighbors[UP]    = neighbors[UP];
-    this->neighbors[DOWN]  = neighbors[DOWN];
+    for (int i = 0; i < 6; i++) {
+        this->neighbors[i] = neighbors[i];
+    }
 }
 
 void ChunkMesh::prepare() {

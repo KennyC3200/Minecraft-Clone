@@ -10,7 +10,7 @@ public:
 
     static void init();
 
-    void neighbors_set(Chunk *chunks[6]);
+    void neighbors_set(Chunk *neighbors[6]);
 
     void render();
 
@@ -25,9 +25,10 @@ public:
     // - 4 bits B light
     // - 4 bits light intensity
     // - 16 bits block id
-    uint64_t *data;
+    BlockData *data;
 
     bool meshed;
 private:
     ChunkMesh *mesh;
+    Chunk *neighbors[6];
 };
