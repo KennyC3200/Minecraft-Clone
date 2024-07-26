@@ -22,8 +22,6 @@ void UIComponent::destroy() {
     ibo.destroy();
 }
 
-void UIComponent::init() {
-}
+void UIComponent::init() {}
 
-void UIComponent::render() {
-}
+void UIComponent::render() {}

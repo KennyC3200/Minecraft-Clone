@@ -2,7 +2,6 @@
 
 #include "../gfx/gfx.hpp"
 #include "../gfx/window.hpp"
-#include "../gfx/texture.hpp"
 #include "../gfx/shader.hpp"
 #include "../gfx/vbo.hpp"
 #include "../gfx/vao.hpp"
@@ -22,6 +21,4 @@ public:
     static Window *window;
 
     bool toggled;
-protected:
-    Texture texture;
 };

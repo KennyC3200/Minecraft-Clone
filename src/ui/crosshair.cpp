@@ -2,7 +2,7 @@
 
 void Crosshair::init() {
     toggled = true;
-    texture = Texture::create("res/images/crosshair.png", "tex", GL_RGBA, GL_RGBA);
+    texture.init("res/images/crosshair.png", "tex", GL_RGBA, GL_RGBA);
 }
 
 void Crosshair::render() {

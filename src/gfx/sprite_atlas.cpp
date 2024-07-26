@@ -11,13 +11,6 @@ sprite_size(sprite_size)
     size = texture.size;
     sprite_unit = sprite_size / size;
     pixel_unit = 1.0f / size;
-
-#ifdef SPRITEATLAS_DEBUG
-    std::cout << "TextureAtlas: " << path << " (" << fs_name << ")" << '\n'
-        << "size: " << size.x << ' ' << size.y << '\n'
-        << "sprite_unit: " << sprite_unit.x << ' ' << sprite_unit.y << '\n'
-        << "pixel_unit: " << pixel_unit.x << ' ' << pixel_unit.y << '\n';
-#endif
 }
 
 glm::vec2 SpriteAtlas::sprite_uv(glm::vec2 sprite_coordinates) {

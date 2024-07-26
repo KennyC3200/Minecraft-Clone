@@ -4,13 +4,19 @@ void World::init() {
     Block::init();
     Chunk::init();
 
+    y_ground = 2;
     chunks_size = {16, 3, 16};
     _chunks_size = chunks_size.x * chunks_size.y * chunks_size.z;
     chunks = new Chunk*[_chunks_size];
     for (int x = 0; x < chunks_size.x; x++) {
-        for (int y = 0; y < chunks_size.y; y++) {
+        for (int y = 0; y < y_ground; y++) {
             for (int z = 0; z < chunks_size.z; z++) {
                 chunks[chunks_idx(x, y, z)] = new Chunk({x, y, z});
+            }
+        }
+        for (int y = y_ground; y < chunks_size.y; y++) {
+            for (int z = 0; z < chunks_size.z; z++) {
+                chunks[chunks_idx(x, y, z)] = new Chunk({x, y, z}, BLOCK_AIR);
             }
         }
     }

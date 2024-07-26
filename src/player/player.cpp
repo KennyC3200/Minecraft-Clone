@@ -16,7 +16,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     int player_height = 2;
     offset = {
         CHUNK_SIZE_X * world->chunks_size.x / 2, 
-        CHUNK_SIZE_Y * world->chunks_size.y + player_height, 
+        CHUNK_SIZE_Y * world->y_ground + player_height, 
         CHUNK_SIZE_Z * world->chunks_size.z / 2};
     offset += 0.0001;
     position = {0, 0, 0};
@@ -64,6 +64,21 @@ void Player::update() {
             BlockData *block = world->block_get(raycast.position);
             *block = BLOCK_AIR;
             Chunk *chunk = world->chunk_get(raycast.position);
+            chunk->meshed = false;
+            for (int i = 0; i < 6; i++) {
+                if (chunk->neighbors[i]) {
+                    chunk->neighbors[i]->meshed = false;
+                }
+            }
+        }
+    }
+    if (mouse->keys[GLFW_MOUSE_BUTTON_RIGHT].pressed) {
+        RayCastData raycast = ray.cast(position + offset, camera.direction);
+        if (raycast.hit && world->block_get(raycast.position + raycast.out)) {
+            glm::ivec3 _position = raycast.position + raycast.out;
+            BlockData *block = world->block_get(_position);
+            *block = BLOCK_DIRT;
+            Chunk *chunk = world->chunk_get(_position);
             chunk->meshed = false;
             for (int i = 0; i < 6; i++) {
                 if (chunk->neighbors[i]) {

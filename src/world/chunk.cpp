@@ -22,6 +22,16 @@ position(position)
     meshed = false;
 }
 
+Chunk::Chunk(glm::ivec3 position, BlockType fill):
+position(position)
+{
+    data = new BlockData[CHUNK_VOLUME];
+    std::fill(data, data + CHUNK_VOLUME, fill);
+
+    mesh = new ChunkMesh(data, &this->position);
+    meshed = false;
+}
+
 Chunk::~Chunk() {
     delete mesh;
     delete[] data;

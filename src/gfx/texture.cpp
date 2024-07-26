@@ -3,12 +3,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Texture Texture::create(std::string path, std::string fs_name, GLint tex_format, GLint src_format) {
-    Texture self;
-    self.init(path, fs_name, tex_format, src_format);
-    return self;
-}
-
 void Texture::init(std::string path, std::string fs_name, GLint tex_format, GLint src_format)
 {
     this->fs_name = fs_name;

@@ -6,6 +6,7 @@
 class Chunk {
 public:
     Chunk(glm::ivec3 position);
+    Chunk(glm::ivec3 position, BlockType fill);
     ~Chunk();
 
     static void init();
