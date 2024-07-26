@@ -10,8 +10,10 @@ public:
     void update();
 
     glm::vec3 position;
-    glm::vec3 front, target, direction;
-    glm::vec3 up, right;
+    glm::vec3 direction;
+
+    // camera vectors that define the vector space
+    glm::vec3 up, right, front;
 
     glm::mat4 view, projection;
 

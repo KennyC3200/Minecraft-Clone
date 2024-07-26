@@ -40,16 +40,12 @@ public:
     } overview;
     struct {
         bool toggled;
-    } camera;
-    struct {
-        bool toggled;
         bool demo_window;
     } settings;
 private:
     void init_imgui(GLFWwindow *window);
     void render_components();
     void render_overview();
-    void render_camera();
     void render_settings();
 
     ImGuiIO *io;

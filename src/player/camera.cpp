@@ -5,15 +5,8 @@ void Camera::init(Window *window, Mouse *mouse, glm::ivec3 position) {
     this->mouse = mouse;
     this->position = position;
 
-    front = glm::vec3(0.0f, 0.0f, -1.0f);
+    direction = glm::vec3(0.0f, 0.0f, -1.0f);
     up = glm::vec3(0.0f, 1.0f, 0.0f);
-
-    // position = glm::vec3(0.0f, 0.0f, 3.0f);
-    // target = glm::vec3(0.0f, 0.0f, 0.0f);
-    // direction = glm::normalize(position - target);
-    //
-    // right = glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), direction));
-    // up = glm::cross(direction, right);
 
     // point towards -Z axis
     yaw = -90.0f;
@@ -34,19 +27,20 @@ void Camera::update() {
         pitch += sensitivity * mouse->position_delta.y;
         pitch = CLAMP(pitch, -89.0f, 89.0f);
 
-        direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-        direction.y = sin(glm::radians(pitch));
-        direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+        direction = glm::normalize(glm::vec3(
+            cos(glm::radians(yaw)) * cos(glm::radians(pitch)),
+            sin(glm::radians(pitch)),
+            sin(glm::radians(yaw)) * cos(glm::radians(pitch))
+        ));
 
-        front = glm::normalize(direction);
-        right = glm::normalize(glm::cross(front, up));
+        right = glm::normalize(glm::cross(direction, up));
 
         // this is the cross product of the up vector and right vector
         // gives the direction that the player will move in the x and z components
-        direction = glm::normalize(glm::cross(up, right));
+        front = glm::normalize(glm::cross(up, right));
     }
 
-    view = glm::lookAt(position, position + front, up);
+    view = glm::lookAt(position, position + direction, up);
     projection = glm::perspective(
         glm::radians(fov), 
         (float) window->size.x / window->size.y,

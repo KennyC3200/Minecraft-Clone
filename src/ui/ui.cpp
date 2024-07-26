@@ -14,7 +14,6 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
 
     toggled = true;
     overview.toggled = true;
-    camera.toggled = true;
     settings.toggled = false;
     settings.demo_window = false;
 
@@ -44,9 +43,6 @@ void UI::render() {
 
     if (overview.toggled) {
         render_overview();
-    }
-    if (camera.toggled) {
-        render_camera();
     }
     if (settings.toggled) {
         render_settings();
@@ -102,29 +98,6 @@ void UI::render_overview() {
     UI_INT(FPS, (int) window->fps);
     UI_VEC3(Position, player->position);
     UI_VEC3(Position + Offset, player->position + player->offset);
-    ImGui::End();
-}
-
-void UI::render_camera() {
-    ImGui::Begin("Camera");
-    ImGui::SeparatorText("Overview");
-    UI_VEC3(Front, player->camera.front);
-    // ImGui::SeparatorText("Ray");
-    // UI_VEC3(Position, player->ray.position);
-    // UI_VEC3(Direction, player->ray.direction);
-    // if (player->ray.tmp.hit) {
-    //     ImGui::Text("Hit: %lu %lu %lu", player->ray.tmp.position.x, player->ray.tmp.position.y, player->ray.tmp.position.z);
-    // } else {
-    //     ImGui::Text("Hit: false");
-    // }
-
-    // ImGui::SliderFloat("FOV", &player->camera.fov, 1.0f, 80.0f);
-    // UI_RESET_BUTTON(1, player->camera.fov = 45.0f;);
-    // ImGui::SliderFloat("Z-far", &player->camera.z_far, 1.0f, 500.0f);
-    // UI_RESET_BUTTON(2, player->camera.z_far = 1000.0f;);
-    // ImGui::SliderFloat("Sensitivity", &player->camera.sensitivity, 0.0f, 1.0f);
-    // UI_RESET_BUTTON(3, player->camera.sensitivity = 0.1f;);
-
     ImGui::End();
 }
 

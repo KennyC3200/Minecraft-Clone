@@ -24,12 +24,12 @@ void Player::update() {
     glm::vec3 displacement;
     float _displacement;
     if (keyboard->keys[GLFW_KEY_W].down) {
-        displacement = speed * (float) window->time_delta * camera.direction;
+        displacement = speed * (float) window->time_delta * camera.front;
         camera.position += displacement;
         position += displacement;
     }
     if (keyboard->keys[GLFW_KEY_S].down) {
-        displacement = speed * (float) window->time_delta * camera.direction;
+        displacement = speed * (float) window->time_delta * camera.front;
         camera.position -= displacement;
         position -= displacement;
     }
@@ -54,7 +54,7 @@ void Player::update() {
         position.y -= _displacement;
     }
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
-        RayCastData raycast = ray.cast(position + offset, camera.front);
+        RayCastData raycast = ray.cast(position + offset, camera.direction);
         if (raycast.hit) {
             BlockData *block = world->block_get(raycast.position);
             *block = BLOCK_AIR;
@@ -69,8 +69,6 @@ void Player::update() {
     }
 
     camera.update();
-    // TODO: need to refactor between camera.front and camera.direction
-    // ray.update(world->chunks[idx]->data, chunk_data.game_position, camera.front);
 }
 
 void Player::render() {
