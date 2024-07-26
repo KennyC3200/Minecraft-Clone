@@ -8,6 +8,8 @@
 #include "camera.hpp"
 #include "ray.hpp"
 
+#define HOTBAR_SIZE 9
+
 class Player {
 public:
     void init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world);
@@ -20,6 +22,8 @@ public:
     float speed;
 
     glm::vec3 offset, position;
+
+    BlockType inventory[HOTBAR_SIZE];
 private:
     Window *window;
     Keyboard *keyboard;

@@ -8,6 +8,11 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     speed = 30.0f;
 
+    for (int i = 0; i < HOTBAR_SIZE; i++) {
+        inventory[i] = BLOCK_NONE;
+    }
+    inventory[0] = BLOCK_DIRT;
+
     int player_height = 2;
     offset = {
         CHUNK_SIZE_X * world->chunks_size.x / 2, 

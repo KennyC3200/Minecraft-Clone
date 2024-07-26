@@ -6,6 +6,7 @@
 typedef uint64_t BlockData;
 
 enum BlockType {
+    BLOCK_NONE = -1,
     BLOCK_AIR = 0,
     BLOCK_GRASS,
     BLOCK_DIRT,

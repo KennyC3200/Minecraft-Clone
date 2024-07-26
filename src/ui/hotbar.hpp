@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ui_component.hpp"
+#include "../player/player.hpp"
 
 class Hotbar : public UIComponent {
 public:

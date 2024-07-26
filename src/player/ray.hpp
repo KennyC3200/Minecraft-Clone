@@ -5,7 +5,7 @@
 
 struct RayCastData {
     bool hit;
-    glm::ivec3 position;
+    glm::ivec3 position, out;
 };
 
 class Ray {
