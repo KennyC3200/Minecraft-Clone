@@ -48,28 +48,28 @@ void ChunkMesh::mesh() {
                 }
 
                 if (z == CHUNK_SIZE_Z - 1) {
-                    if (neighbors[SOUTH] == nullptr || neighbors[SOUTH]->data[CHUNK_POS_TO_IDX(x, y, 0)] == BLOCK_AIR) {
+                    if (neighbors[SOUTH] != nullptr && neighbors[SOUTH]->data[CHUNK_POS_TO_IDX(x, y, 0)] == BLOCK_AIR) {
                         block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
                     }
                 } else if (data[CHUNK_POS_TO_IDX(x, y, z + 1)] == BLOCK_AIR) {
                     block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
                 }
                 if (z == 0) {
-                    if (neighbors[NORTH] == nullptr || neighbors[NORTH]->data[CHUNK_POS_TO_IDX(x, y, CHUNK_SIZE_Z - 1)] == BLOCK_AIR) {
+                    if (neighbors[NORTH] != nullptr && neighbors[NORTH]->data[CHUNK_POS_TO_IDX(x, y, CHUNK_SIZE_Z - 1)] == BLOCK_AIR) {
                         block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
                     }
                 } else if (data[CHUNK_POS_TO_IDX(x, y, z - 1)] == BLOCK_AIR) {
                     block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
                 }
                 if (x == CHUNK_SIZE_X - 1) {
-                    if (neighbors[EAST] == nullptr || neighbors[EAST]->data[CHUNK_POS_TO_IDX(0, y, z)] == BLOCK_AIR) {
+                    if (neighbors[EAST] != nullptr && neighbors[EAST]->data[CHUNK_POS_TO_IDX(0, y, z)] == BLOCK_AIR) {
                         block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
                     }
                 } else if (data[CHUNK_POS_TO_IDX(x + 1, y, z)] == BLOCK_AIR) {
                     block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
                 }
                 if (x == 0) {
-                    if (neighbors[WEST] == nullptr || neighbors[WEST]->data[CHUNK_POS_TO_IDX(CHUNK_SIZE_X - 1, y, z)] == BLOCK_AIR) {
+                    if (neighbors[WEST] != nullptr && neighbors[WEST]->data[CHUNK_POS_TO_IDX(CHUNK_SIZE_X - 1, y, z)] == BLOCK_AIR) {
                         block.mesh.mesh_face(WEST, {x, y, z}, vertices, indices);
                     }
                 } else if (data[CHUNK_POS_TO_IDX(x - 1, y, z)] == BLOCK_AIR) {
@@ -83,7 +83,7 @@ void ChunkMesh::mesh() {
                     block.mesh.mesh_face(UP, {x, y, z}, vertices, indices);
                 }
                 if (y == 0) {
-                    if (neighbors[DOWN] == nullptr || neighbors[DOWN]->data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)] == BLOCK_AIR) {
+                    if (neighbors[DOWN] != nullptr && neighbors[DOWN]->data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)] == BLOCK_AIR) {
                         block.mesh.mesh_face(DOWN, {x, y, z}, vertices, indices);
                     }
                 } else if (data[CHUNK_POS_TO_IDX(x, y - 1, z)] == BLOCK_AIR) {
