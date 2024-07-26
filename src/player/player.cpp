@@ -55,6 +55,11 @@ void Player::update() {
             *block = BLOCK_AIR;
             Chunk *chunk = world->chunk_get(raycast.position);
             chunk->meshed = false;
+            for (int i = 0; i < 6; i++) {
+                if (chunk->neighbors[i]) {
+                    chunk->neighbors[i]->meshed = false;
+                }
+            }
         }
     }
 

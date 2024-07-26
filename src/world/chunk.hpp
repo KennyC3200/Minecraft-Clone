@@ -28,7 +28,7 @@ public:
     BlockData *data;
 
     bool meshed;
+    Chunk *neighbors[6];
 private:
     ChunkMesh *mesh;
-    Chunk *neighbors[6];
 };
