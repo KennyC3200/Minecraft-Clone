@@ -51,6 +51,10 @@ void Player::update() {
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
         RayCastData raycast = ray.cast(position + offset, camera.front);
         if (raycast.hit) {
+            BlockData *block = world->block_get(raycast.position);
+            *block = BLOCK_AIR;
+            Chunk *chunk = world->chunk_get(raycast.position);
+            chunk->meshed = false;
         }
     }
 

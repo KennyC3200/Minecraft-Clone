@@ -47,7 +47,7 @@ void World::render() {
 }
 
 Chunk *World::chunk_get(glm::ivec3 position) {
-    return chunks[chunks_idx(position)];
+    return chunks[chunks_idx(position / ChunkMesh::chunk_size)];
 }
 
 int World::chunks_idx(int x, int y, int z) {
