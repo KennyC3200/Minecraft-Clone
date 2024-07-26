@@ -1,7 +1,6 @@
 # Minecraft
 
 # TODO
-- Fix camera snapping: clamp and then don't allow camera movements in that particular direction
 - More blocks
 - World generation
 - Create a player mesh

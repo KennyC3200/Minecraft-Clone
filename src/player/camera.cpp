@@ -32,11 +32,13 @@ void Camera::update() {
     if (toggled) {
         yaw += sensitivity * mouse->position_delta.x;
         pitch += sensitivity * mouse->position_delta.y;
+        pitch = CLAMP(pitch, -89.0f, 89.0f);
+
         direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
         direction.y = sin(glm::radians(pitch));
         direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
         front = glm::normalize(direction);
-        pitch = CLAMP(pitch, -89.0f, 89.0f);
         right = glm::normalize(glm::cross(front, up));
 
         // this is the cross product of the up vector and right vector

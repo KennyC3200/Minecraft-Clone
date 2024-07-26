@@ -4,7 +4,7 @@ void World::init() {
     Block::init();
     Chunk::init();
 
-    chunks_size = {16, 1, 16};
+    chunks_size = {16, 3, 16};
     _chunks_size = chunks_size.x * chunks_size.y * chunks_size.z;
     chunks = new Chunk*[_chunks_size];
     for (int x = 0; x < chunks_size.x; x++) {
