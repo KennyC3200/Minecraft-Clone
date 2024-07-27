@@ -2,6 +2,7 @@
 
 # TODO
 - World generation
+- Chunks rendering as player moves around
 - Create a player mesh
 - Implement third person mode
 
