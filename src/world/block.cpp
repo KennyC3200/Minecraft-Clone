@@ -8,8 +8,8 @@ Block::Block() {}
 Block::~Block() {}
 
 Block::Block(BlockType type, BlockMesh mesh):
-type(type),
-mesh(mesh)
+    type(type),
+    mesh(mesh)
 {}
 
 void Block::init() {

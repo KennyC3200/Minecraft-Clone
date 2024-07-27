@@ -6,8 +6,10 @@
 
 class Hotbar : public UIComponent {
 public:
-    void init() override;
-    void render() override;
+    void init(Player *player);
+    void mesh();
+    void render();
 private:
+    Player *player;
     SpriteAtlas atlas;
 };

@@ -8,7 +8,7 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
 
     UIComponent::init(this->window);
     crosshair.init();
-    hotbar.init();
+    hotbar.init(this->player);
 
     init_imgui(window->handle);
 
@@ -88,7 +88,6 @@ void UI::init_imgui(GLFWwindow *window) {
 
 void UI::render_components() {
     UIComponent::shader.bind();
-
     crosshair.render();
     hotbar.render();
 }
@@ -98,6 +97,26 @@ void UI::render_overview() {
     UI_INT(FPS, (int) window->fps);
     UI_VEC3(Position, player->position);
     UI_VEC3(Position + Offset, player->position + player->offset);
+
+    std::string block;
+    switch (player->hotbar[player->hotbar_idx]) {
+        case BLOCK_NONE:
+            block = "none";
+            break;
+        case BLOCK_DIRT:
+            block = "dirt";
+            break;
+        case BLOCK_GRASS:
+            block = "grass";
+            break;
+        case BLOCK_STONE:
+            block = "stone";
+            break;
+        default:
+            break;
+    }
+    ImGui::Text("Block: %s", block.c_str());
+
     ImGui::End();
 }
 

@@ -1,7 +1,7 @@
 #include "chunk.hpp"
 
 Chunk::Chunk(glm::ivec3 position):
-position(position)
+    position(position)
 {
     data = new BlockData[CHUNK_VOLUME];
     std::fill(data, data + CHUNK_VOLUME, BLOCK_DIRT);
@@ -23,7 +23,7 @@ position(position)
 }
 
 Chunk::Chunk(glm::ivec3 position, BlockType fill):
-position(position)
+    position(position)
 {
     data = new BlockData[CHUNK_VOLUME];
     std::fill(data, data + CHUNK_VOLUME, fill);
@@ -57,7 +57,6 @@ void Chunk::neighbors_set(Chunk *neighbors[6]) {
 
 void Chunk::render() {
     if (!meshed) {
-        mesh->prepare();
         mesh->mesh();
         meshed = true;
     }

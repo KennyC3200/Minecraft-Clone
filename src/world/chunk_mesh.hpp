@@ -15,8 +15,8 @@
 
 class ChunkMesh {
 public:
-    ~ChunkMesh();
     ChunkMesh(BlockData *data, glm::ivec3 *position);
+    ~ChunkMesh();
 
     static void init();
 
@@ -25,7 +25,6 @@ public:
 
     void neighbors_set(ChunkMesh *neighbors[6]);
 
-    void prepare();
     void mesh();
     void render();
 private:

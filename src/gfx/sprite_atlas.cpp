@@ -5,7 +5,7 @@ SpriteAtlas::SpriteAtlas() {}
 SpriteAtlas::~SpriteAtlas() {}
 
 SpriteAtlas::SpriteAtlas(std::string path, std::string fs_name, glm::vec2 sprite_size):
-sprite_size(sprite_size)
+    sprite_size(sprite_size)
 {
     texture.init(path, fs_name, GL_RGBA, GL_RGBA);
     size = texture.size;

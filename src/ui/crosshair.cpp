@@ -14,6 +14,7 @@ void Crosshair::render() {
 
     float x = window->size.y / 1000.0f * 0.01f,
           y = window->size.x / 1000.0f * 0.01f;
+
     float vertices[] = {
          x,  y,  1.0f, 1.0f,
          x, -y,  1.0f, 0.0f,

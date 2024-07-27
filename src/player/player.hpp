@@ -23,7 +23,8 @@ public:
 
     glm::vec3 offset, position;
 
-    BlockType inventory[HOTBAR_SIZE];
+    int hotbar_idx;
+    BlockType hotbar[HOTBAR_SIZE];
 private:
     Window *window;
     Keyboard *keyboard;

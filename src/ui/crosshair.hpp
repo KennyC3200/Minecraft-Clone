@@ -5,8 +5,8 @@
 
 class Crosshair : public UIComponent {
 public:
-    void init() override;
-    void render() override;
+    void init();
+    void render();
 private:
     Texture texture;
 };

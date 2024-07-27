@@ -1,7 +1,6 @@
 # Minecraft
 
 # TODO
-- Hotbar
 - More blocks
 - World generation
 - Create a player mesh

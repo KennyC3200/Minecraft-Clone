@@ -11,9 +11,6 @@ public:
     static void init(Window *window);
     static void destroy();
 
-    virtual void init();
-    virtual void render();
-
     static Shader shader;
     static VAO vao;
     static VBO vbo, ibo;

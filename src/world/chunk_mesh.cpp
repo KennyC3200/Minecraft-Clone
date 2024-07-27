@@ -4,15 +4,9 @@
 
 Shader ChunkMesh::shader;
 
-ChunkMesh::~ChunkMesh() {
-    vbo.destroy();
-    ibo.destroy();
-    vao.destroy();
-}
-
 ChunkMesh::ChunkMesh(BlockData *data, glm::ivec3 *position):
-data(data),
-position(position)
+    data(data),
+    position(position)
 {
     for (int i = 0; i < 6; i++) {
         this->neighbors[i] = neighbors[i];
@@ -21,6 +15,12 @@ position(position)
     vao.init();
     vbo.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
+}
+
+ChunkMesh::~ChunkMesh() {
+    vbo.destroy();
+    ibo.destroy();
+    vao.destroy();
 }
 
 void ChunkMesh::init() {
@@ -33,12 +33,10 @@ void ChunkMesh::neighbors_set(ChunkMesh *neighbors[6]) {
     }
 }
 
-void ChunkMesh::prepare() {
+void ChunkMesh::mesh() {
     vertices.clear();
     indices.clear();
-}
 
-void ChunkMesh::mesh() {
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {

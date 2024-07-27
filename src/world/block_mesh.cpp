@@ -19,7 +19,7 @@ void BlockMesh::mesh_face(
     Direction direction,
     glm::ivec3 position,
     std::vector<float> &vertices,
-    std::vector<unsigned int> &indices) 
+    std::vector<unsigned int> &indices)
 {
     for (int i = 0; i < 6; i++) {
         indices.push_back(vertices.size() / 5 + BlockMesh::INDICES[i]);

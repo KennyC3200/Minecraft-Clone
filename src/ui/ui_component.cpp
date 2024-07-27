@@ -21,7 +21,3 @@ void UIComponent::destroy() {
     vbo.destroy();
     ibo.destroy();
 }
-
-void UIComponent::init() {}
-
-void UIComponent::render() {}

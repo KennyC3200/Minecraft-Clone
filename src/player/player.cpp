@@ -9,9 +9,12 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     speed = 30.0f;
 
     for (int i = 0; i < HOTBAR_SIZE; i++) {
-        inventory[i] = BLOCK_NONE;
+        hotbar[i] = BLOCK_NONE;
     }
-    inventory[0] = BLOCK_DIRT;
+    hotbar[0] = BLOCK_DIRT;
+    hotbar[1] = BLOCK_GRASS;
+    hotbar[2] = BLOCK_STONE;
+    hotbar_idx = 0;
 
     int player_height = 2;
     offset = {
@@ -58,6 +61,11 @@ void Player::update() {
         camera.position.y -= _displacement;
         position.y -= _displacement;
     }
+    for (int i = 0; i < HOTBAR_SIZE; i++) {
+        if (keyboard->keys[GLFW_KEY_1 + i].pressed) {
+            hotbar_idx = i;
+        }
+    }
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
         RayCastData raycast = ray.cast(position + offset, camera.direction);
         if (raycast.hit) {
@@ -74,10 +82,10 @@ void Player::update() {
     }
     if (mouse->keys[GLFW_MOUSE_BUTTON_RIGHT].pressed) {
         RayCastData raycast = ray.cast(position + offset, camera.direction);
-        if (raycast.hit && world->block_get(raycast.position + raycast.out)) {
+        if (raycast.hit && world->block_get(raycast.position + raycast.out) && hotbar[hotbar_idx] != BLOCK_NONE) {
             glm::ivec3 _position = raycast.position + raycast.out;
             BlockData *block = world->block_get(_position);
-            *block = BLOCK_DIRT;
+            *block = hotbar[hotbar_idx];
             Chunk *chunk = world->chunk_get(_position);
             chunk->meshed = false;
             for (int i = 0; i < 6; i++) {
