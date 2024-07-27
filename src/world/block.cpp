@@ -39,4 +39,12 @@ void Block::init() {
     mesh.add_face(UP,    atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
     mesh.add_face(DOWN,  atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
     blocks[BLOCK_STONE] = Block(BLOCK_STONE, mesh);
+
+    mesh.add_face(NORTH, atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
+    mesh.add_face(SOUTH, atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
+    mesh.add_face(EAST,  atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
+    mesh.add_face(WEST,  atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
+    mesh.add_face(UP,    atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
+    mesh.add_face(DOWN,  atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
+    blocks[BLOCK_SAND] = Block(BLOCK_SAND, mesh);
 }

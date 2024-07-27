@@ -14,12 +14,12 @@ void Hotbar::render() {
 
     for (int i = 0; i < HOTBAR_SIZE; i++) {
         glm::vec2 unit = 1.0f / glm::vec2(window->size);
-        glm::vec2 size = unit * 80.0f;
+        glm::vec2 size = unit * 100.0f;
         glm::vec2 p1 = {-size.x * (HOTBAR_SIZE / 2.0f - i), -1.0f + 0.1f};
         glm::vec2 p2 = {p1.x + size.x, p1.y + size.y};
 
         if (player->hotbar[i] != BLOCK_NONE) {
-            render_items(p1 + 10.0f * unit, p2 - 10.0f * unit, player->hotbar[i]);
+            render_items(p1 + 12.0f * unit, p2 - 12.0f * unit, player->hotbar[i]);
         }
         render_hotbar(p1, p2, i == player->hotbar_idx);
     }

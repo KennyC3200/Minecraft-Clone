@@ -97,26 +97,6 @@ void UI::render_overview() {
     UI_INT(FPS, (int) window->fps);
     UI_VEC3(Position, player->position);
     UI_VEC3(Position + Offset, player->position + player->offset);
-
-    std::string block;
-    switch (player->hotbar[player->hotbar_idx]) {
-        case BLOCK_NONE:
-            block = "none";
-            break;
-        case BLOCK_DIRT:
-            block = "dirt";
-            break;
-        case BLOCK_GRASS:
-            block = "grass";
-            break;
-        case BLOCK_STONE:
-            block = "stone";
-            break;
-        default:
-            break;
-    }
-    ImGui::Text("Block: %s", block.c_str());
-
     ImGui::End();
 }
 
