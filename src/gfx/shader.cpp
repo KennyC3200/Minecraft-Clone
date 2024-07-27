@@ -38,6 +38,12 @@ void Shader::uniform_texture_2d(Texture tex, unsigned int unit) {
     glUniform1i(glGetUniformLocation(handle, tex.fs_name.c_str()), unit);
 }
 
+void Shader::uniform_texture_2d(Texture tex, std::string fs_name, unsigned int unit) {
+    glActiveTexture(GL_TEXTURE0 + unit);
+    tex.bind();
+    glUniform1i(glGetUniformLocation(handle, fs_name.c_str()), unit);
+}
+
 void Shader::uniform_mat4(std::string name, glm::mat4 mat4) {
     glUniformMatrix4fv(
         glGetUniformLocation(handle, name.c_str()), 

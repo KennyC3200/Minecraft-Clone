@@ -12,6 +12,7 @@ public:
     void destroy();
     void bind();
     void uniform_texture_2d(Texture tex, unsigned int unit);
+    void uniform_texture_2d(Texture tex, std::string fs_name, unsigned int unit);
     void uniform_mat4(std::string name, glm::mat4 mat4);
 
     GLuint handle;

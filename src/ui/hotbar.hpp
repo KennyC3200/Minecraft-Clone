@@ -10,6 +10,9 @@ public:
     void mesh();
     void render();
 private:
+    void render_hotbar(glm::vec2 p1, glm::vec2 p2, bool toggled);
+    void render_items(glm::vec2 p1, glm::vec2 p2, BlockType block);
+
     Player *player;
     SpriteAtlas atlas;
 };
