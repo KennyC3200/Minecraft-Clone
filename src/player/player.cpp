@@ -15,6 +15,8 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     hotbar[1] = BLOCK_GRASS;
     hotbar[2] = BLOCK_STONE;
     hotbar[3] = BLOCK_SAND;
+    hotbar[4] = BLOCK_LOG;
+    hotbar[5] = BLOCK_PLANK;
     hotbar_idx = 0;
 
     int player_height = 2;

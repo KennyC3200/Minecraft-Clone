@@ -47,4 +47,20 @@ void Block::init() {
     mesh.add_face(UP,    atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
     mesh.add_face(DOWN,  atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
     blocks[BLOCK_SAND] = Block(BLOCK_SAND, mesh);
+
+    mesh.add_face(NORTH, atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
+    mesh.add_face(SOUTH, atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
+    mesh.add_face(EAST,  atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
+    mesh.add_face(WEST,  atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
+    mesh.add_face(UP,    atlas.sprite_uv({5, 0}), atlas.sprite_uv({6, 1}));
+    mesh.add_face(DOWN,  atlas.sprite_uv({5, 0}), atlas.sprite_uv({6, 1}));
+    blocks[BLOCK_LOG] = Block(BLOCK_LOG, mesh);
+
+    mesh.add_face(NORTH, atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
+    mesh.add_face(SOUTH, atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
+    mesh.add_face(EAST,  atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
+    mesh.add_face(WEST,  atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
+    mesh.add_face(UP,    atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
+    mesh.add_face(DOWN,  atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
+    blocks[BLOCK_PLANK] = Block(BLOCK_PLANK, mesh);
 }

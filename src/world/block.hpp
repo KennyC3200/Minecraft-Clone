@@ -12,7 +12,9 @@ enum BlockType {
     BLOCK_DIRT,
     BLOCK_STONE,
     BLOCK_SAND,
-    BLOCK_LAST
+    BLOCK_LOG,
+    BLOCK_PLANK,
+    BLOCK_LAST,
 };
 
 class Block {
