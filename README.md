@@ -1,7 +1,6 @@
 # Minecraft
 
 # TODO
-- More blocks
 - World generation
 - Create a player mesh
 - Implement third person mode

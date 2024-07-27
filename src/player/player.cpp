@@ -6,7 +6,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     this->mouse = mouse;
     this->world = world;
 
-    speed = 30.0f;
+    speed = 10.0f;
 
     for (int i = 0; i < HOTBAR_SIZE; i++) {
         hotbar[i] = BLOCK_NONE;
