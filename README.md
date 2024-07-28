@@ -1,6 +1,7 @@
 # Minecraft
 
 # TODO
+- Generate chunks progressively as player loads into the game
 - World generation
 - Chunks rendering as player moves around
 - Block faces facing the direction that the player is facing
