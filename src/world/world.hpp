@@ -2,6 +2,7 @@
 
 #include "../util/util.hpp"
 #include "chunk.hpp"
+#include "generation/generation.hpp"
 
 class World {
 public:
@@ -25,4 +26,6 @@ public:
 
     // the ground y-position value
     int y_ground;
+
+    Generation generation;
 };
