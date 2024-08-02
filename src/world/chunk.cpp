@@ -22,7 +22,7 @@ Chunk::Chunk(glm::ivec3 position):
     meshed = false;
 }
 
-Chunk::Chunk(glm::ivec3 position, BlockType fill):
+Chunk::Chunk(glm::ivec3 position, BlockID fill):
     position(position)
 {
     data = new BlockData[CHUNK_VOLUME];

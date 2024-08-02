@@ -1,6 +1,7 @@
 # Minecraft
 
 # TODO
+- Refactor BlockData data
 - World generation
 - Generate chunks progressively as player loads into the game
 - Chunks rendering as player moves around

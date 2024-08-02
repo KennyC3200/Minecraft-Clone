@@ -72,7 +72,7 @@ void Hotbar::render_hotbar(glm::vec2 p1, glm::vec2 p2, bool toggled) {
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 
-void Hotbar::render_items(glm::vec2 p1, glm::vec2 p2, BlockType block) {
+void Hotbar::render_items(glm::vec2 p1, glm::vec2 p2, BlockID block) {
     UIComponent::shader.uniform_texture_2d(Block::atlas.texture, "tex", 0);
 
     std::vector<float> vertices = {

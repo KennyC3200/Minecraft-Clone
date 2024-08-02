@@ -54,3 +54,15 @@ clean:
 
 deepclean:
 	rm -rf $(BIN) $(OBJ)
+
+TEST = block_data
+TEST_SRC = tests/$(TEST).cpp
+
+test:
+	$(CXX) -o tests/$(TEST) $(TEST_SRC) $(CXXFLAGS)
+
+runtest: test
+	./tests/$(TEST)
+
+cleantest:
+	rm -rf tests/$(TEST)

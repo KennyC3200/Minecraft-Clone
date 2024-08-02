@@ -7,8 +7,8 @@ Block::Block() {}
 
 Block::~Block() {}
 
-Block::Block(BlockType type, BlockMesh mesh):
-    type(type),
+Block::Block(BlockID id, BlockMesh mesh):
+    id(id),
     mesh(mesh)
 {}
 
