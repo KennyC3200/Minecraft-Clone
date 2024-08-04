@@ -1,10 +1,8 @@
 # Minecraft
 
 # TODO
-- Refactor BlockData data
-- World generation
-- Generate chunks progressively as player loads into the game
 - Chunks rendering as player moves around
+- World generation
 - Block faces facing the direction that the player is facing
 - Create a player mesh
 - Implement third person mode

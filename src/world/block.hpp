@@ -3,7 +3,6 @@
 #include "../gfx/sprite_atlas.hpp"
 #include "block_mesh.hpp"
 
-typedef uint64_t BlockData;
 // - 28 bits metadata/extra
 // - 4 bits sunlight intensity
 // - 4 bits R light
@@ -11,8 +10,9 @@ typedef uint64_t BlockData;
 // - 4 bits B light
 // - 4 bits light intensity
 // - 16 bits block id
+typedef uint64_t BlockData;
 
-// TODO: refactor this mess
+// TODO: refactor this mess--couldn't get any uglier but idk
 #define BLOCK_ID_GET(data) (data & 0xffff)
 #define BLOCK_ID_SET(data, id) (data = (data & 0xffffffffffff0000) + (uint64_t) id)
 #define BLOCK_LIGHT_GET(data) ((data >> 16) & 0xf)

@@ -24,8 +24,12 @@ public:
     // number of chunks as vector
     glm::ivec3 chunks_size;
 
-    // the ground y-position value
-    int y_ground;
+    // ground level y-position
+    int ground_level;
 
+    // world generation
     Generation generation;
+private:
+    void init_chunks();
+    void init_chunks_neighbors();
 };

@@ -12,7 +12,7 @@ ChunkMesh::ChunkMesh(BlockData *data, glm::ivec3 *position):
         this->neighbors[i] = neighbors[i];
     }
 
-    vao.init();
+    vao.init(); 
     vbo.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
 }

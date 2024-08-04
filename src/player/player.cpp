@@ -22,7 +22,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     int player_height = 2;
     offset = {
         CHUNK_SIZE_X * world->chunks_size.x / 2, 
-        CHUNK_SIZE_Y * world->y_ground + player_height, 
+        CHUNK_SIZE_Y * world->ground_level + player_height, 
         CHUNK_SIZE_Z * world->chunks_size.z / 2};
     offset += 0.0001;
     position = {0, 0, 0};
@@ -69,6 +69,7 @@ void Player::update() {
             hotbar_idx = i;
         }
     }
+
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
         RayCastData raycast = ray.cast(position + offset, camera.direction);
         if (raycast.hit) {
@@ -83,6 +84,7 @@ void Player::update() {
             }
         }
     }
+
     if (mouse->keys[GLFW_MOUSE_BUTTON_RIGHT].pressed) {
         RayCastData raycast = ray.cast(position + offset, camera.direction);
         if (raycast.hit && world->block_get(raycast.position + raycast.out) && hotbar[hotbar_idx] != BLOCK_NONE) {
