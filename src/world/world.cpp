@@ -31,10 +31,6 @@ Chunk *World::chunk_get(glm::ivec3 position) {
     return chunks[chunks_idx(position / ChunkMesh::chunk_size)];
 }
 
-int World::chunks_idx(int x, int y, int z) {
-    return x * chunks_size.y * chunks_size.z + z * chunks_size.y + y;
-}
-
 int World::chunks_idx(glm::ivec3 position) {
     return position.x * chunks_size.y * chunks_size.z + position.z * chunks_size.y + position.y;
 }
@@ -60,12 +56,12 @@ void World::init_chunks() {
     for (int x = 0; x < chunks_size.x; x++) {
         for (int y = 0; y < ground_level; y++) {
             for (int z = 0; z < chunks_size.z; z++) {
-                chunks[chunks_idx(x, y, z)] = new Chunk({x, y, z});
+                chunks[chunks_idx({x, y, z})] = new Chunk({x, y, z});
             }
         }
         for (int y = ground_level; y < chunks_size.y; y++) {
             for (int z = 0; z < chunks_size.z; z++) {
-                chunks[chunks_idx(x, y, z)] = new Chunk({x, y, z}, BLOCK_AIR);
+                chunks[chunks_idx({x, y, z})] = new Chunk({x, y, z}, BLOCK_AIR);
             }
         }
     }
@@ -76,13 +72,13 @@ void World::init_chunks_neighbors() {
         for (int y = 0; y < chunks_size.y; y++) {
             for (int z = 0; z < chunks_size.z; z++) {
                 Chunk *neighbors[6];
-                neighbors[SOUTH] = z + 1 <  chunks_size.z ? chunks[chunks_idx(x, y, z + 1)] : nullptr;
-                neighbors[NORTH] = z - 1 >= 0             ? chunks[chunks_idx(x, y, z - 1)] : nullptr;
-                neighbors[EAST]  = x + 1 <  chunks_size.x ? chunks[chunks_idx(x + 1, y, z)] : nullptr;
-                neighbors[WEST]  = x - 1 >= 0             ? chunks[chunks_idx(x - 1, y, z)] : nullptr;
-                neighbors[UP]    = y + 1 <  chunks_size.y ? chunks[chunks_idx(x, y + 1, z)] : nullptr;
-                neighbors[DOWN]  = y - 1 >= 0             ? chunks[chunks_idx(x, y - 1, z)] : nullptr;
-                chunks[chunks_idx(x, y, z)]->neighbors_set(neighbors);
+                neighbors[SOUTH] = z + 1 <  chunks_size.z ? chunks[chunks_idx({x, y, z + 1})] : nullptr;
+                neighbors[NORTH] = z - 1 >= 0             ? chunks[chunks_idx({x, y, z - 1})] : nullptr;
+                neighbors[EAST]  = x + 1 <  chunks_size.x ? chunks[chunks_idx({x + 1, y, z})] : nullptr;
+                neighbors[WEST]  = x - 1 >= 0             ? chunks[chunks_idx({x - 1, y, z})] : nullptr;
+                neighbors[UP]    = y + 1 <  chunks_size.y ? chunks[chunks_idx({x, y + 1, z})] : nullptr;
+                neighbors[DOWN]  = y - 1 >= 0             ? chunks[chunks_idx({x, y - 1, z})] : nullptr;
+                chunks[chunks_idx({x, y, z})]->neighbors_set(neighbors);
             }
         }
     }

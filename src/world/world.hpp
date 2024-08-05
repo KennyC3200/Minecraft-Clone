@@ -11,7 +11,6 @@ public:
     void render();
 
     Chunk *chunk_get(glm::ivec3 position);
-    int chunks_idx(int x, int y, int z);
     int chunks_idx(glm::ivec3 position);
 
     BlockData *block_get(glm::ivec3 position);
@@ -26,10 +25,10 @@ public:
 
     // ground level y-position
     int ground_level;
-
-    // world generation
-    Generation generation;
 private:
     void init_chunks();
     void init_chunks_neighbors();
+
+    // world generation
+    Generation generation;
 };

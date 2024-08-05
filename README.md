@@ -2,7 +2,8 @@
 
 # TODO
 - Chunks rendering as player moves around
-- World generation
+- World generation [article](https://web.archive.org/web/20160530124230/http://freespace.virgin.net/hugo.elias/models/m_perlin.htm)
+    - `gx` to open url and `gf` to open file
 - Block faces facing the direction that the player is facing
 - Create a player mesh
 - Implement third person mode
