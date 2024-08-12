@@ -6,6 +6,7 @@ void World::init() {
 
     chunks_size = {16, 3, 16};
     ground_level = 2;
+    chunk_position = {chunks_size.x / 2, ground_level, chunks_size.z / 2};
 
     init_chunks();
     init_chunks_neighbors();
@@ -33,6 +34,19 @@ Chunk *World::chunk_get(glm::ivec3 position) {
 
 int World::chunks_idx(glm::ivec3 position) {
     return position.x * chunks_size.y * chunks_size.z + position.z * chunks_size.y + position.y;
+}
+
+void World::chunks_generate(glm::ivec3 chunk_position) {
+    glm::ivec3 diff = chunk_position - chunk_position;
+
+    if (SIGN(diff.x) > 0) {
+    }
+    if (SIGN(diff.x) < 0) {
+    }
+    if (SIGN(diff.z) > 0) {
+    }
+    if (SIGN(diff.z) < 0) {
+    }
 }
 
 BlockData *World::block_get(glm::ivec3 position) {

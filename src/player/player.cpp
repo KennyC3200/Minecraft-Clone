@@ -70,6 +70,8 @@ void Player::update() {
         }
     }
 
+    chunk_position = glm::ivec3(position + offset);
+
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
         RayCastData raycast = ray.cast(position + offset, camera.direction);
         if (raycast.hit) {

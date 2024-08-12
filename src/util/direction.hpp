@@ -12,7 +12,7 @@ enum Direction {
 };
 
 namespace direction {
-static constexpr glm::vec3 VECTOR[6] = {
+static constexpr glm::vec3 VEC[6] = {
     glm::vec3(0, 0, -1),
     glm::vec3(0, 0, 1),
     glm::vec3(1, 0, 0),

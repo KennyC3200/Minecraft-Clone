@@ -12,10 +12,12 @@ public:
 
     Chunk *chunk_get(glm::ivec3 position);
     int chunks_idx(glm::ivec3 position);
+    void chunks_generate(glm::ivec3 position);
 
-    BlockData *block_get(glm::ivec3 position);
+    BlockData *block_get(glm::ivec3 chunk_position);
 
     Chunk **chunks;
+    glm::ivec3 chunk_position;
 
     // number of chunks
     size_t _chunks_size;

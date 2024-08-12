@@ -22,6 +22,7 @@ public:
     float speed;
 
     glm::vec3 offset, position;
+    glm::ivec3 chunk_position;
 
     int hotbar_idx;
     BlockID hotbar[HOTBAR_SIZE];
