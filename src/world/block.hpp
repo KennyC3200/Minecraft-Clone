@@ -3,15 +3,15 @@
 #include "../gfx/sprite_atlas.hpp"
 #include "block_mesh.hpp"
 
-// - 28 bits metadata/extra
-// - 4 bits sunlight intensity
-// - 4 bits R light
-// - 4 bits G light
-// - 4 bits B light
-// - 4 bits light intensity
-// - 16 bits block id
-typedef uint64_t BlockData;
-
+/*
+ * 28 bits metadata/extra
+ * 4 bits sunlight intensity
+ * 4 bits R light
+ * 4 bits G light
+ * 4 bits B light
+ * 4 bits light intensity
+ * 16 bits block id
+ * */
 #define BLOCK_ID_SET(data, id)               (data = (data & 0xffffffffffff0000) + (uint64_t) id)
 #define BLOCK_LIGHT_SET(data, intensity)     (data = (data & 0xfffffffffff0ffff) + (uint64_t) (intensity << 16))
 #define BLOCK_RGB_SET(data, rgb)             (data = (data & 0xffffffff000fffff) + (uint64_t) (rgb << 28))

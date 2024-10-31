@@ -1,12 +1,17 @@
 # Minecraft
 
+# TODO important
+- [ ] Refactor everything
+- [ ] Store the block data in bits of `uint32_t` for cpu to gpu communication bottlekneck
+- [ ] Chunks rendering as player moves around
+
 # TODO
-- Chunks rendering as player moves around
-- World generation [article](https://web.archive.org/web/20160530124230/http://freespace.virgin.net/hugo.elias/models/m_perlin.htm)
+- [ ] Rotate the blocks based on where the player views from
+- [ ] World generation [article](https://web.archive.org/web/20160530124230/http://freespace.virgin.net/hugo.elias/models/m_perlin.htm)
     - `gx` to open url and `gf` to open file
-- Block faces facing the direction that the player is facing
-- Create a player mesh
-- Implement third person mode
+- [ ] Block faces facing the direction that the player is facing
+- [ ] Create a player mesh
+- [ ] Implement third person mode
 
 # Future implementations?
 ## Optimize memory usage (assuming a memory bandwidth bottleneck)
@@ -40,3 +45,7 @@ void main() {
 ```
 ## Composition over inheritance
 ECS? Seems like everyone is using it lol. I can see in some parts why it would be good, but is it really good for performance?
+
+## Issues
+Path: `/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Headers/Carbon`
+Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk`

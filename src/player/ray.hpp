@@ -17,5 +17,5 @@ public:
 private:
     World *world;
 
-    BlockData *data;
+    uint64_t *data;
 };

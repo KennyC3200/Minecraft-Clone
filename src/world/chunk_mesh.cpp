@@ -4,7 +4,7 @@
 
 Shader ChunkMesh::shader;
 
-ChunkMesh::ChunkMesh(BlockData *data, glm::ivec3 *position):
+ChunkMesh::ChunkMesh(uint64_t *data, glm::ivec3 *position):
     data(data),
     position(position)
 {
@@ -37,6 +37,7 @@ void ChunkMesh::mesh() {
     vertices.clear();
     indices.clear();
 
+    // Wtf is thie devious code?
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {

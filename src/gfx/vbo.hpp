@@ -4,7 +4,7 @@
 
 enum VBODrawType {
     DYNAMIC_DRAW = GL_DYNAMIC_DRAW,
-    STATIC_DRAW = GL_STATIC_DRAW
+    STATIC_DRAW = GL_STATIC_DRAW,
 };
 
 class VBO {

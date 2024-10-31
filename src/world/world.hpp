@@ -14,7 +14,7 @@ public:
     int chunks_idx(glm::ivec3 position);
     void chunks_generate(glm::ivec3 position);
 
-    BlockData *block_get(glm::ivec3 chunk_position);
+    uint64_t *block_get(glm::ivec3 chunk_position);
 
     Chunk **chunks;
     glm::ivec3 chunk_position;
