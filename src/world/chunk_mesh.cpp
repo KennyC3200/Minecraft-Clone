@@ -41,7 +41,7 @@ void ChunkMesh::mesh() {
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
-                Block &block = Block::blocks[BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x, y, z)])];
+                BlockData &block = BlockData::blocks[BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x, y, z)])];
                 if (block.id == BLOCK_AIR) {
                     continue;
                 }

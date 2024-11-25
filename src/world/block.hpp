@@ -42,19 +42,22 @@ enum BlockID {
     BLOCK_LAST,
 };
 
-class Block {
+class BlockData {
+
 public:
-    Block();
-    ~Block();
-    Block(BlockID id, BlockMesh mesh);
+    BlockData();
+    ~BlockData();
+    BlockData(BlockID id, BlockMesh mesh);
 
     static SpriteAtlas atlas;
-    static Block blocks[BLOCK_LAST];
+    static BlockData blocks[BLOCK_LAST];
 
     BlockID id;
     BlockMesh mesh;
+
 private:
     friend class World;
 
     static void init();
+
 };

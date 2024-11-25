@@ -1,7 +1,7 @@
 #include "world.hpp"
 
 void World::init() {
-    Block::init();
+    BlockData::init();
     Chunk::init();
 
     chunks_size = {16, 3, 16};
@@ -21,7 +21,7 @@ void World::destroy() {
 
 void World::render() {
     ChunkMesh::shader.bind();
-    ChunkMesh::shader.uniform_texture_2d(Block::atlas.texture, 0);
+    ChunkMesh::shader.uniform_texture_2d(BlockData::atlas.texture, 0);
 
     for (size_t i = 0; i < _chunks_size; i++) {
         chunks[i]->render();
