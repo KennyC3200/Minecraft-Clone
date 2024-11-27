@@ -5,7 +5,6 @@
 #include "generation/generation.hpp"
 
 class Chunk {
-
 public:
     Chunk(glm::ivec3 position);
     Chunk(glm::ivec3 position, BlockID fill);
@@ -24,8 +23,6 @@ public:
 
     bool meshed;
     Chunk *neighbors[6];
-
 private:
     ChunkMesh *mesh;
-
 };

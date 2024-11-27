@@ -7,7 +7,6 @@
 #include "../gfx/vbo.hpp"
 
 class ChunkMesh {
-
 public:
     ChunkMesh(Block *blocks, glm::ivec3 *position);
     ~ChunkMesh();
@@ -24,7 +23,6 @@ public:
 
     void mesh();
     void render();
-
 private:
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
@@ -35,5 +33,4 @@ private:
 
     VAO vao;
     VBO vbo, ibo;
-
 };

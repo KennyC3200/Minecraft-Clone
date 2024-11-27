@@ -21,14 +21,12 @@
 #define BLOCK_METADATA_GET(data) ((data >> 36) & 0xfffffff)
 
 class Block {
-
 public:
     Block();
     Block(BlockID id);
 
     uint get_id();
     void set_id(uint id);
-
 private:
     /*
      * 28 bits metadata/extra
@@ -40,5 +38,4 @@ private:
      * 16 bits block id
      * */
     uint64_t data;
-
 };

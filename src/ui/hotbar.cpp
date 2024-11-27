@@ -89,6 +89,7 @@ void Hotbar::render_items(glm::vec2 p1, glm::vec2 p2, BlockID block) {
 
     glm::vec2 uv_min = BlockData::blocks[block].mesh.faces[NORTH].uv_min,
               uv_max = BlockData::blocks[block].mesh.faces[NORTH].uv_max;
+
     vertices.push_back(uv_min.x);
     vertices.push_back(1 - uv_min.y);
     vertices.push_back(uv_min.x);

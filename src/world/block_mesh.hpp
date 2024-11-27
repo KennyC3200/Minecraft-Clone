@@ -55,6 +55,7 @@ public:
         0, 0, 0,
         1, 0, 0,
     };
+
     static constexpr unsigned int INDICES[] = {2,  0,  1,  2,  3,  1};
 
     Face faces[6];

@@ -1,10 +1,7 @@
 # Minecraft
 
 # TODO important
-- [ ] Replace macros with static methods
-- [x] Refactor `block`
-- [ ] Refactor `chunk_mesh`
-- [ ] Refactor `chunk`
+- [x] Replace macros with static methods
 - [ ] Store the block data in bits of `uint32_t` for cpu to gpu communication bottleneck
 - [ ] Chunks rendering as player moves around
 - [ ] Fix coordinates system

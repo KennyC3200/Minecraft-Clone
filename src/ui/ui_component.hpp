@@ -7,6 +7,7 @@
 #include "../gfx/vao.hpp"
 
 class UIComponent {
+
 public:
     static void init(Window *window);
     static void destroy();
@@ -18,4 +19,5 @@ public:
     static Window *window;
 
     bool toggled;
+
 };
