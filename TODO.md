@@ -2,7 +2,7 @@
 
 # TODO important
 - [ ] Replace macros with static methods
-- [ ] Refactor `block`
+- [x] Refactor `block`
 - [ ] Refactor `chunk_mesh`
 - [ ] Refactor `chunk`
 - [ ] Store the block data in bits of `uint32_t` for cpu to gpu communication bottleneck
