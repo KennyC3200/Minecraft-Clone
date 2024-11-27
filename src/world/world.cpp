@@ -51,9 +51,9 @@ void World::chunks_generate(glm::ivec3 chunk_position) {
 
 Block *World::block_get(glm::ivec3 position) {
     if (
-        position.x < 0 || position.x >= CHUNK_SIZE_X * chunks_size.x ||
-        position.y < 0 || position.y >= CHUNK_SIZE_Y * chunks_size.y ||
-        position.z < 0 || position.z >= CHUNK_SIZE_Z * chunks_size.z
+        position.x < 0 || position.x >= ChunkMesh::chunk_size.x * chunks_size.x ||
+        position.y < 0 || position.y >= ChunkMesh::chunk_size.y * chunks_size.y ||
+        position.z < 0 || position.z >= ChunkMesh::chunk_size.z * chunks_size.z
     ) {
         return nullptr;
     }

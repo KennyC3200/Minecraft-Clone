@@ -5,16 +5,16 @@ Chunk::Chunk(glm::ivec3 position):
 {
     data = new Block[CHUNK_VOLUME];
     std::fill(data, data + CHUNK_VOLUME, BLOCK_DIRT);
-    for (int x = 0; x < CHUNK_SIZE_X; x++) {
-        for (int y = 0; y < CHUNK_SIZE_Y / 2; y++) {
-            for (int z = 0; z < CHUNK_SIZE_Z; z++) {
+    for (int x = 0; x < ChunkMesh::chunk_size.x; x++) {
+        for (int y = 0; y < ChunkMesh::chunk_size.y / 2; y++) {
+            for (int z = 0; z < ChunkMesh::chunk_size.z; z++) {
                 data[CHUNK_POS_TO_IDX(x, y, z)] = BLOCK_STONE;
             }
         }
     }
-    for (int x = 0; x < CHUNK_SIZE_X; x++) {
-        for (int z = 0; z < CHUNK_SIZE_Z; z++) {
-            data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)] = BLOCK_GRASS;
+    for (int x = 0; x < ChunkMesh::chunk_size.x; x++) {
+        for (int z = 0; z < ChunkMesh::chunk_size.z; z++) {
+            data[CHUNK_POS_TO_IDX(x, ChunkMesh::chunk_size.z - 1, z)] = BLOCK_GRASS;
         }
     }
 

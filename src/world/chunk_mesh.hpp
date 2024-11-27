@@ -20,9 +20,11 @@ public:
     ~ChunkMesh();
 
     static void init();
+    static int chunk_pos_to_idx(int x, int y, int z);
 
     static Shader shader;
-    static constexpr glm::ivec3 chunk_size = {CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z};
+    static constexpr glm::ivec3 chunk_size = {16, 16, 16};
+    static constexpr int chunk_volume = chunk_size.x * chunk_size.y * chunk_size.z;
 
     void neighbors_set(ChunkMesh *neighbors[6]);
 
