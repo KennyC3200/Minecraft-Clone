@@ -8,13 +8,13 @@
 #include "camera.hpp"
 #include "ray.hpp"
 
-#define HOTBAR_SIZE 9
-
 class Player {
 public:
     void init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world);
     void update();
     void render();
+
+    static constexpr int HOTBAR_SIZE = 9;
 
     Camera camera;
     Ray ray;

@@ -21,9 +21,9 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     int player_height = 2;
     offset = {
-        ChunkMesh::chunk_size.x * world->chunks_size.x / 2, 
-        ChunkMesh::chunk_size.y * world->ground_level + player_height, 
-        ChunkMesh::chunk_size.z * world->chunks_size.z / 2};
+        ChunkMesh::CHUNK_SIZE.x * world->chunks_size.x / 2, 
+        ChunkMesh::CHUNK_SIZE.y * world->ground_level + player_height, 
+        ChunkMesh::CHUNK_SIZE.z * world->chunks_size.z / 2};
     offset += 0.0001;
     position = {0, 0, 0};
 

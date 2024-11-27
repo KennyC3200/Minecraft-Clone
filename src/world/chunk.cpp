@@ -3,21 +3,21 @@
 Chunk::Chunk(glm::ivec3 position)
     : position(position)
 {
-    data = new Block[ChunkMesh::chunk_volume];
+    data = new Block[ChunkMesh::CHUNK_VOLUME];
 
-    std::fill(data, data + ChunkMesh::chunk_volume, BLOCK_DIRT);
+    std::fill(data, data + ChunkMesh::CHUNK_VOLUME, BLOCK_DIRT);
 
-    for (int x = 0; x < ChunkMesh::chunk_size.x; x++) {
-        for (int y = 0; y < ChunkMesh::chunk_size.y / 2; y++) {
-            for (int z = 0; z < ChunkMesh::chunk_size.z; z++) {
+    for (int x = 0; x < ChunkMesh::CHUNK_SIZE.x; x++) {
+        for (int y = 0; y < ChunkMesh::CHUNK_SIZE.y / 2; y++) {
+            for (int z = 0; z < ChunkMesh::CHUNK_SIZE.z; z++) {
                 data[ChunkMesh::chunk_pos_to_idx(x, y, z)] = BLOCK_STONE;
             }
         }
     }
 
-    for (int x = 0; x < ChunkMesh::chunk_size.x; x++) {
-        for (int z = 0; z < ChunkMesh::chunk_size.z; z++) {
-            data[ChunkMesh::chunk_pos_to_idx(x, ChunkMesh::chunk_size.z - 1, z)] = BLOCK_GRASS;
+    for (int x = 0; x < ChunkMesh::CHUNK_SIZE.x; x++) {
+        for (int z = 0; z < ChunkMesh::CHUNK_SIZE.z; z++) {
+            data[ChunkMesh::chunk_pos_to_idx(x, ChunkMesh::CHUNK_SIZE.z - 1, z)] = BLOCK_GRASS;
         }
     }
 
@@ -28,8 +28,8 @@ Chunk::Chunk(glm::ivec3 position)
 Chunk::Chunk(glm::ivec3 position, BlockID fill)
     : position(position)
 {
-    data = new Block[ChunkMesh::chunk_volume];
-    std::fill(data, data + ChunkMesh::chunk_volume, fill);
+    data = new Block[ChunkMesh::CHUNK_VOLUME];
+    std::fill(data, data + ChunkMesh::CHUNK_VOLUME, fill);
 
     mesh = new ChunkMesh(data, &this->position);
     meshed = false;

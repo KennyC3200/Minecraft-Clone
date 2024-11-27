@@ -29,7 +29,7 @@ void World::render() {
 }
 
 Chunk *World::chunk_get(glm::ivec3 position) {
-    return chunks[chunks_idx(position / ChunkMesh::chunk_size)];
+    return chunks[chunks_idx(position / ChunkMesh::CHUNK_SIZE)];
 }
 
 int World::chunks_idx(glm::ivec3 position) {
@@ -51,15 +51,15 @@ void World::chunks_generate(glm::ivec3 chunk_position) {
 
 Block *World::block_get(glm::ivec3 position) {
     if (
-        position.x < 0 || position.x >= ChunkMesh::chunk_size.x * chunks_size.x ||
-        position.y < 0 || position.y >= ChunkMesh::chunk_size.y * chunks_size.y ||
-        position.z < 0 || position.z >= ChunkMesh::chunk_size.z * chunks_size.z
+        position.x < 0 || position.x >= ChunkMesh::CHUNK_SIZE.x * chunks_size.x ||
+        position.y < 0 || position.y >= ChunkMesh::CHUNK_SIZE.y * chunks_size.y ||
+        position.z < 0 || position.z >= ChunkMesh::CHUNK_SIZE.z * chunks_size.z
     ) {
         return nullptr;
     }
 
-    glm::ivec3 chunk_idx = position / ChunkMesh::chunk_size;
-    glm::ivec3 block_idx = position - chunk_idx * ChunkMesh::chunk_size;
+    glm::ivec3 chunk_idx = position / ChunkMesh::CHUNK_SIZE;
+    glm::ivec3 block_idx = position - chunk_idx * ChunkMesh::CHUNK_SIZE;
     return &chunks[chunks_idx(chunk_idx)]->data[ChunkMesh::chunk_pos_to_idx(block_idx.x, block_idx.y, block_idx.z)];
 }
 
