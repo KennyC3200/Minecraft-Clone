@@ -14,6 +14,7 @@
 #define CHUNK_POS_TO_IDX(x, y, z) ((x) * CHUNK_SIZE_Z * CHUNK_SIZE_Y + (z) * CHUNK_SIZE_Y + (y))
 
 class ChunkMesh {
+
 public:
     ChunkMesh(uint64_t *data, glm::ivec3 *position);
     ~ChunkMesh();
@@ -27,6 +28,7 @@ public:
 
     void mesh();
     void render();
+
 private:
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
@@ -37,4 +39,5 @@ private:
 
     VAO vao;
     VBO vbo, ibo;
+
 };
