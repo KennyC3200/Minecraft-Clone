@@ -6,13 +6,6 @@
 #include "../gfx/vao.hpp"
 #include "../gfx/vbo.hpp"
 
-#define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 16
-#define CHUNK_SIZE_Z 16
-#define CHUNK_VOLUME (CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z)
-
-#define CHUNK_POS_TO_IDX(x, y, z) ((x) * CHUNK_SIZE_Z * CHUNK_SIZE_Y + (z) * CHUNK_SIZE_Y + (y))
-
 class ChunkMesh {
 
 public:
@@ -20,6 +13,7 @@ public:
     ~ChunkMesh();
 
     static void init();
+    static int chunk_pos_to_idx(glm::ivec3 pos);
     static int chunk_pos_to_idx(int x, int y, int z);
 
     static Shader shader;

@@ -1,20 +1,23 @@
 #include "chunk.hpp"
 
-Chunk::Chunk(glm::ivec3 position):
-    position(position)
+Chunk::Chunk(glm::ivec3 position)
+    : position(position)
 {
-    data = new Block[CHUNK_VOLUME];
-    std::fill(data, data + CHUNK_VOLUME, BLOCK_DIRT);
+    data = new Block[ChunkMesh::chunk_volume];
+
+    std::fill(data, data + ChunkMesh::chunk_volume, BLOCK_DIRT);
+
     for (int x = 0; x < ChunkMesh::chunk_size.x; x++) {
         for (int y = 0; y < ChunkMesh::chunk_size.y / 2; y++) {
             for (int z = 0; z < ChunkMesh::chunk_size.z; z++) {
-                data[CHUNK_POS_TO_IDX(x, y, z)] = BLOCK_STONE;
+                data[ChunkMesh::chunk_pos_to_idx(x, y, z)] = BLOCK_STONE;
             }
         }
     }
+
     for (int x = 0; x < ChunkMesh::chunk_size.x; x++) {
         for (int z = 0; z < ChunkMesh::chunk_size.z; z++) {
-            data[CHUNK_POS_TO_IDX(x, ChunkMesh::chunk_size.z - 1, z)] = BLOCK_GRASS;
+            data[ChunkMesh::chunk_pos_to_idx(x, ChunkMesh::chunk_size.z - 1, z)] = BLOCK_GRASS;
         }
     }
 
@@ -22,11 +25,11 @@ Chunk::Chunk(glm::ivec3 position):
     meshed = false;
 }
 
-Chunk::Chunk(glm::ivec3 position, BlockID fill):
-    position(position)
+Chunk::Chunk(glm::ivec3 position, BlockID fill)
+    : position(position)
 {
-    data = new Block[CHUNK_VOLUME];
-    std::fill(data, data + CHUNK_VOLUME, fill);
+    data = new Block[ChunkMesh::chunk_volume];
+    std::fill(data, data + ChunkMesh::chunk_volume, fill);
 
     mesh = new ChunkMesh(data, &this->position);
     meshed = false;
@@ -43,6 +46,7 @@ void Chunk::init() {
 
 void Chunk::neighbors_set(Chunk *neighbors[6]) {
     ChunkMesh *mesh_neighbors[6];
+
     for (int i = 0; i < 6; i++) {
         if (neighbors[i]) {
             this->neighbors[i] = neighbors[i];
@@ -52,6 +56,7 @@ void Chunk::neighbors_set(Chunk *neighbors[6]) {
             mesh_neighbors[i]  = nullptr;
         }
     }
+
     mesh->neighbors_set(mesh_neighbors);
 }
 
@@ -60,5 +65,6 @@ void Chunk::render() {
         mesh->mesh();
         meshed = true;
     }
+
     mesh->render();
 }
