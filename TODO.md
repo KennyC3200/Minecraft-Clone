@@ -1,6 +1,7 @@
 # Minecraft
 
 # TODO important
+- [ ] Replace macros with static methods
 - [ ] Refactor `block`
 - [ ] Refactor `chunk_mesh`
 - [ ] Refactor `chunk`

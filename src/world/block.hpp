@@ -25,6 +25,9 @@ class Block {
 public:
     Block(BlockID id);
 
+    uint get_id();
+    void set_id(uint id);
+
 private:
     /*
      * 28 bits metadata/extra
