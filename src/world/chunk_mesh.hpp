@@ -16,7 +16,7 @@
 class ChunkMesh {
 
 public:
-    ChunkMesh(uint64_t *data, glm::ivec3 *position);
+    ChunkMesh(Block *blocks, glm::ivec3 *position);
     ~ChunkMesh();
 
     static void init();
@@ -33,7 +33,7 @@ private:
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
 
-    uint64_t *data;
+    Block *blocks;
     glm::ivec3 *position;
     ChunkMesh *neighbors[6];
 

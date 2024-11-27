@@ -4,9 +4,8 @@
 
 Shader ChunkMesh::shader;
 
-ChunkMesh::ChunkMesh(uint64_t *data, glm::ivec3 *position):
-    data(data),
-    position(position)
+ChunkMesh::ChunkMesh(Block *blocks, glm::ivec3 *position)
+    : blocks(blocks), position(position)
 {
     for (int i = 0; i < 6; i++) {
         this->neighbors[i] = neighbors[i];
@@ -41,51 +40,51 @@ void ChunkMesh::mesh() {
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
-                BlockData &block = BlockData::blocks[BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x, y, z)])];
+                BlockData &block = BlockData::blocks[blocks[CHUNK_POS_TO_IDX(x, y, z)].get_id()];
                 if (block.id == BLOCK_AIR) {
                     continue;
                 }
 
                 if (z == CHUNK_SIZE_Z - 1) {
-                    if (neighbors[SOUTH] != nullptr && BLOCK_ID_GET(neighbors[SOUTH]->data[CHUNK_POS_TO_IDX(x, y, 0)]) == BLOCK_AIR) {
+                    if (neighbors[SOUTH] != nullptr && (neighbors[SOUTH]->blocks[CHUNK_POS_TO_IDX(x, y, 0)]).get_id() == BLOCK_AIR) {
                         block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
                     }
-                } else if (BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x, y, z + 1)]) == BLOCK_AIR) {
+                } else if (blocks[CHUNK_POS_TO_IDX(x, y, z + 1)].get_id() == BLOCK_AIR) {
                     block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
                 }
                 if (z == 0) {
-                    if (neighbors[NORTH] != nullptr && BLOCK_ID_GET(neighbors[NORTH]->data[CHUNK_POS_TO_IDX(x, y, CHUNK_SIZE_Z - 1)]) == BLOCK_AIR) {
+                    if (neighbors[NORTH] != nullptr && (neighbors[NORTH]->blocks[CHUNK_POS_TO_IDX(x, y, CHUNK_SIZE_Z - 1)]).get_id() == BLOCK_AIR) {
                         block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
                     }
-                } else if (BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x, y, z - 1)]) == BLOCK_AIR) {
+                } else if (blocks[CHUNK_POS_TO_IDX(x, y, z - 1)].get_id() == BLOCK_AIR) {
                     block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
                 }
                 if (x == CHUNK_SIZE_X - 1) {
-                    if (neighbors[EAST] != nullptr && BLOCK_ID_GET(neighbors[EAST]->data[CHUNK_POS_TO_IDX(0, y, z)]) == BLOCK_AIR) {
+                    if (neighbors[EAST] != nullptr && (neighbors[EAST]->blocks[CHUNK_POS_TO_IDX(0, y, z)]).get_id() == BLOCK_AIR) {
                         block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
                     }
-                } else if (BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x + 1, y, z)]) == BLOCK_AIR) {
+                } else if (blocks[CHUNK_POS_TO_IDX(x + 1, y, z)].get_id() == BLOCK_AIR) {
                     block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
                 }
                 if (x == 0) {
-                    if (neighbors[WEST] != nullptr && BLOCK_ID_GET(neighbors[WEST]->data[CHUNK_POS_TO_IDX(CHUNK_SIZE_X - 1, y, z)]) == BLOCK_AIR) {
+                    if (neighbors[WEST] != nullptr && (neighbors[WEST]->blocks[CHUNK_POS_TO_IDX(CHUNK_SIZE_X - 1, y, z)]).get_id() == BLOCK_AIR) {
                         block.mesh.mesh_face(WEST, {x, y, z}, vertices, indices);
                     }
-                } else if (BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x - 1, y, z)]) == BLOCK_AIR) {
+                } else if (blocks[CHUNK_POS_TO_IDX(x - 1, y, z)].get_id() == BLOCK_AIR) {
                     block.mesh.mesh_face(WEST, {x, y, z}, vertices, indices);
                 }
                 if (y == CHUNK_SIZE_Y - 1) {
-                    if (neighbors[UP] == nullptr || BLOCK_ID_GET(neighbors[UP]->data[CHUNK_POS_TO_IDX(x, 0, z)]) == BLOCK_AIR) {
+                    if (neighbors[UP] == nullptr || (neighbors[UP]->blocks[CHUNK_POS_TO_IDX(x, 0, z)]).get_id() == BLOCK_AIR) {
                         block.mesh.mesh_face(UP, {x, y, z}, vertices, indices);
                     }
-                } else if (BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x, y + 1, z)]) == BLOCK_AIR) {
+                } else if (blocks[CHUNK_POS_TO_IDX(x, y + 1, z)].get_id() == BLOCK_AIR) {
                     block.mesh.mesh_face(UP, {x, y, z}, vertices, indices);
                 }
                 if (y == 0) {
-                    if (neighbors[DOWN] != nullptr && BLOCK_ID_GET(neighbors[DOWN]->data[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)]) == BLOCK_AIR) {
+                    if (neighbors[DOWN] != nullptr && (neighbors[DOWN]->blocks[CHUNK_POS_TO_IDX(x, CHUNK_SIZE_Y - 1, z)]).get_id() == BLOCK_AIR) {
                         block.mesh.mesh_face(DOWN, {x, y, z}, vertices, indices);
                     }
-                } else if (BLOCK_ID_GET(data[CHUNK_POS_TO_IDX(x, y - 1, z)]) == BLOCK_AIR) {
+                } else if (blocks[CHUNK_POS_TO_IDX(x, y - 1, z)].get_id() == BLOCK_AIR) {
                     block.mesh.mesh_face(DOWN, {x, y, z}, vertices, indices);
                 }
             }

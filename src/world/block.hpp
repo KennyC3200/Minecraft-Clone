@@ -23,6 +23,7 @@
 class Block {
 
 public:
+    Block();
     Block(BlockID id);
 
     uint get_id();

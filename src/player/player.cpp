@@ -75,8 +75,8 @@ void Player::update() {
     if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
         RayCastData raycast = ray.cast(position + offset, camera.direction);
         if (raycast.hit) {
-            uint64_t *block = world->block_get(raycast.position);
-            *block = BLOCK_AIR;
+            Block *block = world->block_get(raycast.position);
+            block->set_id(BLOCK_AIR);
             Chunk *chunk = world->chunk_get(raycast.position);
             chunk->meshed = false;
             for (int i = 0; i < 6; i++) {
@@ -91,8 +91,8 @@ void Player::update() {
         RayCastData raycast = ray.cast(position + offset, camera.direction);
         if (raycast.hit && world->block_get(raycast.position + raycast.out) && hotbar[hotbar_idx] != BLOCK_NONE) {
             glm::ivec3 _position = raycast.position + raycast.out;
-            uint64_t *block = world->block_get(_position);
-            *block = hotbar[hotbar_idx];
+            Block *block = world->block_get(_position);
+            block->set_id(hotbar[hotbar_idx]);
             Chunk *chunk = world->chunk_get(_position);
             chunk->meshed = false;
             for (int i = 0; i < 6; i++) {

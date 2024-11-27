@@ -1,6 +1,12 @@
 #include "block.hpp"
 
-Block::Block(BlockID id) {
+Block::Block() {
+}
+
+Block::Block(BlockID id)
+    : data(0)
+{
+    set_id(id);
 }
 
 uint Block::get_id() {

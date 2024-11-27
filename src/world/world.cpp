@@ -49,7 +49,7 @@ void World::chunks_generate(glm::ivec3 chunk_position) {
     }
 }
 
-uint64_t *World::block_get(glm::ivec3 position) {
+Block *World::block_get(glm::ivec3 position) {
     if (
         position.x < 0 || position.x >= CHUNK_SIZE_X * chunks_size.x ||
         position.y < 0 || position.y >= CHUNK_SIZE_Y * chunks_size.y ||

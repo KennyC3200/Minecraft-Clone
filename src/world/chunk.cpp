@@ -3,7 +3,7 @@
 Chunk::Chunk(glm::ivec3 position):
     position(position)
 {
-    data = new uint64_t[CHUNK_VOLUME];
+    data = new Block[CHUNK_VOLUME];
     std::fill(data, data + CHUNK_VOLUME, BLOCK_DIRT);
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
         for (int y = 0; y < CHUNK_SIZE_Y / 2; y++) {
@@ -25,7 +25,7 @@ Chunk::Chunk(glm::ivec3 position):
 Chunk::Chunk(glm::ivec3 position, BlockID fill):
     position(position)
 {
-    data = new uint64_t[CHUNK_VOLUME];
+    data = new Block[CHUNK_VOLUME];
     std::fill(data, data + CHUNK_VOLUME, fill);
 
     mesh = new ChunkMesh(data, &this->position);
