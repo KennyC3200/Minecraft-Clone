@@ -60,7 +60,7 @@ Block *World::block_get(glm::ivec3 position) {
 
     glm::ivec3 chunk_idx = position / ChunkMesh::CHUNK_SIZE;
     glm::ivec3 block_idx = position - chunk_idx * ChunkMesh::CHUNK_SIZE;
-    return &chunks[chunks_idx(chunk_idx)]->data[ChunkMesh::chunk_pos_to_idx(block_idx.x, block_idx.y, block_idx.z)];
+    return &chunks[chunks_idx(chunk_idx)]->blocks[ChunkMesh::chunk_pos_to_idx(block_idx.x, block_idx.y, block_idx.z)];
 }
 
 void World::init_chunks() {

@@ -19,7 +19,7 @@ public:
     glm::ivec3 position;
 
     // 3d array of block data
-    Block *data;
+    Block *blocks;
 
     bool meshed;
     Chunk *neighbors[6];
