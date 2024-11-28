@@ -8,7 +8,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     speed = 15.0f;
 
-    for (int i = 0; i < HOTBAR_SIZE; i++) {
+    for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
         hotbar[i] = BLOCK_NONE;
     }
     hotbar[0] = BLOCK_DIRT;
@@ -64,7 +64,7 @@ void Player::update() {
         camera.position.y -= _displacement;
         position.y -= _displacement;
     }
-    for (int i = 0; i < HOTBAR_SIZE; i++) {
+    for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
         if (keyboard->keys[GLFW_KEY_1 + i].pressed) {
             hotbar_idx = i;
         }

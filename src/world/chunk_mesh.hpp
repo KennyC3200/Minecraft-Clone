@@ -15,9 +15,10 @@ public:
     static int chunk_pos_to_idx(glm::ivec3 pos);
     static int chunk_pos_to_idx(int x, int y, int z);
 
-    static Shader shader;
     static constexpr glm::ivec3 CHUNK_SIZE = {16, 16, 16};
     static constexpr int CHUNK_VOLUME = CHUNK_SIZE.x * CHUNK_SIZE.y * CHUNK_SIZE.z;
+
+    static Shader shader;
 
     void neighbors_set(ChunkMesh *neighbors[6]);
 

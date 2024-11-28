@@ -12,10 +12,10 @@ void Hotbar::render() {
         return;
     }
 
-    for (int i = 0; i < HOTBAR_SIZE; i++) {
+    for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
         glm::vec2 unit = 1.0f / glm::vec2(window->size);
         glm::vec2 size = unit * 80.0f;
-        glm::vec2 p1 = {-size.x * (HOTBAR_SIZE / 2.0f - i), -1.0f + 0.05f};
+        glm::vec2 p1 = {-size.x * (Player::HOTBAR_SIZE / 2.0f - i), -1.0f + 0.05f};
         glm::vec2 p2 = {p1.x + size.x, p1.y + size.y};
 
         if (player->hotbar[i] != BLOCK_NONE) {
