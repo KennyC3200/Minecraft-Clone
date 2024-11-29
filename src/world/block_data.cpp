@@ -7,9 +7,8 @@ BlockData::BlockData() {}
 
 BlockData::~BlockData() {}
 
-BlockData::BlockData(BlockID id, BlockMesh mesh):
-    id(id),
-    mesh(mesh)
+BlockData::BlockData(BlockID id, BlockMesh mesh)
+    : id(id), mesh(mesh)
 {}
 
 void BlockData::init() {

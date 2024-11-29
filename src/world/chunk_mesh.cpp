@@ -5,7 +5,7 @@
 Shader ChunkMesh::shader;
 
 ChunkMesh::ChunkMesh(Block *blocks, glm::ivec3 *position)
-    : blocks(blocks), position(position)
+    : blocks(blocks) , position(position)
 {
     for (int i = 0; i < 6; i++) {
         this->neighbors[i] = neighbors[i];

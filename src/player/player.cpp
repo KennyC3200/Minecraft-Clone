@@ -8,9 +8,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     speed = 15.0f;
 
-    for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
-        hotbar[i] = BLOCK_NONE;
-    }
+    std::fill(hotbar, hotbar + Player::HOTBAR_SIZE, BLOCK_NONE);
     hotbar[0] = BLOCK_DIRT;
     hotbar[1] = BLOCK_GRASS;
     hotbar[2] = BLOCK_STONE;

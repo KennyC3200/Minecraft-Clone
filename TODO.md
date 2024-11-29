@@ -1,9 +1,9 @@
 # Minecraft
 
 # TODO important
+- [ ] Fix coordinates system
 - [ ] Store the block data in bits of `uint32_t` for cpu to gpu communication bottleneck
 - [ ] Chunks rendering as player moves around
-- [ ] Fix coordinates system
 
 # TODO
 - [ ] Rotate the blocks based on where the player views from
