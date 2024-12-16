@@ -44,7 +44,7 @@ void ChunkMesh::mesh() {
     vertices.clear();
     indices.clear();
 
-    // Wtf is thie devious code?
+    // Wtf is this devious code?
     for (int x = 0; x < ChunkMesh::CHUNK_SIZE.x; x++) {
         for (int z = 0; z < ChunkMesh::CHUNK_SIZE.z; z++) {
             for (int y = 0; y < ChunkMesh::CHUNK_SIZE.y; y++) {

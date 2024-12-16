@@ -16,7 +16,6 @@ enum BlockID {
 };
 
 class BlockData {
-
 public:
     BlockData();
     ~BlockData();
@@ -32,5 +31,4 @@ private:
     friend class World;
 
     static void init();
-
 };

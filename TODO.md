@@ -8,7 +8,7 @@
 # TODO
 - [ ] Rotate the blocks based on where the player views from
 - [ ] World generation [article](https://web.archive.org/web/20160530124230/http://freespace.virgin.net/hugo.elias/models/m_perlin.htm)
-    - `gx` to open url and `gf` to open file
+    - [ ] `FastNoiseLite` library
 - [ ] Block faces facing the direction that the player is facing
 - [ ] Create a player mesh
 - [ ] Implement third person mode
