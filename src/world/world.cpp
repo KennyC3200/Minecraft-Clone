@@ -33,7 +33,7 @@ Chunk *World::chunk_get(glm::ivec3 position) {
 }
 
 int World::chunks_idx(glm::ivec3 position) {
-    return position.x * chunks_size.y * chunks_size.z + position.z * chunks_size.y + position.y;
+    return (position.x * chunks_size.y * chunks_size.z) + (position.z * chunks_size.y) + (position.y);
 }
 
 void World::chunks_generate(glm::ivec3 chunk_position) {

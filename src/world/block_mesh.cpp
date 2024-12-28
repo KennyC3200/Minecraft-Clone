@@ -22,13 +22,19 @@ void BlockMesh::mesh_face(
     std::vector<float> &vertices,
     std::vector<unsigned int> &indices)
 {
+    // Add the indices
     for (int i = 0; i < 6; i++) {
         indices.push_back(vertices.size() / 5 + BlockMesh::INDICES[i]);
     }
+
+    // Add the vertices
     for (int i = 0; i < 4; i++) {
+        // Add the coordinates
         vertices.push_back(VERTICES[3 * 4 * direction + i * 3 + 0] + position.x);
         vertices.push_back(VERTICES[3 * 4 * direction + i * 3 + 1] + position.y);
         vertices.push_back(VERTICES[3 * 4 * direction + i * 3 + 2] + position.z);
+
+        // Add the uv coordinates
         vertices.push_back(faces[direction].uv_coordinates[i * 2]);
         vertices.push_back(faces[direction].uv_coordinates[i * 2 + 1]);
     }

@@ -43,9 +43,3 @@ void main() {
     v_uv = uv;
 }
 ```
-## Composition over inheritance
-ECS? Seems like everyone is using it lol. I can see in some parts why it would be good, but is it really good for performance?
-
-## Issues
-Path: `/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Headers/Carbon`
-Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk`

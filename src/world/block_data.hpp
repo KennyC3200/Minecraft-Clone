@@ -26,7 +26,6 @@ public:
 
     BlockID id;
     BlockMesh mesh;
-
 private:
     friend class World;
 

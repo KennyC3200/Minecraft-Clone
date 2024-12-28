@@ -30,7 +30,7 @@ void Crosshair::render() {
     UIComponent::ibo.buffer(sizeof(indices), indices);
     UIComponent::vbo.buffer(sizeof(vertices), vertices);
 
-    UIComponent::vao.attr(UIComponent::vbo, 0, 2, GL_FLOAT, 4 * sizeof(float), 0);
+    UIComponent::vao.attr(UIComponent::vbo, 0, 2, GL_FLOAT, 4 * sizeof(float), 0 * sizeof(float));
     UIComponent::vao.attr(UIComponent::vbo, 1, 2, GL_FLOAT, 4 * sizeof(float), 2 * sizeof(float));
 
     UIComponent::vao.bind();

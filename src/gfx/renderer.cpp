@@ -20,8 +20,7 @@ void Renderer::render() {
     } else {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
-    world->render();
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    world->render();
     player->render();
 }

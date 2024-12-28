@@ -112,7 +112,7 @@ void ChunkMesh::render() {
     ibo.buffer(indices.size() * sizeof(unsigned int), &indices[0]);
     vbo.buffer(vertices.size() * sizeof(float), &vertices[0]);
 
-    vao.attr(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0);
+    vao.attr(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0 * sizeof(float));
     vao.attr(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
 
     vao.bind();
