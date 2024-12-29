@@ -35,12 +35,15 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 TODO
 -----
 * Major refactor
-    * Move the binding of the projection and vertex matrices into Renderer.cpp
+    * Make `mc` namespace because Block class is SLOW AF
     * Refactor block
+    * Refactor ChunkMesh meshing
     * Refactor how the hotbar and crosshair are being rendered
     * Use a hashmap for block meshes
+    * Move ui rendering to renderer
 * Store the block data in a struct instead of a class because it is faster (array of structs vs array of pointers)
 * Store the block data in bits of `uint64_t` for cpu communication bottleneck
 * Chunks rendering as player moves around
 * Physics
 * Padding issues, add `-Wpadded` to see
+    * See [this article](http://www.catb.org/esr/structure-packing/#_who_should_read_this)

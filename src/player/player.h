@@ -12,7 +12,6 @@ class Player {
 public:
     void init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world);
     void update();
-    void render();
 
     Camera &get_camera();
 

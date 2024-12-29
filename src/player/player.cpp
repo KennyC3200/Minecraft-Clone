@@ -57,12 +57,11 @@ void Player::update() {
     }
 
     // Update the camera
-    camera.position = position;
+    camera.set_position(position);
     camera.update();
 
-    /* Handle the hotbar
-     * Keep in mind the index starts at 0, not 1
-     * */
+    // Handle the hotbar
+    // Keep in mind the index starts at 0, not 
     for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
         if (keyboard->get_button(GLFW_KEY_1 + i).pressed) {
             current_hotbar_idx = i;
@@ -70,7 +69,7 @@ void Player::update() {
     }
 
     // Handle block placement/deletion
-    RayCastData raycast = ray.cast(position, camera.direction);
+    RayCastData raycast = ray.cast(position, camera.get_direction());
     if (raycast.hit) {
         if (mouse->get_button(GLFW_MOUSE_BUTTON_LEFT).pressed) {
             world->get_block(raycast.position)->set_id(BLOCK_AIR);
@@ -86,11 +85,6 @@ void Player::update() {
             }
         }
     }
-}
-
-void Player::render() {
-    ChunkMesh::shader.uniform_mat4("view", camera.view);
-    ChunkMesh::shader.uniform_mat4("projection", camera.projection);
 }
 
 Camera &Player::get_camera() {

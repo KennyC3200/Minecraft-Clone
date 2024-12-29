@@ -7,7 +7,7 @@ BlockData::BlockData() {}
 
 BlockData::~BlockData() {}
 
-BlockData::BlockData(BlockID id, BlockMesh mesh)
+BlockData::BlockData(enum BlockID id, BlockMesh mesh)
     : id(id), mesh(mesh)
 {}
 

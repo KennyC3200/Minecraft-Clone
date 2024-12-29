@@ -52,8 +52,8 @@ void Camera::set_position(glm::vec3 &position) {
     this->position = position;
 }
 
-void Camera::set_toggled(bool toggled) {
-    this->toggled = toggled;
+glm::vec3 Camera::get_direction() {
+    return direction;
 }
 
 glm::vec3 Camera::get_up() {
@@ -66,4 +66,16 @@ glm::vec3 Camera::get_right() {
 
 glm::vec3 Camera::get_front() {
     return front;
+}
+
+glm::mat4 Camera::get_view() {
+    return view;
+}
+
+glm::mat4 Camera::get_projection() {
+    return projection;
+}
+
+void Camera::set_toggled(bool toggled) {
+    this->toggled = toggled;
 }

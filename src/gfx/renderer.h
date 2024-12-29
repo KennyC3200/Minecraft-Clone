@@ -12,6 +12,9 @@ public:
         bool wireframe;
     } flags;
 private:
+    void render_world();
+    void render_ui();
+
     World *world;
     Player *player;
 };

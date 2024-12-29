@@ -16,7 +16,8 @@ public:
         enum Direction direction,
         glm::ivec3 position, 
         std::vector<float> &vertices, 
-        std::vector<unsigned int> &indices);
+        std::vector<unsigned int> &indices
+    );
 
     static constexpr float VERTICES[] = {
         // NORTH (-z)

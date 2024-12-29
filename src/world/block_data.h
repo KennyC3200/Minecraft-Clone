@@ -19,7 +19,7 @@ class BlockData {
 public:
     BlockData();
     ~BlockData();
-    BlockData(BlockID id, BlockMesh mesh);
+    BlockData(enum BlockID id, BlockMesh mesh);
 
     static SpriteAtlas atlas;
     static BlockData blocks[BLOCK_LAST];

@@ -21,6 +21,23 @@ void Renderer::render() {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 
+    render_world();
+    render_ui();
+}
+
+void Renderer::render_world() {
+    // Bind the chunk shader
+    ChunkMesh::shader.bind();
+
+    // Bind the view and projection matrices
+    ChunkMesh::shader.uniform_mat4("view", player->get_camera().get_view());
+    ChunkMesh::shader.uniform_mat4("projection", player->get_camera().get_projection());
+
+    // Render the world
+    ChunkMesh::shader.uniform_texture_2d(BlockData::atlas.texture, 0);
     world->render();
-    player->render();
+}
+
+// TODO
+void Renderer::render_ui() {
 }

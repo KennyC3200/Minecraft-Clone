@@ -22,9 +22,6 @@ void World::destroy() {
 
 /* Render the world */
 void World::render() {
-    ChunkMesh::shader.bind();
-    ChunkMesh::shader.uniform_texture_2d(BlockData::atlas.texture, 0);
-
     for (size_t i = 0; i < chunks_count; i++) {
         chunks[i]->render();
     }
