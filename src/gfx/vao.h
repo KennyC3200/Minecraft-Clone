@@ -1,7 +1,7 @@
 #pragma once
 
-#include "gfx.hpp"
-#include "vbo.hpp"
+#include "gfx.h"
+#include "vbo.h"
 
 class VAO {
 public:

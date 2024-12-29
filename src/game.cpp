@@ -1,22 +1,18 @@
-#include "game.hpp"
+#include "game.h"
 
 void Game::init() {
-    // gfx
     window.init();
     world.init();
     renderer.init(&world, &player);
     ui.init(&window, &renderer, &world, &player);
 
-    // inputs
     keyboard.init(&window);
     mouse.init(&window);
 
-    // player
     player.init(&window, &keyboard, &mouse, &world);
 }
 
 void Game::destroy() {
-    // gfx
     ui.destroy();
     window.destroy();
     world.destroy();
@@ -37,23 +33,20 @@ void Game::loop() {
 }
 
 void Game::update() {
-    // gfx
     window.update();
 
-    // input
     keyboard.update();
     mouse.update();
 
-    // player
     player.update();
 
-    if (keyboard.keys[GLFW_KEY_T].pressed) {
+    if (keyboard.get_button(GLFW_KEY_T).pressed) {
         renderer.flags.wireframe = !renderer.flags.wireframe;
     }
-    if (keyboard.keys[GLFW_KEY_ESCAPE].pressed) {
+    if (keyboard.get_button(GLFW_KEY_ESCAPE).pressed) {
         ui.settings.toggled = !ui.settings.toggled;
-        mouse.toggled = ui.settings.toggled;
-        player.camera.toggled = !ui.settings.toggled;
+        mouse.set_toggled(ui.settings.toggled);
+        player.get_camera().set_toggled(!ui.settings.toggled);
     }
 }
 

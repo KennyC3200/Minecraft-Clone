@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ui_component.hpp"
-#include "../gfx/sprite_atlas.hpp"
-#include "../player/player.hpp"
+#include "ui_component.h"
+#include "../gfx/sprite_atlas.h"
+#include "../player/player.h"
 
 class Hotbar : public UIComponent {
 public:

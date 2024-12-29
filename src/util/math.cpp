@@ -1,4 +1,4 @@
-#include "math.hpp"
+#include "math.h"
 
 glm::vec3 intbound(glm::vec3 s, glm::vec3 ds) {
     glm::vec3 v;

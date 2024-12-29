@@ -3,5 +3,5 @@
 #include <iostream>
 #include <vector>
 
-#include "math.hpp"
-#include "direction.hpp"
+#include "math.h"
+#include "direction.h"

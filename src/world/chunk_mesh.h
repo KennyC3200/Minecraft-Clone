@@ -1,10 +1,10 @@
 #pragma once
 
-#include "block.hpp"
-#include "../util/util.hpp"
-#include "../gfx/shader.hpp"
-#include "../gfx/vao.hpp"
-#include "../gfx/vbo.hpp"
+#include "../util/util.h"
+#include "../gfx/shader.h"
+#include "../gfx/vao.h"
+#include "../gfx/vbo.h"
+#include "block.h"
 
 class ChunkMesh {
 public:

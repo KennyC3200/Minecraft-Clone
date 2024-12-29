@@ -1,4 +1,4 @@
-#include "ui_component.hpp"
+#include "ui_component.h"
 
 Shader UIComponent::shader;
 VAO UIComponent::vao;

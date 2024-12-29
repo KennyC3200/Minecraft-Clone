@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../world/world.hpp"
-#include "../player/player.hpp"
+#include "../world/world.h"
+#include "../player/player.h"
 
 class Renderer {
 public:

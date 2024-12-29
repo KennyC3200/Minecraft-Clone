@@ -1,11 +1,11 @@
 #pragma once
 
-#include "gfx/window.hpp"
-#include "gfx/renderer.hpp"
-#include "input/keyboard.hpp"
-#include "input/mouse.hpp"
-#include "player/player.hpp"
-#include "ui/ui.hpp"
+#include "gfx/window.h"
+#include "gfx/renderer.h"
+#include "input/keyboard.h"
+#include "input/mouse.h"
+#include "player/player.h"
+#include "ui/ui.h"
 
 class Game {
 public:

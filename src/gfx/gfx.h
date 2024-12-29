@@ -7,4 +7,4 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "../util/util.hpp"
+#include "../util/util.h"

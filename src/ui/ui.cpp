@@ -1,4 +1,4 @@
-#include "ui.hpp"
+#include "ui.h"
 
 void UI::init(Window *window, Renderer *renderer, World *world, Player *player) {
     this->window = window;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ui_component.hpp"
-#include "../gfx/texture.hpp"
+#include "ui_component.h"
+#include "../gfx/texture.h"
 
 class Crosshair : public UIComponent {
 public:

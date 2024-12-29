@@ -1,4 +1,4 @@
-#include "player.hpp"
+#include "player.h"
 
 void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world) {
     this->window = window;
@@ -15,94 +15,84 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
     hotbar[3] = BLOCK_SAND;
     hotbar[4] = BLOCK_LOG;
     hotbar[5] = BLOCK_PLANK;
-    hotbar_idx = 0;
+    current_hotbar_idx = 0;
 
-    int player_height = 2;
+    float player_height = 1.8f;
     offset = {
         ChunkMesh::CHUNK_SIZE.x * world->chunks_size.x / 2, 
         ChunkMesh::CHUNK_SIZE.y * world->ground_level + player_height, 
-        ChunkMesh::CHUNK_SIZE.z * world->chunks_size.z / 2};
+        ChunkMesh::CHUNK_SIZE.z * world->chunks_size.z / 2
+    };
     offset += 0.0001;
-    position = {0, 0, 0};
+    position = offset;
 
     camera.init(window, mouse, offset);
     ray.init(this->world, 8.0f);
 }
 
+/* Update the player 
+ * Handle movement
+ * Update camera
+ * Handle block placement/deletion
+ * */
 void Player::update() {
-    glm::vec3 displacement;
-    float _displacement;
-    if (keyboard->keys[GLFW_KEY_W].down) {
-        displacement = speed * (float) window->time_delta * camera.front;
-        camera.position += displacement;
-        position += displacement;
+    float displacement = speed * window->time_delta;
+    if (keyboard->get_button(GLFW_KEY_W).down) {
+        position += displacement * camera.get_front();
     }
-    if (keyboard->keys[GLFW_KEY_S].down) {
-        displacement = speed * (float) window->time_delta * camera.front;
-        camera.position -= displacement;
-        position -= displacement;
+    if (keyboard->get_button(GLFW_KEY_S).down) {
+        position -= displacement * camera.get_front();
     }
-    if (keyboard->keys[GLFW_KEY_A].down) {
-        displacement = speed * (float) window->time_delta * camera.right;
-        camera.position -= displacement;
-        position -= displacement;
+    if (keyboard->get_button(GLFW_KEY_A).down) {
+        position -= displacement * camera.get_right();
     }
-    if (keyboard->keys[GLFW_KEY_D].down) {
-        displacement = speed * (float) window->time_delta * camera.right;
-        camera.position += displacement;
-        position += displacement;
+    if (keyboard->get_button(GLFW_KEY_D).down) {
+        position += displacement * camera.get_right();
     }
-    if (keyboard->keys[GLFW_KEY_SPACE].down) {
-        _displacement = speed * (float) window->time_delta;
-        camera.position.y += _displacement;
-        position.y += _displacement;
+    if (keyboard->get_button(GLFW_KEY_SPACE).down) {
+        position.y += 0.5f * displacement;
     }
-    if (keyboard->keys[GLFW_KEY_LEFT_SHIFT].down) {
-        _displacement = speed * (float) window->time_delta; 
-        camera.position.y -= _displacement;
-        position.y -= _displacement;
-    }
-    for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
-        if (keyboard->keys[GLFW_KEY_1 + i].pressed) {
-            hotbar_idx = i;
-        }
+    if (keyboard->get_button(GLFW_KEY_LEFT_SHIFT).down) {
+        position.y -= 0.5f * displacement;
     }
 
-    if (mouse->keys[GLFW_MOUSE_BUTTON_LEFT].pressed) {
-        RayCastData raycast = ray.cast(position + offset, camera.direction);
-        if (raycast.hit) {
-            Block *block = world->block_get(raycast.position);
-            block->set_id(BLOCK_AIR);
-            Chunk *chunk = world->chunk_get(raycast.position);
-            chunk->meshed = false;
-            for (int i = 0; i < 6; i++) {
-                if (chunk->neighbors[i]) {
-                    chunk->neighbors[i]->meshed = false;
-                }
-            }
-        }
-    }
-
-    if (mouse->keys[GLFW_MOUSE_BUTTON_RIGHT].pressed) {
-        RayCastData raycast = ray.cast(position + offset, camera.direction);
-        if (raycast.hit && world->block_get(raycast.position + raycast.out) && hotbar[hotbar_idx] != BLOCK_NONE) {
-            glm::ivec3 _position = raycast.position + raycast.out;
-            Block *block = world->block_get(_position);
-            block->set_id(hotbar[hotbar_idx]);
-            Chunk *chunk = world->chunk_get(_position);
-            chunk->meshed = false;
-            for (int i = 0; i < 6; i++) {
-                if (chunk->neighbors[i]) {
-                    chunk->neighbors[i]->meshed = false;
-                }
-            }
-        }
-    }
-
+    // Update the camera
+    camera.position = position;
     camera.update();
+
+    /* Handle the hotbar
+     * Keep in mind the index starts at 0, not 1
+     * */
+    for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
+        if (keyboard->get_button(GLFW_KEY_1 + i).pressed) {
+            current_hotbar_idx = i;
+        }
+    }
+
+    // Handle block placement/deletion
+    RayCastData raycast = ray.cast(position, camera.direction);
+    if (raycast.hit) {
+        if (mouse->get_button(GLFW_MOUSE_BUTTON_LEFT).pressed) {
+            world->get_block(raycast.position)->set_id(BLOCK_AIR);
+            world->get_chunk(raycast.position)->set_dirty();
+        }
+        if (mouse->get_button(GLFW_MOUSE_BUTTON_RIGHT).pressed) {
+            glm::vec3 block_position = raycast.position + raycast.out;
+            Block *block = world->get_block(block_position);
+
+            if (block != nullptr && block->get_id() == BLOCK_AIR) {
+                world->get_block(block_position)->set_id(hotbar[current_hotbar_idx]);
+                world->get_chunk(block_position)->set_dirty();
+            }
+        }
+    }
 }
 
 void Player::render() {
     ChunkMesh::shader.uniform_mat4("view", camera.view);
     ChunkMesh::shader.uniform_mat4("projection", camera.projection);
+}
+
+Camera &Player::get_camera() {
+    return camera;
 }

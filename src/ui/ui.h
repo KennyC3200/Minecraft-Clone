@@ -6,13 +6,13 @@
 #include <imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
 
-#include "crosshair.hpp"
-#include "hotbar.hpp"
-#include "../util/util.hpp"
-#include "../gfx/window.hpp"
-#include "../gfx/renderer.hpp"
-#include "../world/world.hpp"
-#include "../player/player.hpp"
+#include "crosshair.h"
+#include "hotbar.h"
+#include "../util/util.h"
+#include "../gfx/window.h"
+#include "../gfx/renderer.h"
+#include "../world/world.h"
+#include "../player/player.h"
 
 #define UI_RESET_BUTTON(id, assignment)\
 ImGui::SameLine();\

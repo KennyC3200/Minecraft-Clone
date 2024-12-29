@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../util/util.hpp"
-#include "../world/world.hpp"
+#include "../util/util.h"
+#include "../world/world.h"
 
 struct RayCastData {
     bool hit;

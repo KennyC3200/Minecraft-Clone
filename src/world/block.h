@@ -1,6 +1,6 @@
 #pragma once
 
-#include "block_data.hpp"
+#include "block_data.h"
 
 #define BLOCK_ID_SET(data, id)               (data = (data & 0xffffffffffff0000) + (uint64_t) id)
 #define BLOCK_LIGHT_SET(data, intensity)     (data = (data & 0xfffffffffff0ffff) + (uint64_t) (intensity << 16))

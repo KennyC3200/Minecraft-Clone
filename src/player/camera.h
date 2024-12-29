@@ -1,13 +1,20 @@
 #pragma once
 
-#include "../util/util.hpp"
-#include "../gfx/window.hpp"
-#include "../input/mouse.hpp"
+#include "../util/util.h"
+#include "../gfx/window.h"
+#include "../input/mouse.h"
 
 class Camera {
 public:
     void init(Window *window, Mouse *mouse, glm::ivec3 position);
     void update();
+
+    void set_position(glm::vec3 &position);
+    void set_toggled(bool toggled);
+
+    glm::vec3 get_up();
+    glm::vec3 get_right();
+    glm::vec3 get_front();
 
     glm::vec3 position;
     glm::vec3 direction;

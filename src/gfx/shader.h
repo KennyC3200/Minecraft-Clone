@@ -1,10 +1,10 @@
 #pragma once
 
+#include "gfx.h"
+#include "texture.h"
+
 #include <fstream>
 #include <sstream>
-
-#include "gfx.hpp"
-#include "texture.hpp"
 
 class Shader {
 public:

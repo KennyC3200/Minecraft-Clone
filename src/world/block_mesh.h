@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../util/util.hpp"
+#include "../util/util.h"
 
 #define FACE_UV_COORDINATES_SIZE (4 * 2)
 

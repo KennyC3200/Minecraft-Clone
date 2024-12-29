@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "gfx.hpp"
+#include "gfx.h"
 
 class Texture {
 public:

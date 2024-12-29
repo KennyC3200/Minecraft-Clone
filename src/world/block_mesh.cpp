@@ -1,4 +1,4 @@
-#include "block_mesh.hpp"
+#include "block_mesh.h"
 
 void BlockMesh::add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max) {
     faces[direction].uv_min = uv_min;

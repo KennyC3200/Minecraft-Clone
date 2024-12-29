@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../gfx/gfx.hpp"
-#include "../gfx/window.hpp"
-#include "../gfx/shader.hpp"
-#include "../gfx/vbo.hpp"
-#include "../gfx/vao.hpp"
+#include "../gfx/gfx.h"
+#include "../gfx/window.h"
+#include "../gfx/shader.h"
+#include "../gfx/vbo.h"
+#include "../gfx/vao.h"
 
 class UIComponent {
 public:

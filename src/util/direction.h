@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math.hpp"
+#include "math.h"
 
 enum Direction {
     NORTH = 0, // -z

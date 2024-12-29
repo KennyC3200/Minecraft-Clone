@@ -35,9 +35,12 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 TODO
 -----
 * Major refactor
-    * Refactor `world.hpp` variable names etc.
-    * Fix the coordinates system
+    * Move the binding of the projection and vertex matrices into Renderer.cpp
+    * Refactor block
+    * Refactor how the hotbar and crosshair are being rendered
+    * Use a hashmap for block meshes
 * Store the block data in a struct instead of a class because it is faster (array of structs vs array of pointers)
 * Store the block data in bits of `uint64_t` for cpu communication bottleneck
 * Chunks rendering as player moves around
 * Physics
+* Padding issues, add `-Wpadded` to see

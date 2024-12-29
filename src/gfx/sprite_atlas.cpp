@@ -1,4 +1,4 @@
-#include "sprite_atlas.hpp"
+#include "sprite_atlas.h"
 
 SpriteAtlas::SpriteAtlas() {}
 

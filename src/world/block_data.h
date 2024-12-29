@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../gfx/sprite_atlas.hpp"
-#include "block_mesh.hpp"
+#include "../gfx/sprite_atlas.h"
+#include "block_mesh.h"
 
 enum BlockID {
     BLOCK_NONE = -1,

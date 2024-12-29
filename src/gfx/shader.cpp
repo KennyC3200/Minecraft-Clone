@@ -1,4 +1,4 @@
-#include "shader.hpp"
+#include "shader.h"
 
 void Shader::init(std::string vs_path, std::string fs_path) {
     handle = glCreateProgram();

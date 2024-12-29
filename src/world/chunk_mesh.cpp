@@ -1,6 +1,6 @@
-#include "chunk_mesh.hpp"
-#include "block.hpp"
-#include "block_mesh.hpp"
+#include "chunk_mesh.h"
+#include "block.h"
+#include "block_mesh.h"
 
 Shader ChunkMesh::shader;
 

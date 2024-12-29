@@ -1,4 +1,4 @@
-#include "renderer.hpp"
+#include "renderer.h"
 
 void Renderer::init(World *world, Player *player) {
     this->world = world;
@@ -6,11 +6,11 @@ void Renderer::init(World *world, Player *player) {
 
     flags.wireframe = false;
 
-    // blend for alpha channel
+    // Blend for alpha channel
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // 3d depth
+    // 3D depth
     glEnable(GL_DEPTH_TEST);
 }
 

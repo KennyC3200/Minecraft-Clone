@@ -1,4 +1,4 @@
-#include "block.hpp"
+#include "block.h"
 
 BlockData BlockData::blocks[BLOCK_LAST];
 SpriteAtlas BlockData::atlas;

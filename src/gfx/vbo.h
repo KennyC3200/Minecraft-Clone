@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gfx.hpp"
+#include "gfx.h"
 
 enum VBODrawType {
     DYNAMIC_DRAW = GL_DYNAMIC_DRAW,

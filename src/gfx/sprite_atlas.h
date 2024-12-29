@@ -1,7 +1,7 @@
 #pragma once
 
-#include "gfx.hpp"
-#include "texture.hpp"
+#include "gfx.h"
+#include "texture.h"
 
 class SpriteAtlas {
 public:

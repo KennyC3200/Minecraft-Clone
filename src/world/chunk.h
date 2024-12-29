@@ -1,8 +1,8 @@
 #pragma once
 
-#include "chunk_mesh.hpp"
-#include "block.hpp"
-#include "generation/generation.hpp"
+#include "generation/generation.h"
+#include "chunk_mesh.h"
+#include "block.h"
 
 class Chunk {
 public:
@@ -11,6 +11,8 @@ public:
     ~Chunk();
 
     static void init();
+
+    void set_dirty();
 
     void neighbors_set(Chunk *neighbors[6]);
 

@@ -1,4 +1,4 @@
-#include "hotbar.hpp"
+#include "hotbar.h"
 
 void Hotbar::init(Player *player) {
     this->player = player;
@@ -21,7 +21,7 @@ void Hotbar::render() {
         if (player->hotbar[i] != BLOCK_NONE) {
             render_items(p1 + 12.0f * unit, p2 - 12.0f * unit, player->hotbar[i]);
         }
-        render_hotbar(p1, p2, i == player->hotbar_idx);
+        render_hotbar(p1, p2, i == player->current_hotbar_idx);
     }
 }
 

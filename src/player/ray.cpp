@@ -1,4 +1,4 @@
-#include "ray.hpp"
+#include "ray.h"
 
 void Ray::init(World *world, float max_distance) {
     this->world = world;
@@ -58,7 +58,7 @@ RayCastData Ray::cast(glm::vec3 position, glm::vec3 direction) {
             }
         }
 
-        Block *block = world->block_get(_position);
+        Block *block = world->get_block(_position);
         if (block == nullptr) {
             continue;
         }

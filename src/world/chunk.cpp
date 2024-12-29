@@ -1,4 +1,4 @@
-#include "chunk.hpp"
+#include "chunk.h"
 
 Chunk::Chunk(glm::ivec3 position)
     : position(position)
@@ -42,6 +42,15 @@ Chunk::~Chunk() {
 
 void Chunk::init() {
     ChunkMesh::init();
+}
+
+void Chunk::set_dirty() {
+    meshed = false;
+    for (int i = 0; i < 6; i++) {
+        if (neighbors[i] != nullptr) {
+            neighbors[i]->meshed = false;
+        }
+    }
 }
 
 void Chunk::neighbors_set(Chunk *neighbors[6]) {

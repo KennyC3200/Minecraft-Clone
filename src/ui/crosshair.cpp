@@ -1,4 +1,4 @@
-#include "crosshair.hpp"
+#include "crosshair.h"
 
 void Crosshair::init() {
     toggled = true;
