@@ -2,7 +2,7 @@
 
 void Game::init() {
     window.init();
-    world.init();
+    world.Init();
     renderer.init(&world, &player);
     ui.init(&window, &renderer, &world, &player);
 
@@ -15,7 +15,7 @@ void Game::init() {
 void Game::destroy() {
     ui.destroy();
     window.destroy();
-    world.destroy();
+    world.Destroy();
 }
 
 void Game::loop() {

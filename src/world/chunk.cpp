@@ -1,79 +1,54 @@
 #include "chunk.h"
 
-Chunk::Chunk(glm::ivec3 position)
-    : position(position)
-{
-    blocks = new Block[ChunkMesh::CHUNK_VOLUME];
+Chunk::Chunk(glm::ivec3 position) {
+    Chunk(position, BLOCK_DIRT);
+}
 
-    std::fill(blocks, blocks + ChunkMesh::CHUNK_VOLUME, BLOCK_DIRT);
+Chunk::Chunk(glm::ivec3 position, BlockID block) {
+    this->position = position;
 
-    for (int x = 0; x < ChunkMesh::CHUNK_SIZE.x; x++) {
-        for (int y = 0; y < ChunkMesh::CHUNK_SIZE.y / 2; y++) {
-            for (int z = 0; z < ChunkMesh::CHUNK_SIZE.z; z++) {
-                blocks[ChunkMesh::chunk_pos_to_idx(x, y, z)] = BLOCK_STONE;
-            }
-        }
-    }
-
-    for (int x = 0; x < ChunkMesh::CHUNK_SIZE.x; x++) {
-        for (int z = 0; z < ChunkMesh::CHUNK_SIZE.z; z++) {
-            blocks[ChunkMesh::chunk_pos_to_idx(x, ChunkMesh::CHUNK_SIZE.z - 1, z)] = BLOCK_GRASS;
-        }
-    }
-
-    mesh = new ChunkMesh(blocks, &this->position);
     meshed = false;
-}
 
-Chunk::Chunk(glm::ivec3 position, BlockID fill)
-    : position(position)
-{
-    blocks = new Block[ChunkMesh::CHUNK_VOLUME];
-    std::fill(blocks, blocks + ChunkMesh::CHUNK_VOLUME, fill);
-
-    mesh = new ChunkMesh(blocks, &this->position);
-    meshed = false;
-}
-
-Chunk::~Chunk() {
-    delete mesh;
-    delete[] blocks;
-}
-
-void Chunk::init() {
-    ChunkMesh::init();
-}
-
-void Chunk::set_dirty() {
-    meshed = false;
-    for (int i = 0; i < 6; i++) {
-        if (neighbors[i] != nullptr) {
-            neighbors[i]->meshed = false;
-        }
-    }
-}
-
-void Chunk::neighbors_set(Chunk *neighbors[6]) {
-    ChunkMesh *mesh_neighbors[6];
+    std::fill(blocks, blocks + Chunk::volume, block);
 
     for (int i = 0; i < 6; i++) {
-        if (neighbors[i]) {
-            this->neighbors[i] = neighbors[i];
-            mesh_neighbors[i]  = neighbors[i]->mesh;
-        } else {
-            this->neighbors[i] = nullptr;
-            mesh_neighbors[i]  = nullptr;
-        }
+        adjacents[i] = nullptr;
     }
-
-    mesh->neighbors_set(mesh_neighbors);
 }
 
-void Chunk::render() {
+int Chunk::PosToIdx(int x, int y, int z) {
+    return (x * size.y * size.z) + (z * size.y) + (y);
+}
+
+int Chunk::PosToIdx(glm::ivec3 pos) {
+    return PosToIdx(pos.x, pos.y, pos.z);
+}
+
+void Chunk::Render() {
     if (!meshed) {
-        mesh->mesh();
+        mesh.Mesh(blocks, position, adjacents);
         meshed = true;
     }
+    mesh.Render();
+}
 
-    mesh->render();
+void Chunk::SetAdjacent(enum Direction direction, Chunk* chunk) {
+    adjacents[direction] = chunk;
+}
+
+void Chunk::SetDirty() {
+    meshed = false;
+    for (int i = 0; i < 6; i++) {
+        if (adjacents[i] != nullptr) {
+            adjacents[i]->meshed = false;
+        }
+    }
+}
+
+Block& Chunk::GetBlock(int x, int y, int z) {
+    return blocks[PosToIdx(x, y, z)];
+}
+
+Block& Chunk::GetBlock(glm::ivec3 pos) {
+    return blocks[PosToIdx(pos)];
 }

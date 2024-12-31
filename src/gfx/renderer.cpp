@@ -34,8 +34,8 @@ void Renderer::render_world() {
     ChunkMesh::shader.uniform_mat4("projection", player->get_camera().get_projection());
 
     // Render the world
-    ChunkMesh::shader.uniform_texture_2d(BlockData::atlas.texture, 0);
-    world->render();
+    ChunkMesh::shader.uniform_texture_2d(BlockMesh::GetAtlas().texture, 0);
+    world->Render();
 }
 
 // TODO

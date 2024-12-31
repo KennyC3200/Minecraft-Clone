@@ -58,11 +58,11 @@ RayCastData Ray::cast(glm::vec3 position, glm::vec3 direction) {
             }
         }
 
-        Block *block = world->get_block(_position);
+        Block *block = world->GetBlock(_position);
         if (block == nullptr) {
             continue;
         }
-        if (block->get_id() != BLOCK_AIR) {
+        if (block->GetID() != BLOCK_AIR) {
             return (RayCastData) {
                 .hit = true,
                 .position = _position,

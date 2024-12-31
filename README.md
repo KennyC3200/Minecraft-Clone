@@ -35,7 +35,11 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 TODO
 -----
 * Major refactor
-    * Make `mc` namespace because Block class is SLOW AF
+    * Change all method names to CamelCase
+    * Refactor `ChunkMesh`
+        * Remove `model` matrix
+
+    * (MAYBE) Make `mc` namespace because Block class is SLOW AF
     * Refactor block
     * Refactor ChunkMesh meshing
     * Refactor how the hotbar and crosshair are being rendered

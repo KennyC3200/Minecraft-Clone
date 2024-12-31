@@ -1,114 +1,73 @@
 #include "chunk_mesh.h"
-#include "block.h"
-#include "block_mesh.h"
+#include "chunk.h"
 
 Shader ChunkMesh::shader;
 
-ChunkMesh::ChunkMesh(Block *blocks, glm::ivec3 *position)
-    : blocks(blocks) , position(position)
-{
-    for (int i = 0; i < 6; i++) {
-        this->neighbors[i] = neighbors[i];
-    }
-
-    vao.init(); 
+ChunkMesh::ChunkMesh() {
+    vao.init();
     vbo.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
     ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
 }
 
 ChunkMesh::~ChunkMesh() {
+    vao.destroy();
     vbo.destroy();
     ibo.destroy();
-    vao.destroy();
 }
 
-void ChunkMesh::init() {
+void ChunkMesh::Init() {
     shader.init("res/shaders/chunk.vs", "res/shaders/chunk.fs");
 }
 
-int ChunkMesh::chunk_pos_to_idx(glm::ivec3 pos) {
-    return (pos.x * CHUNK_SIZE.z * CHUNK_SIZE.y + pos.z * CHUNK_SIZE.y + pos.y);
-}
-
-int ChunkMesh::chunk_pos_to_idx(int x, int y, int z) {
-    return (x * CHUNK_SIZE.z * CHUNK_SIZE.y + z * CHUNK_SIZE.y + y);
-}
-
-void ChunkMesh::neighbors_set(ChunkMesh *neighbors[6]) {
-    for (int i = 0; i < 6; i++) {
-        this->neighbors[i] = neighbors[i];
-    }
-}
-
-void ChunkMesh::mesh() {
+void ChunkMesh::Mesh(Block blocks[], glm::ivec3 position, Chunk* adjacent_chunks[6]) {
     vertices.clear();
     indices.clear();
 
-    // Wtf is this devious code?
-    for (int x = 0; x < ChunkMesh::CHUNK_SIZE.x; x++) {
-        for (int z = 0; z < ChunkMesh::CHUNK_SIZE.z; z++) {
-            for (int y = 0; y < ChunkMesh::CHUNK_SIZE.y; y++) {
-                BlockData &block = BlockData::blocks[blocks[ChunkMesh::chunk_pos_to_idx(x, y, z)].get_id()];
-                if (block.id == BLOCK_AIR) {
+    for (int x = 0; x < Chunk::size.x; x++) {
+        for (int y = 0; y < Chunk::size.y; y++) {
+            for (int z = 0; z < Chunk::size.z; z++) {
+                glm::ivec3 iter_pos = {x, y, z};
+
+                BlockID block_ID = blocks[Chunk::PosToIdx(iter_pos)].GetID();
+                if (block_ID == BLOCK_AIR) {
                     continue;
                 }
 
-                if (z == ChunkMesh::CHUNK_SIZE.z - 1) {
-                    if (neighbors[SOUTH] != nullptr && (neighbors[SOUTH]->blocks[ChunkMesh::chunk_pos_to_idx(x, y, 0)]).get_id() == BLOCK_AIR) {
-                        block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
+                glm::ivec3 block_pos = position + iter_pos;
+                for (int i = 0; i < 6; i++) {
+                    glm::ivec3 adjacent_pos = iter_pos + mc::IVEC[i];
+
+                    if (
+                        adjacent_pos.x < 0 || adjacent_pos.x == Chunk::size.x ||
+                        adjacent_pos.y < 0 || adjacent_pos.y == Chunk::size.y ||
+                        adjacent_pos.z < 0 || adjacent_pos.z == Chunk::size.z
+                    )
+                    {
+                        if (
+                            (i == UP && adjacent_chunks[i] == nullptr) ||
+                            (adjacent_chunks[i] != nullptr &&
+                            adjacent_chunks[i]->GetBlock(
+                                (adjacent_pos.x + Chunk::size.x) % Chunk::size.x,
+                                (adjacent_pos.y + Chunk::size.y) % Chunk::size.y,
+                                (adjacent_pos.z + Chunk::size.z) % Chunk::size.z
+                            ).GetID() == BLOCK_AIR)
+                        )
+                        {
+                            BlockMesh::Get(block_ID).MeshFace((Direction) i, block_pos, vertices, indices);
+                        }
+                        continue;
                     }
-                } else if (blocks[ChunkMesh::chunk_pos_to_idx(x, y, z + 1)].get_id() == BLOCK_AIR) {
-                    block.mesh.mesh_face(SOUTH, {x, y, z}, vertices, indices);
-                }
-                if (z == 0) {
-                    if (neighbors[NORTH] != nullptr && (neighbors[NORTH]->blocks[ChunkMesh::chunk_pos_to_idx(x, y, ChunkMesh::CHUNK_SIZE.z - 1)]).get_id() == BLOCK_AIR) {
-                        block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
+
+                    if (blocks[Chunk::PosToIdx(adjacent_pos)].GetID() == BLOCK_AIR) {
+                        BlockMesh::Get(block_ID).MeshFace((Direction) i, block_pos, vertices, indices);
                     }
-                } else if (blocks[ChunkMesh::chunk_pos_to_idx(x, y, z - 1)].get_id() == BLOCK_AIR) {
-                    block.mesh.mesh_face(NORTH, {x, y, z}, vertices, indices);
-                }
-                if (x == ChunkMesh::CHUNK_SIZE.x - 1) {
-                    if (neighbors[EAST] != nullptr && (neighbors[EAST]->blocks[ChunkMesh::chunk_pos_to_idx(0, y, z)]).get_id() == BLOCK_AIR) {
-                        block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
-                    }
-                } else if (blocks[ChunkMesh::chunk_pos_to_idx(x + 1, y, z)].get_id() == BLOCK_AIR) {
-                    block.mesh.mesh_face(EAST, {x, y, z}, vertices, indices);
-                }
-                if (x == 0) {
-                    if (neighbors[WEST] != nullptr && (neighbors[WEST]->blocks[ChunkMesh::chunk_pos_to_idx(ChunkMesh::CHUNK_SIZE.x - 1, y, z)]).get_id() == BLOCK_AIR) {
-                        block.mesh.mesh_face(WEST, {x, y, z}, vertices, indices);
-                    }
-                } else if (blocks[ChunkMesh::chunk_pos_to_idx(x - 1, y, z)].get_id() == BLOCK_AIR) {
-                    block.mesh.mesh_face(WEST, {x, y, z}, vertices, indices);
-                }
-                if (y == ChunkMesh::CHUNK_SIZE.y - 1) {
-                    if (neighbors[UP] == nullptr || (neighbors[UP]->blocks[ChunkMesh::chunk_pos_to_idx(x, 0, z)]).get_id() == BLOCK_AIR) {
-                        block.mesh.mesh_face(UP, {x, y, z}, vertices, indices);
-                    }
-                } else if (blocks[ChunkMesh::chunk_pos_to_idx(x, y + 1, z)].get_id() == BLOCK_AIR) {
-                    block.mesh.mesh_face(UP, {x, y, z}, vertices, indices);
-                }
-                if (y == 0) {
-                    if (neighbors[DOWN] != nullptr && (neighbors[DOWN]->blocks[ChunkMesh::chunk_pos_to_idx(x, ChunkMesh::CHUNK_SIZE.y - 1, z)]).get_id() == BLOCK_AIR) {
-                        block.mesh.mesh_face(DOWN, {x, y, z}, vertices, indices);
-                    }
-                } else if (blocks[ChunkMesh::chunk_pos_to_idx(x, y - 1, z)].get_id() == BLOCK_AIR) {
-                    block.mesh.mesh_face(DOWN, {x, y, z}, vertices, indices);
                 }
             }
         }
     }
 }
 
-void ChunkMesh::render() {
-    glm::mat4 model = glm::translate(
-        glm::mat4(1.0f), 
-        glm::vec3(
-            ChunkMesh::CHUNK_SIZE.x * position->x,
-            ChunkMesh::CHUNK_SIZE.y * position->y,
-            ChunkMesh::CHUNK_SIZE.z * position->z));
-    shader.uniform_mat4("model", model);
-
+void ChunkMesh::Render() {
     ibo.buffer(indices.size() * sizeof(unsigned int), &indices[0]);
     vbo.buffer(vertices.size() * sizeof(float), &vertices[0]);
 

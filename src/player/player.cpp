@@ -19,9 +19,9 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     float player_height = 1.8f;
     offset = {
-        ChunkMesh::CHUNK_SIZE.x * world->chunks_size.x / 2, 
-        ChunkMesh::CHUNK_SIZE.y * world->ground_level + player_height, 
-        ChunkMesh::CHUNK_SIZE.z * world->chunks_size.z / 2
+        Chunk::size.x * world->chunks_size.x / 2, 
+        Chunk::size.y * world->ground_level + player_height, 
+        Chunk::size.z * world->chunks_size.z / 2
     };
     offset += 0.0001;
     position = offset;
@@ -72,16 +72,16 @@ void Player::update() {
     RayCastData raycast = ray.cast(position, camera.get_direction());
     if (raycast.hit) {
         if (mouse->get_button(GLFW_MOUSE_BUTTON_LEFT).pressed) {
-            world->get_block(raycast.position)->set_id(BLOCK_AIR);
-            world->get_chunk(raycast.position)->set_dirty();
+            world->GetBlock(raycast.position)->SetID(BLOCK_AIR);
+            world->GetChunk(raycast.position)->SetDirty();
         }
         if (mouse->get_button(GLFW_MOUSE_BUTTON_RIGHT).pressed) {
             glm::vec3 block_position = raycast.position + raycast.out;
-            Block *block = world->get_block(block_position);
+            Block *block = world->GetBlock(block_position);
 
-            if (block != nullptr && block->get_id() == BLOCK_AIR) {
-                world->get_block(block_position)->set_id(hotbar[current_hotbar_idx]);
-                world->get_chunk(block_position)->set_dirty();
+            if (block != nullptr && block->GetID() == BLOCK_AIR) {
+                world->GetBlock(block_position)->SetID(hotbar[current_hotbar_idx]);
+                world->GetChunk(block_position)->SetDirty();
             }
         }
     }

@@ -73,7 +73,7 @@ void Hotbar::render_hotbar(glm::vec2 p1, glm::vec2 p2, bool toggled) {
 }
 
 void Hotbar::render_items(glm::vec2 p1, glm::vec2 p2, BlockID block) {
-    UIComponent::shader.uniform_texture_2d(BlockData::atlas.texture, "tex", 0);
+    UIComponent::shader.uniform_texture_2d(BlockMesh::GetAtlas().texture, "tex", 0);
 
     std::vector<float> vertices = {
         p1.x, p2.y,
@@ -87,8 +87,8 @@ void Hotbar::render_items(glm::vec2 p1, glm::vec2 p2, BlockID block) {
         1, 2, 3,
     };
 
-    glm::vec2 uv_min = BlockData::blocks[block].mesh.faces[NORTH].uv_min,
-              uv_max = BlockData::blocks[block].mesh.faces[NORTH].uv_max;
+    glm::vec2 uv_min = BlockMesh::Get(block).GetFace(NORTH).uv_min;
+    glm::vec2 uv_max = BlockMesh::Get(block).GetFace(NORTH).uv_max;
 
     vertices.push_back(uv_min.x);
     vertices.push_back(1 - uv_min.y);

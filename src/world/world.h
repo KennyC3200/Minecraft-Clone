@@ -6,26 +6,30 @@
 
 class World {
 public:
-    void init();
-    void destroy();
-    void render();
+    void Init();
+    void Destroy();
+    void Render();
 
-    Chunk *get_chunk(glm::ivec3 position);
-    int get_chunk_idx(glm::ivec3 position);
-    Block *get_block(glm::ivec3 chunk_position);
+    Chunk* GetChunk(glm::ivec3 position);
 
-    Chunk **chunks;
+    // Get the chunk index, given a chunk position
+    int GetChunkIdx(int x, int y, int z);
+    int GetChunkIdx(glm::ivec3 position);
+
+    Block* GetBlock(glm::ivec3 chunk_position);
+
+    Chunk** chunks;
     glm::ivec3 chunk_position;
 
-    /* Chunks size as a vector and size_t */
+    // Chunks size as a vector and size_t
     glm::ivec3 chunks_size;
     size_t chunks_count;
 
-    /* Ground level y-position */
+    // Ground level y-position
     int ground_level;
 private:
-    void init_chunks();
+    void InitChunks();
 
-    /* World generation */
+    // World generation
     Generation generation;
 };

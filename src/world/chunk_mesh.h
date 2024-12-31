@@ -1,37 +1,33 @@
 #pragma once
 
+#include <vector>
+
+#include "block.h"
+#include "block_mesh.h"
 #include "../util/util.h"
-#include "../gfx/shader.h"
 #include "../gfx/vao.h"
 #include "../gfx/vbo.h"
-#include "block.h"
+#include "../gfx/shader.h"
+
+class Chunk;
 
 class ChunkMesh {
 public:
-    ChunkMesh(Block *blocks, glm::ivec3 *position);
+    ChunkMesh();
     ~ChunkMesh();
 
-    static void init();
-    static int chunk_pos_to_idx(glm::ivec3 pos);
-    static int chunk_pos_to_idx(int x, int y, int z);
+    static void Init();
 
-    static constexpr glm::ivec3 CHUNK_SIZE = {16, 16, 16};
-    static constexpr int CHUNK_VOLUME = CHUNK_SIZE.x * CHUNK_SIZE.y * CHUNK_SIZE.z;
+    void Mesh(Block blocks[], glm::ivec3 position, Chunk* adjacent_chunks[6]);
+    void Render();
 
     static Shader shader;
 
-    void neighbors_set(ChunkMesh *neighbors[6]);
-
-    void mesh();
-    void render();
 private:
+    VAO vao;
+    VBO vbo;
+    VBO ibo;
+
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
-
-    Block *blocks;
-    glm::ivec3 *position;
-    ChunkMesh *neighbors[6];
-
-    VAO vao;
-    VBO vbo, ibo;
 };

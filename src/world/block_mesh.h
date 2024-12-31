@@ -1,63 +1,89 @@
 #pragma once
 
+#include "block.h"
 #include "../util/util.h"
-
-#define FACE_UV_COORDINATES_SIZE (4 * 2)
+#include "../gfx/sprite_atlas.h"
 
 typedef struct {
     glm::vec2 uv_min, uv_max;
-    float uv_coordinates[FACE_UV_COORDINATES_SIZE];
+    float uv_coordinates[4 * 2];
 } Face;
 
 class BlockMesh {
 public:
-    void add_face(Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
-    void mesh_face(
-        enum Direction direction,
-        glm::ivec3 position, 
-        std::vector<float> &vertices, 
-        std::vector<unsigned int> &indices
-    );
+    static void Init();
+    static const SpriteAtlas GetAtlas();
+    static const BlockMesh Get(BlockID block_ID);
 
-    static constexpr float VERTICES[] = {
-        // NORTH (-z)
+    /*
+     * Add a face to the BlockMesh static meshes array
+     * @param direction The direction of the block face
+     * @param uv_min The min uv coordinate of the face
+     * @param uv_max The max uv coordinate of the face
+     * */
+    void AddFace(enum Direction direction, glm::vec2 uv_min, glm::vec2 uv_max);
+
+    /* 
+     * Mesh a face in the chunk 
+     * @param direction The direction of the face to mesh
+     * @param position The block's position
+     * @param vertices The vertices of the block
+     * @param indices The indices of the block
+     * */
+    void MeshFace(
+        enum Direction direction, 
+        glm::vec3 position, 
+        std::vector<float>& vertices, 
+        std::vector<unsigned int>& indices) const;
+
+    Face GetFace(enum Direction direction) const;
+
+private:
+    static SpriteAtlas atlas;
+    static BlockMesh meshes[BLOCK_LAST];
+    
+    static constexpr float vertices[] = {
+        // North (-z)
         0, 0, 0,
         1, 0, 0,
         0, 1, 0,
         1, 1, 0,
 
-        // SOUTH (+z)
+        // South (+z)
         0, 0, 1,
         1, 0, 1,
         0, 1, 1,
         1, 1, 1,
 
-        // EAST (+x)
+        // East (+x)
         1, 0, 1,
         1, 0, 0,
         1, 1, 1,
         1, 1, 0,
 
-        // WEST (-x)
+        // West (-x)
         0, 0, 1,
         0, 0, 0,
         0, 1, 1,
         0, 1, 0,
 
-        // UP (+y)
+        // Up (+y)
         0, 1, 1,
         1, 1, 1,
         0, 1, 0,
         1, 1, 0,
 
-        // DOWN (-y)
+        // Down (-y)
         0, 0, 1,
         1, 0, 1,
         0, 0, 0,
         1, 0, 0,
     };
 
-    static constexpr unsigned int INDICES[] = {2,  0,  1,  2,  3,  1};
+    static constexpr unsigned int indices[] = {
+        2,  0,  1,  
+        2,  3,  1
+    };
 
     Face faces[6];
 };

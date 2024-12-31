@@ -1,18 +1,19 @@
 #include "block.h"
+#include <iostream>
 
 Block::Block() {
+    SetID(BLOCK_DIRT);
 }
 
-Block::Block(BlockID id)
-    : data(0)
-{
-    set_id(id);
+Block::Block(enum BlockID id) {
+    data = 0;
+    SetID(id);
 }
 
-uint Block::get_id() {
-    return (data & 0xffff);
+void Block::SetID(enum BlockID id) {
+    data = (data & 0xffffffffffff0000L) + id;
 }
 
-void Block::set_id(uint id) {
-    data = (data & 0xffffffffffff0000) + (uint64_t) id;
+BlockID Block::GetID() {
+    return (BlockID) (data & 0xffff);
 }
