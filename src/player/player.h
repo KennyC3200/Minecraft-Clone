@@ -31,7 +31,6 @@ private:
 
     float speed;
     Camera camera;
-    Ray ray;
 
     BlockID hotbar[hotbar_size];
     int current_hotbar_idx;

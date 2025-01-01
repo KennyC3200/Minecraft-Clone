@@ -6,6 +6,7 @@
 #include "input/mouse.h"
 #include "player/player.h"
 #include "ui/hud/hud_manager.h"
+#include "ui/gui/gui_manager.h"
 
 class Game {
 public:
@@ -19,11 +20,13 @@ private:
 
     Window window;
     Renderer renderer;
+
     HudManager hud_manager;
-    World world;
+    GuiManager gui_manager;
 
     Keyboard keyboard;
     Mouse mouse;
 
+    World world;
     Player player;
 };

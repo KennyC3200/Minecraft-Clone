@@ -30,13 +30,12 @@ Libraries Used
 Issues and Fixes
 -----
 Path: `/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Headers/Carbon`
+
 Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk`
 
 TODO
 -----
 * Major refactor
-    * Refactor how the hotbar and crosshair are being rendered
-    * Move ui rendering to renderer
     * Refactor the Ray (why tf is this a class anyways)
 * Chunks rendering as player moves around
 * Physics

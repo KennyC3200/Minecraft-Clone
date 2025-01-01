@@ -1,9 +1,10 @@
 #include "renderer.h"
 
-void Renderer::Init(World* world, Player* player, HudManager* hud_manager) {
+void Renderer::Init(World* world, Player* player, HudManager* hud_manager, GuiManager* gui_manager) {
     this->world = world;
     this->player = player;
     this->hud_manager = hud_manager;
+    this->gui_manager = gui_manager;
 
     flags.wireframe = false;
 
@@ -16,17 +17,17 @@ void Renderer::Init(World* world, Player* player, HudManager* hud_manager) {
 }
 
 void Renderer::Render() {
+    RenderWorld();
+    RenderUI();
+}
+
+void Renderer::RenderWorld() {
     if (flags.wireframe) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     } else {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 
-    RenderWorld();
-    RenderUI();
-}
-
-void Renderer::RenderWorld() {
     // Bind the chunk shader
     ChunkMesh::shader.Bind();
 
@@ -42,4 +43,5 @@ void Renderer::RenderWorld() {
 void Renderer::RenderUI() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     hud_manager->Render();
+    gui_manager->Render();
 }

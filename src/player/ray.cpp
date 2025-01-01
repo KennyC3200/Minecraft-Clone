@@ -1,11 +1,8 @@
 #include "ray.h"
 
-void Ray::Init(World *world, float max_distance) {
-    this->world = world;
-    this->max_distance = max_distance;
-}
+namespace mc {
 
-RayCastData Ray::Cast(glm::vec3 position, glm::vec3 direction) {
+RaycastData Raycast(World* world, glm::vec3 position, glm::vec3 direction, float max_distance) {
     glm::vec3 step;
     glm::vec3 d_length, d_delta;
     glm::ivec3 _position, _out;
@@ -63,16 +60,18 @@ RayCastData Ray::Cast(glm::vec3 position, glm::vec3 direction) {
             continue;
         }
         if (block->GetID() != BLOCK_AIR) {
-            return (RayCastData) {
+            return (RaycastData) {
                 .hit = true,
                 .position = _position,
                 .out = _out
             };
         }
     }
-    return (RayCastData) {
+    return (RaycastData) {
         .hit = false,
         .position = _position,
         .out = {0, 0, 0}
     };
+}
+
 }

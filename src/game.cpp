@@ -8,13 +8,16 @@ void Game::Init() {
     mouse.Init(&window);
 
     player.Init(&window, &keyboard, &mouse, &world);
-    hud_manager.Init(&window, &player);
 
-    renderer.Init(&world, &player, &hud_manager);
+    hud_manager.Init(&window, &player);
+    gui_manager.Init(&window, &player);
+
+    renderer.Init(&world, &player, &hud_manager, &gui_manager);
 }
 
 void Game::Destroy() {
     hud_manager.Destroy();
+    gui_manager.Destroy();
     world.Destroy();
     window.Destroy();
 }
@@ -44,11 +47,10 @@ void Game::Update() {
     if (keyboard.GetButton(GLFW_KEY_T).pressed) {
         renderer.flags.wireframe = !renderer.flags.wireframe;
     }
-    // if (keyboard.GetButton(GLFW_KEY_ESCAPE).pressed) {
-    //     ui.settings.toggled = !ui.settings.toggled;
-    //     mouse.SetToggled(ui.settings.toggled);
-    //     player.GetCamera().SetToggled(!ui.settings.toggled);
-    // }
+    if (keyboard.GetButton(GLFW_KEY_ESCAPE).pressed) {
+        mouse.SetToggled(!mouse.GetToggled());
+        player.GetCamera().SetToggled(!mouse.GetToggled());
+    }
 }
 
 void Game::Render() {

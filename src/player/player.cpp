@@ -27,7 +27,6 @@ void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world
     position = offset;
 
     camera.Init(window, mouse, offset);
-    ray.Init(this->world, 8.0f);
 }
 
 /* Update the player 
@@ -70,7 +69,7 @@ void Player::Update() {
     }
 
     // Handle block placement/deletion
-    RayCastData raycast = ray.Cast(position, camera.GetDirection());
+    mc::RaycastData raycast = mc::Raycast(world, position, camera.GetDirection(), 8.0f);
     if (raycast.hit) {
         if (mouse->GetButton(GLFW_MOUSE_BUTTON_LEFT).pressed) {
             world->GetBlock(raycast.position)->SetID(BLOCK_AIR);
