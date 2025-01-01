@@ -58,7 +58,7 @@ RayCastData Ray::Cast(glm::vec3 position, glm::vec3 direction) {
             }
         }
 
-        Block *block = world->GetBlock(_position);
+        Block* block = world->GetBlock(_position);
         if (block == nullptr) {
             continue;
         }

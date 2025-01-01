@@ -77,5 +77,5 @@ void ChunkMesh::Render() {
     vao.Bind();
     ibo.Bind();
 
-    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
 }

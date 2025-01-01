@@ -15,7 +15,7 @@ public:
     /* Update the mouse */
     void Update() override {
         double x, y;
-        glfwGetCursorPos(window->handle, &x, &y);
+        glfwGetCursorPos(window->GetHandle(), &x, &y);
 
         if (first_move) {
             position.x = x;
@@ -32,7 +32,7 @@ public:
         Input::Update();
 
         glfwSetInputMode(
-            window->handle, 
+            window->GetHandle(), 
             GLFW_CURSOR, 
             toggled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED
         );
@@ -46,7 +46,7 @@ protected:
      * Required by Input class
      * */
     int GetButtonState(int button) override {
-        return glfwGetMouseButton(window->handle, button);
+        return glfwGetMouseButton(window->GetHandle(), button);
     }
 
     glm::vec2 position;

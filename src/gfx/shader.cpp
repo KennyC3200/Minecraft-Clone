@@ -51,6 +51,10 @@ void Shader::UniformMat4(std::string name, glm::mat4 mat4) {
         glm::value_ptr(mat4));
 }
 
+GLuint Shader::GetHandle() {
+    return handle;
+}
+
 GLuint Shader::Compile(std::string path, GLuint type) {
     std::ifstream file;
     std::string text;

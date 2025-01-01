@@ -1,4 +1,5 @@
 #include "player.h"
+#include "../ui/hud/hud_manager.h"
 
 void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world) {
     this->window = window;
@@ -35,7 +36,7 @@ void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world
  * Handle block placement/deletion
  * */
 void Player::Update() {
-    float displacement = speed * window->time_delta;
+    float displacement = speed * window->GetTimeDelta();
     if (keyboard->GetButton(GLFW_KEY_W).down) {
         position += displacement * camera.GetFront();
     }
@@ -64,6 +65,7 @@ void Player::Update() {
     for (int i = 0; i < Player::hotbar_size; i++) {
         if (keyboard->GetButton(GLFW_KEY_1 + i).pressed) {
             current_hotbar_idx = i;
+            HudManager::MeshHotbar();
         }
     }
 
@@ -88,4 +90,12 @@ void Player::Update() {
 
 Camera& Player::GetCamera() {
     return camera;
+}
+
+BlockID Player::GetHotbarItem(int idx) {
+    return hotbar[idx];
+}
+
+int Player::GetCurrentHotbarIdx() {
+    return current_hotbar_idx;
 }

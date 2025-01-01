@@ -44,7 +44,7 @@ void Camera::Update() {
     view = glm::lookAt(position, position + direction, up);
     projection = glm::perspective(
         glm::radians(fov), 
-        (float) window->size.x / window->size.y,
+        (float) window->GetSize().x / window->GetSize().y,
         z_near, z_far);
 }
 

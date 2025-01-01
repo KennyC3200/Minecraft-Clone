@@ -8,22 +8,18 @@
 #include "camera.h"
 #include "ray.h"
 
+class HudManager;
+
 class Player {
 public:
     void Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world);
     void Update();
 
     Camera& GetCamera();
+    BlockID GetHotbarItem(int idx);
+    int GetCurrentHotbarIdx();
 
-    glm::vec3 offset, position;
-    glm::ivec3 chunk_position;
-
-    // TODO: Make this an enum so that you pass in
-    //       This makes it so that the idx cannot go out of bounds :)
-    // void set_hotbar_idx(enum HotbarIndex idx)
     static constexpr int hotbar_size = 9;
-    BlockID hotbar[hotbar_size];
-    int current_hotbar_idx;
 
 private:
     Window* window;
@@ -31,7 +27,12 @@ private:
     Mouse* mouse;
     World* world;
 
+    glm::vec3 offset, position;
+
     float speed;
     Camera camera;
     Ray ray;
+
+    BlockID hotbar[hotbar_size];
+    int current_hotbar_idx;
 };

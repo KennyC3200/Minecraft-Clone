@@ -14,9 +14,10 @@ public:
     void UniformTexture2D(Texture tex, unsigned int unit);
     void UniformTexture2D(Texture tex, std::string fs_name, unsigned int unit);
     void UniformMat4(std::string name, glm::mat4 mat4);
-
-    GLuint handle;
+    GLuint GetHandle();
 
 private:
     GLuint Compile(std::string path, GLuint type);
+
+    GLuint handle;
 };

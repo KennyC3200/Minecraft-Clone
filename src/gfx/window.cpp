@@ -1,11 +1,7 @@
 #include "window.h"
 
-Window::Window() {}
-
-Window::~Window() {}
-
-void Window::Init() {
-    size = {1440, 900};
+void Window::Init(glm::ivec2 size) {
+    this->size = size;
 
     if (!glfwInit()) {
         std::cout << "Error initializing GLFW\n";
@@ -55,4 +51,24 @@ void Window::Update() {
     fps = 1.0 / time_delta;
 
     glfwGetWindowSize(handle, &size.x, &size.y);
+}
+
+GLFWwindow* Window::GetHandle() {
+    return handle;
+}
+
+glm::ivec2 Window::GetSize() {
+    return size;
+}
+
+glm::vec2 Window::GetPixelUnit() {
+    return 1.0f / glm::vec2(size);
+}
+
+float Window::GetFPS() {
+    return fps;
+}
+
+float Window::GetTimeDelta() {
+    return time_delta;
 }

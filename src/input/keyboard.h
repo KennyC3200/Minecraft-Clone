@@ -13,6 +13,6 @@ protected:
      * Required by Input class
      * */
     int GetButtonState(int button) override {
-        return glfwGetKey(window->handle, button);
+        return glfwGetKey(window->GetHandle(), button);
     }
 };

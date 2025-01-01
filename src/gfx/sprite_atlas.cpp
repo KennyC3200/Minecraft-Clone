@@ -12,9 +12,13 @@ void SpriteAtlas::Destroy() {
     Texture::Destroy();
 }
 
-glm::vec2 SpriteAtlas::SpriteUV(glm::vec2 sprite_coordinates) {
+glm::vec2 SpriteAtlas::SpriteUV(int x, int y) {
     return glm::vec2(
-        sprite_coordinates.x * sprite_unit.x,
-        sprite_coordinates.y * sprite_unit.y
+        x * sprite_unit.x,
+        y * sprite_unit.y
     );
+}
+
+glm::vec2 SpriteAtlas::SpriteUV(glm::ivec2 sprite_coordinates) {
+    return SpriteUV(sprite_coordinates.x, sprite_coordinates.y);
 }

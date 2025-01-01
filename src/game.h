@@ -5,7 +5,7 @@
 #include "input/keyboard.h"
 #include "input/mouse.h"
 #include "player/player.h"
-#include "ui/ui.h"
+#include "ui/hud/hud_manager.h"
 
 class Game {
 public:
@@ -19,7 +19,7 @@ private:
 
     Window window;
     Renderer renderer;
-    UI ui;
+    HudManager hud_manager;
     World world;
 
     Keyboard keyboard;

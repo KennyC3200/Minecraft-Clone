@@ -1,8 +1,9 @@
 #include "renderer.h"
 
-void Renderer::Init(World* world, Player* player) {
+void Renderer::Init(World* world, Player* player, HudManager* hud_manager) {
     this->world = world;
     this->player = player;
+    this->hud_manager = hud_manager;
 
     flags.wireframe = false;
 
@@ -22,7 +23,6 @@ void Renderer::Render() {
     }
 
     RenderWorld();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     RenderUI();
 }
 
@@ -39,6 +39,7 @@ void Renderer::RenderWorld() {
     world->Render();
 }
 
-// TODO
 void Renderer::RenderUI() {
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    hud_manager->Render();
 }
