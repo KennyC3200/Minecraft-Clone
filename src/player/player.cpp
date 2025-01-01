@@ -1,6 +1,6 @@
 #include "player.h"
 
-void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world) {
+void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world) {
     this->window = window;
     this->keyboard = keyboard;
     this->mouse = mouse;
@@ -8,7 +8,7 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     speed = 15.0f;
 
-    std::fill(hotbar, hotbar + Player::HOTBAR_SIZE, BLOCK_NONE);
+    std::fill(hotbar, hotbar + Player::hotbar_size, BLOCK_NONE);
     hotbar[0] = BLOCK_DIRT;
     hotbar[1] = BLOCK_GRASS;
     hotbar[2] = BLOCK_STONE;
@@ -19,15 +19,14 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
 
     float player_height = 1.8f;
     offset = {
-        Chunk::size.x * world->chunks_size.x / 2, 
-        Chunk::size.y * world->ground_level + player_height, 
-        Chunk::size.z * world->chunks_size.z / 2
+        0.001f + (int)(world->GetChunksSize().x * Chunk::size.x / 2), 
+        0.001f + (int)(world->GetChunksSize().y * Chunk::size.y / 2) + player_height, 
+        0.001f + (int)(world->GetChunksSize().z * Chunk::size.z / 2)
     };
-    offset += 0.0001;
     position = offset;
 
-    camera.init(window, mouse, offset);
-    ray.init(this->world, 8.0f);
+    camera.Init(window, mouse, offset);
+    ray.Init(this->world, 8.0f);
 }
 
 /* Update the player 
@@ -35,47 +34,47 @@ void Player::init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world
  * Update camera
  * Handle block placement/deletion
  * */
-void Player::update() {
+void Player::Update() {
     float displacement = speed * window->time_delta;
-    if (keyboard->get_button(GLFW_KEY_W).down) {
-        position += displacement * camera.get_front();
+    if (keyboard->GetButton(GLFW_KEY_W).down) {
+        position += displacement * camera.GetFront();
     }
-    if (keyboard->get_button(GLFW_KEY_S).down) {
-        position -= displacement * camera.get_front();
+    if (keyboard->GetButton(GLFW_KEY_S).down) {
+        position -= displacement * camera.GetFront();
     }
-    if (keyboard->get_button(GLFW_KEY_A).down) {
-        position -= displacement * camera.get_right();
+    if (keyboard->GetButton(GLFW_KEY_A).down) {
+        position -= displacement * camera.GetRight();
     }
-    if (keyboard->get_button(GLFW_KEY_D).down) {
-        position += displacement * camera.get_right();
+    if (keyboard->GetButton(GLFW_KEY_D).down) {
+        position += displacement * camera.GetRight();
     }
-    if (keyboard->get_button(GLFW_KEY_SPACE).down) {
+    if (keyboard->GetButton(GLFW_KEY_SPACE).down) {
         position.y += 0.5f * displacement;
     }
-    if (keyboard->get_button(GLFW_KEY_LEFT_SHIFT).down) {
+    if (keyboard->GetButton(GLFW_KEY_LEFT_SHIFT).down) {
         position.y -= 0.5f * displacement;
     }
 
     // Update the camera
-    camera.set_position(position);
-    camera.update();
+    camera.SetPosition(position);
+    camera.Update();
 
     // Handle the hotbar
     // Keep in mind the index starts at 0, not 
-    for (int i = 0; i < Player::HOTBAR_SIZE; i++) {
-        if (keyboard->get_button(GLFW_KEY_1 + i).pressed) {
+    for (int i = 0; i < Player::hotbar_size; i++) {
+        if (keyboard->GetButton(GLFW_KEY_1 + i).pressed) {
             current_hotbar_idx = i;
         }
     }
 
     // Handle block placement/deletion
-    RayCastData raycast = ray.cast(position, camera.get_direction());
+    RayCastData raycast = ray.Cast(position, camera.GetDirection());
     if (raycast.hit) {
-        if (mouse->get_button(GLFW_MOUSE_BUTTON_LEFT).pressed) {
+        if (mouse->GetButton(GLFW_MOUSE_BUTTON_LEFT).pressed) {
             world->GetBlock(raycast.position)->SetID(BLOCK_AIR);
             world->GetChunk(raycast.position)->SetDirty();
         }
-        if (mouse->get_button(GLFW_MOUSE_BUTTON_RIGHT).pressed) {
+        if (mouse->GetButton(GLFW_MOUSE_BUTTON_RIGHT).pressed) {
             glm::vec3 block_position = raycast.position + raycast.out;
             Block *block = world->GetBlock(block_position);
 
@@ -87,6 +86,6 @@ void Player::update() {
     }
 }
 
-Camera &Player::get_camera() {
+Camera& Player::GetCamera() {
     return camera;
 }

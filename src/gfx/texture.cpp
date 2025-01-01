@@ -3,12 +3,12 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-void Texture::init(std::string path, std::string fs_name, GLint tex_format, GLint src_format)
+void Texture::Init(std::string path, std::string fs_name, GLint tex_format, GLint src_format)
 {
     this->fs_name = fs_name;
 
     glGenTextures(1, &handle);
-    bind();
+    Bind();
 
     // no interpolation
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -29,10 +29,22 @@ void Texture::init(std::string path, std::string fs_name, GLint tex_format, GLin
     stbi_image_free(data);
 }
 
-void Texture::destroy() {
+void Texture::Destroy() {
     glDeleteTextures(1, &handle);
 }
 
-void Texture::bind() {
+void Texture::Bind() {
     glBindTexture(GL_TEXTURE_2D, handle);
+}
+
+GLuint Texture::GetHandle() {
+    return handle;
+}
+
+std::string& Texture::GetFSName() {
+    return fs_name;
+}
+
+glm::ivec2 Texture::GetSize() {
+    return size;
 }

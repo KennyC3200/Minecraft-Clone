@@ -9,12 +9,13 @@
 
 class Game {
 public:
-    void init();
-    void loop();
-    void destroy();
+    void Init();
+    void Loop();
+    void Destroy();
+
 private:
-    void update();
-    void render();
+    void Update();
+    void Render();
 
     Window window;
     Renderer renderer;

@@ -7,52 +7,52 @@ void BlockMesh::Init() {
     atlas = SpriteAtlas("res/images/blocks.png", "blocks", glm::vec2(16, 16));
 
     BlockMesh mesh;
-    mesh.AddFace(NORTH, atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
-    mesh.AddFace(SOUTH, atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
-    mesh.AddFace(EAST,  atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
-    mesh.AddFace(WEST,  atlas.sprite_uv({1, 0}), atlas.sprite_uv({2, 1}));
-    mesh.AddFace(UP,    atlas.sprite_uv({0, 0}), atlas.sprite_uv({1, 1}));
-    mesh.AddFace(DOWN,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    mesh.AddFace(NORTH, atlas.SpriteUV({1, 0}), atlas.SpriteUV({2, 1}));
+    mesh.AddFace(SOUTH, atlas.SpriteUV({1, 0}), atlas.SpriteUV({2, 1}));
+    mesh.AddFace(EAST,  atlas.SpriteUV({1, 0}), atlas.SpriteUV({2, 1}));
+    mesh.AddFace(WEST,  atlas.SpriteUV({1, 0}), atlas.SpriteUV({2, 1}));
+    mesh.AddFace(UP,    atlas.SpriteUV({0, 0}), atlas.SpriteUV({1, 1}));
+    mesh.AddFace(DOWN,  atlas.SpriteUV({2, 0}), atlas.SpriteUV({3, 1}));
     meshes[BLOCK_GRASS] = mesh;
 
-    mesh.AddFace(NORTH, atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
-    mesh.AddFace(SOUTH, atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
-    mesh.AddFace(EAST,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
-    mesh.AddFace(WEST,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
-    mesh.AddFace(UP,    atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
-    mesh.AddFace(DOWN,  atlas.sprite_uv({2, 0}), atlas.sprite_uv({3, 1}));
+    mesh.AddFace(NORTH, atlas.SpriteUV({2, 0}), atlas.SpriteUV({3, 1}));
+    mesh.AddFace(SOUTH, atlas.SpriteUV({2, 0}), atlas.SpriteUV({3, 1}));
+    mesh.AddFace(EAST,  atlas.SpriteUV({2, 0}), atlas.SpriteUV({3, 1}));
+    mesh.AddFace(WEST,  atlas.SpriteUV({2, 0}), atlas.SpriteUV({3, 1}));
+    mesh.AddFace(UP,    atlas.SpriteUV({2, 0}), atlas.SpriteUV({3, 1}));
+    mesh.AddFace(DOWN,  atlas.SpriteUV({2, 0}), atlas.SpriteUV({3, 1}));
     meshes[BLOCK_DIRT] = mesh;
 
-    mesh.AddFace(NORTH, atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
-    mesh.AddFace(SOUTH, atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
-    mesh.AddFace(EAST,  atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
-    mesh.AddFace(WEST,  atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
-    mesh.AddFace(UP,    atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
-    mesh.AddFace(DOWN,  atlas.sprite_uv({3, 0}), atlas.sprite_uv({4, 1}));
+    mesh.AddFace(NORTH, atlas.SpriteUV({3, 0}), atlas.SpriteUV({4, 1}));
+    mesh.AddFace(SOUTH, atlas.SpriteUV({3, 0}), atlas.SpriteUV({4, 1}));
+    mesh.AddFace(EAST,  atlas.SpriteUV({3, 0}), atlas.SpriteUV({4, 1}));
+    mesh.AddFace(WEST,  atlas.SpriteUV({3, 0}), atlas.SpriteUV({4, 1}));
+    mesh.AddFace(UP,    atlas.SpriteUV({3, 0}), atlas.SpriteUV({4, 1}));
+    mesh.AddFace(DOWN,  atlas.SpriteUV({3, 0}), atlas.SpriteUV({4, 1}));
     meshes[BLOCK_STONE] = mesh;
 
-    mesh.AddFace(NORTH, atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
-    mesh.AddFace(SOUTH, atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
-    mesh.AddFace(EAST,  atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
-    mesh.AddFace(WEST,  atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
-    mesh.AddFace(UP,    atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
-    mesh.AddFace(DOWN,  atlas.sprite_uv({4, 0}), atlas.sprite_uv({5, 1}));
+    mesh.AddFace(NORTH, atlas.SpriteUV({4, 0}), atlas.SpriteUV({5, 1}));
+    mesh.AddFace(SOUTH, atlas.SpriteUV({4, 0}), atlas.SpriteUV({5, 1}));
+    mesh.AddFace(EAST,  atlas.SpriteUV({4, 0}), atlas.SpriteUV({5, 1}));
+    mesh.AddFace(WEST,  atlas.SpriteUV({4, 0}), atlas.SpriteUV({5, 1}));
+    mesh.AddFace(UP,    atlas.SpriteUV({4, 0}), atlas.SpriteUV({5, 1}));
+    mesh.AddFace(DOWN,  atlas.SpriteUV({4, 0}), atlas.SpriteUV({5, 1}));
     meshes[BLOCK_SAND] = mesh;
 
-    mesh.AddFace(NORTH, atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
-    mesh.AddFace(SOUTH, atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
-    mesh.AddFace(EAST,  atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
-    mesh.AddFace(WEST,  atlas.sprite_uv({6, 0}), atlas.sprite_uv({7, 1}));
-    mesh.AddFace(UP,    atlas.sprite_uv({5, 0}), atlas.sprite_uv({6, 1}));
-    mesh.AddFace(DOWN,  atlas.sprite_uv({5, 0}), atlas.sprite_uv({6, 1}));
+    mesh.AddFace(NORTH, atlas.SpriteUV({6, 0}), atlas.SpriteUV({7, 1}));
+    mesh.AddFace(SOUTH, atlas.SpriteUV({6, 0}), atlas.SpriteUV({7, 1}));
+    mesh.AddFace(EAST,  atlas.SpriteUV({6, 0}), atlas.SpriteUV({7, 1}));
+    mesh.AddFace(WEST,  atlas.SpriteUV({6, 0}), atlas.SpriteUV({7, 1}));
+    mesh.AddFace(UP,    atlas.SpriteUV({5, 0}), atlas.SpriteUV({6, 1}));
+    mesh.AddFace(DOWN,  atlas.SpriteUV({5, 0}), atlas.SpriteUV({6, 1}));
     meshes[BLOCK_LOG] = mesh;
 
-    mesh.AddFace(NORTH, atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
-    mesh.AddFace(SOUTH, atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
-    mesh.AddFace(EAST,  atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
-    mesh.AddFace(WEST,  atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
-    mesh.AddFace(UP,    atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
-    mesh.AddFace(DOWN,  atlas.sprite_uv({7, 0}), atlas.sprite_uv({8, 1}));
+    mesh.AddFace(NORTH, atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
+    mesh.AddFace(SOUTH, atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
+    mesh.AddFace(EAST,  atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
+    mesh.AddFace(WEST,  atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
+    mesh.AddFace(UP,    atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
+    mesh.AddFace(DOWN,  atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
     meshes[BLOCK_PLANK] = mesh;
 }
 

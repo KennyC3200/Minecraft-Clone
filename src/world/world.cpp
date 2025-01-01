@@ -4,9 +4,7 @@ void World::Init() {
     ChunkMesh::Init();
     BlockMesh::Init();
 
-    chunks_size = {16, 4, 16};
-    ground_level = 2;
-    chunk_position = {chunks_size.x / 2, ground_level, chunks_size.z / 2};
+    chunks_size = {8, 2, 8};
 
     InitChunks();
 }
@@ -81,4 +79,12 @@ void World::InitChunks() {
             }
         }
     }
+}
+
+glm::ivec3 World::GetChunksSize() {
+    return chunks_size;
+}
+
+size_t World::GetChunksCount() {
+    return chunks_count;
 }

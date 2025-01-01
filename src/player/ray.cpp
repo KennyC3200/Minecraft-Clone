@@ -1,11 +1,11 @@
 #include "ray.h"
 
-void Ray::init(World *world, float max_distance) {
+void Ray::Init(World *world, float max_distance) {
     this->world = world;
     this->max_distance = max_distance;
 }
 
-RayCastData Ray::cast(glm::vec3 position, glm::vec3 direction) {
+RayCastData Ray::Cast(glm::vec3 position, glm::vec3 direction) {
     glm::vec3 step;
     glm::vec3 d_length, d_delta;
     glm::ivec3 _position, _out;

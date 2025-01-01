@@ -2,21 +2,19 @@
 
 #include "gfx.h"
 
-enum VBODrawType {
-    DYNAMIC_DRAW = GL_DYNAMIC_DRAW,
-    STATIC_DRAW = GL_STATIC_DRAW,
-};
-
 class VBO {
 public:
     VBO();
     ~VBO();
 
-    void init(GLuint type, enum VBODrawType draw_type);
-    void destroy();
-    void bind();
-    void buffer(size_t size, void *data);
+    void Init(GLuint type, GLuint draw_type);
+    void Destroy();
+    void Bind();
+    void Buffer(size_t size, void *data);
 
-    GLuint handle, type;
-    enum VBODrawType draw_type;
+    GLuint GetHandle();
+
+private:
+    GLuint handle;
+    GLuint type, draw_type;
 };

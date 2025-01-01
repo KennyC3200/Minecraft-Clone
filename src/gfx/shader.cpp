@@ -1,9 +1,9 @@
 #include "shader.h"
 
-void Shader::init(std::string vs_path, std::string fs_path) {
+void Shader::Init(std::string vs_path, std::string fs_path) {
     handle = glCreateProgram();
-    GLuint vs_handle = compile(vs_path, GL_VERTEX_SHADER);
-    GLuint fs_handle = compile(fs_path, GL_FRAGMENT_SHADER);
+    GLuint vs_handle = Compile(vs_path, GL_VERTEX_SHADER);
+    GLuint fs_handle = Compile(fs_path, GL_FRAGMENT_SHADER);
 
     glAttachShader(handle, vs_handle);
     glAttachShader(handle, fs_handle);
@@ -24,34 +24,34 @@ void Shader::init(std::string vs_path, std::string fs_path) {
     glDeleteShader(fs_handle);
 }
 
-void Shader::destroy() {
+void Shader::Destroy() {
     glDeleteProgram(handle);
 }
 
-void Shader::bind() {
+void Shader::Bind() {
     glUseProgram(handle);
 }
 
-void Shader::uniform_texture_2d(Texture tex, unsigned int unit) {
+void Shader::UniformTexture2D(Texture tex, unsigned int unit) {
     glActiveTexture(GL_TEXTURE0 + unit);
-    tex.bind();
-    glUniform1i(glGetUniformLocation(handle, tex.fs_name.c_str()), unit);
+    tex.Bind();
+    glUniform1i(glGetUniformLocation(handle, tex.GetFSName().c_str()), unit);
 }
 
-void Shader::uniform_texture_2d(Texture tex, std::string fs_name, unsigned int unit) {
+void Shader::UniformTexture2D(Texture tex, std::string fs_name, unsigned int unit) {
     glActiveTexture(GL_TEXTURE0 + unit);
-    tex.bind();
+    tex.Bind();
     glUniform1i(glGetUniformLocation(handle, fs_name.c_str()), unit);
 }
 
-void Shader::uniform_mat4(std::string name, glm::mat4 mat4) {
+void Shader::UniformMat4(std::string name, glm::mat4 mat4) {
     glUniformMatrix4fv(
         glGetUniformLocation(handle, name.c_str()), 
         1, GL_FALSE, 
         glm::value_ptr(mat4));
 }
 
-GLuint Shader::compile(std::string path, GLuint type) {
+GLuint Shader::Compile(std::string path, GLuint type) {
     std::ifstream file;
     std::string text;
     std::stringstream stream;

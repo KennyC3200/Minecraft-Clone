@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../util/util.h"
-#include "generation/generation.h"
 #include "chunk.h"
 
 class World {
@@ -18,18 +17,15 @@ public:
 
     Block* GetBlock(glm::ivec3 chunk_position);
 
+    glm::ivec3 GetChunksSize();
+    size_t GetChunksCount();
+
+private:
+    void InitChunks();
+
     Chunk** chunks;
-    glm::ivec3 chunk_position;
 
     // Chunks size as a vector and size_t
     glm::ivec3 chunks_size;
     size_t chunks_count;
-
-    // Ground level y-position
-    int ground_level;
-private:
-    void InitChunks();
-
-    // World generation
-    Generation generation;
 };

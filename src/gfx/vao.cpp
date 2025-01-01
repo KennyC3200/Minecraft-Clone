@@ -4,26 +4,30 @@ VAO::VAO() {}
 
 VAO::~VAO() {}
 
-void VAO::init() {
+void VAO::Init() {
     glGenVertexArrays(1, &handle);
 }
 
-void VAO::destroy() {
+void VAO::Destroy() {
     glDeleteVertexArrays(1, &handle);
 }
 
-void VAO::bind() {
+void VAO::Bind() {
     glBindVertexArray(handle);
 }
 
-void VAO::attr(
+void VAO::AttribPointer(
     VBO vbo, 
     GLuint location, GLint size, GLenum type, GLsizei stride, size_t offset) 
 {
     // glVertexAttribPointer takes data from currently bound VBO
-    vbo.bind();
-    bind();
+    vbo.Bind();
+    Bind();
 
     glVertexAttribPointer(location, size, type, GL_FALSE, stride, (void*) offset);
     glEnableVertexAttribArray(location);
+}
+
+GLuint VAO::GetHandle() {
+    return handle;
 }

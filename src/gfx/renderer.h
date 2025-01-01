@@ -5,16 +5,17 @@
 
 class Renderer {
 public:
-    void init(World *world, Player *player);
-    void render();
+    void Init(World* world, Player* player);
+    void Render();
 
     struct {
         bool wireframe;
     } flags;
-private:
-    void render_world();
-    void render_ui();
 
-    World *world;
-    Player *player;
+private:
+    void RenderWorld();
+    void RenderUI();
+
+    World* world;
+    Player* player;
 };

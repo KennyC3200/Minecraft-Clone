@@ -35,16 +35,9 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 TODO
 -----
 * Major refactor
-    * Change all method names to CamelCase
-    * Refactor `ChunkMesh`
-        * Remove `model` matrix
-
-    * (MAYBE) Make `mc` namespace because Block class is SLOW AF
-    * Refactor block
-    * Refactor ChunkMesh meshing
     * Refactor how the hotbar and crosshair are being rendered
-    * Use a hashmap for block meshes
     * Move ui rendering to renderer
+    * Refactor the Ray (why tf is this a class anyways)
 * Store the block data in a struct instead of a class because it is faster (array of structs vs array of pointers)
 * Store the block data in bits of `uint64_t` for cpu communication bottleneck
 * Chunks rendering as player moves around

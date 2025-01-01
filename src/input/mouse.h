@@ -5,15 +5,15 @@
 class Mouse : public Input {
 public:
     /* Init the mouse */
-    void init(Window *window) override {
-        Input::init(window, GLFW_MOUSE_BUTTON_1, GLFW_MOUSE_BUTTON_LAST);
+    void Init(Window* window) override {
+        Input::Init(window, GLFW_MOUSE_BUTTON_1, GLFW_MOUSE_BUTTON_LAST);
 
         toggled = false;
         first_move = true;
     }
 
     /* Update the mouse */
-    void update() override {
+    void Update() override {
         double x, y;
         glfwGetCursorPos(window->handle, &x, &y);
 
@@ -29,7 +29,7 @@ public:
         position.x = x;
         position.y = y;
 
-        Input::update();
+        Input::Update();
 
         glfwSetInputMode(
             window->handle, 
@@ -38,14 +38,14 @@ public:
         );
     }
 
-    glm::vec2 get_position();
-    glm::vec2 get_position_delta();
+    glm::vec2 GetPosition();
+    glm::vec2 GetPositionDelta();
 
 protected:
     /* Get the button state
      * Required by Input class
      * */
-    int get_button_state(int button) override {
+    int GetButtonState(int button) override {
         return glfwGetMouseButton(window->handle, button);
     }
 

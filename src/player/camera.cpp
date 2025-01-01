@@ -1,6 +1,6 @@
 #include "camera.h"
 
-void Camera::init(Window *window, Mouse *mouse, glm::ivec3 position) {
+void Camera::Init(Window* window, Mouse* mouse, glm::ivec3 position) {
     this->window = window;
     this->mouse = mouse;
     this->position = position;
@@ -21,10 +21,10 @@ void Camera::init(Window *window, Mouse *mouse, glm::ivec3 position) {
     toggled = true;
 }
 
-void Camera::update() {
+void Camera::Update() {
     if (toggled) {
-        yaw += sensitivity * mouse->get_position_delta().x;
-        pitch += sensitivity * mouse->get_position_delta().y;
+        yaw += sensitivity * mouse->GetPositionDelta().x;
+        pitch += sensitivity * mouse->GetPositionDelta().y;
         pitch = CLAMP(pitch, -89.0f, 89.0f);
 
         direction = glm::normalize(glm::vec3(
@@ -48,34 +48,34 @@ void Camera::update() {
         z_near, z_far);
 }
 
-void Camera::set_position(glm::vec3 &position) {
+void Camera::SetPosition(glm::vec3& position) {
     this->position = position;
 }
 
-glm::vec3 Camera::get_direction() {
+glm::vec3 Camera::GetDirection() {
     return direction;
 }
 
-glm::vec3 Camera::get_up() {
+glm::vec3 Camera::GetUp() {
     return up;
 }
 
-glm::vec3 Camera::get_right() {
+glm::vec3 Camera::GetRight() {
     return right;
 }
 
-glm::vec3 Camera::get_front() {
+glm::vec3 Camera::GetFront() {
     return front;
 }
 
-glm::mat4 Camera::get_view() {
+glm::mat4 Camera::GetView() {
     return view;
 }
 
-glm::mat4 Camera::get_projection() {
+glm::mat4 Camera::GetProjection() {
     return projection;
 }
 
-void Camera::set_toggled(bool toggled) {
+void Camera::SetToggled(bool toggled) {
     this->toggled = toggled;
 }

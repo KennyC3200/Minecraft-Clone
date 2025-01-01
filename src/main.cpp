@@ -2,8 +2,8 @@
 
 int main() {
     Game game;
-    game.init();
-    game.loop();
-    game.destroy();
+    game.Init();
+    game.Loop();
+    game.Destroy();
     return 0;
 }

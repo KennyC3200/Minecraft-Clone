@@ -10,10 +10,10 @@
 
 class Player {
 public:
-    void init(Window *window, Keyboard *keyboard, Mouse *mouse, World *world);
-    void update();
+    void Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world);
+    void Update();
 
-    Camera &get_camera();
+    Camera& GetCamera();
 
     glm::vec3 offset, position;
     glm::ivec3 chunk_position;
@@ -21,14 +21,15 @@ public:
     // TODO: Make this an enum so that you pass in
     //       This makes it so that the idx cannot go out of bounds :)
     // void set_hotbar_idx(enum HotbarIndex idx)
-    static constexpr int HOTBAR_SIZE = 9;
-    BlockID hotbar[HOTBAR_SIZE];
+    static constexpr int hotbar_size = 9;
+    BlockID hotbar[hotbar_size];
     int current_hotbar_idx;
+
 private:
-    Window *window;
-    Keyboard *keyboard;
-    Mouse *mouse;
-    World *world;
+    Window* window;
+    Keyboard* keyboard;
+    Mouse* mouse;
+    World* world;
 
     float speed;
     Camera camera;

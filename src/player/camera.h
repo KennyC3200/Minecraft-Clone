@@ -6,23 +6,24 @@
 
 class Camera {
 public:
-    void init(Window *window, Mouse *mouse, glm::ivec3 position);
-    void update();
+    void Init(Window* window, Mouse* mouse, glm::ivec3 position);
+    void Update();
 
-    void set_position(glm::vec3 &position);
-    glm::vec3 get_direction();
+    void SetPosition(glm::vec3& position);
+    glm::vec3 GetDirection();
 
-    glm::vec3 get_up();
-    glm::vec3 get_right();
-    glm::vec3 get_front();
+    glm::vec3 GetUp();
+    glm::vec3 GetRight();
+    glm::vec3 GetFront();
 
-    glm::mat4 get_view();
-    glm::mat4 get_projection();
+    glm::mat4 GetView();
+    glm::mat4 GetProjection();
 
-    void set_toggled(bool toggled);
+    void SetToggled(bool toggled);
+
 private:
-    Window *window;
-    Mouse *mouse;
+    Window* window;
+    Mouse* mouse;
 
     glm::vec3 position;
     glm::vec3 direction;

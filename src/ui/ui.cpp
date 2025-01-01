@@ -1,16 +1,16 @@
 #include "ui.h"
 
-void UI::init(Window *window, Renderer *renderer, World *world, Player *player) {
+void UI::Init(Window* window, Renderer* renderer, World* world, Player* player) {
     this->window = window;
     this->renderer = renderer;
     this->world = world;
     this->player = player;
 
-    UIComponent::init(this->window);
-    crosshair.init();
-    hotbar.init(this->player);
+    UIComponent::Init(this->window);
+    crosshair.Init();
+    hotbar.Init(this->player);
 
-    init_imgui(window->handle);
+    InitImgui(window->handle);
 
     toggled = true;
     overview.toggled = true;
@@ -20,18 +20,18 @@ void UI::init(Window *window, Renderer *renderer, World *world, Player *player) 
     reset_button_id = 0;
 }
 
-void UI::destroy() {
-    UIComponent::destroy();
-    crosshair.destroy();
-    hotbar.destroy();
+void UI::Destroy() {
+    UIComponent::Destroy();
+    crosshair.Destroy();
+    hotbar.Destroy();
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 }
 
-void UI::render() {
-    render_components();
+void UI::Render() {
+    RenderComponents();
 
     if (!toggled) {
         return;
@@ -42,17 +42,17 @@ void UI::render() {
     ImGui::NewFrame();
 
     if (overview.toggled) {
-        render_overview();
+        RenderOverview();
     }
     if (settings.toggled) {
-        render_settings();
+        RenderSettings();
     }
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void UI::init_imgui(GLFWwindow *window) {
+void UI::InitImgui(GLFWwindow *window) {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     io = &ImGui::GetIO(); (void)io;
@@ -86,13 +86,13 @@ void UI::init_imgui(GLFWwindow *window) {
     ImGui::StyleColorsDark();
 }
 
-void UI::render_components() {
-    UIComponent::shader.bind();
-    crosshair.render();
-    hotbar.render();
+void UI::RenderComponents() {
+    UIComponent::shader.Bind();
+    crosshair.Render();
+    hotbar.Render();
 }
 
-void UI::render_overview() {
+void UI::RenderOverview() {
     ImGui::Begin("Overview");
     UI_INT(FPS, (int) window->fps);
     UI_VEC3(Position, player->position);
@@ -100,7 +100,7 @@ void UI::render_overview() {
     ImGui::End();
 }
 
-void UI::render_settings() {
+void UI::RenderSettings() {
     ImGui::Begin("Settings");
     ImGui::Text("Window Size: %ipx %ipx", window->size.x, window->size.y);
     ImGui::Checkbox("Overview", &overview.toggled);

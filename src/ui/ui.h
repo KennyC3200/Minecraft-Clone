@@ -27,9 +27,9 @@ if (ImGui::Button("Reset##"#id))\
 
 class UI {
 public:
-    void init(Window *window, Renderer *renderer, World *world, Player *player);
-    void destroy();
-    void render();
+    void Init(Window* window, Renderer* renderer, World* world, Player* player);
+    void Destroy();
+    void Render();
 
     Crosshair crosshair;
     Hotbar hotbar;
@@ -43,16 +43,16 @@ public:
         bool demo_window;
     } settings;
 private:
-    void init_imgui(GLFWwindow *window);
-    void render_components();
-    void render_overview();
-    void render_settings();
+    void InitImgui(GLFWwindow *window);
+    void RenderComponents();
+    void RenderOverview();
+    void RenderSettings();
 
-    ImGuiIO *io;
+    ImGuiIO* io;
     int reset_button_id;
 
-    Window *window;
-    Renderer *renderer;
-    World *world;
-    Player *player;
+    Window* window;
+    Renderer* renderer;
+    World* world;
+    Player* player;
 };

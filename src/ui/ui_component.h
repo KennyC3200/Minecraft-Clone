@@ -8,14 +8,14 @@
 
 class UIComponent {
 public:
-    static void init(Window *window);
-    static void destroy();
+    static void Init(Window* window);
+    static void Destroy();
 
     static Shader shader;
     static VAO vao;
     static VBO vbo, ibo;
 
-    static Window *window;
+    static Window* window;
 
     bool toggled;
 };

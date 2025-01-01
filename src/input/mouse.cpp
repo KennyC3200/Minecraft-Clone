@@ -1,9 +1,9 @@
 #include "mouse.h"
 
-glm::vec2 Mouse::get_position() {
+glm::vec2 Mouse::GetPosition() {
     return position;
 }
 
-glm::vec2 Mouse::get_position_delta() {
+glm::vec2 Mouse::GetPositionDelta() {
     return position_delta;
 }

@@ -4,7 +4,7 @@ Window::Window() {}
 
 Window::~Window() {}
 
-void Window::init() {
+void Window::Init() {
     size = {1440, 900};
 
     if (!glfwInit()) {
@@ -43,12 +43,12 @@ void Window::init() {
     time_delta = 0.0;
 }
 
-void Window::destroy() {
+void Window::Destroy() {
     glfwDestroyWindow(handle);
     glfwTerminate();
 }
 
-void Window::update() {
+void Window::Update() {
     time_current = glfwGetTime();
     time_delta = time_current - time_previous;
     time_previous = time_current;

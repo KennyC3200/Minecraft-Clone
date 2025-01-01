@@ -7,9 +7,9 @@ public:
     Window();
     ~Window();
 
-    void init();
-    void destroy();
-    void update();
+    void Init();
+    void Destroy();
+    void Update();
 
     GLFWwindow *handle;
 

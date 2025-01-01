@@ -1,6 +1,6 @@
 #include "renderer.h"
 
-void Renderer::init(World *world, Player *player) {
+void Renderer::Init(World* world, Player* player) {
     this->world = world;
     this->player = player;
 
@@ -14,30 +14,31 @@ void Renderer::init(World *world, Player *player) {
     glEnable(GL_DEPTH_TEST);
 }
 
-void Renderer::render() {
+void Renderer::Render() {
     if (flags.wireframe) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     } else {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 
-    render_world();
-    render_ui();
+    RenderWorld();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    RenderUI();
 }
 
-void Renderer::render_world() {
+void Renderer::RenderWorld() {
     // Bind the chunk shader
-    ChunkMesh::shader.bind();
+    ChunkMesh::shader.Bind();
 
     // Bind the view and projection matrices
-    ChunkMesh::shader.uniform_mat4("view", player->get_camera().get_view());
-    ChunkMesh::shader.uniform_mat4("projection", player->get_camera().get_projection());
+    ChunkMesh::shader.UniformMat4("view", player->GetCamera().GetView());
+    ChunkMesh::shader.UniformMat4("projection", player->GetCamera().GetProjection());
 
     // Render the world
-    ChunkMesh::shader.uniform_texture_2d(BlockMesh::GetAtlas().texture, 0);
+    ChunkMesh::shader.UniformTexture2D(BlockMesh::GetAtlas().texture, 0);
     world->Render();
 }
 
 // TODO
-void Renderer::render_ui() {
+void Renderer::RenderUI() {
 }

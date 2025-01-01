@@ -8,12 +8,14 @@ public:
     VAO();
     ~VAO();
 
-    void init();
-    void destroy();
-    void bind();
-    void attr(
+    void Init();
+    void Destroy();
+    void Bind();
+    void AttribPointer(
         VBO vbo, 
         GLuint location, GLint size, GLenum type, GLsizei stride, size_t offset);
+    GLuint GetHandle();
 
+private:
     GLuint handle;
 };

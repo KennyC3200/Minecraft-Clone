@@ -1,16 +1,16 @@
 #include "crosshair.h"
 
-void Crosshair::init() {
+void Crosshair::Init() {
     toggled = true;
-    texture.init("res/images/crosshair.png", "tex", GL_RGBA, GL_RGBA);
+    texture.Init("res/images/crosshair.png", "tex", GL_RGBA, GL_RGBA);
 }
 
-void Crosshair::render() {
+void Crosshair::Render() {
     if (!toggled) {
         return;
     }
 
-    UIComponent::shader.uniform_texture_2d(texture, 0);
+    UIComponent::shader.UniformTexture2D(texture, 0);
 
     float x = window->size.y / 1000.0f * 0.01f,
           y = window->size.x / 1000.0f * 0.01f;
@@ -27,14 +27,14 @@ void Crosshair::render() {
         1, 2, 3,
     };
 
-    UIComponent::ibo.buffer(sizeof(indices), indices);
-    UIComponent::vbo.buffer(sizeof(vertices), vertices);
+    UIComponent::ibo.Buffer(sizeof(indices), indices);
+    UIComponent::vbo.Buffer(sizeof(vertices), vertices);
 
-    UIComponent::vao.attr(UIComponent::vbo, 0, 2, GL_FLOAT, 4 * sizeof(float), 0 * sizeof(float));
-    UIComponent::vao.attr(UIComponent::vbo, 1, 2, GL_FLOAT, 4 * sizeof(float), 2 * sizeof(float));
+    UIComponent::vao.AttribPointer(UIComponent::vbo, 0, 2, GL_FLOAT, 4 * sizeof(float), 0 * sizeof(float));
+    UIComponent::vao.AttribPointer(UIComponent::vbo, 1, 2, GL_FLOAT, 4 * sizeof(float), 2 * sizeof(float));
 
-    UIComponent::vao.bind();
-    UIComponent::ibo.bind();
+    UIComponent::vao.Bind();
+    UIComponent::ibo.Bind();
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }

@@ -6,13 +6,14 @@
 
 class Hotbar : public UIComponent {
 public:
-    void init(Player *player);
-    void mesh();
-    void render();
-private:
-    void render_hotbar(glm::vec2 p1, glm::vec2 p2, bool toggled);
-    void render_items(glm::vec2 p1, glm::vec2 p2, BlockID block);
+    void Init(Player* player);
+    void Mesh();
+    void Render();
 
-    Player *player;
+private:
+    void RenderHotbar(glm::vec2 p1, glm::vec2 p2, bool toggled);
+    void RenderItems(glm::vec2 p1, glm::vec2 p2, BlockID block);
+
+    Player* player;
     SpriteAtlas atlas;
 };

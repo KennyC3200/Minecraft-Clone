@@ -10,11 +10,11 @@ typedef struct {
 
 class Input {
 public:
-    virtual void init(Window *window) = 0;
+    virtual void Init(Window* window) = 0;
 
-    virtual void update() {
+    virtual void Update() {
         for (int i = button_first; i < button_last; i++) {
-            int state = get_button_state(i);
+            int state = GetButtonState(i);
             if (state == GLFW_PRESS) {
                 buttons[i].down = true;
             }
@@ -27,25 +27,25 @@ public:
         }
     }
 
-    virtual Button get_button(int button) {
+    virtual Button GetButton(int button) {
         return buttons[button];
     }
 
-    virtual bool get_toggled() {
+    virtual bool GetToggled() {
         return toggled;
     }
 
-    virtual void set_toggled(bool toggled) {
+    virtual void SetToggled(bool toggled) {
         this->toggled = toggled;
     }
 
 protected:
-    Window *window;
+    Window* window;
     int button_first, button_last;
-    Button *buttons;
+    Button* buttons;
     bool toggled;
 
-    void init(Window *window, int button_first, int button_last) {
+    void Init(Window* window, int button_first, int button_last) {
         this->window = window;
         this->button_first = button_first;
         this->button_last = button_last;
@@ -54,5 +54,5 @@ protected:
         buttons = new Button[button_last];
     }
 
-    virtual int get_button_state(int button) = 0;
+    virtual int GetButtonState(int button) = 0;
 };

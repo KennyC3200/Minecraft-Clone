@@ -4,19 +4,19 @@
 Shader ChunkMesh::shader;
 
 ChunkMesh::ChunkMesh() {
-    vao.init();
-    vbo.init(GL_ARRAY_BUFFER, DYNAMIC_DRAW);
-    ibo.init(GL_ELEMENT_ARRAY_BUFFER, DYNAMIC_DRAW);
+    vao.Init();
+    vbo.Init(GL_ARRAY_BUFFER, GL_DYNAMIC_DRAW);
+    ibo.Init(GL_ELEMENT_ARRAY_BUFFER, GL_DYNAMIC_DRAW);
 }
 
 ChunkMesh::~ChunkMesh() {
-    vao.destroy();
-    vbo.destroy();
-    ibo.destroy();
+    vao.Destroy();
+    vbo.Destroy();
+    ibo.Destroy();
 }
 
 void ChunkMesh::Init() {
-    shader.init("res/shaders/chunk.vs", "res/shaders/chunk.fs");
+    shader.Init("res/shaders/chunk.vs", "res/shaders/chunk.fs");
 }
 
 void ChunkMesh::Mesh(Block blocks[], glm::ivec3 position, Chunk* adjacent_chunks[6]) {
@@ -68,14 +68,14 @@ void ChunkMesh::Mesh(Block blocks[], glm::ivec3 position, Chunk* adjacent_chunks
 }
 
 void ChunkMesh::Render() {
-    ibo.buffer(indices.size() * sizeof(unsigned int), &indices[0]);
-    vbo.buffer(vertices.size() * sizeof(float), &vertices[0]);
+    ibo.Buffer(indices.size() * sizeof(unsigned int), &indices[0]);
+    vbo.Buffer(vertices.size() * sizeof(float), &vertices[0]);
 
-    vao.attr(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0 * sizeof(float));
-    vao.attr(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
+    vao.AttribPointer(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0 * sizeof(float));
+    vao.AttribPointer(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
 
-    vao.bind();
-    ibo.bind();
+    vao.Bind();
+    ibo.Bind();
 
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }

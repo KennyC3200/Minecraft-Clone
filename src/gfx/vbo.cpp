@@ -4,21 +4,25 @@ VBO::VBO() {}
 
 VBO::~VBO() {}
 
-void VBO::init(GLuint type, enum VBODrawType draw_type) {
+void VBO::Init(GLuint type, GLuint draw_type) {
     this->type = type;
     this->draw_type = draw_type;
     glGenBuffers(1, &handle);
 }
 
-void VBO::destroy() {
+void VBO::Destroy() {
     glDeleteBuffers(1, &handle);
 }
 
-void VBO::bind() {
+void VBO::Bind() {
     glBindBuffer(type, handle);
 }
 
-void VBO::buffer(size_t size, void *data) {
-    bind();
+void VBO::Buffer(size_t size, void *data) {
+    Bind();
     glBufferData(type, size, data, draw_type);
+}
+
+GLuint VBO::GetHandle() {
+    return handle;
 }

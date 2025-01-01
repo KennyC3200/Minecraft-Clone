@@ -1,56 +1,56 @@
 #include "game.h"
 
-void Game::init() {
-    window.init();
+void Game::Init() {
+    window.Init();
     world.Init();
-    renderer.init(&world, &player);
-    ui.init(&window, &renderer, &world, &player);
+    renderer.Init(&world, &player);
+    ui.Init(&window, &renderer, &world, &player);
 
-    keyboard.init(&window);
-    mouse.init(&window);
+    keyboard.Init(&window);
+    mouse.Init(&window);
 
-    player.init(&window, &keyboard, &mouse, &world);
+    player.Init(&window, &keyboard, &mouse, &world);
 }
 
-void Game::destroy() {
-    ui.destroy();
-    window.destroy();
+void Game::Destroy() {
+    ui.Destroy();
+    window.Destroy();
     world.Destroy();
 }
 
-void Game::loop() {
+void Game::Loop() {
     while (!glfwWindowShouldClose(window.handle)) {
         glfwPollEvents();
 
         glClearColor(0.580f, 0.800f, 0.976f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        update();
-        render();
+        Update();
+        Render();
 
         glfwSwapBuffers(window.handle);
     }
 }
 
-void Game::update() {
-    window.update();
+void Game::Update() {
+    window.Update();
 
-    keyboard.update();
-    mouse.update();
+    keyboard.Update();
+    mouse.Update();
 
-    player.update();
+    player.Update();
 
-    if (keyboard.get_button(GLFW_KEY_T).pressed) {
+    if (keyboard.GetButton(GLFW_KEY_T).pressed) {
         renderer.flags.wireframe = !renderer.flags.wireframe;
     }
-    if (keyboard.get_button(GLFW_KEY_ESCAPE).pressed) {
+    if (keyboard.GetButton(GLFW_KEY_ESCAPE).pressed) {
         ui.settings.toggled = !ui.settings.toggled;
-        mouse.set_toggled(ui.settings.toggled);
-        player.get_camera().set_toggled(!ui.settings.toggled);
+        mouse.SetToggled(ui.settings.toggled);
+        player.GetCamera().SetToggled(!ui.settings.toggled);
     }
 }
 
-void Game::render() {
-    renderer.render();
-    ui.render();
+void Game::Render() {
+    renderer.Render();
+    ui.Render();
 }
