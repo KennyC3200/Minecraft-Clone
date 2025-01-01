@@ -12,6 +12,7 @@ typedef struct {
 class BlockMesh {
 public:
     static void Init();
+    static void Destroy();
     static const SpriteAtlas GetAtlas();
     static const BlockMesh Get(BlockID block_ID);
 

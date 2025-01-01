@@ -7,6 +7,7 @@
 class Hotbar : public UIComponent {
 public:
     void Init(Player* player);
+    void Destroy();
     void Mesh();
     void Render();
 

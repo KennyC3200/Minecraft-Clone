@@ -4,7 +4,11 @@ void Hotbar::Init(Player* player) {
     this->player = player;
 
     toggled = true;
-    atlas = SpriteAtlas("res/images/hotbar.png", "tex", {22, 22});
+    atlas.Init("res/images/hotbar.png", "tex", {22, 22});
+}
+
+void Hotbar::Destroy() {
+    atlas.Destroy();
 }
 
 void Hotbar::Render() {
@@ -26,7 +30,7 @@ void Hotbar::Render() {
 }
 
 void Hotbar::RenderHotbar(glm::vec2 p1, glm::vec2 p2, bool toggled) {
-    UIComponent::shader.UniformTexture2D(atlas.texture, 0);
+    UIComponent::shader.UniformTexture2D(atlas, 0);
 
     std::vector<float> vertices = {
         p1.x, p2.y,
@@ -73,7 +77,7 @@ void Hotbar::RenderHotbar(glm::vec2 p1, glm::vec2 p2, bool toggled) {
 }
 
 void Hotbar::RenderItems(glm::vec2 p1, glm::vec2 p2, BlockID block) {
-    UIComponent::shader.UniformTexture2D(BlockMesh::GetAtlas().texture, "tex", 0);
+    UIComponent::shader.UniformTexture2D(BlockMesh::GetAtlas(), "tex", 0);
 
     std::vector<float> vertices = {
         p1.x, p2.y,

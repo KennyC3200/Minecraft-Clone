@@ -1,16 +1,15 @@
 #include "sprite_atlas.h"
 
-SpriteAtlas::SpriteAtlas() {}
+void SpriteAtlas::Init(const std::string& path, const std::string& fs_name, glm::vec2 sprite_size) {
+    this->sprite_size = sprite_size;
 
-SpriteAtlas::~SpriteAtlas() {}
+    Texture::Init(path, fs_name, GL_RGBA, GL_RGBA);
+    sprite_unit = sprite_size / glm::vec2(size);
+    pixel_unit = 1.0f / glm::vec2(size);
+}
 
-SpriteAtlas::SpriteAtlas(std::string path, std::string fs_name, glm::vec2 sprite_size)
-    : sprite_size(sprite_size)
-{
-    texture.Init(path, fs_name, GL_RGBA, GL_RGBA);
-    size = texture.GetSize();
-    sprite_unit = sprite_size / size;
-    pixel_unit = 1.0f / size;
+void SpriteAtlas::Destroy() {
+    Texture::Destroy();
 }
 
 glm::vec2 SpriteAtlas::SpriteUV(glm::vec2 sprite_coordinates) {

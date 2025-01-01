@@ -14,6 +14,8 @@ void World::Destroy() {
         delete chunks[i];
     }
     delete[] chunks;
+
+    BlockMesh::Destroy();
 }
 
 void World::Render() {

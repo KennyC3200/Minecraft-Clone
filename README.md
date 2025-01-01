@@ -38,8 +38,6 @@ TODO
     * Refactor how the hotbar and crosshair are being rendered
     * Move ui rendering to renderer
     * Refactor the Ray (why tf is this a class anyways)
-* Store the block data in a struct instead of a class because it is faster (array of structs vs array of pointers)
-* Store the block data in bits of `uint64_t` for cpu communication bottleneck
 * Chunks rendering as player moves around
 * Physics
 * Padding issues, add `-Wpadded` to see

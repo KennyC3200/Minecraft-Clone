@@ -35,7 +35,7 @@ void Renderer::RenderWorld() {
     ChunkMesh::shader.UniformMat4("projection", player->GetCamera().GetProjection());
 
     // Render the world
-    ChunkMesh::shader.UniformTexture2D(BlockMesh::GetAtlas().texture, 0);
+    ChunkMesh::shader.UniformTexture2D(BlockMesh::GetAtlas(), 0);
     world->Render();
 }
 

@@ -4,7 +4,7 @@ SpriteAtlas BlockMesh::atlas;
 BlockMesh BlockMesh::meshes[BLOCK_LAST];
 
 void BlockMesh::Init() {
-    atlas = SpriteAtlas("res/images/blocks.png", "blocks", glm::vec2(16, 16));
+    atlas.Init("res/images/blocks.png", "blocks", glm::vec2(16, 16));
 
     BlockMesh mesh;
     mesh.AddFace(NORTH, atlas.SpriteUV({1, 0}), atlas.SpriteUV({2, 1}));
@@ -54,6 +54,10 @@ void BlockMesh::Init() {
     mesh.AddFace(UP,    atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
     mesh.AddFace(DOWN,  atlas.SpriteUV({7, 0}), atlas.SpriteUV({8, 1}));
     meshes[BLOCK_PLANK] = mesh;
+}
+
+void BlockMesh::Destroy() {
+    atlas.Destroy();
 }
 
 const SpriteAtlas BlockMesh::GetAtlas() {

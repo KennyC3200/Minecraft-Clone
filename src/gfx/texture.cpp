@@ -3,7 +3,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-void Texture::Init(std::string path, std::string fs_name, GLint tex_format, GLint src_format)
+void Texture::Init(std::string path, const std::string& fs_name, GLint tex_format, GLint src_format)
 {
     this->fs_name = fs_name;
 
@@ -19,7 +19,7 @@ void Texture::Init(std::string path, std::string fs_name, GLint tex_format, GLin
     // OpenGL has texture coordinates with (0, 0) on bottom left
     stbi_set_flip_vertically_on_load(true);
     int channels;
-    unsigned char *data = stbi_load(path.c_str(), &size.x, &size.y, &channels, 0);
+    unsigned char* data = stbi_load(path.c_str(), &size.x, &size.y, &channels, 0);
     if (data) {
         glTexImage2D(GL_TEXTURE_2D, 0, tex_format, size.x, size.y, 0, src_format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
@@ -41,7 +41,7 @@ GLuint Texture::GetHandle() {
     return handle;
 }
 
-std::string& Texture::GetFSName() {
+const std::string& Texture::GetFSName() {
     return fs_name;
 }
 
