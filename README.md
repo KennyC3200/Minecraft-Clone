@@ -35,8 +35,6 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 
 TODO
 -----
-* Major refactor
-    * Refactor the Ray (why tf is this a class anyways)
 * Chunks rendering as player moves around
 * Physics
 * Padding issues, add `-Wpadded` to see

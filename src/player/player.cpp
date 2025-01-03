@@ -29,11 +29,6 @@ void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world
     camera.Init(window, mouse, offset);
 }
 
-/* Update the player 
- * Handle movement
- * Update camera
- * Handle block placement/deletion
- * */
 void Player::Update() {
     float displacement = speed * window->GetTimeDelta();
     if (keyboard->GetButton(GLFW_KEY_W).down) {

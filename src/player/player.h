@@ -13,6 +13,12 @@ class HudManager;
 class Player {
 public:
     void Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world);
+
+    /* Update the player 
+     * Handle movement
+     * Update camera
+     * Handle block placement/deletion
+     * */
     void Update();
 
     Camera& GetCamera();
