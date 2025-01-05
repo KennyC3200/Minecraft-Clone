@@ -22,23 +22,19 @@
       "-Wall",
       "-Wextra",
       "-Wfloat-conversion",
-      "-I",
-      "lib/glad/include",
-      "-I",
-      "lib/glfw/include",
-      "-I",
-      "lib/stb",
-      "-I",
-      "lib/imgui",
-      "-I",
-      "lib/imgui/backends",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-Ilib/stb",
+      "-Ilib/imgui",
+      "-Ilib/imgui/backends",
+      "-Ilib/fast_noise_lite",
       "-o",
-      "src/world/block_data.o",
-      "src/world/block_data.cpp"
+      "src/ui/gui/gui_manager.o",
+      "src/ui/gui/gui_manager.cpp"
     ],
     "directory": "/Users/kennychen/Desktop/CS/minecraft.nosync",
-    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/world/block_data.cpp",
-    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/world/block_data.o"
+    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/ui/gui/gui_manager.cpp",
+    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/ui/gui/gui_manager.o"
   },
   {
     "arguments": [
@@ -49,23 +45,19 @@
       "-Wall",
       "-Wextra",
       "-Wfloat-conversion",
-      "-I",
-      "lib/glad/include",
-      "-I",
-      "lib/glfw/include",
-      "-I",
-      "lib/stb",
-      "-I",
-      "lib/imgui",
-      "-I",
-      "lib/imgui/backends",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-Ilib/stb",
+      "-Ilib/imgui",
+      "-Ilib/imgui/backends",
+      "-Ilib/fast_noise_lite",
       "-o",
-      "src/world/chunk_mesh.o",
-      "src/world/chunk_mesh.cpp"
+      "src/world/chunk.o",
+      "src/world/chunk.cpp"
     ],
     "directory": "/Users/kennychen/Desktop/CS/minecraft.nosync",
-    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/world/chunk_mesh.cpp",
-    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/world/chunk_mesh.o"
+    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/world/chunk.cpp",
+    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/world/chunk.o"
   },
   {
     "arguments": [
@@ -76,23 +68,19 @@
       "-Wall",
       "-Wextra",
       "-Wfloat-conversion",
-      "-I",
-      "lib/glad/include",
-      "-I",
-      "lib/glfw/include",
-      "-I",
-      "lib/stb",
-      "-I",
-      "lib/imgui",
-      "-I",
-      "lib/imgui/backends",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-Ilib/stb",
+      "-Ilib/imgui",
+      "-Ilib/imgui/backends",
+      "-Ilib/fast_noise_lite",
       "-o",
-      "src/gfx/vao.o",
-      "src/gfx/vao.cpp"
+      "src/gfx/texture.o",
+      "src/gfx/texture.cpp"
     ],
     "directory": "/Users/kennychen/Desktop/CS/minecraft.nosync",
-    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/vao.cpp",
-    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/vao.o"
+    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/texture.cpp",
+    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/texture.o"
   },
   {
     "arguments": [
@@ -103,23 +91,19 @@
       "-Wall",
       "-Wextra",
       "-Wfloat-conversion",
-      "-I",
-      "lib/glad/include",
-      "-I",
-      "lib/glfw/include",
-      "-I",
-      "lib/stb",
-      "-I",
-      "lib/imgui",
-      "-I",
-      "lib/imgui/backends",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-Ilib/stb",
+      "-Ilib/imgui",
+      "-Ilib/imgui/backends",
+      "-Ilib/fast_noise_lite",
       "-o",
-      "src/gfx/vbo.o",
-      "src/gfx/vbo.cpp"
+      "src/gfx/renderer.o",
+      "src/gfx/renderer.cpp"
     ],
     "directory": "/Users/kennychen/Desktop/CS/minecraft.nosync",
-    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/vbo.cpp",
-    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/vbo.o"
+    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/renderer.cpp",
+    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/renderer.o"
   },
   {
     "arguments": [
@@ -130,22 +114,64 @@
       "-Wall",
       "-Wextra",
       "-Wfloat-conversion",
-      "-I",
-      "lib/glad/include",
-      "-I",
-      "lib/glfw/include",
-      "-I",
-      "lib/stb",
-      "-I",
-      "lib/imgui",
-      "-I",
-      "lib/imgui/backends",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-Ilib/stb",
+      "-Ilib/imgui",
+      "-Ilib/imgui/backends",
+      "-Ilib/fast_noise_lite",
       "-o",
-      "src/gfx/sprite_atlas.o",
-      "src/gfx/sprite_atlas.cpp"
+      "src/game.o",
+      "src/game.cpp"
     ],
     "directory": "/Users/kennychen/Desktop/CS/minecraft.nosync",
-    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/sprite_atlas.cpp",
-    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/gfx/sprite_atlas.o"
+    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/game.cpp",
+    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/game.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-c",
+      "-std=c++20",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wfloat-conversion",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-Ilib/stb",
+      "-Ilib/imgui",
+      "-Ilib/imgui/backends",
+      "-Ilib/fast_noise_lite",
+      "-o",
+      "src/player/player.o",
+      "src/player/player.cpp"
+    ],
+    "directory": "/Users/kennychen/Desktop/CS/minecraft.nosync",
+    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/player/player.cpp",
+    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/player/player.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-c",
+      "-std=c++20",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wfloat-conversion",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-Ilib/stb",
+      "-Ilib/imgui",
+      "-Ilib/imgui/backends",
+      "-Ilib/fast_noise_lite",
+      "-o",
+      "src/player/ray.o",
+      "src/player/ray.cpp"
+    ],
+    "directory": "/Users/kennychen/Desktop/CS/minecraft.nosync",
+    "file": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/player/ray.cpp",
+    "output": "/Users/kennychen/Desktop/CS/minecraft.nosync/src/player/ray.o"
   }
 ]

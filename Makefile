@@ -2,7 +2,7 @@ UNAME_S = $(shell uname -s)
 
 CXX = clang++
 CXXFLAGS = -std=c++20 -g -Wall -Wextra -Wfloat-conversion
-CXXFLAGS += -I lib/glad/include -I lib/glfw/include -I lib/stb -I lib/imgui -I lib/imgui/backends
+CXXFLAGS += -Ilib/glad/include -Ilib/glfw/include -Ilib/stb -Ilib/imgui -Ilib/imgui/backends -Ilib/fast_noise_lite
 LDFLAGS = lib/glad/src/glad.o lib/glfw/src/libglfw3.a lib/glm/build/glm/libglm.a -lm
 
 # GLFW required frameworks on OSX

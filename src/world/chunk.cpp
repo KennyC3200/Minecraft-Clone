@@ -1,19 +1,37 @@
 #include "chunk.h"
 
-Chunk::Chunk(glm::ivec3 position) {
-    Chunk(position, BLOCK_DIRT);
-}
+FastNoiseLite Chunk::noise;
 
-Chunk::Chunk(glm::ivec3 position, BlockID block) {
+Chunk::Chunk(glm::ivec3 position, int ground_level_y) {
     this->position = position;
 
     meshed = false;
 
-    std::fill(blocks, blocks + Chunk::volume, block);
+    for (int x = 0; x < size.x; x++) {
+        for (int z = 0; z < size.z; z++) {
+            float noise_y_threshold = ground_level_y + noise.GetNoise<float>(position.x + x, position.z + z) * ground_level_y * 0.2f;
+            for (int y = 0; y < size.y; y++) {
+                if (position.y + y < noise_y_threshold) {
+                    blocks[PosToIdx(x, y, z)] = BLOCK_GRASS;
+                } else {
+                    blocks[PosToIdx(x, y, z)] = BLOCK_AIR;
+                }
+            }
+        }
+    }
 
     for (int i = 0; i < 6; i++) {
         adjacents[i] = nullptr;
     }
+}
+
+void Chunk::Init() {
+    ChunkMesh::Init();
+
+    noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
+    noise.SetFrequency(0.01f);
+    noise.SetFractalType(FastNoiseLite::FractalType_FBm);
+    noise.SetFractalOctaves(10);
 }
 
 int Chunk::PosToIdx(int x, int y, int z) {

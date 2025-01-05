@@ -2,12 +2,14 @@
 
 #include "block.h"
 #include "chunk_mesh.h"
+#include "fast_noise_lite.h"
 #include "../util/util.h"
 
 class Chunk {
 public:
-    Chunk(glm::ivec3 position);
-    Chunk(glm::ivec3 position, BlockID block);
+    Chunk(glm::ivec3 position, int ground_level_y);
+
+    static void Init();
 
     static int PosToIdx(int x, int y, int z);
     static int PosToIdx(glm::ivec3 pos);
@@ -24,6 +26,7 @@ public:
 
     static constexpr glm::ivec3 size = {16, 16, 16};
     static constexpr int volume = size.x * size.y * size.z;
+    static FastNoiseLite noise;
 
 private:
     glm::ivec3 position;

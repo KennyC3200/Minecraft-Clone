@@ -35,6 +35,7 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 
 TODO
 -----
+* Either vectors are slow or classes are slow, most likely the former. Load times are taking a while...
 * Chunks rendering as player moves around
 * Physics
 * Padding issues, add `-Wpadded` to see

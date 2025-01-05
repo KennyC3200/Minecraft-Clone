@@ -1,10 +1,12 @@
 #include "world.h"
 
 void World::Init() {
-    ChunkMesh::Init();
+    Chunk::Init();
     BlockMesh::Init();
 
-    chunks_size = {8, 2, 8};
+    chunks_size = {32, 8, 32};
+    chunks_count = chunks_size.x * chunks_size.y * chunks_size.z;
+    ground_level_y = chunks_size.y * Chunk::size.y / 2;
 
     InitChunks();
 }
@@ -51,7 +53,6 @@ Block* World::GetBlock(glm::ivec3 position) {
 }
 
 void World::InitChunks() {
-    chunks_count = chunks_size.x * chunks_size.y * chunks_size.z;
     chunks = new Chunk*[chunks_count];
 
     // Init the chunks
@@ -60,7 +61,7 @@ void World::InitChunks() {
             for (int z = 0; z < chunks_size.z; z++) {
                 chunks[GetChunkIdx(x, y, z)] = new Chunk(
                     {x * Chunk::size.x, y * Chunk::size.y, z * Chunk::size.z},
-                    y < chunks_size.y / 2 ? BLOCK_GRASS : BLOCK_AIR
+                    ground_level_y
                 );
             }
         }

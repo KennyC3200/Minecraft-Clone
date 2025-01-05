@@ -28,4 +28,7 @@ private:
     // Chunks size as a vector and size_t
     glm::ivec3 chunks_size;
     size_t chunks_count;
+
+    // The ground level y-value
+    int ground_level_y;
 };
