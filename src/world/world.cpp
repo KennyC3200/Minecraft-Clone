@@ -4,7 +4,7 @@ void World::Init() {
     Chunk::Init();
     BlockMesh::Init();
 
-    chunks_size = {32, 8, 32};
+    chunks_size = {10, 8, 10};
     chunks_count = chunks_size.x * chunks_size.y * chunks_size.z;
     ground_level_y = chunks_size.y * Chunk::size.y / 2;
 

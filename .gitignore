@@ -1,6 +1,7 @@
 bin/game
 TODO.md
 backup
+compile_commands.json
 
 *.icloud
 .DS_Store

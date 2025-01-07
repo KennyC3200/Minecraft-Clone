@@ -35,6 +35,9 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 
 TODO
 -----
+* Optimize rendering
+    * Pack and unpack the data, each vertice should be 0-16 (4 bits); a face is (4 * 6) / 8 = 3 bytes
+    * Pass a chunk_pos vec3 into the vertex shader
 * Either vectors are slow or classes are slow, most likely the former. Load times are taking a while...
 * Chunks rendering as player moves around
 * Physics

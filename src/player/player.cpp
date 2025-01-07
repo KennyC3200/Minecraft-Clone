@@ -7,7 +7,7 @@ void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world
     this->mouse = mouse;
     this->world = world;
 
-    speed = 15.0f;
+    speed = 30.0f;
 
     std::fill(hotbar, hotbar + Player::hotbar_size, BLOCK_NONE);
     hotbar[0] = BLOCK_DIRT;

@@ -92,19 +92,19 @@ void BlockMesh::MeshFace(
 {
     // Add the indices
     for (int i = 0; i < 6; i++) {
-        indices.push_back(vertices.size() / 5 + BlockMesh::indices[i]);
+        indices.emplace_back(vertices.size() / 5 + BlockMesh::indices[i]);
     }
 
     // Add the vertices
     for (int i = 0; i < 4; i++) {
         // Add the position coordinates
-        vertices.push_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 0] + position.x);
-        vertices.push_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 1] + position.y);
-        vertices.push_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 2] + position.z);
+        vertices.emplace_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 0] + position.x);
+        vertices.emplace_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 1] + position.y);
+        vertices.emplace_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 2] + position.z);
 
         // Add the uv coordinates
-        vertices.push_back(faces[direction].uv_coordinates[i * 2 + 0]);
-        vertices.push_back(faces[direction].uv_coordinates[i * 2 + 1]);
+        vertices.emplace_back(faces[direction].uv_coordinates[i * 2 + 0]);
+        vertices.emplace_back(faces[direction].uv_coordinates[i * 2 + 1]);
     }
 }
 

@@ -18,6 +18,8 @@ private:
     void Update();
     void Render();
 
+    bool running;
+
     Window window;
     Renderer renderer;
 

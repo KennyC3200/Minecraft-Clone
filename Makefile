@@ -5,6 +5,10 @@ CXXFLAGS = -std=c++20 -g -Wall -Wextra -Wfloat-conversion
 CXXFLAGS += -Ilib/glad/include -Ilib/glfw/include -Ilib/stb -Ilib/imgui -Ilib/imgui/backends -Ilib/fast_noise_lite
 LDFLAGS = lib/glad/src/glad.o lib/glfw/src/libglfw3.a lib/glm/build/glm/libglm.a -lm
 
+# Profiling
+CXXFLAGS += -I/opt/homebrew/include
+LDFLAGS += -L/opt/homebrew/lib -lprofiler
+
 # GLFW required frameworks on OSX
 ifeq ($(UNAME_S), Darwin)
 	LDFLAGS += -framework OpenGL -framework IOKit -framework CoreVideo -framework Cocoa

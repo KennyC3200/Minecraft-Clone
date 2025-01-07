@@ -1,6 +1,8 @@
 #include "game.h"
 
 void Game::Init() {
+    running = true;
+
     window.Init({1440, 900});
     world.Init();
 
@@ -13,24 +15,30 @@ void Game::Init() {
     gui_manager.Init(&window, &player);
 
     renderer.Init(&world, &player, &hud_manager, &gui_manager);
+
+    ProfilerStart("Minecraft Clone");
 }
 
 void Game::Destroy() {
+    running = false;
+
     hud_manager.Destroy();
     gui_manager.Destroy();
     world.Destroy();
     window.Destroy();
+
+    ProfilerStop();
 }
 
 void Game::Loop() {
-    while (!glfwWindowShouldClose(window.GetHandle())) {
+    while (running && !glfwWindowShouldClose(window.GetHandle())) {
         glfwPollEvents();
 
         glClearColor(0.580f, 0.800f, 0.976f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        Update();
         Render();
+        Update();
 
         glfwSwapBuffers(window.GetHandle());
     }
@@ -50,6 +58,9 @@ void Game::Update() {
     if (keyboard.GetButton(GLFW_KEY_ESCAPE).pressed) {
         mouse.SetToggled(!mouse.GetToggled());
         player.GetCamera().SetToggled(!mouse.GetToggled());
+    }
+    if (keyboard.GetButton(GLFW_KEY_Q).pressed) {
+        Destroy();
     }
 }
 
