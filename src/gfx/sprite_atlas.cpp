@@ -2,6 +2,7 @@
 
 void SpriteAtlas::Init(const std::string& path, const std::string& fs_name, glm::vec2 sprite_size) {
     this->sprite_size = sprite_size;
+    this->sprites_size = {size.x / sprite_size.x, size.y / sprite_size.y};
 
     Texture::Init(path, fs_name, GL_RGBA, GL_RGBA);
     sprite_unit = sprite_size / glm::vec2(size);
@@ -21,4 +22,8 @@ glm::vec2 SpriteAtlas::SpriteUV(int x, int y) {
 
 glm::vec2 SpriteAtlas::SpriteUV(glm::ivec2 sprite_coordinates) {
     return SpriteUV(sprite_coordinates.x, sprite_coordinates.y);
+}
+
+glm::ivec2 SpriteAtlas::SpritesSize() {
+    return sprites_size;
 }

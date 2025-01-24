@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../util/util.h"
 #include "chunk.h"
 
 class World {

@@ -3,12 +3,11 @@
 #include <vector>
 
 #include "block.h"
-#include "block_mesh.h"
-#include "../util/util.h"
 #include "../gfx/vao.h"
 #include "../gfx/vbo.h"
 #include "../gfx/shader.h"
 
+// Forward declarations
 class Chunk;
 
 class ChunkMesh {
@@ -18,8 +17,8 @@ public:
 
     static void Init();
 
-    void Mesh(Block blocks[], glm::ivec3 position, Chunk* adjacent_chunks[6]);
-    void Render();
+    void Mesh(Block blocks[], Chunk* adjacent_chunks[6]);
+    void Render(glm::ivec3& position);
 
     static Shader shader;
 

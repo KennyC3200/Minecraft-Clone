@@ -1,9 +1,9 @@
 #pragma once
 
 #include "hud_component.h"
-#include "../../util/util.h"
 #include "../../player/player.h"
-#include "../../gfx/gfx.h"
+#include "../../gfx/sprite_atlas.h"
+#include "../../world/block_mesh.h"
 
 class Hotbar : public HudComponent {
 public:

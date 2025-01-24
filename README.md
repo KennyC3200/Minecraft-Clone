@@ -11,6 +11,8 @@ make run
 ```
 Which will build the executable file in the `bin` folder.
 
+* Will in the future implement for CMake and Windows
+
 Current Implemented Features
 -----
 Features that are implemented include:
@@ -43,3 +45,4 @@ TODO
 * Physics
 * Padding issues, add `-Wpadded` to see
     * See [this article](http://www.catb.org/esr/structure-packing/#_who_should_read_this)
+* HUD being rendered over by the blocks when hovering too close to block face

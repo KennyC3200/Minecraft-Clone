@@ -44,10 +44,10 @@ int Chunk::PosToIdx(glm::ivec3 pos) {
 
 void Chunk::Render() {
     if (!meshed) {
-        mesh.Mesh(blocks, position, adjacents);
+        mesh.Mesh(blocks, adjacents);
         meshed = true;
     }
-    mesh.Render();
+    mesh.Render(position);
 }
 
 void Chunk::SetAdjacent(enum Direction direction, Chunk* chunk) {

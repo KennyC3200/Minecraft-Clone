@@ -1,6 +1,5 @@
 #pragma once
 
-#include "gfx.h"
 #include "texture.h"
 
 class SpriteAtlas : public Texture {
@@ -12,8 +11,10 @@ public:
 
     glm::vec2 SpriteUV(int x, int y);
     glm::vec2 SpriteUV(glm::ivec2 sprite_coordinates);
+    glm::ivec2 SpritesSize();
 
 private:
     glm::vec2 sprite_size;
     glm::vec2 sprite_unit, pixel_unit;
+    glm::ivec2 sprites_size;
 };

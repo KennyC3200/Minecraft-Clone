@@ -1,10 +1,11 @@
 #include "world.h"
+#include "block_mesh.h"
 
 void World::Init() {
     Chunk::Init();
     BlockMesh::Init();
 
-    chunks_size = {10, 8, 10};
+    chunks_size = {24, 8, 24};
     chunks_count = chunks_size.x * chunks_size.y * chunks_size.z;
     ground_level_y = chunks_size.y * Chunk::size.y / 2;
 
@@ -26,7 +27,7 @@ void World::Render() {
     }
 }
 
-Chunk *World::GetChunk(glm::ivec3 position) {
+Chunk* World::GetChunk(glm::ivec3 position) {
     return chunks[GetChunkIdx(position / Chunk::size)];
 }
 
@@ -35,7 +36,10 @@ int World::GetChunkIdx(int x, int y, int z) {
 }
 
 int World::GetChunkIdx(glm::ivec3 position) {
-    return (position.x * chunks_size.y * chunks_size.z) + (position.z * chunks_size.y) + (position.y);
+    return
+        (position.x * chunks_size.y * chunks_size.z) +
+        (position.z * chunks_size.y) +
+        (position.y);
 }
 
 Block* World::GetBlock(glm::ivec3 position) {

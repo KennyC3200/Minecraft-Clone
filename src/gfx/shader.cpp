@@ -1,6 +1,10 @@
 #include "shader.h"
+#include "glad/glad.h"
 
-void Shader::Init(std::string vs_path, std::string fs_path) {
+#include <fstream>
+#include <sstream>
+
+void Shader::Init(const std::string& vs_path, const std::string& fs_path) {
     handle = glCreateProgram();
     GLuint vs_handle = Compile(vs_path, GL_VERTEX_SHADER);
     GLuint fs_handle = Compile(fs_path, GL_FRAGMENT_SHADER);
@@ -32,30 +36,38 @@ void Shader::Bind() {
     glUseProgram(handle);
 }
 
-void Shader::UniformTexture2D(Texture tex, unsigned int unit) {
+GLuint Shader::GetHandle() {
+    return handle;
+}
+
+void Shader::UniformTexture2D(Texture& tex, unsigned int unit) {
     glActiveTexture(GL_TEXTURE0 + unit);
     tex.Bind();
     glUniform1i(glGetUniformLocation(handle, tex.GetFSName().c_str()), unit);
 }
 
-void Shader::UniformTexture2D(Texture tex, std::string fs_name, unsigned int unit) {
+void Shader::UniformTexture2D(Texture& tex, const std::string& fs_name, unsigned int unit) {
     glActiveTexture(GL_TEXTURE0 + unit);
     tex.Bind();
     glUniform1i(glGetUniformLocation(handle, fs_name.c_str()), unit);
 }
 
-void Shader::UniformMat4(std::string name, glm::mat4 mat4) {
+void Shader::UniformMat4(const std::string& name, glm::mat4& mat) {
     glUniformMatrix4fv(
-        glGetUniformLocation(handle, name.c_str()), 
-        1, GL_FALSE, 
-        glm::value_ptr(mat4));
+        glGetUniformLocation(handle, name.c_str()),
+        1, GL_FALSE,
+        glm::value_ptr(mat));
 }
 
-GLuint Shader::GetHandle() {
-    return handle;
+void Shader::UniformVec3(const std::string& name, glm::vec3& vec) {
+    glUniform3f(glGetUniformLocation(handle, name.c_str()), vec.x, vec.y, vec.z);
 }
 
-GLuint Shader::Compile(std::string path, GLuint type) {
+void Shader::UniformIVec3(const std::string& name, glm::ivec3& vec) {
+    glUniform3i(glGetUniformLocation(handle, name.c_str()), vec.x, vec.y, vec.z);
+}
+
+GLuint Shader::Compile(const std::string& path, GLuint type) {
     std::ifstream file;
     std::string text;
     std::stringstream stream;

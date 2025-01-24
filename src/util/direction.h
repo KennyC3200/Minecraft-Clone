@@ -13,7 +13,7 @@ enum Direction : int {
 
 namespace mc {
 
-static constexpr glm::vec3 VEC[6] = {
+static const glm::vec3 VEC[6] = {
     glm::vec3( 0,  0, -1),
     glm::vec3( 0,  0,  1),
     glm::vec3( 1,  0,  0),
@@ -22,7 +22,7 @@ static constexpr glm::vec3 VEC[6] = {
     glm::vec3( 0, -1,  0)
 };
 
-static constexpr glm::ivec3 IVEC[6] = {
+static const glm::ivec3 IVEC[6] = {
     glm::ivec3( 0,  0, -1),
     glm::ivec3( 0,  0,  1),
     glm::ivec3( 1,  0,  0),

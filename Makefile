@@ -32,10 +32,10 @@ dirs:
 
 libs:
 	cd lib/glm && cmake -DGLM_BUILD_TESTS=OFF -DBUILD_SHARED_LIBS=OFF -B build . && cmake --build build -- all
-	cd lib/glad && $(CXX) -o src/glad.o -I include -c src/glad.c 
+	cd lib/glad && $(CXX) -o src/glad.o -I include -c src/glad.c
 	cd lib/glfw && cmake . && make
 
-run: all
+run: dirs game
 	$(BIN)/game
 
 game: $(OBJ)

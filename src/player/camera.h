@@ -16,8 +16,8 @@ public:
     glm::vec3 GetRight();
     glm::vec3 GetFront();
 
-    glm::mat4 GetView();
-    glm::mat4 GetProjection();
+    glm::mat4& GetView();
+    glm::mat4& GetProjection();
 
     void SetToggled(bool toggled);
 

@@ -35,15 +35,15 @@ void Camera::Update() {
 
         right = glm::normalize(glm::cross(direction, up));
 
-        /* This is the cross product of the up vector and right vector 
-         * gives the direction that the player will move in the x and z components 
+        /* This is the cross product of the up vector and right vector
+         * gives the direction that the player will move in the x and z components
          * */
         front = glm::normalize(glm::cross(up, right));
     }
 
     view = glm::lookAt(position, position + direction, up);
     projection = glm::perspective(
-        glm::radians(fov), 
+        glm::radians(fov),
         (float) window->GetSize().x / window->GetSize().y,
         z_near, z_far);
 }
@@ -68,11 +68,11 @@ glm::vec3 Camera::GetFront() {
     return front;
 }
 
-glm::mat4 Camera::GetView() {
+glm::mat4& Camera::GetView() {
     return view;
 }
 
-glm::mat4 Camera::GetProjection() {
+glm::mat4& Camera::GetProjection() {
     return projection;
 }
 

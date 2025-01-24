@@ -15,8 +15,6 @@ void Game::Init() {
     gui_manager.Init(&window, &player);
 
     renderer.Init(&world, &player, &hud_manager, &gui_manager);
-
-    ProfilerStart("Minecraft Clone");
 }
 
 void Game::Destroy() {
@@ -26,8 +24,6 @@ void Game::Destroy() {
     gui_manager.Destroy();
     world.Destroy();
     window.Destroy();
-
-    ProfilerStop();
 }
 
 void Game::Loop() {
