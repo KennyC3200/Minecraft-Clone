@@ -41,10 +41,10 @@ GLuint Texture::GetHandle() {
     return handle;
 }
 
-const std::string& Texture::GetFSName() {
+const std::string& Texture::FSName() {
     return fs_name;
 }
 
-glm::ivec2 Texture::GetSize() {
+glm::ivec2 Texture::Size() {
     return size;
 }

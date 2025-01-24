@@ -1,10 +1,11 @@
 #include "sprite_atlas.h"
 
 void SpriteAtlas::Init(const std::string& path, const std::string& fs_name, glm::vec2 sprite_size) {
+    Texture::Init(path, fs_name, GL_RGBA, GL_RGBA);
+
     this->sprite_size = sprite_size;
     this->sprites_size = {size.x / sprite_size.x, size.y / sprite_size.y};
 
-    Texture::Init(path, fs_name, GL_RGBA, GL_RGBA);
     sprite_unit = sprite_size / glm::vec2(size);
     pixel_unit = 1.0f / glm::vec2(size);
 }

@@ -73,14 +73,13 @@ void ChunkMesh::Render(glm::ivec3& position) {
         return;
     }
 
-    ibo.Buffer(indices.size() * sizeof(unsigned int), &indices[0]);
-    vbo.Buffer(vertices.size() * sizeof(float), &vertices[0]);
+    ibo.Buffer(indices.size() * sizeof(uint32_t), &indices[0]);
+    vbo.Buffer(vertices.size() * sizeof(uint32_t), &vertices[0]);
 
     // Bind the uniform vec3 for the chunk_pos in the vertex shader
     shader.UniformIVec3("chunk_pos", position);
 
-    vao.AttribPointer(vbo, 0, 3, GL_FLOAT, 5 * sizeof(float), 0 * sizeof(float));
-    vao.AttribPointer(vbo, 1, 2, GL_FLOAT, 5 * sizeof(float), 3 * sizeof(float));
+    vao.AttribIPointer(vbo, 0, 1, GL_UNSIGNED_INT, 1 * sizeof(uint32_t), 0 * sizeof(uint32_t));
 
     vao.Bind();
     ibo.Bind();

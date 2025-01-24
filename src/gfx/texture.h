@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
 #include "gfx.h"
 
@@ -9,8 +9,8 @@ public:
     void Bind();
 
     GLuint GetHandle();
-    const std::string& GetFSName();
-    glm::ivec2 GetSize();
+    const std::string& FSName();
+    glm::ivec2 Size();
 
 protected:
     GLuint handle;

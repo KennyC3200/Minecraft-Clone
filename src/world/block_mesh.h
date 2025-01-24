@@ -3,6 +3,8 @@
 #include "block.h"
 #include "../gfx/sprite_atlas.h"
 
+#include <cstdint>
+
 typedef struct {
     // UV coordinates of the sprite
     glm::vec2 uv_min, uv_max;
@@ -27,22 +29,18 @@ public:
     // @param sprite_max The maximum sprite coordinate (bottom-right coordinate, as sprite coordinates)
     void AddFace(enum Direction direction, glm::ivec2 sprite_min, glm::ivec2 sprite_max);
 
-    // Mesh a face in the chunk
-    // @param direction Direction of the face to mesh
-    // @param position Block's position
-    // @param vertices Vertices of the block
-    // @param indices Indices of the block
     void MeshFace(
         enum Direction direction,
-        glm::vec3 position,
-        std::vector<float>& vertices,
-        std::vector<unsigned int>& indices);
+        glm::ivec3 position,
+        std::vector<uint32_t>& vertices,
+        std::vector<uint32_t>& indices
+    );
 
 private:
     static SpriteAtlas atlas;
     static BlockMesh meshes[BLOCK_LAST];
 
-    static constexpr float vertices[] = {
+    static constexpr unsigned int vertices[] = {
         // North (-z)
         0, 0, 0,
         1, 0, 0,

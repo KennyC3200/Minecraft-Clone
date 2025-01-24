@@ -37,6 +37,10 @@ void Renderer::RenderWorld() {
 
     // Render the world
     ChunkMesh::shader.UniformTexture2D(BlockMesh::GetAtlas(), 0);
+
+    glm::ivec2 sprites_size = BlockMesh::GetAtlas().SpritesSize();
+    ChunkMesh::shader.UniformIVec2("sprites_size", sprites_size);
+
     world->Render();
 }
 

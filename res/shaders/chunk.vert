@@ -1,7 +1,6 @@
 #version 330 core
 
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec2 uv;
+layout (location = 0) in uint data;
 
 // Block UV coordinates
 out vec2 v_uv;
@@ -14,9 +13,23 @@ uniform mat4 projection;
 uniform ivec3 chunk_pos;
 
 // To calculate the UV coordinates
-uniform vec2 sprites_size;
+uniform ivec2 sprites_size;
 
 void main() {
-    gl_Position = projection * view * vec4(chunk_pos + position, 1.0f);
+    // Unpack the face position
+    ivec3 block_position = ivec3(
+        data       & 31u,
+        data >> 5  & 31u,
+        data >> 10 & 31u
+    );
+
+    gl_Position = projection * view * vec4(chunk_pos + block_position, 1.0f);
+
+    // Unpack the UV coordinates
+    vec2 uv = vec2(
+        (data >> 15u & 31u) / float(sprites_size.x),
+        (data >> 20u & 31u) / float(sprites_size.y)
+    );
+
     v_uv = uv;
 }

@@ -102,24 +102,34 @@ void BlockMesh::AddFace(enum Direction direction, glm::ivec2 sprite_min, glm::iv
 
 void BlockMesh::MeshFace(
     enum Direction direction,
-    glm::vec3 position,
-    std::vector<float>& vertices,
-    std::vector<unsigned int>& indices)
+    glm::ivec3 position,
+    std::vector<uint32_t>& vertices,
+    std::vector<uint32_t>& indices
+)
 {
-    // Add the indices
+    // Add the indices for the face
+    int indices_offset = vertices.size();
     for (int i = 0; i < 6; i++) {
-        indices.emplace_back(vertices.size() / 5 + BlockMesh::indices[i]);
+        indices.emplace_back(indices_offset + BlockMesh::indices[i]);
     }
 
-    // Add the vertices
+    // Add the vertices for the face (4 vertices total)
+    // Data packing:
+    // * Vertex coordinate (x, y, z) stored in 5 bits each, totalling 15 bits
+    // * Sprite coordinate (x, y) stored in 5 bits each, totalling 10 bits
     for (int i = 0; i < 4; i++) {
-        // Add the position coordinates
-        vertices.emplace_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 0] + position.x);
-        vertices.emplace_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 1] + position.y);
-        vertices.emplace_back(BlockMesh::vertices[3 * 4 * direction + i * 3 + 2] + position.z);
+        int data = 0x0;
 
-        // Add the uv coordinates
-        vertices.emplace_back(faces[direction].uv_coordinates[i * 2 + 0]);
-        vertices.emplace_back(faces[direction].uv_coordinates[i * 2 + 1]);
+        // Vertex coordinates
+        int idx_offset = (3 * 4) * direction + (i * 3);
+        data |= (BlockMesh::vertices[idx_offset + 0] << (0 * 5)) + (position.x << (0 * 5)); // x
+        data |= (BlockMesh::vertices[idx_offset + 1] << (1 * 5)) + (position.y << (1 * 5)); // y
+        data |= (BlockMesh::vertices[idx_offset + 2] << (2 * 5)) + (position.z << (2 * 5)); // z
+
+        // Sprite coordinates
+        data |= faces[direction].sprite_coordinates[i].x << ((3 * 5) + (0 * 5)); // x
+        data |= faces[direction].sprite_coordinates[i].y << ((3 * 5) + (1 * 5)); // y
+
+        vertices.emplace_back(data);
     }
 }

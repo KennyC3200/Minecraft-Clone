@@ -14,6 +14,7 @@ public:
     void UniformMat4(const std::string& name, glm::mat4& mat);
     void UniformVec3(const std::string& name, glm::vec3& vec);
     void UniformIVec3(const std::string& name, glm::ivec3& vec);
+    void UniformIVec2(const std::string& name, glm::ivec2& vec);
 
 private:
     GLuint Compile(const std::string& path, GLuint type);

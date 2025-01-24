@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <cstdint>
 
 #include "block.h"
 #include "../gfx/vao.h"
@@ -27,6 +28,6 @@ private:
     VBO vbo;
     VBO ibo;
 
-    std::vector<float> vertices;
-    std::vector<unsigned int> indices;
+    std::vector<uint32_t> vertices;
+    std::vector<uint32_t> indices;
 };

@@ -43,7 +43,7 @@ GLuint Shader::GetHandle() {
 void Shader::UniformTexture2D(Texture& tex, unsigned int unit) {
     glActiveTexture(GL_TEXTURE0 + unit);
     tex.Bind();
-    glUniform1i(glGetUniformLocation(handle, tex.GetFSName().c_str()), unit);
+    glUniform1i(glGetUniformLocation(handle, tex.FSName().c_str()), unit);
 }
 
 void Shader::UniformTexture2D(Texture& tex, const std::string& fs_name, unsigned int unit) {
@@ -65,6 +65,10 @@ void Shader::UniformVec3(const std::string& name, glm::vec3& vec) {
 
 void Shader::UniformIVec3(const std::string& name, glm::ivec3& vec) {
     glUniform3i(glGetUniformLocation(handle, name.c_str()), vec.x, vec.y, vec.z);
+}
+
+void Shader::UniformIVec2(const std::string& name, glm::ivec2& vec) {
+    glUniform2i(glGetUniformLocation(handle, name.c_str()), vec.x, vec.y);
 }
 
 GLuint Shader::Compile(const std::string& path, GLuint type) {
