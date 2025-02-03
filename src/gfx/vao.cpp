@@ -39,7 +39,3 @@ void VAO::AttribIPointer(
     glVertexAttribIPointer(location, size, type, stride, (void*) offset);
     glEnableVertexAttribArray(location);
 }
-
-GLuint VAO::GetHandle() {
-    return handle;
-}

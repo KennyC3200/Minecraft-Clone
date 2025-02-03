@@ -22,7 +22,3 @@ void VBO::Buffer(size_t size, void *data) {
     Bind();
     glBufferData(type, size, data, draw_type);
 }
-
-GLuint VBO::GetHandle() {
-    return handle;
-}

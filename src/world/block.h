@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 enum BlockID : uint16_t {
     BLOCK_NONE = 0,

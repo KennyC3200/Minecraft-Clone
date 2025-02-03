@@ -2,23 +2,15 @@
 
 FastNoiseLite Chunk::noise;
 
-Chunk::Chunk(glm::ivec3 position, int ground_level_y) {
+Chunk::Chunk() {}
+
+Chunk::Chunk(glm::ivec3 position, int ground_level) {
     this->position = position;
 
     meshed = false;
 
-    for (int x = 0; x < size.x; x++) {
-        for (int z = 0; z < size.z; z++) {
-            float noise_y_threshold = ground_level_y + noise.GetNoise<float>(position.x + x, position.z + z) * ground_level_y * 0.2f;
-            for (int y = 0; y < size.y; y++) {
-                if (position.y + y < noise_y_threshold) {
-                    blocks[PosToIdx(x, y, z)] = BLOCK_GRASS;
-                } else {
-                    blocks[PosToIdx(x, y, z)] = BLOCK_AIR;
-                }
-            }
-        }
-    }
+    // Generate the chunk
+    Generate(position, ground_level);
 
     for (int i = 0; i < 6; i++) {
         adjacents[i] = nullptr;
@@ -40,6 +32,29 @@ int Chunk::PosToIdx(int x, int y, int z) {
 
 int Chunk::PosToIdx(glm::ivec3 pos) {
     return PosToIdx(pos.x, pos.y, pos.z);
+}
+
+void Chunk::Generate(glm::ivec3 position, int ground_level) {
+    this->position = position;
+
+    for (int x = 0; x < size.x; x++) {
+        for (int z = 0; z < size.z; z++) {
+            float noise_val = 
+                ground_level +
+                noise.GetNoise<float>(position.x + x, position.z + z) * ground_level * 0.2f;
+
+            // The surface of the ground is filled with grass
+            bool surface_level = false;
+            for (int y = 0; y < size.y; y++) {
+                if (position.y + y + 1 > noise_val) 
+                    surface_level = true;
+                if (position.y + y < noise_val)
+                    blocks[PosToIdx(x, y, z)] = surface_level ? BLOCK_GRASS : BLOCK_DIRT;
+                else
+                    blocks[PosToIdx(x, y, z)] = BLOCK_AIR;
+            }
+        }
+    }
 }
 
 void Chunk::Render() {

@@ -20,6 +20,7 @@ Features that are implemented include:
 * Placing and blocks
 * Removing blocks
 * Hotbar
+* World generation
 
 Libraries Used
 -----
@@ -37,9 +38,14 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 
 TODO
 -----
-* Like are vectors slow or something?
-* Chunks rendering as player moves around
+* Multithread the chunks generation
+* Implement a ticks system
+    * Chunks render at a tick rate
 * Physics
 * Padding issues, add `-Wpadded` to see
     * See [this article](http://www.catb.org/esr/structure-packing/#_who_should_read_this)
 * HUD being rendered over by the blocks when hovering too close to block face
+* Fix cursor issue interacting with GUI even when off
+* In the future, benchmark 1d array vs 2d array for chunks stored in the world
+    * 2d array has cache misses
+    * 1d array has a lot of multiplication calculations (costs a lot of cpu cycles)

@@ -12,7 +12,7 @@ void Game::Init() {
     player.Init(&window, &keyboard, &mouse, &world);
 
     hud_manager.Init(&window, &player);
-    gui_manager.Init(&window, &player);
+    gui_manager.Init(&window, &world, &player);
 
     renderer.Init(&world, &player, &hud_manager, &gui_manager);
 }
@@ -57,6 +57,9 @@ void Game::Update() {
     }
     if (keyboard.GetButton(GLFW_KEY_Q).pressed) {
         Destroy();
+    }
+    if (keyboard.GetButton(GLFW_KEY_R).pressed) {
+        world.generate = !world.generate;
     }
 }
 

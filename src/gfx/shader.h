@@ -6,7 +6,7 @@ class Shader {
 public:
     void Init(const std::string& vs_path, const std::string& fs_path);
     void Destroy();
-    GLuint GetHandle();
+    inline GLuint GetHandle() { return handle; }
     void Bind();
 
     void UniformTexture2D(Texture& tex, unsigned int unit);

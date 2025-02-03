@@ -1,5 +1,7 @@
 #include "player.h"
+#include "ray.h"
 #include "../ui/hud/hud_manager.h"
+#include "../world/chunk.h"
 
 void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world) {
     this->window = window;
@@ -7,7 +9,7 @@ void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world
     this->mouse = mouse;
     this->world = world;
 
-    speed = 30.0f;
+    speed = 50.0f;
 
     std::fill(hotbar, hotbar + Player::hotbar_size, BLOCK_NONE);
     hotbar[0] = BLOCK_DIRT;
@@ -16,15 +18,21 @@ void Player::Init(Window* window, Keyboard* keyboard, Mouse* mouse, World* world
     hotbar[3] = BLOCK_SAND;
     hotbar[4] = BLOCK_LOG;
     hotbar[5] = BLOCK_PLANK;
-    current_hotbar_idx = 0;
+    hotbar_idx = 0;
 
-    float player_height = 1.8f;
+    height = 1.8f;
     offset = {
-        0.001f + (int)(world->GetChunksSize().x * Chunk::size.x / 2), 
-        0.001f + (int)(world->GetChunksSize().y * Chunk::size.y / 2) + player_height, 
+        0.001f + (int)(world->GetChunksSize().x * Chunk::size.x / 2),
+        0.001f + (int)(world->GetChunksSize().y * Chunk::size.y / 2) + height,
         0.001f + (int)(world->GetChunksSize().z * Chunk::size.z / 2)
     };
+
     position = offset;
+    chunk_position = {
+        (int)(position.x / Chunk::size.x),
+        (int)(position.y / Chunk::size.y),
+        (int)(position.z / Chunk::size.z)};
+    chunk_position_prev = chunk_position;
 
     camera.Init(window, mouse, offset);
 }
@@ -51,20 +59,44 @@ void Player::Update() {
     }
 
     // Update the camera
-    camera.SetPosition(position);
+    camera.SetPosition({position.x, position.y + height, position.z});
     camera.Update();
 
-    // Handle the hotbar
-    // Keep in mind the index starts at 0, not 
+    // Calculate new chunk position
+    chunk_position = {
+        (int)(position.x / Chunk::size.x),
+        (int)(position.y / Chunk::size.y),
+        (int)(position.z / Chunk::size.z)};
+
+    // Generate new chunks when moving between chunks
+    int x_diff = chunk_position.x - chunk_position_prev.x;
+    int z_diff = chunk_position.z - chunk_position_prev.z;
+    if (x_diff != 0 || z_diff != 0) {
+        if (x_diff > 0) {
+            world->GenerateChunks(EAST);
+        } else if (x_diff < 0) {
+            world->GenerateChunks(WEST);
+        } else if (z_diff > 0) {
+            world->GenerateChunks(SOUTH);
+        } else if (z_diff < 0) {
+            world->GenerateChunks(NORTH);
+        }
+
+        chunk_position_prev.x = chunk_position.x;
+        chunk_position_prev.y = chunk_position.y;
+        chunk_position_prev.z = chunk_position.z;
+    }
+
+    // Handle the hotbar. Keep in mind the index starts at 0, not 1
     for (int i = 0; i < Player::hotbar_size; i++) {
         if (keyboard->GetButton(GLFW_KEY_1 + i).pressed) {
-            current_hotbar_idx = i;
+            hotbar_idx = i;
             HudManager::MeshHotbar();
         }
     }
 
     // Handle block placement/deletion
-    mc::RaycastData raycast = mc::Raycast(world, position, camera.GetDirection(), 8.0f);
+    mc::RaycastData raycast = mc::Raycast(world, camera.GetPosition(), camera.GetDirection(), 8.0f);
     if (raycast.hit) {
         if (mouse->GetButton(GLFW_MOUSE_BUTTON_LEFT).pressed) {
             world->GetBlock(raycast.position)->SetID(BLOCK_AIR);
@@ -72,24 +104,20 @@ void Player::Update() {
         }
         if (mouse->GetButton(GLFW_MOUSE_BUTTON_RIGHT).pressed) {
             glm::vec3 block_position = raycast.position + raycast.out;
-            Block *block = world->GetBlock(block_position);
+            Block* block = world->GetBlock(block_position);
 
             if (block != nullptr && block->GetID() == BLOCK_AIR) {
-                world->GetBlock(block_position)->SetID(hotbar[current_hotbar_idx]);
+                world->GetBlock(block_position)->SetID(hotbar[hotbar_idx]);
                 world->GetChunk(block_position)->SetDirty();
             }
         }
     }
 }
 
-Camera& Player::GetCamera() {
-    return camera;
-}
-
 BlockID Player::GetHotbarItem(int idx) {
     return hotbar[idx];
 }
 
-int Player::GetCurrentHotbarIdx() {
-    return current_hotbar_idx;
+int Player::GetHotbarIdx() {
+    return hotbar_idx;
 }

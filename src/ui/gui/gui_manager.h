@@ -8,15 +8,17 @@
 
 #include "../../gfx/window.h"
 #include "../../player/player.h"
+#include "../../world/world.h"
 
 class GuiManager {
 public:
-    void Init(Window* window, Player* player);
+    void Init(Window* window, World* world, Player* player);
     void Destroy();
     void Render();
 
 private:
     Window* window;
+    World* world;
     Player* player;
 
     ImGuiIO* io;

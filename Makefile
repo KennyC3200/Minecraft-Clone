@@ -1,25 +1,49 @@
-UNAME_S = $(shell uname -s)
+UNAME_S := $(shell uname -s)
 
-CXX = clang++
-CXXFLAGS = -std=c++20 -g -Wall -Wextra -Wfloat-conversion
-CXXFLAGS += -Ilib/glad/include -Ilib/glfw/include -Ilib/stb -Ilib/imgui -Ilib/imgui/backends -Ilib/fast_noise_lite
-LDFLAGS = lib/glad/src/glad.o lib/glfw/src/libglfw3.a lib/glm/build/glm/libglm.a -lm
+CXX := clang++
 
-# Profiling
-CXXFLAGS += -I/opt/homebrew/include
-LDFLAGS += -L/opt/homebrew/lib -lprofiler
+# Compiling flags
+CXXFLAGS := -std=c++20
+CXXFLAGS += -g
+CXXFLAGS += -Wall
+CXXFLAGS += -Wextra
+CXXFLAGS += -Wfloat-conversion
+CXXFLAGS += -Wunused
+CXXFLAGS += -O3
+
+# Libraries includes
+CXXFLAGS += -Ilib/glad/include
+CXXFLAGS += -Ilib/glfw/include
+CXXFLAGS += -Ilib/stb
+CXXFLAGS += -Ilib/imgui
+CXXFLAGS += -Ilib/imgui/backends
+CXXFLAGS += -Ilib/fast_noise_lite
+
+# Linking
+LDFLAGS := lib/glad/src/glad.o
+LDFLAGS += lib/glfw/src/libglfw3.a
+LDFLAGS += lib/glm/build/glm/libglm.a -lm
 
 # GLFW required frameworks on OSX
 ifeq ($(UNAME_S), Darwin)
-	LDFLAGS += -framework OpenGL -framework IOKit -framework CoreVideo -framework Cocoa
+	LDFLAGS += -framework OpenGL
+	LDFLAGS += -framework IOKit
+	LDFLAGS += -framework CoreVideo
+	LDFLAGS += -framework Cocoa
 endif
 
 SRC = $(shell find src -name "*.cpp")
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
 BIN = bin
 
-IMGUI_SRC = lib/imgui/imgui.cpp lib/imgui/imgui_demo.cpp lib/imgui/imgui_draw.cpp lib/imgui/imgui_tables.cpp lib/imgui/imgui_widgets.cpp
-IMGUI_SRC += lib/imgui/backends/imgui_impl_glfw.cpp lib/imgui/backends/imgui_impl_opengl3.cpp
+# dear imgui
+IMGUI_SRC := lib/imgui/imgui.cpp
+IMGUI_SRC += lib/imgui/imgui_demo.cpp
+IMGUI_SRC += lib/imgui/imgui_draw.cpp
+IMGUI_SRC += lib/imgui/imgui_tables.cpp
+IMGUI_SRC += lib/imgui/imgui_widgets.cpp
+IMGUI_SRC += lib/imgui/backends/imgui_impl_glfw.cpp
+IMGUI_SRC += lib/imgui/backends/imgui_impl_opengl3.cpp
 IMGUI_OBJ = $(patsubst %.cpp, %.o, $(IMGUI_SRC))
 SRC += $(IMGUI_SRC)
 
@@ -58,15 +82,3 @@ clean:
 
 deepclean:
 	rm -rf $(BIN) $(OBJ)
-
-TEST = block_data
-TEST_SRC = tests/$(TEST).cpp
-
-test:
-	$(CXX) -o tests/$(TEST) $(TEST_SRC) $(CXXFLAGS)
-
-runtest: test
-	./tests/$(TEST)
-
-cleantest:
-	rm -rf tests/$(TEST)

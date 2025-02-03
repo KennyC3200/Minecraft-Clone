@@ -16,7 +16,7 @@ public:
     void AttribIPointer(
         VBO vbo,
         GLuint location, GLint size, GLenum type, GLsizei stride, size_t offset);
-    GLuint GetHandle();
+    inline GLuint GetHandle() { return handle; }
 
 private:
     GLuint handle;

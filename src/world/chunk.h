@@ -3,17 +3,18 @@
 #include "block.h"
 #include "chunk_mesh.h"
 #include "fast_noise_lite.h"
-#include "../util/util.h"
 
 class Chunk {
 public:
-    Chunk(glm::ivec3 position, int ground_level_y);
+    Chunk();
+    Chunk(glm::ivec3 position, int ground_level);
 
     static void Init();
 
     static int PosToIdx(int x, int y, int z);
     static int PosToIdx(glm::ivec3 pos);
 
+    void Generate(glm::ivec3 position, int ground_level);
     void Render();
     void SetAdjacent(enum Direction direction, Chunk* chunk);
 

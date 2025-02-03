@@ -32,7 +32,7 @@ public:
                     player->GetHotbarItem(i)
                 );
             }
-            MeshFrame(p1, p2, i == player->GetCurrentHotbarIdx());
+            MeshFrame(p1, p2, i == player->GetHotbarIdx());
         }
     }
 

@@ -36,15 +36,3 @@ void Texture::Destroy() {
 void Texture::Bind() {
     glBindTexture(GL_TEXTURE_2D, handle);
 }
-
-GLuint Texture::GetHandle() {
-    return handle;
-}
-
-const std::string& Texture::FSName() {
-    return fs_name;
-}
-
-glm::ivec2 Texture::Size() {
-    return size;
-}

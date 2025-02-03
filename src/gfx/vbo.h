@@ -11,8 +11,7 @@ public:
     void Destroy();
     void Bind();
     void Buffer(size_t size, void *data);
-
-    GLuint GetHandle();
+    inline GLuint GetHandle() { return handle; }
 
 private:
     GLuint handle;

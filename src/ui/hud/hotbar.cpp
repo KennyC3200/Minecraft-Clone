@@ -18,7 +18,10 @@ void Hotbar::MeshItem(glm::vec2 p1, glm::vec2 p2, BlockID block_id) {
         vertex_offset + 0, vertex_offset + 1, vertex_offset + 3,
         vertex_offset + 1, vertex_offset + 2, vertex_offset + 3
     };
-    this->indices[ITEM_MESH].insert(this->indices[ITEM_MESH].end(), std::begin(indices), std::end(indices));
+    this->indices[ITEM_MESH].insert(
+        this->indices[ITEM_MESH].end(), 
+        std::begin(indices), 
+        std::end(indices));
 
     float vertices[] = {
         p1.x, p2.y, uv_min.x, 1 - uv_min.y,
@@ -26,7 +29,10 @@ void Hotbar::MeshItem(glm::vec2 p1, glm::vec2 p2, BlockID block_id) {
         p2.x, p1.y, uv_max.x, 1 - uv_max.y,
         p2.x, p2.y, uv_max.x, 1 - uv_min.y
     };
-    this->vertices[ITEM_MESH].insert(this->vertices[ITEM_MESH].end(), std::begin(vertices), std::end(vertices));
+    this->vertices[ITEM_MESH].insert(
+        this->vertices[ITEM_MESH].end(), 
+        std::begin(vertices), 
+        std::end(vertices));
 }
 
 void Hotbar::MeshFrame(glm::vec2 p1, glm::vec2 p2, bool active) {
@@ -39,7 +45,10 @@ void Hotbar::MeshFrame(glm::vec2 p1, glm::vec2 p2, bool active) {
         vertex_offset + 0, vertex_offset + 1, vertex_offset + 3,
         vertex_offset + 1, vertex_offset + 2, vertex_offset + 3
     };
-    this->indices[FRAME_MESH].insert(this->indices[FRAME_MESH].end(), std::begin(indices), std::end(indices));
+    this->indices[FRAME_MESH].insert(
+        this->indices[FRAME_MESH].end(), 
+        std::begin(indices), 
+        std::end(indices));
 
     glm::vec2 uv1 = atlas.SpriteUV(1 + u_offset, 0);
     glm::vec2 uv2 = atlas.SpriteUV(1 + u_offset, 1);
@@ -53,5 +62,8 @@ void Hotbar::MeshFrame(glm::vec2 p1, glm::vec2 p2, bool active) {
         p2.x, p1.y, uv3.x, uv3.y,
         p2.x, p2.y, uv4.x, uv4.y
     };
-    this->vertices[FRAME_MESH].insert(this->vertices[FRAME_MESH].end(), std::begin(vertices), std::end(vertices));
+    this->vertices[FRAME_MESH].insert(
+        this->vertices[FRAME_MESH].end(), 
+        std::begin(vertices), 
+        std::end(vertices));
 }

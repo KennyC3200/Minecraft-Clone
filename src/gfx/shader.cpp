@@ -36,14 +36,10 @@ void Shader::Bind() {
     glUseProgram(handle);
 }
 
-GLuint Shader::GetHandle() {
-    return handle;
-}
-
 void Shader::UniformTexture2D(Texture& tex, unsigned int unit) {
     glActiveTexture(GL_TEXTURE0 + unit);
     tex.Bind();
-    glUniform1i(glGetUniformLocation(handle, tex.FSName().c_str()), unit);
+    glUniform1i(glGetUniformLocation(handle, tex.GetFSName().c_str()), unit);
 }
 
 void Shader::UniformTexture2D(Texture& tex, const std::string& fs_name, unsigned int unit) {

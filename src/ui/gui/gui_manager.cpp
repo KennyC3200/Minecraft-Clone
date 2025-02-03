@@ -1,7 +1,9 @@
 #include "gui_manager.h"
+#include "../../util/util.h"
 
-void GuiManager::Init(Window* window, Player* player) {
+void GuiManager::Init(Window* window, World* world, Player* player) {
     this->window = window;
+    this->world = world;
     this->player = player;
 
     // Init imgui
@@ -51,6 +53,11 @@ void GuiManager::Render() {
 
     ImGui::Begin("Overview");
     ImGui::Text("FPS: %.2f", window->GetFPS());
+    ImGui::Text("World Position: %s", mc::Vec3iToString(world->GetPosition()).c_str());
+    ImGui::Text("Position: (%.1f,%.1f,%.1f)", 
+                player->GetPosition().x, player->GetPosition().y, player->GetPosition().z);
+    ImGui::Text("Chunk Position: %s", mc::Vec3iToString(player->GetChunkPosition()).c_str());
+    ImGui::Text("Chunk Position Prev: %s", mc::Vec3iToString(player->GetChunkPositionPrev()).c_str());
     ImGui::End();
 
     ImGui::Render();

@@ -8,9 +8,9 @@ public:
     void Destroy();
     void Bind();
 
-    GLuint GetHandle();
-    const std::string& FSName();
-    glm::ivec2 Size();
+    inline GLuint GetHandle() { return handle; }
+    inline const std::string& GetFSName() { return fs_name; }
+    inline glm::ivec2 GetSize() { return size; }
 
 protected:
     GLuint handle;

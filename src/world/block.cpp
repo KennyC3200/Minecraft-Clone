@@ -1,5 +1,4 @@
 #include "block.h"
-#include <iostream>
 
 Block::Block() {
     SetID(BLOCK_DIRT);
