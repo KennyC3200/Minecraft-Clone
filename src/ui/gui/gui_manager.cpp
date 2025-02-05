@@ -57,7 +57,6 @@ void GuiManager::Render() {
     ImGui::Text("Position: (%.1f,%.1f,%.1f)", 
                 player->GetPosition().x, player->GetPosition().y, player->GetPosition().z);
     ImGui::Text("Chunk Position: %s", mc::Vec3iToString(player->GetChunkPosition()).c_str());
-    ImGui::Text("Chunk Position Prev: %s", mc::Vec3iToString(player->GetChunkPositionPrev()).c_str());
     ImGui::End();
 
     ImGui::Render();

@@ -32,8 +32,7 @@ void Renderer::RenderWorld() {
     ChunkMesh::shader.Bind();
 
     // Bind the view and projection matrices
-    ChunkMesh::shader.UniformMat4("view", player->GetCamera().GetView());
-    ChunkMesh::shader.UniformMat4("projection", player->GetCamera().GetProjection());
+    ChunkMesh::shader.UniformMat4("mvp", player->GetCamera().GetMVP());
 
     // Render the world
     ChunkMesh::shader.UniformTexture2D(BlockMesh::GetAtlas(), 0);

@@ -107,7 +107,7 @@ void Player::Update() {
             Block* block = world->GetBlock(block_position);
 
             if (block != nullptr && block->GetID() == BLOCK_AIR) {
-                world->GetBlock(block_position)->SetID(hotbar[hotbar_idx]);
+                block->SetID(hotbar[hotbar_idx]);
                 world->GetChunk(block_position)->SetDirty();
             }
         }

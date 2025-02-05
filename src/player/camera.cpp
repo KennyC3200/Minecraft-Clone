@@ -19,6 +19,8 @@ void Camera::Init(Window* window, Mouse* mouse, glm::ivec3 position) {
     sensitivity = 0.1f;
 
     toggled = true;
+
+    model = glm::mat4(1.0f);
 }
 
 void Camera::Update() {
@@ -45,4 +47,5 @@ void Camera::Update() {
         glm::radians(fov),
         (float) window->GetSize().x / window->GetSize().y,
         z_near, z_far);
+    mvp = projection * view * model;
 }

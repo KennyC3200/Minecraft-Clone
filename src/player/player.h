@@ -15,7 +15,6 @@ public:
 
     inline glm::vec3 GetPosition() { return position; }
     inline glm::ivec3 GetChunkPosition() { return chunk_position; }
-    inline glm::ivec3 GetChunkPositionPrev() { return chunk_position_prev; }
     inline Camera& GetCamera() { return camera; }
     BlockID GetHotbarItem(int idx);
     int GetHotbarIdx();

@@ -39,9 +39,13 @@ Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTool
 TODO
 -----
 * Multithread the chunks generation
+    * Use a thread pool
+* Physics
+* Glass and leaves
+* Trees
+    * Transparent leafs
 * Implement a ticks system
     * Chunks render at a tick rate
-* Physics
 * Padding issues, add `-Wpadded` to see
     * See [this article](http://www.catb.org/esr/structure-packing/#_who_should_read_this)
 * HUD being rendered over by the blocks when hovering too close to block face

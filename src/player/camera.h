@@ -15,8 +15,10 @@ public:
     inline glm::vec3 GetUp() { return up; }
     inline glm::vec3 GetRight() { return right; }
     inline glm::vec3 GetFront() { return front; }
+    inline glm::mat4& GetModel() { return model; }
     inline glm::mat4& GetView() { return view; }
     inline glm::mat4& GetProjection() { return projection; }
+    inline glm::mat4& GetMVP() { return mvp; }
 
 private:
     Window* window;
@@ -33,7 +35,8 @@ private:
     // Camera vectors that define the vector space
     glm::vec3 up, right, front;
 
-    glm::mat4 view, projection;
+    glm::mat4 model, view, projection;
+    glm::mat4 mvp;
 
     bool toggled;
 };

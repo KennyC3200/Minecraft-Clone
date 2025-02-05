@@ -6,8 +6,7 @@ layout (location = 0) in uint data;
 out vec2 v_uv;
 
 // For the camera
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 mvp;
 
 // Chunk position
 uniform ivec3 chunk_pos;
@@ -23,7 +22,7 @@ void main() {
         data >> 10 & 31u
     );
 
-    gl_Position = projection * view * vec4(chunk_pos + block_position, 1.0f);
+    gl_Position = mvp * vec4(chunk_pos + block_position, 1.0f);
 
     // Unpack the UV coordinates
     vec2 uv = vec2(
