@@ -108,8 +108,8 @@ void World::GenerateChunks(enum Direction direction) {
                     // Generate new chunk
                     tmp[y * chunks_size.z + z]->Generate(
                         {
-                            position.x - Chunk::size.x, 
-                            position.y + y * Chunk::size.y, 
+                            position.x - Chunk::size.x,
+                            position.y + y * Chunk::size.y,
                             position.z + z * Chunk::size.z
                         },
                         ground_level);
@@ -206,11 +206,11 @@ void World::GenerateChunks(enum Direction direction) {
             position.z += Chunk::size.z;
             break;
         }
-        case UP: 
+        case UP:
             break;
-        case DOWN: 
+        case DOWN:
             break;
-        default: 
+        default:
             break;
     }
 }

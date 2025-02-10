@@ -4,7 +4,7 @@ void Hotbar::Init(Player* player) {
     this->player = player;
 
     toggled = true;
-    atlas.Init("res/images/hotbar.png", "tex", {22, 22});
+    atlas.Init("../res/images/hotbar.png", "tex", {22, 22});
 }
 
 void Hotbar::MeshItem(glm::vec2 p1, glm::vec2 p2, BlockID block_id) {

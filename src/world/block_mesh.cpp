@@ -4,7 +4,7 @@ SpriteAtlas BlockMesh::atlas;
 BlockMesh BlockMesh::meshes[BLOCK_LAST];
 
 void BlockMesh::Init() {
-    atlas.Init("res/images/blocks.png", "blocks", glm::vec2(16, 16));
+    atlas.Init("../res/images/blocks.png", "blocks", glm::vec2(16, 16));
 
     BlockMesh mesh;
     mesh.AddFace(NORTH, {1, 0}, {2, 1});

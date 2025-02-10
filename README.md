@@ -5,13 +5,11 @@ This is a Minecraft clone, made with recreational intended purposes.
 
 Building
 -----
-Currently, this is only tested for macOS. To build on macOS, run
+The project is built using CMake. Run the following command to build
 ```
-make run
+cd build && cmake --build .
 ```
-Which will build the executable file in the `bin` folder.
-
-* Will in the future implement for CMake and Windows
+This will create an executable `Minecraft`. Currently, only macOS is supported.
 
 Current Implemented Features
 -----

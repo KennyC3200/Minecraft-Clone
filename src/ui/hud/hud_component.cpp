@@ -9,7 +9,7 @@ VBO HudComponent::ibo;
 void HudComponent::Init(Window* window) {
     HudComponent::window = window;
 
-    shader.Init("res/shaders/hud.vert", "res/shaders/hud.frag");
+    shader.Init("../res/shaders/hud.vert", "../res/shaders/hud.frag");
     vao.Init();
     vbo.Init(GL_ARRAY_BUFFER, GL_DYNAMIC_DRAW);
     ibo.Init(GL_ELEMENT_ARRAY_BUFFER, GL_DYNAMIC_DRAW);

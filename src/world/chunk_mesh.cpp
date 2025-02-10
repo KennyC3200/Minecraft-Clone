@@ -17,7 +17,7 @@ ChunkMesh::~ChunkMesh() {
 }
 
 void ChunkMesh::Init() {
-    shader.Init("res/shaders/chunk.vert", "res/shaders/chunk.frag");
+    shader.Init("../res/shaders/chunk.vert", "../res/shaders/chunk.frag");
 }
 
 void ChunkMesh::Mesh(Block blocks[], Chunk* adjacent_chunks[6]) {
