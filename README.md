@@ -28,14 +28,11 @@ Libraries Used
 * [imgui](https://github.com/ocornut/imgui) for GUI
 * [stb image](https://github.com/nothings/stb/tree/master) for images
 
-Issues and Fixes
------
-Path: `/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Headers/Carbon`
-
-Update glfw path: `cmake -D CMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk`
-
 TODO
 -----
+* dear imgui does not have a CMakeLists.txt file. Will most likely have to use a cmake/imgui.cmake file
+    * Same for glad, use a cmake/glad.cmake file
+    * Still want to create the static library in build/lib/glad
 * Multithread the chunks generation
     * Use a thread pool
 * Physics
