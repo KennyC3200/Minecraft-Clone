@@ -7,7 +7,6 @@ add_library(gfx STATIC
     vbo.cpp
     window.cpp
 )
-
 target_link_libraries(gfx
     glm::glm
     glfw

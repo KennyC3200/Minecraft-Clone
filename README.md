@@ -31,16 +31,18 @@ Libraries Used
 TODO
 -----
 * dear imgui does not have a CMakeLists.txt file. Will most likely have to use a cmake/imgui.cmake file
+    * SOLUTION: Put the CMakeLists.txt file in the lib/ directory instead, and compile all necessary
+    libraries into a lib/liblib.a file (yes, the name is weird by default, but what can we do)
     * Same for glad, use a cmake/glad.cmake file
     * Still want to create the static library in build/lib/glad
 * Multithread the chunks generation
     * Use a thread pool
 * Physics
+* Implement a ticks system
+    * Chunks render at a tick rate
 * Glass and leaves
 * Trees
     * Transparent leafs
-* Implement a ticks system
-    * Chunks render at a tick rate
 * Padding issues, add `-Wpadded` to see
     * See [this article](http://www.catb.org/esr/structure-packing/#_who_should_read_this)
 * HUD being rendered over by the blocks when hovering too close to block face

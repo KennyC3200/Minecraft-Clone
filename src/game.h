@@ -7,6 +7,7 @@
 #include "player/player.h"
 #include "ui/hud/hud_manager.h"
 #include "ui/gui/gui_manager.h"
+#include "util/thread_pool.h"
 
 class Game {
 public:
@@ -31,4 +32,6 @@ private:
 
     World world;
     Player player;
+
+    ThreadPool thread_pool;
 };

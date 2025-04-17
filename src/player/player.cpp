@@ -96,7 +96,7 @@ void Player::Update() {
     }
 
     // Handle block placement/deletion
-    mc::RaycastData raycast = mc::Raycast(world, camera.GetPosition(), camera.GetDirection(), 8.0f);
+    RaycastData raycast = Raycast(world, camera.GetPosition(), camera.GetDirection(), 8.0f);
     if (raycast.hit) {
         if (mouse->GetButton(GLFW_MOUSE_BUTTON_LEFT).pressed) {
             world->GetBlock(raycast.position)->SetID(BLOCK_AIR);

@@ -53,10 +53,10 @@ void GuiManager::Render() {
 
     ImGui::Begin("Overview");
     ImGui::Text("FPS: %.2f", window->GetFPS());
-    ImGui::Text("World Position: %s", mc::Vec3iToString(world->GetPosition()).c_str());
+    ImGui::Text("World Position: %s", Vec3iToString(world->GetPosition()).c_str());
     ImGui::Text("Position: (%.1f,%.1f,%.1f)", 
                 player->GetPosition().x, player->GetPosition().y, player->GetPosition().z);
-    ImGui::Text("Chunk Position: %s", mc::Vec3iToString(player->GetChunkPosition()).c_str());
+    ImGui::Text("Chunk Position: %s", Vec3iToString(player->GetChunkPosition()).c_str());
     ImGui::End();
 
     ImGui::Render();

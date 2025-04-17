@@ -1,7 +1,7 @@
 #include "world.h"
 #include "block_mesh.h"
 
-void World::Init() {
+void World::Init(ThreadPool* thread_pool) {
     Chunk::Init();
     BlockMesh::Init();
 
@@ -12,6 +12,8 @@ void World::Init() {
 
     InitChunks();
     InitChunksAdjacents();
+
+    this->thread_pool = thread_pool;
 }
 
 void World::Destroy() {
@@ -43,176 +45,195 @@ void World::GenerateChunks(enum Direction direction) {
     }
 
     switch (direction) {
-        case EAST: {
-            Chunk* tmp[chunks_size.y * chunks_size.z];
-            for (int y = 0; y < chunks_size.y; y++) {
-                for (int z = 0; z < chunks_size.z; z++) {
-                    tmp[y * chunks_size.z + z] = chunks[ChunkIdx(0, y, z)];
-                }
-            }
-            for (int x = 0; x < chunks_size.x - 1; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    for (int z = 0; z < chunks_size.z; z++) {
-                        chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x + 1, y, z)];
-                    }
-                }
-            }
-            for (int y = 0; y < chunks_size.y; y++) {
-                for (int z = 0; z < chunks_size.z; z++) {
-                    chunks[ChunkIdx(chunks_size.x - 1, y, z)] = tmp[y * chunks_size.z + z];
-                }
-            }
-            for (int y = 0; y < chunks_size.y; y++) {
-                for (int z = 0; z < chunks_size.z; z++) {
-                    // Generate new chunk
-                    tmp[y * chunks_size.z + z]->Generate(
-                        {
-                            position.x + chunks_size.x * Chunk::size.x,
-                            position.y + y * Chunk::size.y,
-                            position.z + z * Chunk::size.z
-                        },
-                        ground_level);
-                    tmp[y * chunks_size.z + z]->SetDirty();
-                    InitChunkAdjacents(chunks_size.x - 1, y, z);
-
-                    // Set adjacent chunk dirty
-                    chunks[ChunkIdx(chunks_size.x - 2, y, z)]->SetDirty();
-                    InitChunkAdjacents(chunks_size.x - 2, y, z);
-                }
-            }
-
-            position.x += Chunk::size.x;
-            break;
-        }
-        case WEST: {
-            Chunk* tmp[chunks_size.y * chunks_size.z];
-            for (int y = 0; y < chunks_size.y; y++) {
-                for (int z = 0; z < chunks_size.z; z++) {
-                    tmp[y * chunks_size.z + z] = chunks[ChunkIdx(chunks_size.x - 1, y, z)];
-                }
-            }
-            for (int x = chunks_size.x - 1; x > 0; x--) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    for (int z = 0; z < chunks_size.z; z++) {
-                        chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x - 1, y, z)];
-                    }
-                }
-            }
-            for (int y = 0; y < chunks_size.y; y++) {
-                for (int z = 0; z < chunks_size.z; z++) {
-                    chunks[ChunkIdx(0, y, z)] = tmp[y * chunks_size.z + z];
-                }
-            }
-            for (int y = 0; y < chunks_size.y; y++) {
-                for (int z = 0; z < chunks_size.z; z++) {
-                    // Generate new chunk
-                    tmp[y * chunks_size.z + z]->Generate(
-                        {
-                            position.x - Chunk::size.x,
-                            position.y + y * Chunk::size.y,
-                            position.z + z * Chunk::size.z
-                        },
-                        ground_level);
-                    tmp[y * chunks_size.z + z]->SetDirty();
-                    InitChunkAdjacents(0, y, z);
-
-                    // Set adjacent chunk dirty
-                    chunks[ChunkIdx(1, y, z)]->SetDirty();
-                    InitChunkAdjacents(1, y, z);
-                }
-            }
-
-            position.x -= Chunk::size.x;
-            break;
-        }
         case NORTH: {
-            Chunk* tmp[chunks_size.x * chunks_size.y];
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    tmp[x * chunks_size.y + y] = chunks[ChunkIdx(x, y, chunks_size.z - 1)];
-                }
-            }
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    for (int z = chunks_size.z - 1; z > 0; z--) {
-                        chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x, y, z - 1)];
-                    }
-                }
-            }
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    chunks[ChunkIdx(x, y, 0)] = tmp[x * chunks_size.y + y];
-                }
-            }
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    // Generate new chunk
-                    tmp[x * chunks_size.y + y]->Generate(
-                        {
-                            position.x + x * Chunk::size.x,
-                            position.y + y * Chunk::size.y,
-                            position.z - Chunk::size.z
-                        },
-                    ground_level);
-                    tmp[x * chunks_size.y + y]->SetDirty();
-                    InitChunkAdjacents(x, y, 0);
-
-                    // Set adjacent chunk dirty
-                    chunks[ChunkIdx(x, y, 1)]->SetDirty();
-                    InitChunkAdjacents(x, y, 1);
-                }
-            }
-            position.z -= Chunk::size.z;
+            thread_pool->QueueJob([this] { GenerateChunksNorth(); });
             break;
         }
         case SOUTH: {
-            Chunk* tmp[chunks_size.x * chunks_size.y];
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    tmp[x * chunks_size.y + y] = chunks[ChunkIdx(x, y, 0)];
-                }
-            }
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    for (int z = 0; z < chunks_size.z - 1; z++) {
-                        chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x, y, z + 1)];
-                    }
-                }
-            }
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    chunks[ChunkIdx(x, y, chunks_size.z - 1)] = tmp[x * chunks_size.y + y];
-                }
-            }
-            for (int x = 0; x < chunks_size.x; x++) {
-                for (int y = 0; y < chunks_size.y; y++) {
-                    // Generate new chunk
-                    tmp[x * chunks_size.y + y]->Generate(
-                        {
-                            position.x + x * Chunk::size.x,
-                            position.y + y * Chunk::size.y,
-                            position.z + chunks_size.z * Chunk::size.z
-                        },
-                        ground_level);
-                    tmp[x * chunks_size.y + y]->SetDirty();
-                    InitChunkAdjacents(x, y, chunks_size.z - 1);
-
-                    // Set adjacent chunk dirty
-                    chunks[ChunkIdx(x, y, chunks_size.z - 2)]->SetDirty();
-                    InitChunkAdjacents(x, y, chunks_size.z - 2);
-                }
-            }
-
-            position.z += Chunk::size.z;
+            thread_pool->QueueJob([this] { GenerateChunksSouth(); });
             break;
         }
-        case UP:
+        case EAST: {
+            thread_pool->QueueJob([this] { GenerateChunksEast(); });
             break;
-        case DOWN:
+        }
+        case WEST: {
+            thread_pool->QueueJob([this] { GenerateChunksWest(); });
             break;
-        default:
+        }
+        case UP: {
             break;
+        }
+        case DOWN: {
+            break;
+        }
+        default: {
+            break;
+        }
     }
+}
+
+void World::GenerateChunksNorth() {
+    Chunk* tmp[chunks_size.x * chunks_size.y];
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            tmp[x * chunks_size.y + y] = chunks[ChunkIdx(x, y, chunks_size.z - 1)];
+        }
+    }
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            for (int z = chunks_size.z - 1; z > 0; z--) {
+                chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x, y, z - 1)];
+            }
+        }
+    }
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            chunks[ChunkIdx(x, y, 0)] = tmp[x * chunks_size.y + y];
+        }
+    }
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            // Generate new chunk
+            tmp[x * chunks_size.y + y]->Generate(
+                {
+                    position.x + x * Chunk::size.x,
+                    position.y + y * Chunk::size.y,
+                    position.z - Chunk::size.z
+                },
+                ground_level);
+            tmp[x * chunks_size.y + y]->SetDirty();
+            InitChunkAdjacents(x, y, 0);
+
+            // Set adjacent chunk dirty
+            chunks[ChunkIdx(x, y, 1)]->SetDirty();
+            InitChunkAdjacents(x, y, 1);
+        }
+    }
+    position.z -= Chunk::size.z;
+}
+
+void World::GenerateChunksSouth() {
+    Chunk* tmp[chunks_size.x * chunks_size.y];
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            tmp[x * chunks_size.y + y] = chunks[ChunkIdx(x, y, 0)];
+        }
+    }
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            for (int z = 0; z < chunks_size.z - 1; z++) {
+                chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x, y, z + 1)];
+            }
+        }
+    }
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            chunks[ChunkIdx(x, y, chunks_size.z - 1)] = tmp[x * chunks_size.y + y];
+        }
+    }
+    for (int x = 0; x < chunks_size.x; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            // Generate new chunk
+            tmp[x * chunks_size.y + y]->Generate(
+                {
+                    position.x + x * Chunk::size.x,
+                    position.y + y * Chunk::size.y,
+                    position.z + chunks_size.z * Chunk::size.z
+                },
+                ground_level);
+            tmp[x * chunks_size.y + y]->SetDirty();
+            InitChunkAdjacents(x, y, chunks_size.z - 1);
+
+            // Set adjacent chunk dirty
+            chunks[ChunkIdx(x, y, chunks_size.z - 2)]->SetDirty();
+            InitChunkAdjacents(x, y, chunks_size.z - 2);
+        }
+    }
+
+    position.z += Chunk::size.z;
+}
+
+void World::GenerateChunksEast() {
+    Chunk* tmp[chunks_size.y * chunks_size.z];
+    for (int y = 0; y < chunks_size.y; y++) {
+        for (int z = 0; z < chunks_size.z; z++) {
+            tmp[y * chunks_size.z + z] = chunks[ChunkIdx(0, y, z)];
+        }
+    }
+    for (int x = 0; x < chunks_size.x - 1; x++) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            for (int z = 0; z < chunks_size.z; z++) {
+                chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x + 1, y, z)];
+            }
+        }
+    }
+    for (int y = 0; y < chunks_size.y; y++) {
+        for (int z = 0; z < chunks_size.z; z++) {
+            chunks[ChunkIdx(chunks_size.x - 1, y, z)] = tmp[y * chunks_size.z + z];
+        }
+    }
+    for (int y = 0; y < chunks_size.y; y++) {
+        for (int z = 0; z < chunks_size.z; z++) {
+            // Generate new chunk
+            tmp[y * chunks_size.z + z]->Generate(
+                {
+                    position.x + chunks_size.x * Chunk::size.x,
+                    position.y + y * Chunk::size.y,
+                    position.z + z * Chunk::size.z
+                },
+                ground_level);
+            tmp[y * chunks_size.z + z]->SetDirty();
+            InitChunkAdjacents(chunks_size.x - 1, y, z);
+
+            // Set adjacent chunk dirty
+            chunks[ChunkIdx(chunks_size.x - 2, y, z)]->SetDirty();
+            InitChunkAdjacents(chunks_size.x - 2, y, z);
+        }
+    }
+
+    position.x += Chunk::size.x;
+}
+
+void World::GenerateChunksWest() {
+    Chunk* tmp[chunks_size.y * chunks_size.z];
+    for (int y = 0; y < chunks_size.y; y++) {
+        for (int z = 0; z < chunks_size.z; z++) {
+            tmp[y * chunks_size.z + z] = chunks[ChunkIdx(chunks_size.x - 1, y, z)];
+        }
+    }
+    for (int x = chunks_size.x - 1; x > 0; x--) {
+        for (int y = 0; y < chunks_size.y; y++) {
+            for (int z = 0; z < chunks_size.z; z++) {
+                chunks[ChunkIdx(x, y, z)] = chunks[ChunkIdx(x - 1, y, z)];
+            }
+        }
+    }
+    for (int y = 0; y < chunks_size.y; y++) {
+        for (int z = 0; z < chunks_size.z; z++) {
+            chunks[ChunkIdx(0, y, z)] = tmp[y * chunks_size.z + z];
+        }
+    }
+    for (int y = 0; y < chunks_size.y; y++) {
+        for (int z = 0; z < chunks_size.z; z++) {
+            // Generate new chunk
+            tmp[y * chunks_size.z + z]->Generate(
+                {
+                    position.x - Chunk::size.x,
+                    position.y + y * Chunk::size.y,
+                    position.z + z * Chunk::size.z
+                },
+                ground_level);
+            tmp[y * chunks_size.z + z]->SetDirty();
+            InitChunkAdjacents(0, y, z);
+
+            // Set adjacent chunk dirty
+            chunks[ChunkIdx(1, y, z)]->SetDirty();
+            InitChunkAdjacents(1, y, z);
+        }
+    }
+
+    position.x -= Chunk::size.x;
 }
 
 Chunk* World::GetChunk(int x, int y, int z) {

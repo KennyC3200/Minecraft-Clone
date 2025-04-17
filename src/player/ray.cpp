@@ -1,7 +1,5 @@
 #include "ray.h"
 
-namespace mc {
-
 RaycastData Raycast(World* world, glm::vec3 position, glm::vec3 direction, float max_distance) {
     glm::ivec3 step;
     glm::vec3 d_length, d_delta;
@@ -72,6 +70,4 @@ RaycastData Raycast(World* world, glm::vec3 position, glm::vec3 direction, float
         .position = iter_pos,
         .out = out
     };
-}
-
 }

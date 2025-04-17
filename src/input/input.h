@@ -2,11 +2,11 @@
 
 #include "../gfx/window.h"
 
-typedef struct {
+struct Button {
     bool down;
     bool pressed;
     bool last;
-} Button;
+};
 
 class Input {
 public:

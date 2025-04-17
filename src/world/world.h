@@ -1,10 +1,11 @@
 #pragma once
 
 #include "chunk.h"
+#include "../util/thread_pool.h"
 
 class World {
 public:
-    void Init();
+    void Init(ThreadPool* thread_pool);
     void Destroy();
     void Render();
 
@@ -29,6 +30,13 @@ private:
     void InitChunks();
     void InitChunkAdjacents(int x, int y, int z);
     void InitChunksAdjacents();
+
+    void GenerateChunksNorth();
+    void GenerateChunksSouth();
+    void GenerateChunksEast();
+    void GenerateChunksWest();
+
+    ThreadPool* thread_pool;
 
     Chunk** chunks;
 

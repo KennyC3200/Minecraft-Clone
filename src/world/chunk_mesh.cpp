@@ -35,7 +35,7 @@ void ChunkMesh::Mesh(Block blocks[], Chunk* adjacent_chunks[6]) {
                 }
 
                 for (int i = 0; i < 6; i++) {
-                    glm::ivec3 adjacent_pos = iter_pos + mc::IVEC[i];
+                    glm::ivec3 adjacent_pos = iter_pos + IVEC[i];
 
                     if (
                         adjacent_pos.x < 0 || adjacent_pos.x == Chunk::size.x ||

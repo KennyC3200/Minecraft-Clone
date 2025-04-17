@@ -3,8 +3,10 @@
 void Game::Init() {
     running = true;
 
+    thread_pool.Init();
+
     window.Init({1440, 900});
-    world.Init();
+    world.Init(&thread_pool);
 
     keyboard.Init(&window);
     mouse.Init(&window);
@@ -19,6 +21,8 @@ void Game::Init() {
 
 void Game::Destroy() {
     running = false;
+
+    thread_pool.Destroy();
 
     hud_manager.Destroy();
     gui_manager.Destroy();
