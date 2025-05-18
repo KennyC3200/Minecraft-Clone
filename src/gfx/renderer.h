@@ -7,7 +7,7 @@
 
 class Renderer {
 public:
-    void Init(World* world, Player* player, HudManager* hud_manager, GuiManager* gui_manager);
+    void Init( World* world, Player* player, HudManager* hud_manager, GuiManager* gui_manager);
     void Render();
 
     struct {

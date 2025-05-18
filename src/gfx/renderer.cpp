@@ -1,6 +1,7 @@
 #include "renderer.h"
 
-void Renderer::Init(World* world, Player* player, HudManager* hud_manager, GuiManager* gui_manager) {
+void Renderer::Init(World* world, Player* player, HudManager* hud_manager, GuiManager* gui_manager) 
+{
     this->world = world;
     this->player = player;
     this->hud_manager = hud_manager;

@@ -3,6 +3,7 @@
 #include "block.h"
 #include "chunk_mesh.h"
 #include "fast_noise_lite.h"
+#include <mutex>
 
 class Chunk {
 public:
@@ -28,6 +29,8 @@ public:
     static constexpr glm::ivec3 size = {16, 16, 16};
     static constexpr int volume = size.x * size.y * size.z;
     static FastNoiseLite noise;
+
+    std::mutex mutex;
 
 private:
     glm::ivec3 position;

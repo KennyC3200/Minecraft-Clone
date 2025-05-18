@@ -5,7 +5,7 @@ void World::Init(ThreadPool* thread_pool) {
     Chunk::Init();
     BlockMesh::Init();
 
-    chunks_size = {24, 10, 24};
+    chunks_size = {32, 10, 32};
     chunks_count = chunks_size.x * chunks_size.y * chunks_size.z;
     ground_level = chunks_size.y * Chunk::size.y / 2;
     position = {0, 0, 0};
@@ -44,20 +44,37 @@ void World::GenerateChunks(enum Direction direction) {
         return;
     }
 
+    #define DEBUG
     switch (direction) {
         case NORTH: {
+            #ifdef DEBUG
+            GenerateChunksNorth();
+            break;
+            #endif
             thread_pool->QueueJob([this] { GenerateChunksNorth(); });
             break;
         }
         case SOUTH: {
+            #ifdef DEBUG
+            GenerateChunksSouth();
+            break;
+            #endif
             thread_pool->QueueJob([this] { GenerateChunksSouth(); });
             break;
         }
         case EAST: {
+            #ifdef DEBUG
+            GenerateChunksEast();
+            break;
+            #endif
             thread_pool->QueueJob([this] { GenerateChunksEast(); });
             break;
         }
         case WEST: {
+            #ifdef DEBUG
+            GenerateChunksWest();
+            break;
+            #endif
             thread_pool->QueueJob([this] { GenerateChunksWest(); });
             break;
         }

@@ -1,19 +1,5 @@
 #include "thread_pool.h"
 
-void f1(std::vector<int>& nums, int* sum) {
-    *sum = 0;
-    for (auto& num : nums) {
-        *sum += num;
-    }
-}
-
-void f2(std::vector<int>& nums, int* prod) {
-    *prod = 1;
-    for (auto& num : nums) {
-        *prod *= num;
-    }
-}
-
 void ThreadPool::Init() {
     // Get max # of threads available
     uint num_threads = std::thread::hardware_concurrency();

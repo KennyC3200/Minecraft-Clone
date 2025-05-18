@@ -30,6 +30,9 @@ Libraries Used
 
 TODO
 -----
+* DO THEY NOT CACHE THE WORLD FOR GENERATION? MAYBE THATS WHAT I AM MISSING...
+* Implement a ticks system
+    * Chunks render at a tick rate
 * dear imgui does not have a CMakeLists.txt file. Will most likely have to use a cmake/imgui.cmake file
     * SOLUTION: Put the CMakeLists.txt file in the lib/ directory instead, and compile all necessary
     libraries into a lib/liblib.a file (yes, the name is weird by default, but what can we do)
@@ -38,8 +41,6 @@ TODO
 * Multithread the chunks generation
     * Use a thread pool
 * Physics
-* Implement a ticks system
-    * Chunks render at a tick rate
 * Glass and leaves
 * Trees
     * Transparent leafs
